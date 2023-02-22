@@ -25,7 +25,9 @@
         <li class="hover:underline cursor-pointer">Activities</li>
       </ul>
     </div>
-    <div class="w-[20%] h-[150px] bg-[#F7F7FB8A] rounded-[15px]" id="Social media"></div>
+    <div class="w-[20%] h-[150px] bg-[#F7F7FB8A] rounded-[15px]" id="Social media">
+      
+    </div>
   </footer>
 </body>
 
