@@ -11,13 +11,13 @@
 <body class="h-[100vh] overflow-x-hidden bg-[#F7F7FB]">
   <?php
   include __DIR__ . '/../header.php';
-  generateHeader('home', 'dark');
+  generateHeader('home', 'light');
   ?>
 
-  <div class="mt-[100px] pb-[2.5rem] w-[1280px]" id="content-container">
+  <div class="pb-[2.5rem] w-[1280px]" id="content-container">
     <!-- Festival image background -->
-    <div class=" w-screen h-[300px] h-14 bg-gradient-to-r from-purple-500 to-pink-500 ">
-      <div class="relative w-full max-w-lg ml-10 pt-10">
+    <div class=" w-screen h-[100vh] h-14 bg-gradient-to-r from-purple-500 to-pink-500 ">
+      <div class="relative w-full max-w-lg ml-10 pt-40">
         <p class="absolute font-extrabold tracking-wide text-violet-700 text-4xl text-center opacity-50 ">T H E F E S T
           I V A L</p>
         <div class=" text-slate-100">
