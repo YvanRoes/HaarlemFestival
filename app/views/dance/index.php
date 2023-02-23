@@ -2,9 +2,10 @@
   @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
   * {
-    font-family: 'Lato', sans-serif;
-    /* outline: 1px red solid; */
-  }
+        padding: 0px;
+        margin: 0px;
+        outline: 1px solid red;
+    }
 </style>
 
 <title>Home</title>

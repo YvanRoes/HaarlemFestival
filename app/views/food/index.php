@@ -1,20 +1,24 @@
-<html lang="en">
-<script src="https://cdn.tailwindcss.com"></script>
-
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
     * {
+        font-family: 'Lato', sans-serif;
         padding: 0px;
         margin: 0px;
-        /* outline: 1px solid red; */
+        outline: 1px solid red;
     }
 </style>
-<body class="bg-[#F7F7FB] flex justify-center">
+
+<title>Home</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<body class="h-[100vh] overflow-x-hidden bg-[#F7F7FB] flex justify-center">
     <?php
     include __DIR__ . '/../header.php';
-    generateHeader('yummie', '');
+    generateHeader('yummie', 'dark');
     ?>
-    <div id="contentWrapper" class="pb-[2.5rem] lg:w-[1280px] md:w-[100vw] sm:w-[100vw] mt-[100px]">
-        <div id="introSection" class="grid-cols-2 flex items-center pt-[50px] pb-[50px]">
+    <div class="pb-[2.5rem] lg:w-[1280px] md:w-[100vw] sm:w-[100vw]" id="content-container">
+        <div id="introSection" class="grid-cols-2 flex items-center pt-[150px] pb-[50px]">
             <div id="introduction" class="">
                 <h1 class="text-[42px] font-bold"><span class="text-[#42BFDD]">Yummie!</span> Food Event</h1>
                 <p class="text-2xl">27 July - 31 July</p>
@@ -143,5 +147,3 @@
         </div>
     </div>
 </body>
-
-</html>
