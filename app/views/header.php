@@ -7,14 +7,26 @@ $selected = '#FC5B84'; // pink
 global $colours;
 $colours = array("yummie" => '', "tour" => '', "dance" => '');
 
-function generateHeader($pageName)
+function generateHeader(string $pageName, string $mode)
 {
+  global $unselected;
+  switch($mode){
+    case 'dark':
+      $unselected = '#121212';
+      break;
+    case 'light':
+      $unselected = '#F7F7FB';
+      break;
+    default:
+      $unselected = '';
+      break;
+  }
   global $colours;
   $colours = pickColours($colours, $pageName);
   loadHTML();
 }
 
-function pickColours($colours, $var)
+function pickColours(mixed $colours, string $var)
 {
 
   foreach ($colours as $key => $value) {
@@ -31,7 +43,7 @@ function loadHTML()
   echo "<body class=''>
   <div class='absolute top-0 w-[100vw] h-[100px] flex items-center justify-center pl-[50px] pr-[50px]' id='header'>
     <div class='relative w-[1280px] flex flex-row' id='content'>
-      <div class='relative w-max text-[{" . $GLOBALS['unselected'] . "}] font-sans text-[48px]' id='HeadTitle'>
+      <div class='relative w-max text-[" . $GLOBALS['unselected'] . "] font-sans text-[48px]' id='HeadTitle'>
         <span class='text-[#42BFDD]'>H</span>aarlem
       </div>
       <div class='absolute flex items-center right-0 gap-[25px]' id='list'>
