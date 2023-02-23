@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Feb 23, 2023 at 10:07 AM
+-- Generation Time: Feb 23, 2023 at 02:25 PM
 -- Server version: 10.11.2-MariaDB-1:10.11.2+maria~ubu2204
 -- PHP Version: 8.1.16
 
@@ -31,6 +31,13 @@ CREATE TABLE `admin` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`) VALUES
+(1);
+
 -- --------------------------------------------------------
 
 --
@@ -42,6 +49,18 @@ CREATE TABLE `artist` (
   `name` varchar(255) NOT NULL,
   `genre` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `artist`
+--
+
+INSERT INTO `artist` (`id`, `name`, `genre`) VALUES
+(1, 'Hardwell', 'dance and house'),
+(2, 'Armin van Buuren', 'trance and techo'),
+(3, 'Martin Garrix', 'dance and electronic'),
+(4, 'Tiësto', 'trance, techno, minimal, house and electro'),
+(5, 'Nicky Romero', 'electrohouse and progressive house'),
+(6, 'Afrojack', 'house');
 
 -- --------------------------------------------------------
 
@@ -64,6 +83,13 @@ CREATE TABLE `customer` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`id`) VALUES
+(2);
+
 -- --------------------------------------------------------
 
 --
@@ -73,6 +99,13 @@ CREATE TABLE `customer` (
 CREATE TABLE `employee` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`id`) VALUES
+(3);
 
 -- --------------------------------------------------------
 
@@ -154,13 +187,20 @@ CREATE TABLE `personal_program` (
 CREATE TABLE `restaurant` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `category` int(11) DEFAULT NULL,
-  `michelin_star` int(11) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `michelin_star` double NOT NULL,
+  `description` text DEFAULT NULL,
   `address` varchar(1000) NOT NULL,
-  `phone_number` int(11) NOT NULL,
+  `phone_number` varchar(20) NOT NULL,
   `capacity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `restaurant`
+--
+
+INSERT INTO `restaurant` (`id`, `name`, `category`, `michelin_star`, `description`, `address`, `phone_number`, `capacity`) VALUES
+(1, 'Ratatouille', 'French, Seafood, Eurpean', 4.7, 'Ratatouille is Haarlem’s only Michelin starred restaurant. Located in the city centre, and owned by a talented chef Jozua Jaring, the restaurant specialises in creating delicious French dishes using fresh, local ingredients. The menu features a wide variety of classic and modern takes on French favourites Offering indoor and outdoor seating, Ratatouille appeals to a broad range of tastes and is sure to please a wide variety of diners.', 'Spaarne 96', '31235427270', 52);
 
 -- --------------------------------------------------------
 
@@ -182,9 +222,24 @@ CREATE TABLE `route` (
 CREATE TABLE `stroll_location` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
   `address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `stroll_location`
+--
+
+INSERT INTO `stroll_location` (`id`, `name`, `description`, `address`) VALUES
+(1, 'St. Bavo Church', 'The first time St. Bavo Church was mentioned was in 1245 and at that time it was considered a prominent church because of its belfry, and because Influential people like Arnoud van Sassenheim acted there as priests.\r\n\r\nA lot of the furniture dates back from before the iconoclasm of 1566 like the choir fence, choir benches, and copper lectern with pelican. ', 'Grote Markt 22'),
+(2, 'Grote Markt', NULL, 'Grote Markt'),
+(3, 'The Hallen', NULL, 'Grote Markt 16'),
+(4, 'Proveniershof', NULL, 'Grote Houtsstraat 140'),
+(5, 'Jopenkerk', NULL, 'Emrikweg 21'),
+(6, 'Waalse kerk', NULL, 'Begijnhof 30'),
+(7, 'Molen de Adriaan', NULL, 'Papentorenvest 1a'),
+(8, 'Amsterdamse Poort', NULL, 'Amsterdamsevaart'),
+(9, 'Hof van Bakenes', NULL, 'Korte Begijnestraat 21ZW');
 
 -- --------------------------------------------------------
 
@@ -246,6 +301,15 @@ CREATE TABLE `users` (
   `password` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `password`) VALUES
+(1, 'admin', 'admin@gmail.com', 'secret123'),
+(2, 'customer', 'customer@gmail.com', 'secret123'),
+(3, 'employee', 'employee@gmail.com', 'secret123');
+
 -- --------------------------------------------------------
 
 --
@@ -258,6 +322,18 @@ CREATE TABLE `venue` (
   `location` varchar(255) NOT NULL,
   `capacity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `venue`
+--
+
+INSERT INTO `venue` (`id`, `name`, `location`, `capacity`) VALUES
+(1, 'Lichtfabriek', 'Minckelersweg 2', 1500),
+(2, 'Caprera Openluchttheater', 'Hoge Duin en Daalseweg 2', 2000),
+(3, 'Club Stalker', 'Kromme Elleboogsteeg 2', 200),
+(4, 'Jopenkerk', 'Gedemte Voldergracht 2', 300),
+(5, 'XO the club', 'Grote Markt 8', 200),
+(6, 'Club Ruis', 'Smedestraat 31', 200);
 
 --
 -- Indexes for dumped tables
@@ -399,7 +475,7 @@ ALTER TABLE `venue`
 -- AUTO_INCREMENT for table `artist`
 --
 ALTER TABLE `artist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -417,13 +493,13 @@ ALTER TABLE `page`
 -- AUTO_INCREMENT for table `restaurant`
 --
 ALTER TABLE `restaurant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `stroll_location`
 --
 ALTER TABLE `stroll_location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `ticket`
@@ -435,13 +511,13 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `venue`
 --
 ALTER TABLE `venue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
