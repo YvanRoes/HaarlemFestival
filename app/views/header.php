@@ -1,24 +1,28 @@
 <?php
+global $headerTextColorValue;
 $headerTextColorValue = '#F7F7FB'; // white
 global $unselected;
 global $selected;
 $unselected = '#F7F7FB'; //white
 $selected = '#FC5B84'; // pink
 global $colours;
-$colours = array("yummie" => '', "tour" => '', "dance" => '');
+$colours = array("yummie" => '', "tour" => '', "dance" => '', "login" => '');
 
 function generateHeader(string $pageName, string $mode)
 {
   global $unselected;
   global $selected;
+  global $headerTextColorValue;
   switch($mode){
     case 'dark':
-      $unselected = '#121212';
+      $unselected = '#29334E';
       $selected = '#FC5B84';
+      $headerTextColorValue = '#F7F7FB';
       break;
     case 'light':
       $unselected = '#F7F7FB';
       $selected = '#FC5B84';
+      $headerTextColorValue = '#29334E';
       break;
     default:
       $unselected = '';
@@ -64,10 +68,26 @@ function loadHTML()
               <a href='/dance'>Dance</a>
             </li>
           </ul>
-        </div>
-        <button class='w-max p-3 text-[20px] text-[#F7F7FB] bg-[#42BFDD] mt-[15px] transition ease-out hover:translate-y-[-5px]'>
-          Plan your trip!
-        </button>
+        </div>";
+        if(isset($_SESSION["USER_ID"])){
+          echo "
+          <a href='/login'>
+          <div class='w-max h-[40px] mt-[15px] text-[". $GLOBALS['unselected']. "] flex items-center gap-[10px] border-2 border-[".$GLOBALS['colors']['login']."] rounded-md px-4 py-5 transition ease-in-out hover:bg-[".$GLOBALS['unselected']."] hover:border-[".$GLOBALS['unselected']."] hover:text-[".$GLOBALS['headerTextColorValue']."] cursor-pointer'>
+          <i class='fa fa-user' style='font-size: 24px;'></i>Account<i class='fa fa-caret-down mt-[5px]'></i></div>
+          </a>";
+        }
+        else{
+          echo "
+          <a href='/login'>
+          <div class='w-max h-[40px] mt-[15px] text-[". $GLOBALS['unselected']. "] flex items-center gap-[10px] border-2 border-[".$GLOBALS['unselected']."] rounded-md px-4 py-5 transition ease-in-out hover:bg-[".$GLOBALS['unselected']."] hover:border-[".$GLOBALS['unselected']."] hover:text-[".$GLOBALS['headerTextColorValue']."] cursor-pointer'>
+          <i class='fa fa-user' style='font-size: 24px;'></i>Account<i class='fa fa-caret-down mt-[5px]'></i></div>
+          </a>";
+        }
+        echo 
+        "
+        <div class='w-max h-[40px] mt-[15px] text-[". $GLOBALS['unselected']. "] flex items-center gap-[10px] border-2 border-[".$GLOBALS['unselected']."] rounded-md px-4 py-5 transition ease-in-out hover:bg-[".$GLOBALS['unselected']."] hover:border-[".$GLOBALS['unselected']."] hover:text-[".$GLOBALS['headerTextColorValue']."] cursor-pointer'>
+        <i class='fa fa-location-arrow' style='font-size: 24px;'></i>
+          Plan your trip</div>
       </div>
     </div>
   </div>
@@ -83,6 +103,7 @@ function loadHTML()
     font-family: 'Inter', sans-serif;
   }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 <!-- <body class=''>

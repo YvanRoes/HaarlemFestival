@@ -4,7 +4,7 @@
   * {
         padding: 0px;
         margin: 0px;
-        outline: 1px solid red;
+        /* outline: 1px solid red; */
     }
 </style>
 
