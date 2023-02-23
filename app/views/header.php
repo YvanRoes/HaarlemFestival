@@ -44,19 +44,20 @@ function loadHTML()
   <div class='absolute top-0 w-[100vw] h-[100px] flex items-center justify-center pl-[50px] pr-[50px]' id='header'>
     <div class='relative w-[1280px] flex flex-row' id='content'>
       <div class='relative w-max text-[" . $GLOBALS['unselected'] . "] font-sans text-[48px]' id='HeadTitle'>
-        <span class='text-[#42BFDD]'>H</span>aarlem
+      <a href='/'>
+        <span class='text-[#42BFDD]'>H</span>aarlem</a>
       </div>
       <div class='absolute flex items-center right-0 gap-[25px]' id='list'>
         <div class='flex items-center text-[20px] float-right'>
           <ul class='flex flex-row gap-[25px] mt-[15px]'>
             <li class='transition ease-in-out hover:translate-y-[-5px] text-[" . $GLOBALS['colours']['yummie'] . "]'>
-              <a>Yummie!</a>
+              <a href='/food'>Yummie!</a>
             </li>
             <li class='transition ease-in-out hover:translate-y-[-5px] text-[" . $GLOBALS['colours']['tour'] . "]'>
-              <a>Haarlem tour</a>
+              <a href='/tour'>Haarlem tour</a>
             </li>
             <li class='transition ease-out hover:translate-y-[-5px] text-[" . $GLOBALS['colours']['dance'] . "]'>
-              <a>Dance</a>
+              <a href='/dance'>Dance</a>
             </li>
           </ul>
         </div>
