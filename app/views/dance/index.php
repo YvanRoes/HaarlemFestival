@@ -3,7 +3,7 @@
 
   * {
     font-family: 'Lato', sans-serif;
-    outline: 1px red solid;
+    /* outline: 1px red solid; */
   }
 </style>
 

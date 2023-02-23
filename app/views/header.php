@@ -10,15 +10,19 @@ $colours = array("yummie" => '', "tour" => '', "dance" => '');
 function generateHeader(string $pageName, string $mode)
 {
   global $unselected;
+  global $selected;
   switch($mode){
     case 'dark':
       $unselected = '#121212';
+      $selected = '#FC5B84';
       break;
     case 'light':
       $unselected = '#F7F7FB';
+      $selected = '#FC5B84';
       break;
     default:
       $unselected = '';
+      $selected = '#FC5B84';
       break;
   }
   global $colours;

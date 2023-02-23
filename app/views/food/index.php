@@ -8,9 +8,12 @@
         /* outline: 1px solid red; */
     }
 </style>
-
-<body class="flex justify-center">
-    <div id="contentWrapper" class="w-[1280px] h-maxcontent mt-[150px] mb-[150px]">
+<body class="bg-[#F7F7FB] flex justify-center">
+    <?php
+    include __DIR__ . '/../header.php';
+    generateHeader('yummie', '');
+    ?>
+    <div id="contentWrapper" class="pb-[2.5rem] lg:w-[1280px] md:w-[100vw] sm:w-[100vw] mt-[100px]">
         <div id="introSection" class="grid-cols-2 flex items-center pt-[50px] pb-[50px]">
             <div id="introduction" class="">
                 <h1 class="text-[42px] font-bold"><span class="text-[#42BFDD]">Yummie!</span> Food Event</h1>
