@@ -13,3 +13,11 @@ $uri = trim($_SERVER['REQUEST_URI'], '/');
 $router = new PatternRouter();
 $router->route($uri);;
 ?>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+  * {
+    font-family: 'Lato', sans-serif;
+  }
+</style>
