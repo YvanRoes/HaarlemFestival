@@ -26,7 +26,7 @@
       </form>
       <form method="POST" action="" class="flex flex-col justify-center">
         <p class="text-[#29334E]/50 pt-2 text-[14px]">dont have an account yet?</p>
-        <button name="createNewUser" type="submit" class="text-[#29334E] text-[14px] underline">create new Account</button>
+        <button name="createNewUser" type="submit" class="text-[#29334E] text-[14px] underline"><a href='/register'>create new Account</button>
       </form>
     </div>
   </div>
