@@ -1,6 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "developer";
+$servername = "mysql";
+$username = "root";
 $password = "secret123";
 $database = "Haarlem-Festival";
 ?>

@@ -13,7 +13,7 @@ class UserRepository extends Repository{
         } catch(PDOException $e){
             echo $e;
             }
-        }
+         }
        public function get_AllCustomers(){
         try{
             $stmt = $this->conn->prepare("SELECT id, username, email, password FROM users customers WHERE users.id = customers.id");
@@ -48,7 +48,7 @@ class UserRepository extends Repository{
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'User ');
             $user = $stmt->fetch();
             return $user;
-        }catch(PDOException $e){
+         }catch(PDOException $e){
             echo $e;
             }
         }
