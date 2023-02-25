@@ -27,4 +27,9 @@ class UserService{
         return $repo->get_UserPrivilegeById($id);
     }
 
+    public function insert_User(User $user){
+        $repo = new UserRepository();
+        return $repo->insert_User($user);
+    }
+
 }
