@@ -85,8 +85,8 @@ class UserRepository extends Repository
     public function insert_User(User $user)
     {
         try {
-            $stmt = $this->conn->prepare("INSERT INTO users (username, email, 'password') VALUES (:username, :email, :passwd)");
-            $stmt->execute(array(':username' => $user, ':email' => $user, ':passwd' => $user)); //how to select the values from the user object? //get_object_vars()?
+            $stmt = $this->conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
+            $stmt->execute(array(':username' => $user->get_username(), ':email' => $user->get_email(), ':password' => $user->get_password())); //how to select the values from the user object? //get_object_vars()?
         } catch (PDOException $e) {
             echo $e;
         }
