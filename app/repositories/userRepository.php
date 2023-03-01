@@ -3,8 +3,7 @@ require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/user.php';
 class UserRepository extends Repository
 {
-    public function get_AllUsers()
-    {
+    public function get_AllUsers(){
         try {
             $stmt = $this->conn->prepare("SELECT id, username, email, password FROM users");
             $stmt->execute();
@@ -29,8 +28,7 @@ class UserRepository extends Repository
         }
     }
 
-    public function get_UserById(int $id): User
-    {
+    public function get_UserById(int $id): User{
         try {
             $stmt = $this->conn->prepare("SELECT id, username, email, password FROM User WHERE id = :uid");
             $stmt->execute(array(':uid' => $id));
@@ -43,13 +41,12 @@ class UserRepository extends Repository
         }
     }
 
-    public function get_UserByEmail(string $email): User
-    {
+    public function get_UserByEmail(string $email): User{
         try {
             $stmt = $this->conn->prepare("SELECT id, username, email, password FROM users WHERE email = :email");
             $stmt->execute(array(':email' => $email));
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User ');
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
             $user = $stmt->fetch();
             return $user;
          }catch(PDOException $e){
@@ -57,8 +54,7 @@ class UserRepository extends Repository
         }
     }
 
-    public function get_UserPrivilegeById($id)
-    {
+    public function get_UserPrivilegeById($id){
         try {
             //TODO
             $stmt = $this->conn->prepare("");
@@ -70,10 +66,9 @@ class UserRepository extends Repository
         }
     }
 
-    public function verify_UserCredentials(string $email, $passwd)
-    {
+    public function verify_UserCredentials(string $email, $passwd){
         try {
-            $stmt = $this->conn->prepare("SELECT id FROM users WHERE email = :email AND password = :passwd");
+            $stmt = $this->conn->prepare("SELECT users.id FROM users, customer WHERE email = :email AND password = :passwd AND users.id = customer.id");
             $stmt->execute(array(':email' => htmlspecialchars($email), ':passwd' => htmlspecialchars($passwd)));
             return $stmt->rowCount() == 1 ? true : false;
         } catch (PDOException $e) {
