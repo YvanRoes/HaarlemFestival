@@ -49,7 +49,7 @@ function pickColours(mixed $colours, string $var)
 function loadHTML()
 {
   echo "<body class=''>
-  <div class='absolute top-0 w-[100vw] h-[100px] flex items-center justify-center pl-[50px] pr-[50px]' id='header'>
+  <div class='absolute top-0 w-[100vw] h-[100px] flex items-center justify-center pl-[50px] pr-[50px] z-[100]' id='header'>
     <div class='relative w-[1280px] flex flex-row' id='content'>
       <div class='relative w-max text-[" . $GLOBALS['unselected'] . "] font-sans text-[48px]' id='HeadTitle'>
       <a href='/'>
