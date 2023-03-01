@@ -69,11 +69,11 @@ function loadHTML()
             </li>
           </ul>
         </div>";
-  if (isset($_SESSION['USER_ID '])) {
+  if (isset($_SESSION['USER_ID'])) {
     echo "
           <a href='/login'>
           <div class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['selected'] . "] flex items-center gap-[10px] bg-[#f2f2f2] border-2 border-[" . $GLOBALS['colours']['login'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['headerTextColorValue'] . "] cursor-pointer'>
-          <i class='fa fa-user' style='font-size: 24px;'></i>Account<i class='fa fa-caret-down mt-[5px]'></i></div>
+          <i class='fa fa-user' style='font-size: 24px;'></i>My Account<i class='fa fa-caret-down mt-[5px]'></i></div>
           </a>";
   } else {
     echo "
