@@ -8,37 +8,55 @@
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $this->register();
             } 
-            else {
-                $this->displayView($this);
-            }
+            $this->displayView($this);
         }
 
         function register(){
-            $username = htmlspecialchars($_POST['username']);
-            $email = htmlspecialchars($_POST['email']);
+            $userService = new UserService();
+
+            $username = htmlspecialchars($_POST['username']);   
+            $email = htmlspecialchars($_POST['email']);        
             $password = htmlspecialchars($_POST['password']);
             $confirmPassword = htmlspecialchars($_POST['confirmPassword']);
-
-            if($this->validatePassword($password, $confirmPassword)){
+            
+            if($this->checkUsernameAndEmail($username, $email) && $this->validatePassword($password, $confirmPassword)){
                 $user = new User();
                 $user->__set_Username($username);
                 $user->__set_Email($email);
-                $user->__set_Password($password);
-                $userService = new UserService();
+                $user->__set_Password(password_hash($password, PASSWORD_DEFAULT));               
                 $userService->insert_User($user);
-            }
-            else{
-                $this->displayView($this);
+
+                $_SESSION['registerMsg'] = 'Registration successful';
             }
         }
 
         function validatePassword($password, $confirmPassword): bool{
-            if($password == $confirmPassword){
+            if($password == $confirmPassword && strlen($password) >= 8 && strlen($password) <= 20){
                 return true;
             }
             else{
+                $_SESSION['registerMsg'] = 'Password must be between 8 and 20 characters';
                 return false;
             }
+        }
+
+        function checkUsernameAndEmail($username, $email):bool {
+            $userService = new UserService();
+            
+            $users = $userService->get_AllUsers();
+            //is there a better way to do this?
+
+            foreach($users as $user){
+                if($user->get_Username() == $username){
+                    $_SESSION['registerMsg'] = 'Username already exists';
+                    return false;
+                }
+                elseif ($user->get_Email() == $email) {
+                    $_SESSION['registerMsg'] = 'Email already exists';
+                    return false;
+                }
+            }
+            return true;
         }
     }
 ?>

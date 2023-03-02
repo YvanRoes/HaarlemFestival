@@ -22,6 +22,11 @@ class UserService{
         return $repo->get_UserByEmail($email);
     }
 
+    public function get_UserByUsername($username):User{
+        $repo = new UserRepository();
+        return $repo->get_UserByUsername($username);
+    }
+
     public function get_UserPrivilegeById($id){
         $repo = new UserRepository();
         return $repo->get_UserPrivilegeById($id);

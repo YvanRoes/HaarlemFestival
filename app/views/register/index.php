@@ -1,3 +1,10 @@
+<?php
+$msg = '';
+if(isset($_SESSION['registerMsg'])){
+  $msg = $_SESSION['registerMsg'];
+}
+?>
+
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
@@ -8,7 +15,7 @@
     }
 </style>
 
-<title>Login</title>
+<title>Register</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <body class="w-[100vw] h-[100vh] overflow-hidden bg-[#F7F7FB] flex justify-center">
@@ -68,8 +75,9 @@
                     class="block w-full h-[40px] m-auto my-4 py-2 px-2 text-sm text-gray-800 bg-[#F7F7FB] border-0 focus:ring-0 rounded-sm resize-none"
                     placeholder="confirm password" required></input>
 
+                <span class="text-[#FC5B84] flex justify-center mb-[10px]"><?php echo $msg; ?></span>
+
                 <!-- TO DO implement captcha -->
-                <!-- TO DO verify inputs -->
 
                 <button name="submitRegister" type="submit"
                     class="w-full h-[40px] text-[#29334E] flex items-center justify-center gap-[10px] border-2 border-[#29334E] cursor-pointer p-5 rounded-md">Register</button>
