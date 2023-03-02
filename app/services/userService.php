@@ -32,4 +32,9 @@ class UserService{
         return $repo->insert_User($user);
     }
 
+    public function verify_UserCredentials(string $email, string $passwd):bool{
+        $repo = new UserRepository();
+        return $repo->verify_UserCredentials($email, $passwd);
+    }
+
 }

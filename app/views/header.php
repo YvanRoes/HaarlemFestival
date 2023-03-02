@@ -13,7 +13,7 @@ function generateHeader(string $pageName, string $mode)
   global $unselected;
   global $selected;
   global $headerTextColorValue;
-  switch($mode){
+  switch ($mode) {
     case 'dark':
       $unselected = '#29334E';
       $selected = '#FC5B84';
@@ -49,7 +49,7 @@ function pickColours(mixed $colours, string $var)
 function loadHTML()
 {
   echo "<body class=''>
-  <div class='absolute top-0 w-[100vw] h-[100px] flex items-center justify-center pl-[50px] pr-[50px]' id='header'>
+  <div class='absolute top-0 w-[100vw] h-[100px] flex items-center justify-center pl-[50px] pr-[50px] z-[100]' id='header'>
     <div class='relative w-[1280px] flex flex-row' id='content'>
       <div class='relative w-max text-[" . $GLOBALS['unselected'] . "] font-sans text-[48px]' id='HeadTitle'>
       <a href='/'>
@@ -69,17 +69,16 @@ function loadHTML()
             </li>
           </ul>
         </div>";
-        if(isset($_SESSION["USER_ID"])){
-          echo "
+  if (isset($_SESSION['USER_ID'])) {
+    echo "
           <a href='/login'>
-          <div class='w-max h-[40px] mt-[15px] text-[". $GLOBALS['unselected']. "] flex items-center gap-[10px] border-2 border-[".$GLOBALS['colors']['login']."] rounded-md px-4 py-5 transition ease-in-out hover:bg-[".$GLOBALS['unselected']."] hover:border-[".$GLOBALS['unselected']."] hover:text-[".$GLOBALS['headerTextColorValue']."] cursor-pointer'>
-          <i class='fa fa-user' style='font-size: 24px;'></i>Account<i class='fa fa-caret-down mt-[5px]'></i></div>
+          <div class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['selected'] . "] flex items-center gap-[10px] bg-[#f2f2f2] border-2 border-[" . $GLOBALS['colours']['login'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['headerTextColorValue'] . "] cursor-pointer'>
+          <i class='fa fa-user' style='font-size: 24px;'></i>My Account<i class='fa fa-caret-down mt-[5px]'></i></div>
           </a>";
-        }
-        else{
-          echo "
+  } else {
+    echo "
           <a href='/login'>
-          <div class='w-max h-[40px] mt-[15px] text-[". $GLOBALS['unselected']. "] flex items-center gap-[10px] border-2 border-[".$GLOBALS['unselected']."] rounded-md px-4 py-5 transition ease-in-out hover:bg-[".$GLOBALS['unselected']."] hover:border-[".$GLOBALS['unselected']."] hover:text-[".$GLOBALS['headerTextColorValue']."] cursor-pointer'>
+          <div class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['unselected'] . "] flex items-center gap-[10px] border-2 border-[" . $GLOBALS['unselected'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['headerTextColorValue'] . "] cursor-pointer'>
           <i class='fa fa-user' style='font-size: 24px;'></i>Account<i class='fa fa-caret-down mt-[5px]'></i></div>
           </a>";
         }
@@ -105,32 +104,3 @@ function loadHTML()
   }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-<!-- <body class=''>
-  <div class='absolute top-0 w-[100vw] h-[100px] flex items-center justify-center pl-[50px] pr-[50px]' id='header'>
-    <div class='relative w-[1280px] flex flex-row' id='content'>
-      <div class='relative w-max text-[{" . $GLOBALS[' unselected'] . "}] font-sans text-[48px]' id='HeadTitle'>
-        <span class='text-[#42BFDD]'>H</span>aarlem
-      </div>
-      <div class='absolute flex items-center right-0 gap-[25px]' id='navigation'>
-        <div class='flex items-center text-[20px] float-right'>
-          <ul class='flex flex-row gap-[25px] mt-[15px]'>
-            <li class='transition ease-in-out hover:translate-y-[-5px] text-[" . $GLOBALS['colours']['yummie'] . "]'>
-              <a>Yummie!</a>
-            </li>
-            <li class='transition ease-in-out hover:translate-y-[-5px] text-[" . $GLOBALS['colours']['tour'] . "]'>
-              <a>Haarlem tour</a>
-            </li>
-            <li class='transition ease-out hover:translate-y-[-5px] text-[" . $GLOBALS['colours']['dance'] . "]'>
-              <a>Dance</a>
-            </li>
-          </ul>
-        </div>
-        <button class='w-max p-3 text-[20px] text-[{$GLOBALS['unselected']}] bg-[#42BFDD] mt-[15px] transition ease-out hover:translate-y-[-5px]'>
-          Plan your trip!
-        </button>
-      </div>
-    </div>
-  </div>
-</body> -->
