@@ -23,7 +23,7 @@
                 $user = new User();
                 $user->__set_Username($username);
                 $user->__set_Email($email);
-                $user->__set_Password(password_hash($password, PASSWORD_DEFAULT));               
+                $user->__set_Password(md5($password));               
                 $userService->insert_User($user);
 
                 $_SESSION['registerMsg'] = 'Registration successful';

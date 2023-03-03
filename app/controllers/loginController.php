@@ -20,13 +20,13 @@
 
         function handlePost(){
             $email = $_POST['mail'];
-            $passwd = password_hash($_POST['passwd'], PASSWORD_DEFAULT);
+            $passwd = md5($_POST['passwd']);
 
 
             $userService = new UserService();
             if($userService->verify_UserCredentials($email, $passwd)){
                 $_SESSION['USER_ID'] = $userService->get_UserByEmail($email)->get_uid();
-                require __DIR__ . '/../views/userPanel/regularUserPanel.php';
+                header('refresh:0;url=/home');
                 return;
             }
             else{

@@ -81,7 +81,7 @@ class UserRepository extends Repository
 
     public function verify_UserCredentials(string $email, $passwd){
         try {
-            $stmt = $this->conn->prepare("SELECT users.id FROM users, customer WHERE email = :email AND password = :passwd AND users.id = customer.id");
+            $stmt = $this->conn->prepare("SELECT users.id FROM users WHERE email = :email AND password = :passwd");
             $stmt->execute(array(':email' => htmlspecialchars($email), ':passwd' => htmlspecialchars($passwd)));
             return $stmt->rowCount() == 1 ? true : false;
         } catch (PDOException $e) {
