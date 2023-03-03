@@ -18,10 +18,10 @@ async function loadData() {
     }
   }
 
-function createUserContainer(element, id, username, email, passwd){
+function createUserContainer(element, id, username, email){
 
     container = document.createElement('span');
-    container.classList.add('bg-white', 'p-2', 'shadow-md', 'rounded-md','grid', 'grid-cols-4', 'md:grid-cols-2', 'grid-rows-1', 'md:grid-rows-2');
+    container.classList.add('bg-white', 'p-2', 'shadow-md', 'rounded-md','grid','lg:grid-cols-3', 'md:grid-cols-1', 'text-left');
     idSpan = document.createElement('span');
     idSpan.innerHTML = id;
     idSpan.classList.add('col-span-1')
@@ -34,14 +34,9 @@ function createUserContainer(element, id, username, email, passwd){
     mailSpan.innerHTML = email;
     mailSpan.classList.add('col-span-1');
 
-    passwdSpan = document.createElement('span');
-    passwdSpan.innerHTML = passwd;
-    passwdSpan.classList.add('col-span-1');
-
     container.appendChild(idSpan);
     container.appendChild(unameSpan);
     container.appendChild(mailSpan);
-    container.appendChild(passwdSpan);
 
     element.appendChild(container);
 }
