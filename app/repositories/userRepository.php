@@ -54,6 +54,19 @@ class UserRepository extends Repository
         }
     }
 
+    public function get_UserByUsername(string $username): User{
+        try {
+            $stmt = $this->conn->prepare("SELECT id, username, email, password FROM users WHERE username = :username");
+            $stmt->execute(array(':username' => $username));
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+            $user = $stmt->fetch();
+            return $user;
+         }catch(PDOException $e){
+            echo $e;
+        }
+    }
+
     public function get_UserPrivilegeById($id){
         try {
             //TODO
@@ -80,8 +93,8 @@ class UserRepository extends Repository
     public function insert_User(User $user)
     {
         try {
-            $stmt = $this->conn->prepare("INSERT INTO users (username, email, 'password') VALUES (:username, :email, :passwd)");
-            $stmt->execute(array(':username' => $user, ':email' => $user, ':passwd' => $user)); //how to select the values from the user object? //get_object_vars()?
+            $stmt = $this->conn->prepare("INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, 0)");
+            $stmt->execute(array(':username' => $user->get_username(), ':email' => $user->get_email(), ':password' => $user->get_password()));
         } catch (PDOException $e) {
             echo $e;
         }

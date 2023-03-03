@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Feb 23, 2023 at 02:25 PM
--- Server version: 10.11.2-MariaDB-1:10.11.2+maria~ubu2204
--- PHP Version: 8.1.16
+-- Generation Time: Mar 03, 2023 at 12:36 AM
+-- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
+-- PHP Version: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `HaarlemFestival`
+-- Database: `Haarlem-Festival`
 --
 
 -- --------------------------------------------------------
@@ -298,17 +298,19 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(25) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL
+  `password` varchar(256) DEFAULT NULL,
+  `role` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`) VALUES
-(1, 'admin', 'admin@gmail.com', 'secret123'),
-(2, 'customer', 'customer@gmail.com', 'secret123'),
-(3, 'employee', 'employee@gmail.com', 'secret123');
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`) VALUES
+(1, 'admin', 'admin@gmail.com', 'secret123', 9),
+(2, 'customer', 'customer@gmail.com', 'secret123', 0),
+(3, 'employee', 'employee@gmail.com', 'secret123', 1),
+(4, 'Test', 'test@gmail.com', '$2y$10$TRgg5jp6YrQnsM/Qsj5le.pO/XwIZEoBitfjzwNlXYJq5ftQeHik.', 0);
 
 -- --------------------------------------------------------
 
@@ -511,7 +513,7 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `venue`

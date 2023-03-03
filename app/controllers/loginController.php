@@ -20,7 +20,8 @@
 
         function handlePost(){
             $email = $_POST['mail'];
-            $passwd = $_POST['passwd'];
+            $passwd = password_hash($_POST['passwd'], PASSWORD_DEFAULT);
+
 
             $userService = new UserService();
             if($userService->verify_UserCredentials($email, $passwd)){
