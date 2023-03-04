@@ -1,6 +1,6 @@
 <?php
 global $headerTextColorValue;
-$headerTextColorValue = '#F7F7FB'; // white
+$headerTextColourValue = '#F7F7FB'; // white
 global $unselected;
 global $selected;
 $unselected = '#F7F7FB'; //white
@@ -12,17 +12,17 @@ function generateHeader(string $pageName, string $mode)
 {
   global $unselected;
   global $selected;
-  global $headerTextColorValue;
+  global $headerTextColourValue;
   switch ($mode) {
     case 'dark':
       $unselected = '#29334E';
       $selected = '#FC5B84';
-      $headerTextColorValue = '#F7F7FB';
+      $headerTextColourValue = '#F7F7FB';
       break;
     case 'light':
       $unselected = '#F7F7FB';
       $selected = '#FC5B84';
-      $headerTextColorValue = '#29334E';
+      $headerTextColourValue = '#29334E';
       break;
     default:
       $unselected = '';
@@ -71,20 +71,16 @@ function loadHTML()
         </div>";
   if (isset($_SESSION['USER_ID'])) {
     echo "
-          <a href='/login'>
-          <div class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['selected'] . "] flex items-center gap-[10px] bg-[#f2f2f2] border-2 border-[" . $GLOBALS['colours']['login'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['headerTextColorValue'] . "] cursor-pointer'>
-          <i class='fa fa-user' style='font-size: 24px;'></i>My Account<i class='fa fa-caret-down mt-[5px]'></i></div>
-          </a>";
+          <button data-dropdown-toggle='dropdownInformation' class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['headerTextColourValue'] . "] flex items-center gap-[10px] bg-[#f2f2f2] border-2 border-[" . $GLOBALS['colours']['login'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['headerTextColourValue'] . "] cursor-pointer'>
+          <i class='fa fa-user' style='font-size: 24px;'></i>My Account<i class='fa fa-caret-down mt-[5px]'></i></button>";
   } else {
     echo "
-          <a href='/login'>
-          <div class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['unselected'] . "] flex items-center gap-[10px] border-2 border-[" . $GLOBALS['unselected'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['headerTextColorValue'] . "] cursor-pointer'>
-          <i class='fa fa-user' style='font-size: 24px;'></i>Account<i class='fa fa-caret-down mt-[5px]'></i></div>
-          </a>";
+          <button data-dropdown-toggle='dropdownInformation' class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['unselected'] . "] flex items-center gap-[10px] border-2 border-[" . $GLOBALS['unselected'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['headerTextColourValue'] . "] cursor-pointer'>
+          <i class='fa fa-user' style='font-size: 24px;'></i>Account<i class='fa fa-caret-down mt-[5px]'></i></button>";
         }
         echo 
         "<a href='/api/users'>
-        <div class='w-max h-[40px] mt-[15px] text-[". $GLOBALS['unselected']. "] flex items-center gap-[10px] border-2 border-[".$GLOBALS['unselected']."] rounded-md px-4 py-5 transition ease-in-out hover:bg-[".$GLOBALS['unselected']."] hover:border-[".$GLOBALS['unselected']."] hover:text-[".$GLOBALS['headerTextColorValue']."] cursor-pointer'>
+        <div class='w-max h-[40px] mt-[15px] text-[". $GLOBALS['unselected']. "] flex items-center gap-[10px] border-2 border-[".$GLOBALS['unselected']."] rounded-md px-4 py-5 transition ease-in-out hover:bg-[".$GLOBALS['unselected']."] hover:border-[".$GLOBALS['unselected']."] hover:text-[".$GLOBALS['headerTextColourValue']."] cursor-pointer'>
         <i class='fa fa-location-arrow' style='font-size: 24px;'></i>
           Plan your trip</div>
         </a>
@@ -104,3 +100,53 @@ function loadHTML()
   }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+
+<div id='dropdownInformation' class='z-20 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600'>
+    <div class='px-4 py-3 text-sm text-gray-900 dark:text-white'>
+      <div>Bonnie Green</div>
+      <div class='font-medium truncate'>name@flowbite.com</div>
+    </div>
+    <ul class='py-2 text-sm text-gray-700 dark:text-gray-200' aria-labelledby='dropdownInformationButton'>
+    <li>
+      <?php
+        if(isset($_SESSION['USER_ID'])){
+          echo "<a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Personal program</a>";
+        }
+        else{
+          echo "<a href='/login' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Personal program</a>";
+        }
+      ?>
+      </li>
+      <?php
+      if(isset($_SESSION['USER_ID'])){
+        echo "
+      <li>
+        <a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Dashboard</a>
+      </li>
+      <li>
+        <a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Settings</a>
+      </li>";
+      }
+      else{
+        echo "<li>
+        <a href='/register' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Register</a>
+      </li>";
+      }
+
+      ?>
+    </ul>
+    <div class='py-2'>
+      <a href='/login' class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'>
+        <?php
+          if(isset($_SESSION['USER_ID'])){
+            echo 'Sign out';
+          }
+          else{
+            echo 'Sign in';
+          }
+
+        ?>
+      </a>
+    </div>
+</div>
