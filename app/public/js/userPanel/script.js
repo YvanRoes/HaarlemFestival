@@ -21,7 +21,7 @@ async function loadData() {
 function createUserContainer(element, id, username, email){
 
     container = document.createElement('span');
-    container.classList.add('bg-white', 'p-2', 'shadow-md', 'rounded-md','grid','lg:grid-cols-3', 'md:grid-cols-1', 'text-left');
+    container.classList.add('bg-white', 'p-2','rounded-md','grid','lg:grid-cols-3', 'md:grid-cols-1', 'text-left');
     idSpan = document.createElement('span');
     idSpan.innerHTML = id;
     idSpan.classList.add('col-span-1')
