@@ -29,7 +29,8 @@
                 //set uid for header
                 $_SESSION['USER_ID'] = $user->get_uid();
                 $_SESSION['USER_ROLE'] = $user->get_role();
-                $_SESSION['USER_MAIL '] = $user->get_email();
+                $_SESSION['USER_MAIL'] = $user->get_email();
+                $_SESSION['USER_USERNAME'] = $user->get_username();
                 header('Location: /userPanel');
                 return;
             }

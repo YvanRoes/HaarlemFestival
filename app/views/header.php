@@ -1,5 +1,5 @@
 <?php
-global $headerTextColorValue;
+global $headerTextColourValue;
 $headerTextColourValue = '#F7F7FB'; // white
 global $unselected;
 global $selected;
@@ -46,8 +46,7 @@ function pickColours(mixed $colours, string $var)
   return $colours;
 }
 
-function loadHTML()
-{
+function loadHTML(){
   echo "<body class=''>
   <div class='absolute top-0 w-[100vw] h-[100px] flex items-center justify-center pl-[50px] pr-[50px] z-[100]' id='header'>
     <div class='relative w-[1280px] flex flex-row' id='content'>
@@ -102,10 +101,14 @@ function loadHTML()
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 
-<div id='dropdownInformation' class='z-20 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600'>
+<div id='dropdownInformation' class='z-20 hidden divide-y divide-gray-100 rounded-lg shadow w-44 bg-[#29334E] dark:divide-gray-600'>
     <div class='px-4 py-3 text-sm text-gray-900 dark:text-white'>
-      <div>Bonnie Green</div>
-      <div class='font-medium truncate'>name@flowbite.com</div>
+      <?php
+        if(isset($_SESSION['USER_ID'])){
+          echo "<div> ". $_SESSION['USER_USERNAME'] . "</div>
+          <div class='font-medium truncate'> ". $_SESSION['USER_MAIL'] ."</div>";
+        }
+      ?>
     </div>
     <ul class='py-2 text-sm text-gray-700 dark:text-gray-200' aria-labelledby='dropdownInformationButton'>
     <li>
