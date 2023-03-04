@@ -25,8 +25,11 @@
 
             $userService = new UserService();
             if($userService->verify_UserCredentials($email, $passwd)){
-                $_SESSION['USER_ID'] = $userService->get_UserByEmail($email)->get_uid();
-                header('refresh:0;url=/home');
+                $user = $userService->get_UserByEmail($email);
+                //set uid for header
+                $_SESSION['USER_ID'] = $user->get_uid();
+                $_SESSION['USER_ROLE'] = $user->get_role();
+                header('Location: /userPanel');
                 return;
             }
             else{
@@ -36,4 +39,4 @@
         }
     }
 
-    ?>
+?>

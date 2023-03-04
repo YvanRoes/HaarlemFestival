@@ -4,6 +4,7 @@
         private ?string $username = null;
         private ?string $email = null;
         private ?string $password = null;
+        private ?int $role = null;
 
         public function get_uid(): int{
             return $this->id;
@@ -37,8 +38,15 @@
             return $this;
         }
 
-        public function jsonSerialize(): mixed
-        {
+        public function get_role():int{
+            return $this->role;
+        }
+        public function __set_role(int $role){
+            $this->role = $role;
+            return $this;
+        }
+
+        public function jsonSerialize(): mixed{
             return [
                 'id' => $this->id,
                 'username' => $this->username,
