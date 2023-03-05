@@ -54,8 +54,8 @@ function loadHTML(){
       <a href='/'>
         <span class='text-[#42BFDD]'>H</span>aarlem</a>
       </div>
-      <div class='absolute flex items-center right-0 gap-[25px]' id='navigation'>
-        <div class='flex items-center text-[20px] float-right'>
+      <div class='absolute flex items-center right-0 gap-[25px] lg:text-[20px] md:text-[15px]' id='navigation'>
+        <div class='flex items-center float-right'>
           <ul class='flex flex-row gap-[25px] mt-[15px]'>
             <li class='transition ease-in-out hover:translate-y-[-5px] text-[" . $GLOBALS['colours']['yummie'] . "]'>
               <a href='/food'>Yummie!</a>
