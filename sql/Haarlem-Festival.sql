@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 03, 2023 at 01:07 AM
--- Server version: 10.11.2-MariaDB-1:10.11.2+maria~ubu2204
--- PHP Version: 8.1.16
+-- Generation Time: Mar 07, 2023 at 08:36 PM
+-- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,23 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `Haarlem-Festival`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`id`) VALUES
-(1);
 
 -- --------------------------------------------------------
 
@@ -72,40 +55,6 @@ CREATE TABLE `artist_event_edm` (
   `artist_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `customer`
---
-
-CREATE TABLE `customer` (
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `customer`
---
-
-INSERT INTO `customer` (`id`) VALUES
-(2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `employee`
---
-
-CREATE TABLE `employee` (
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `employee`
---
-
-INSERT INTO `employee` (`id`) VALUES
-(3);
 
 -- --------------------------------------------------------
 
@@ -342,12 +291,6 @@ INSERT INTO `venue` (`id`, `name`, `location`, `capacity`) VALUES
 --
 
 --
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `artist`
 --
 ALTER TABLE `artist`
@@ -359,18 +302,6 @@ ALTER TABLE `artist`
 ALTER TABLE `artist_event_edm`
   ADD KEY `artist_id` (`artist_id`),
   ADD KEY `event_id` (`event_id`);
-
---
--- Indexes for table `customer`
---
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `employee`
---
-ALTER TABLE `employee`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `events`
@@ -526,29 +457,11 @@ ALTER TABLE `venue`
 --
 
 --
--- Constraints for table `admin`
---
-ALTER TABLE `admin`
-  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
-
---
 -- Constraints for table `artist_event_edm`
 --
 ALTER TABLE `artist_event_edm`
   ADD CONSTRAINT `artist_event_edm_ibfk_1` FOREIGN KEY (`artist_id`) REFERENCES `artist` (`id`),
   ADD CONSTRAINT `artist_event_edm_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event_edm` (`id`);
-
---
--- Constraints for table `customer`
---
-ALTER TABLE `customer`
-  ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `employee`
---
-ALTER TABLE `employee`
-  ADD CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `event_edm`
