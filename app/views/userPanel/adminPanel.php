@@ -29,15 +29,15 @@
         <div class="col-start-1 col-span-1 row-start-2 row-span-5 flex justify-center border-[1px] border[#656262]" id="subMenu">
             <ul class="p-4 flex flex-col gap-[20px] h-fit" id="items">
                 <ul class="text-sm text-[#656262]" id="UsersList">
-                    <li class="font-bold"><a href="">Users</a></li>
+                    <li class="font-bold"><button onclick="loadUserData()">Users</button></li>
                     <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">Customers</a>
+                        <button onclick="loadCustomers()" class="block px-4 py-2 dark:hover:text-[#121212]">Customers</button>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">Emloyees</a>
+                        <button onclick="loadEmployees()" class="block px-4 py-2 dark:hover:text-[#121212]">Emloyees</button>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">Admins</a>
+                        <button onclick="loadAdmins()" class="block px-4 py-2 dark:hover:text-[#121212]">Admins</button>
                     </li>
                 </ul>
                 <ul class="text-sm text-[#656262] mt-4" id="TicketsList">

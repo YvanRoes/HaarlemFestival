@@ -1,10 +1,44 @@
-async function loadData() {
+async function loadUserData() {
+  var objects = await getDataFromUserAPI();
+  createUserList(objects);
+}
+
+async function loadCustomers() {
+  customers = await getUsersByRole(0);
+  createUserList(customers);
+}
+
+async function loadEmployees(){
+  employees = await getUsersByRole(1);
+  createUserList(employees);
+}
+
+async function loadAdmins(){
+  admins = await getUsersByRole(9);
+  createUserList(admins);
+}
+
+async function getUsersByRole(role) {
+  let res = await getDataFromUserAPI();
+  console.log(res);
+  let customers = [];
+
+  for (let i = 0; i < res.length; i++) {
+    if(res[i].role == role){
+      customers.push(res[i]);
+    }
+  }
+  return customers;
+}
+
+async function getDataFromUserAPI() {
+  const response = await fetch("http://localhost/api/users");
+  return await response.json();
+}
+
+function createUserList(objects) {
   parentElement = document.getElementById('contentItemsWrapper');
   parentElement.innerHTML = '';
-
-  let objects;
-  const response = await fetch('http://localhost/api/users');
-  objects = await response.json();
   for (let i = 0; i < objects.length; i++) {
     createUserContainer(
       parentElement,
@@ -47,4 +81,4 @@ function createUserContainer(element, id, username, email) {
   element.appendChild(container);
 }
 
-loadData();
+loadUserData();

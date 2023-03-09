@@ -51,7 +51,8 @@
                 'id' => $this->id,
                 'username' => $this->username,
                 'email' => $this->email,
-                'password' => $this->password
+                'password' => $this->password,
+                'role' => $this->role,
             ];
         }
     }
