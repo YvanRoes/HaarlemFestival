@@ -63,10 +63,10 @@ if (isset($_SESSION['registerMsg'])) {
     <div class="pb-[2.5rem] lg:w-[1280px] md:w-[100vw] sm:w-[100vw] flex items-center justify-center"
         id="content-container">
         <div
-            class="w-2/6 h-4/5 flex flex-col items-center  mt-[100px] backdrop-blur bg-white/50 rounded-md border-white/25 border-2 drop-shadow-xl">
+            class="w-2/6 h-4.5/5 flex flex-col items-center  mt-[100px] backdrop-blur bg-white/50 rounded-md border-white/25 border-2 drop-shadow-xl">
             <form method="POST" action="" class="flex flex-col w-4/6">
                 <input name="username" rows="1"
-                    class="block w-full h-[40px] mt-[75px] m-auto my-4 py-2 px-2 text-sm text-gray-800 bg-[#F7F7FB] border-0 rounded-sm focus:ring-0 resize-none"
+                    class="block w-full h-[40px] mt-[50px] m-auto my-4 py-2 px-2 text-sm text-gray-800 bg-[#F7F7FB] border-0 rounded-sm focus:ring-0 resize-none"
                     placeholder="username" required></input>
                 <input name="email" rows="1"
                     class="block w-full h-[40px] m-auto my-4 py-2 px-2 text-sm text-gray-800 bg-[#F7F7FB] border-0 rounded-sm focus:ring-0 resize-none"
@@ -78,7 +78,7 @@ if (isset($_SESSION['registerMsg'])) {
                     class="block w-full h-[40px] m-auto my-4 py-2 px-2 text-sm text-gray-800 bg-[#F7F7FB] border-0 focus:ring-0 rounded-sm resize-none"
                     placeholder="confirm password" required></input>
                 <input name="captcha" rows="1"
-                    class="block w-full h-[40px] m-auto my-4 py-2 px-2 text-sm text-gray-800 bg-[#F7F7FB] border-0 focus:ring-0 rounded-sm resize-none"
+                    class="block w-full h-[40px] m-auto my-4 py-2 px-2 text-sm text-gray-800 bg-[#F7F7FB] border-0 focus:ring-0 rounded-sm resize-none mt-[50px]"
                     placeholder="captcha" required></input>
 
                 <img src="capacha.jpg" class="w-[300px] h-[60px] mb-[20px]"/>
@@ -93,7 +93,7 @@ if (isset($_SESSION['registerMsg'])) {
 
             <form method="POST" action="" class="flex flex-col justify-center">
                 <p class="text-[#29334E]/50 pt-2 text-[14px]">already have an account?</p>
-                <button name="Login" type="submit" class="text-[#29334E] text-[14px] underline"><a href='/login'>
+                <button name="Login" type="submit" class="text-[#29334E] text-[14px] underline mb-[50px]"><a href='/login'>
                         Log in here
                 </button>
             </form>
