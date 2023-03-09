@@ -94,7 +94,7 @@ class UserRepository extends Repository
     {
         try {
             $stmt = $this->conn->prepare("INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, 0)");
-            $stmt->execute(array(':username' => $user->get_username(), ':email' => $user->get_email(), ':password' => $user->get_password()));
+            $stmt->execute(array(':username' => $user->get_username(), ':email' => $user->get_email(), ':password' => md5($user->get_password())));
         } catch (PDOException $e) {
             echo $e;
         }

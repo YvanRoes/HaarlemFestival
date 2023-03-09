@@ -2,9 +2,12 @@
     require_once __DIR__ . '/controller.php';
     require_once __DIR__ . '/../models/user.php';
     require_once __DIR__ . '/../services/userService.php';
+    require_once __DIR__ . '/../services/captcha/captcha.php';
 
     class RegisterController extends Controller{
         public function index(){   
+            $this->verifyCaptcha();
+
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $this->register();
             } 
@@ -19,11 +22,11 @@
             $password = htmlspecialchars($_POST['password']);
             $confirmPassword = htmlspecialchars($_POST['confirmPassword']);
             
-            if($this->checkUsernameAndEmail($username, $email) && $this->validatePassword($password, $confirmPassword)){
+            if($this->checkUsernameAndEmail($username, $email) && $this->validatePassword($password, $confirmPassword) && $this->verifyCaptcha()){
                 $user = new User();
                 $user->__set_Username($username);
                 $user->__set_Email($email);
-                $user->__set_Password(md5($password));               
+                $user->__set_Password(($password));               
                 $userService->insert_User($user);
 
                 $_SESSION['registerMsg'] = 'Registration successful';
@@ -57,6 +60,32 @@
                 }
             }
             return true;
+        }
+        
+        function verifyCaptcha(){
+            $filename = session_id();
+
+            if(count($_POST)>0){
+                $number = file_get_contents($filename);
+                if($_POST['captcha'] == $number)
+                {
+                    $_SESSION['registerMsg'] = 'captcha is correct';
+                    return true;
+                }else{
+                    $_SESSION['registerMsg'] = 'captcha is not correct';
+                    $text = rand(10000,99999);
+
+                    $myimage = create_capacha($text);
+                    file_put_contents($filename, $text);
+                    return false;
+                }
+            }else{
+                $text = rand(10000,99999);
+
+                $myimage = create_capacha($text);
+                file_put_contents($filename, $text);
+                return false;
+            }
         }
     }
 ?>
