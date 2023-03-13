@@ -24,14 +24,51 @@
           Dance for us is not just an activity, it’s a way of life.
           Come dance the best Dutch produced music out there right here, right now!
         </p>
-        <button class='w-max h-[40px] mt-[15px] text-[#F7F7FB] flex items-center gap-[10px] border-2 border-[#F7F7FB] px-4 py-5 transition ease-in-out cursor-pointer'>Buy Tickets</button>
+        <button
+          class='w-max h-[40px] mt-[15px] text-[#F7F7FB] flex items-center gap-[10px] border-2 border-[#F7F7FB] px-4 py-5 transition ease-in-out cursor-pointer'>Buy
+          Tickets</button>
       </div>
       <div class="flex items-center justify-center">
-        <svg width="65%" height="75%" viewBox="0 0 647 646" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M355.414 0.278878C458.936 -3.85714 567.595 38.017 622.938 125.602C673.702 205.94 628.923 303.925 605.474 396.02C583.193 483.529 575.008 586.91 494.88 628.549C413.137 671.026 319.936 624.735 235.29 588.385C143.401 548.924 32.699 515.078 6.14034 418.665C-21.1532 319.584 47.555 224.852 113.416 145.959C176.899 69.9144 256.434 4.23344 355.414 0.278878Z" fill="#D9D9D9" />
-        </svg>
+        <image src="/img/DanceImg1.png" class="w-[500px]">
       </div>
     </div>
-
+    <div class="flex justify-center mt-[100px]">
+      <h1 class="text-[64px] text-[#F7F7FB] font-['Lato']">The Artists</h1>
+    </div>
+    <div class="grid grid-cols-3 grid-rows-2 mt-[50px]">
+      <div class="flex flex-col justify-center items-center">
+        <image src="/img/Artist1.png" class="w-[300px]">   
+      </div>
+      <div class="flex flex-col justify-center items-center mt-[100px]">
+        <image src="/img/Artist2.png" class="w-[300px]">
+      </div>
+      <div class="flex flex-col justify-center items-center mt-[200px]">
+        <image src="/img/Artist3.png" class="w-[300px]">
+      </div>
+      <div class="flex flex-col justify-center items-center">
+        <image src="/img/Artist4.png" class="w-[300px]">   
+      </div>
+      <div class="flex flex-col justify-center items-center mt-[100px]">
+        <image src="/img/Artist5.png" class="w-[300px]">
+      </div>
+      <div class="flex flex-col justify-center items-center mt-[200px]">
+        <image src="/img/Artist6.png" class="w-[300px]">
+      </div>
+    </div>
+    <div class="flex justify-center mt-[100px]">
+      <h1 class="text-[64px] text-[#F7F7FB] font-['Lato']">The Planning</h1>
+    </div>
+    <div class="grid grid-cols-6 gap-y-[10px] mt-[50px] text-[24px] text-[#F7F7FB] font-['Lato'] ">
+      <h2 class="outline outline-1 outline-white">Date</h2>
+      <h2 class="outline outline-1 outline-white">Location</h2>
+      <h2 class="col-span-2">Artist</h2>
+      <h2 class="outline outline-1 outline-white">Tickets</h2>
+      <h2 class="outline outline-1 outline-white">Price</h2>
+      <h2 class="outline outline-1 outline-white">Fri, Jul. 27 20:00</h2>
+      <h2 class="outline outline-1 outline-white">LichtFabriek</h2>
+      <h2 class="col-span-2">Nicky Romero/ Afrojack</h2>
+      <h2 class="outline outline-1 outline-white">1500</h2>
+      <h2 class="outline outline-1 outline-white">€75.00</h2>
+    </div>
   </div>
 </body>
