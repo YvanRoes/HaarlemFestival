@@ -182,10 +182,34 @@ function generateGrid2(restaurantName) {
 
   return grid;
 }
-generate1('Ratatouille', 4.7, 'French, Seafood, European');
-generate2('Mr&mrs', 4.7, 'Dutch, Seafood, European');
-generate1('Specktakel', 4.5, 'European, International, Asian');
-generate2('Toujours', 4.4, 'Dutch, Seafood, European');
-generate1('ML', 4.1, 'Dutch, Seafood, European');
-generate2('Grand Cafe Brinkmann', 4.1, 'Dutch, Seafood, European');
-generate1('Fris', 4.1, 'Dutch, French, European');
+// generate1('Ratatouille', 4.7, 'French, Seafood, European');
+// generate2('Mr&mrs', 4.7, 'Dutch, Seafood, European');
+// generate1('Specktakel', 4.5, 'European, International, Asian');
+// generate2('Toujours', 4.4, 'Dutch, Seafood, European');
+// generate1('ML', 4.1, 'Dutch, Seafood, European');
+// generate2('Grand Cafe Brinkmann', 4.1, 'Dutch, Seafood, European');
+// generate1('Fris', 4.1, 'Dutch, French, European');
+
+async function generateContent() {
+  restaurants = await getDataFromRestaurantAPI();
+  createRestaurants(restaurants);
+}
+
+async function getDataFromRestaurantAPI() {
+  const response = await fetch('http://localhost/api/restaurants');
+  return await response.json();
+}
+
+function createRestaurants(objects) {
+  parentElement = document.getElementById('restaurants');
+  parentElement.innerHTML = '';
+  for (let i = 0; i < objects.length; i++) {
+    if (i % 2 == 0) {
+      generate1(objects[i].name, objects[i].michelin_star, objects[i].category);
+    } else {
+      generate2(objects[i].name, objects[i].michelin_star, objects[i].category);
+    }
+  }
+}
+
+generateContent();
