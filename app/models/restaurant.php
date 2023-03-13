@@ -4,8 +4,7 @@ class Restaurant implements JsonSerializable
     private ?int $id = null;
     private ?string $name = null;
     private ?string $category = null;
-    private ?float $stars = null;
-    private ?int $role = null;
+    private  $michelin_star = null;
 
     public function get_id(): int
     {
@@ -39,11 +38,11 @@ class Restaurant implements JsonSerializable
 
     public function get_stars(): float
     {
-        return $this->stars;
+        return $this->michelin_star;
     }
     public function __set_stars(string $stars): self
     {
-        $this->stars = $stars;
+        $this->michelin_star = $stars;
         return $this;
     }
 
@@ -54,7 +53,7 @@ class Restaurant implements JsonSerializable
             'id' => $this->id,
             'name' => $this->name,
             'category' => $this->category,
-            'michelin_star' => $this->stars,
+            'michelin_star' => $this->michelin_star,
         ];
     }
 }
