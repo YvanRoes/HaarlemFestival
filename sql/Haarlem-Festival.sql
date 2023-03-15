@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 07, 2023 at 08:36 PM
+-- Generation Time: Mar 14, 2023 at 10:43 PM
 -- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
 -- PHP Version: 8.0.25
 
@@ -114,6 +114,14 @@ CREATE TABLE `page` (
   `name` varchar(255) DEFAULT NULL,
   `html` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `page`
+--
+
+INSERT INTO `page` (`id`, `folder`, `name`, `html`) VALUES
+(1, NULL, 'martinGarrix', 'martijn'),
+(2, NULL, 'sub2', 'sub2');
 
 -- --------------------------------------------------------
 
@@ -420,7 +428,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `restaurant`

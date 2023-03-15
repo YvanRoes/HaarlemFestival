@@ -50,16 +50,25 @@ class PatternRouter
         if (file_exists($filename)) {
             require $filename;
         } else {
-            http_response_code(404);
+            $this->REQ_404();
             die();
         }
         // dynamically call relevant controller method
         try {
             $controllerObj = new $controllerName;
-            $controllerObj->{$methodName}();
+            if (method_exists($controllerObj, $methodName)) {
+                $controllerObj->{$methodName}();
+            }else{
+                $this->REQ_404();
+            }
         } catch (Exception $e) {
             http_response_code(404);
             die();
         }
+    }
+
+    function REQ_404()
+    {
+        require __DIR__ . '/../views/404/index.html';
     }
 }
