@@ -12,7 +12,7 @@
 <title>Home</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
-<body class="overflow-x-hidden bg-[#F7F7FB] flex justify-center">
+<body class="overflow-x-hidden bg-[#F7F7FB] flex flex-col items-center h-fit w-screen">
     <?php
     include __DIR__ . '/../header.php';
     generateHeader('yummie', 'dark');
@@ -38,5 +38,8 @@
         <div id="restaurants" class="flex justify-center w-[100%] flex-col">
         </div>
     </div>
+    
+    <?php include __DIR__ . '/../footer.php'; ?>
+
     <script src="/js/food/index.js"></script>
 </body>
