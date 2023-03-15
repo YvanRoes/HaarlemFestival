@@ -15,6 +15,18 @@ class UsersController{
       header('Content-type: Application/JSON');
       echo json_encode($users);
     }
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+      $body = file_get_contents('php://input');
+      $object = json_decode($body);
+
+      if($object == null){
+        return;
+      }
+
+      if ($object->post_type == "delete") {
+        $this->userService->delete_UserById($object->id);
+      }
+    }
   }
 }
-?>
