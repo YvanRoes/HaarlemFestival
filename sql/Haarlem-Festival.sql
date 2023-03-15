@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 15, 2023 at 09:11 PM
+-- Generation Time: Mar 15, 2023 at 10:47 PM
 -- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
--- PHP Version: 8.0.25
+-- PHP Version: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,20 +30,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `artist` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `genre` varchar(255) NOT NULL
+  `genre` varchar(255) NOT NULL,
+  `imagePath` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `artist`
 --
 
-INSERT INTO `artist` (`id`, `name`, `genre`) VALUES
-(1, 'Hardwell', 'dance and house'),
-(2, 'Armin van Buuren', 'trance and techo'),
-(3, 'Martin Garrix', 'dance and electronic'),
-(4, 'Tiësto', 'trance, techno, minimal, house and electro'),
-(5, 'Nicky Romero', 'electrohouse and progressive house'),
-(6, 'Afrojack', 'house');
+INSERT INTO `artist` (`id`, `name`, `genre`, `imagePath`) VALUES
+(1, 'Hardwell', 'dance and house', '/img/Artist1.png'),
+(2, 'Armin van Buuren', 'trance and techo', '/img/Artist2.png'),
+(3, 'Martin Garrix', 'dance and electronic', '/img/Artist3.png'),
+(4, 'Tiësto', 'trance, techno, minimal, house and electro', '/img/Artist4.png'),
+(5, 'Nicky Romero', 'electrohouse and progressive house', '/img/Artist5.png'),
+(6, 'Afrojack', 'house', '/img/Artist6.png');
 
 -- --------------------------------------------------------
 
@@ -63,8 +64,20 @@ CREATE TABLE `artist_event_edm` (
 --
 
 CREATE TABLE `events` (
-  `id` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `small_title` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `title`, `description`, `small_title`) VALUES
+(1, 'A stroll through Haarlem', 'The city of Haarlem is holding a tour to showcase fun and important historical sites. Join us on this tour between the dates of 26-29 of July this year. If you are interested in Haarlem\'s history this tour is for you!', 'Explore the city'),
+(2, 'Food event', 'Enjoy the wide variety of culinary delights that the city of Haarlem has to offer. Join us as we explore the city one bite at a time.', 'Food'),
+(3, 'Let\'s dance', 'The city of Haarlem welcomes you to a dance party! from popular DJs to up and coming artists, we have it all at Haarlem Dance event. Welcome to the party everyone!', 'Life of the party');
 
 -- --------------------------------------------------------
 
@@ -101,6 +114,32 @@ CREATE TABLE `event_yummie` (
   `price_adult` double NOT NULL,
   `price_child` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `location`
+--
+
+CREATE TABLE `location` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `imagePath` varchar(255) DEFAULT NULL,
+  `capacity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `location`
+--
+
+INSERT INTO `location` (`id`, `name`, `address`, `imagePath`, `capacity`) VALUES
+(1, 'Lichtfabriek', 'Minckelersweg 2', '/img/danceLocation1.png', 1500),
+(2, 'Caprera Openluchttheater', 'Hoge Duin en Daalseweg 2', '/img/danceLocation2.png', 2000),
+(3, 'Club Stalker', 'Kromme Elleboogsteeg 2', '/img/danceLocation3.png', 200),
+(4, 'Jopenkerk', 'Gedemte Voldergracht 2', '/img/danceLocation4.png', 300),
+(5, 'XO the club', 'Grote Markt 8', '/img/danceLocation5.png', 200),
+(6, 'Club Ruis', 'Smedestraat 31', '/img/danceLocation6.png', 200);
 
 -- --------------------------------------------------------
 
@@ -270,31 +309,6 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`) VALUES
 (3, 'employee', 'employee@gmail.com', '5d7845ac6ee7cfffafc5fe5f35cf666d', 1),
 (4, 'Test', 'test@gmail.com', '5d7845ac6ee7cfffafc5fe5f35cf666d', 0);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `venue`
---
-
-CREATE TABLE `venue` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `location` varchar(255) NOT NULL,
-  `capacity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `venue`
---
-
-INSERT INTO `venue` (`id`, `name`, `location`, `capacity`) VALUES
-(1, 'Lichtfabriek', 'Minckelersweg 2', 1500),
-(2, 'Caprera Openluchttheater', 'Hoge Duin en Daalseweg 2', 2000),
-(3, 'Club Stalker', 'Kromme Elleboogsteeg 2', 200),
-(4, 'Jopenkerk', 'Gedemte Voldergracht 2', 300),
-(5, 'XO the club', 'Grote Markt 8', 200),
-(6, 'Club Ruis', 'Smedestraat 31', 200);
-
 --
 -- Indexes for dumped tables
 --
@@ -337,6 +351,12 @@ ALTER TABLE `event_stroll`
 ALTER TABLE `event_yummie`
   ADD PRIMARY KEY (`id`),
   ADD KEY `restaurant` (`restaurant`);
+
+--
+-- Indexes for table `location`
+--
+ALTER TABLE `location`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `page`
@@ -404,12 +424,6 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `venue`
---
-ALTER TABLE `venue`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -423,7 +437,13 @@ ALTER TABLE `artist`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `location`
+--
+ALTER TABLE `location`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `page`
@@ -456,12 +476,6 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `venue`
---
-ALTER TABLE `venue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- Constraints for dumped tables
 --
 
@@ -476,7 +490,7 @@ ALTER TABLE `artist_event_edm`
 -- Constraints for table `event_edm`
 --
 ALTER TABLE `event_edm`
-  ADD CONSTRAINT `event_edm_ibfk_1` FOREIGN KEY (`venue`) REFERENCES `venue` (`id`),
+  ADD CONSTRAINT `event_edm_ibfk_1` FOREIGN KEY (`venue`) REFERENCES `location` (`id`),
   ADD CONSTRAINT `event_edm_ibfk_2` FOREIGN KEY (`id`) REFERENCES `events` (`id`);
 
 --

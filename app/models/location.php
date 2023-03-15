@@ -1,10 +1,12 @@
 <?php
-class Artist implements JsonSerializable
+class Location implements JsonSerializable
 {
     private ?int $id = null;
     private ?string $name = null;
-    private ?string $genre = null;
+    private ?string $address = null;
     private ?string $imagePath = null;
+    private ?int $capacity = null;
+
 
     public function get_id(): int
     {
@@ -26,13 +28,13 @@ class Artist implements JsonSerializable
         return $this;
     }
 
-    public function get_genre(): string
+    public function get_address(): string
     {
-        return $this->genre;
+        return $this->address;
     }
-    public function __set_genre(string $genre): self
+    public function __set_address(string $address): self
     {
-        $this->genre = $genre;
+        $this->address = $address;
         return $this;
     }
 
@@ -47,13 +49,25 @@ class Artist implements JsonSerializable
         return $this;
     }
 
+    public function get_capacity(): int
+    {
+        return $this->capacity;
+    }
+
+    public function __set_capacity(int $capacity): self
+    {
+        $this->capacity = $capacity;
+        return $this;
+    }
+
     public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'genre' => $this->genre,
-            'imagePath' => $this->imagePath
+            'address' => $this->address,
+            'imagePath' => $this->imagePath,
+            'capacity' => $this->capacity
         ];
     }
 }
