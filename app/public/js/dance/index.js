@@ -123,7 +123,13 @@ async function generateArtists(artistGrid) {
     artists = await getDataFromArtistAPI();
 
     for (let i = 1; i <= artists.length; i++) {
-        generateArtist(i, i * 25, artistGrid);
+        if (i <= artists.length / 2) {
+            margin = i * 100;
+        }
+        else {
+            margin = (i * 100) - ((artists.length/2) * 120);
+        }
+        generateArtist(i, margin, artistGrid);
     }
 }
 
