@@ -122,8 +122,8 @@ function generateArtist(i, mt, artistGrid) {
 async function generateArtists(artistGrid) {
     artists = await getDataFromArtistAPI();
 
-    for (let i = 0; i < artists.length; i++) {
-        generateArtist(++i, i * 100, artistGrid);
+    for (let i = 1; i <= artists.length; i++) {
+        generateArtist(i, i * 25, artistGrid);
     }
 }
 
