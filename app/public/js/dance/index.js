@@ -15,8 +15,11 @@ function generateDancePage() {
     header = generateHeader();
     container.appendChild(header);
     generateArtistSection(container);
+    generatePlanningSection(container);
     wrapper.appendChild(container);
 }
+
+//generate the header of the page
 
 function generateHeader() {
     header = document.createElement('div');
@@ -82,6 +85,8 @@ function generateHeader() {
     return header;
 }
 
+//generate the artist section of the page
+
 function generateArtistSection(container) {
     sectionTitleContainer = document.createElement('div');
     sectionTitleContainer.classList.add('flex', 'justify-center', 'mt-[100px]');
@@ -100,29 +105,104 @@ function generateArtistSection(container) {
     container.appendChild(artistGrid);
 };
 
-function generateArtist(i, mt, artistGrid){
-    artist = document.createElement('div');
-    artist.classList.add('flex', 'flex-col', 'justify-center', 'items-center' , 'mt-['+ mt +'px]');
+//generate the artist cards
+function generateArtist(i, mt, artistGrid) {
+    artistContainer = document.createElement('div');
+    artistContainer.classList.add('flex', 'flex-col', 'justify-center', 'items-center', 'mt-[' + mt + 'px]');
 
     image = new Image();
-    image.src = '/img/artist'+ i +'.png';
+    image.src = '/img/artist' + i + '.png';
     image.classList.add('w-[300px]');
-    artist.appendChild(image);
+    artistContainer.appendChild(image);
 
-    artistGrid.appendChild(artist);
+    artistGrid.appendChild(artistContainer);
 }
 
+//get the data from the api and generate the artist cards
 async function generateArtists(artistGrid) {
     artists = await getDataFromArtistAPI();
 
     for (let i = 0; i < artists.length; i++) {
-        generateArtist(++i, i*100, artistGrid);
+        generateArtist(++i, i * 100, artistGrid);
     }
 }
 
+//get the data from the api
 async function getDataFromArtistAPI() {
     const response = await fetch('http://localhost/api/artists');
     return await response.json();
 }
+
+//generate the planning section of the page
+function generatePlanningSection(container) {
+    sectionTitleContainer = document.createElement('div');
+    sectionTitleContainer.classList.add('flex', 'justify-center', 'mt-[100px]');
+    sectionTitle = document.createElement('h1');
+    sectionTitle.classList.add('text-[64px]', 'text-[#F7F7FB]', 'font-[\'Lato\']');
+    sectionTitle.innerHTML = 'The Planning';
+
+    planningGrid = document.createElement('div');
+    planningGrid.classList.add(
+        'grid',
+        'grid-cols-6',
+        'mt-[50px]',
+        'text-[24px]',
+        'text-[#F7F7FB]',
+        'font-[\'Lato\']'
+    );
+
+    generatePlanningItem(1, 'Date', planningGrid);
+    generatePlanningItem(1, 'Location', planningGrid);
+    generatePlanningItem(2, 'Artist', planningGrid);
+    generatePlanningItem(1, 'Tickets', planningGrid);
+    generatePlanningItem(1, 'Price', planningGrid);
+
+    planningParagraph = document.createElement('p');
+    planningParagraph.classList.add('text-[#656262]', 'mt-[10px]');
+    planningParagraph.innerHTML = '* The capacity of the Club sessions is very limited. Availability for All-Access pas holders can not be garanteed due to safety regulations. Tickets available represents total capacity. (90% is sold as single tickets. 10% of total capacity is left for Walk ins/All-Acces passholders.)';
+   
+    buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('flex', 'justify-center');
+    button = document.createElement('button');
+    button.classList.add(
+        'mt-[100px]',
+        'w-[200px]',
+        'h-[50px]',
+        'text-white',
+        'outline',
+        'outline-3',
+        'white'
+    );
+    button.innerHTML = 'Buy Tickets';
+
+    sectionTitleContainer.appendChild(sectionTitle);
+    container.appendChild(sectionTitleContainer);
+
+    container.appendChild(planningGrid);
+    container.appendChild(planningParagraph);
+
+    buttonContainer.appendChild(button);
+    container.appendChild(buttonContainer);
+}
+
+function generatePlanningItem(span, content, planningGrid) {
+    planningItem = document.createElement('h2');
+    planningItem.classList.add('col-span-'+span,'outline', 'outline-1', 'outline-white', 'pl-[3px]');
+
+    planningItem.innerHTML = content;
+
+    planningGrid.appendChild(planningItem);
+}
+
+// function generateLocationSection(container) {
+//     sectionTitleContainer = document.createElement('div');
+//     sectionTitleContainer.classList.add('flex', 'justify-center', 'mt-[100px]', 'mb-[50px]');
+//     sectionTitle = document.createElement('h1');
+//     sectionTitle.classList.add('text-[64px]', 'text-[#F7F7FB]', 'font-[\'Lato\']');
+//     sectionTitle.innerHTML = 'Locations';
+
+//     locationGrid = document.createElement('div');
+//     locationGrid.classList.add('grid', 'grid-cols-2', 'grid-rows-3', 'gap-x-[20px]', 'gap-y-[20px]');
+// }
 
 generateDancePage();
