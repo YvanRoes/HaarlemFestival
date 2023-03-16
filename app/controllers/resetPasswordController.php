@@ -61,7 +61,7 @@ class ResetPasswordController extends Controller
     public function verifyNumber()
     {
         $number = $_SESSION['passwordNumber'];
-        $input = $_POST['passwordNumber'];
+        $input = htmlspecialchars($_POST['passwordNumber']);
         if ($number == $input) {
             return true;
         } else {
