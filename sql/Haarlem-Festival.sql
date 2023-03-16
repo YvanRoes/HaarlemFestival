@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 15, 2023 at 10:47 PM
--- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
--- PHP Version: 8.0.26
+-- Generation Time: Mar 16, 2023 at 12:48 PM
+-- Server version: 10.11.2-MariaDB-1:10.11.2+maria~ubu2204
+-- PHP Version: 8.1.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -161,7 +161,7 @@ CREATE TABLE `page` (
 INSERT INTO `page` (`id`, `folder`, `name`, `html`) VALUES
 (1, NULL, 'martinGarrix', 'martijn'),
 (2, NULL, 'sub2', 'sub2'),
-(3, NULL, 'danceIndex', '<style>\r\n  @import url(\'https://fonts.googleapis.com/css2?family=Lato&display=swap\');\r\n\r\n  * {\r\n    padding: 0px;\r\n    margin: 0px;\r\n    /* outline: 1px solid red; */\r\n  }\r\n</style>\r\n\r\n<title>Dance</title>\r\n<script src=\"https://cdn.tailwindcss.com\"></script>\r\n\r\n<body class=\"h-[100vh] overflow-x-hidden bg-[#121212] flex flex-col items-center h-fit w-screen\">\r\n  <div id=\"content-wrapper\">\r\n    \r\n  </div>\r\n  <script src=\"/js/dance/index.js\"></script>\r\n</body>');
+(3, NULL, 'danceIndex', '<style>\r\n  @import url(\"https://fonts.googleapis.com/css2?family=Lato&display=swap\");\r\n\r\n  * {\r\n    padding: 0px;\r\n    margin: 0px;\r\n    /* outline: 1px solid red; */\r\n  }\r\n</style>\r\n\r\n<title>Dance</title>\r\n<script src=\"https://cdn.tailwindcss.com\"></script>\r\n\r\n<body class=\"h-[100vh] overflow-x-hidden bg-[#121212] flex flex-col items-center h-fit w-screen\">\r\n  <div id=\"content-wrapper\">\r\n    \r\n  </div>\r\n  <script src=\"/js/dance/index.js\"></script>\r\n</body>');
 
 -- --------------------------------------------------------
 
