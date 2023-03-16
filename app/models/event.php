@@ -8,6 +8,19 @@ class Event implements JsonSerializable
 
     private ?string $description = null;
 
+    private ?string $small_title = null;
+
+    public function get_small_title(): string
+    {
+        return $this->small_title;
+    }
+
+    public function __set_small_title(string $small_title): self
+    {
+        $this->small_title = $small_title;
+        return $this;
+    }
+
     public function get_id(): int
     {
         return $this->id;
@@ -47,6 +60,7 @@ class Event implements JsonSerializable
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
+            'small_title' => $this->small_title
         ];
     }
 }
