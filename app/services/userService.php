@@ -27,11 +27,6 @@ class UserService{
         return $repo->get_UserByUsername($username);
     }
 
-    public function get_UserPrivilegeById($id){
-        $repo = new UserRepository();
-        return $repo->get_UserPrivilegeById($id);
-    }
-
     public function insert_User(User $user){
         $repo = new UserRepository();
         return $repo->insert_User($user);
@@ -44,6 +39,11 @@ class UserService{
     public function update_Password($user_id, $password){
         $repo = new UserRepository();
         return $repo->update_Password($user_id, $password);
+    }
+
+    public function delete_UserById($id){
+        $repo = new UserRepository();
+        $repo->delete_UserById($id);
     }
 
 }

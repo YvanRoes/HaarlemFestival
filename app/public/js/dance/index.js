@@ -16,6 +16,7 @@ function generateDancePage() {
     container.appendChild(header);
     generateArtistSection(container);
     generatePlanningSection(container);
+    generateLocationSection(container);
     wrapper.appendChild(container);
 }
 
@@ -103,15 +104,15 @@ function generateArtistSection(container) {
 
     container.appendChild(sectionTitleContainer);
     container.appendChild(artistGrid);
-};
+}
 
 //generate the artist cards
-function generateArtist(i, mt, artistGrid) {
+function generateArtist(artist, mt, artistGrid) {
     artistContainer = document.createElement('div');
     artistContainer.classList.add('flex', 'flex-col', 'justify-center', 'items-center', 'mt-[' + mt + 'px]');
 
     image = new Image();
-    image.src = '/img/artist' + i + '.png';
+    image.src = artist.imagePath;
     image.classList.add('w-[300px]');
     artistContainer.appendChild(image);
 
@@ -129,7 +130,7 @@ async function generateArtists(artistGrid) {
         else {
             margin = (i * 100) - ((artists.length/2) * 120);
         }
-        generateArtist(i, margin, artistGrid);
+        generateArtist(artists[i-1], margin, artistGrid);
     }
 }
 
@@ -200,15 +201,59 @@ function generatePlanningItem(span, content, planningGrid) {
     planningGrid.appendChild(planningItem);
 }
 
-// function generateLocationSection(container) {
-//     sectionTitleContainer = document.createElement('div');
-//     sectionTitleContainer.classList.add('flex', 'justify-center', 'mt-[100px]', 'mb-[50px]');
-//     sectionTitle = document.createElement('h1');
-//     sectionTitle.classList.add('text-[64px]', 'text-[#F7F7FB]', 'font-[\'Lato\']');
-//     sectionTitle.innerHTML = 'Locations';
+function generateLocationSection(container) {
+    sectionTitleContainer = document.createElement('div');
+    sectionTitleContainer.classList.add('flex', 'justify-center', 'mt-[100px]', 'mb-[50px]');
+    sectionTitle = document.createElement('h1');
+    sectionTitle.classList.add('text-[64px]', 'text-[#F7F7FB]', 'font-[\'Lato\']');
+    sectionTitle.innerHTML = 'Locations';
 
-//     locationGrid = document.createElement('div');
-//     locationGrid.classList.add('grid', 'grid-cols-2', 'grid-rows-3', 'gap-x-[20px]', 'gap-y-[20px]');
-// }
+    locationGrid = document.createElement('div');
+    locationGrid.classList.add('grid', 'grid-cols-2', 'grid-rows-3', 'gap-x-[20px]', 'gap-y-[20px]');
+
+    generateLocations(locationGrid);
+
+    sectionTitleContainer.appendChild(sectionTitle);
+
+    container.appendChild(sectionTitleContainer);
+    container.appendChild(locationGrid);
+}
+
+function generateLocation(locationGrid, location) {
+    locationContainer = document.createElement('div');
+    locationContainer.classList.add('grid', 'grid-cols-2', 'grid-rows-2', 'outline', 'outline-1', 'outline-white');
+
+    locationName = document.createElement('h2');
+    locationName.classList.add('text-[24px]', 'text-[#F7F7FB]', 'font-[\'Lato\']', 'mt-[20px]', 'ml-[10px]');
+    locationName.innerHTML = location.name;
+
+    image = new Image();
+    image.src = location.imagePath;
+    image.classList.add('grid', 'justify-self-end', 'row-span-2', 'w-[253px]', 'h-[161px]');
+
+    locationAddress = document.createElement('h2');
+    locationAddress.classList.add('text-[20px]', 'text-[#F7F7FB]', 'font-[\'Lato\']', 'ml-[10px]');
+    locationAddress.innerHTML = location.address;
+
+    locationContainer.appendChild(locationName);
+    locationContainer.appendChild(image);
+    locationContainer.appendChild(locationAddress);
+
+    locationGrid.appendChild(locationContainer);
+}
+
+async function generateLocations(locationGrid) {
+    locations = await getDataFromLocationAPI();
+
+    for (let i = 0; i <= locations.length; i++) {
+        generateLocation(locationGrid, locations[i]);
+    }
+}
+
+//get the data from the api
+async function getDataFromLocationAPI() {
+    const response = await fetch('http://localhost/api/locations');
+    return await response.json();
+}
 
 generateDancePage();
