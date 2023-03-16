@@ -109,7 +109,6 @@ class UserRepository extends Repository
             echo $e;
         }
     }
-}
     public function delete_UserById($id){
         try {
             $stmt = $this->conn->prepare("DELETE FROM users WHERE id = :id");
