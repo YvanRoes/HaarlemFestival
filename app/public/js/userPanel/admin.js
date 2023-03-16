@@ -146,12 +146,11 @@ async function addUserSearch() {
 loadUserData();
 
 async function searchUsers(objects, value) {
-  var objects = await getDataFromUserAPI();
   var newArr = [];
   for (element of objects) {
     if (element.username.includes(value)) newArr.push(element);
-    else if (element.id.toString().includes(value)) newArr.push(element);
-    else if (element.email.includes(value)) newArr.push(element);
+    if (element.id.toString().includes(value)) newArr.push(element);
+    //if (element.email.includes(value)) newArr.push(element);
   }
   createUserList(newArr);
 }

@@ -122,7 +122,7 @@ CREATE TABLE `page` (
 INSERT INTO `page` (`id`, `folder`, `name`, `html`) VALUES
 (1, NULL, 'martinGarrix', 'martijn'),
 (2, NULL, 'sub2', 'sub2'),
-(3, NULL, 'danceIndex', '<style>\r\n  @import url(\'https://fonts.googleapis.com/css2?family=Lato&display=swap\');\r\n\r\n  * {\r\n    padding: 0px;\r\n    margin: 0px;\r\n    /* outline: 1px solid red; */\r\n  }\r\n</style>\r\n\r\n<title>Dance</title>\r\n<script src=\"https://cdn.tailwindcss.com\"></script>\r\n\r\n<body class=\"h-[100vh] overflow-x-hidden bg-[#121212] flex flex-col items-center h-fit w-screen\">\r\n  <div id=\"content-wrapper\">\r\n    \r\n  </div>\r\n  <script src=\"/js/dance/index.js\"></script>\r\n</body>');
+(3, NULL, 'danceIndex', '<style>\r\n  @import url(\"https://fonts.googleapis.com/css2?family=Lato&display=swap\");\r\n\r\n  * {\r\n    padding: 0px;\r\n    margin: 0px;\r\n    /* outline: 1px solid red; */\r\n  }\r\n</style>\r\n\r\n<title>Dance</title>\r\n<script src=\"https://cdn.tailwindcss.com\"></script>\r\n\r\n<body class=\"h-[100vh] overflow-x-hidden bg-[#121212] flex flex-col items-center h-fit w-screen\">\r\n  <div id=\"content-wrapper\">\r\n    \r\n  </div>\r\n  <script src=\"/js/dance/index.js\"></script>\r\n</body>');
 
 -- --------------------------------------------------------
 
