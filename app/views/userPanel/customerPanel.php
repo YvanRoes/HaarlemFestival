@@ -11,7 +11,7 @@
     <title>User Panel</title>
 </head>
 
-<body class="w-[100vw] h-[100vh] overflow-hidden bg-[#F7F7FB]">
+<body class="w-[100vw] h-[100vh] overflow-x-hidden bg-[#F7F7FB]">
         <?php
             include __DIR__ . '/../header.php';
             generateHeader('home', 'dark');
@@ -29,7 +29,7 @@
         </div>
         <div class="col-start-2 col-span-5 row-start-2 row-span-5 flex justify-center" id="Content">
             <div class="w-10/12 h-max p-16 mt-16 rounded-lg shadow" id="ContentWrapper">
-                <div class="flex flex-col gap-4" id="contentItemsWrapper">
+                <div class="flex flex-col gap-4 w-[100px]" id="contentItemsWrapper">
                     <button name="changePassword" type="submit" class="text-[#29334E] text-[14px] underline"><a href='/resetPassword'>Change Password</button>
                 </div>
             </div>
