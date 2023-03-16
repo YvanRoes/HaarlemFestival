@@ -16,7 +16,9 @@ function sendMail($userEmail, $subject, $htmlBody, $plainBody)
 
     try {
         //Server settings
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER; //Enable verbose debug output
+       // $mail->SMTPDebug = SMTP::DEBUG_SERVER; //Enable verbose debug output
+        $mail->SMTPDebug = false; //this is so no mesasge show up use the above line to show the debug output
+
         $mail->isSMTP(); //Send using SMTP
         $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
         $mail->SMTPAuth = true; //Enable SMTP authentication
@@ -44,6 +46,8 @@ function sendMail($userEmail, $subject, $htmlBody, $plainBody)
         $mail->Subject = $subject;
         $mail->Body = $htmlBody;
         $mail->AltBody = $plainBody;
+
+
 
         $mail->send();
         echo 'Message has been sent';

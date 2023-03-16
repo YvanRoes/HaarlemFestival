@@ -11,11 +11,11 @@
     <title>Admin Panel</title>
 </head>
 
-<body class="w-[100vw] h-[100vh] overflow-hidden bg-[#F7F7FB]">
-        <?php
-            include __DIR__ . '/../header.php';
-            generateHeader('home', 'dark');
-        ?>
+<body class="w-[100vw] h-[100vh] overflow-x-hidden bg-[#F7F7FB]">
+    <?php
+    include __DIR__ . '/../header.php';
+    generateHeader('home', 'dark');
+    ?>
     <div class="w-screen h-[800px] grid grid-cols-6 grid-rows-6 mt-[100px]">
         <div class="col-span-6 row-span-1 border-y-[1px] border-[#656262]" id="header">
             <div class="flex items-center justify-center h-[100%]" id="nav">
@@ -68,7 +68,8 @@
 
         </div>
         <div class="col-start-2 col-span-5 row-start-2 row-span-5 flex justify-center" id="Content">
-            <div class="w-10/12 h-max p-16 mt-16 rounded-lg" id="ContentWrapper">
+            <div class="w-8/12 h-max p-16 mt-16 rounded-lg" id="ContentWrapper">
+                <input id="searchInput" type="text" placeholder="Search" />
                 <div class="flex flex-col gap-4" id="contentItemsWrapper">
                 </div>
             </div>
@@ -76,7 +77,7 @@
     </div>
     </div>
 
-    <script src="./js/userPanel/script.js"></script>
+    <script src="./js/userPanel/admin.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 
 </body>

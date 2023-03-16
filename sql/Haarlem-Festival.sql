@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 15, 2023 at 10:05 PM
--- Server version: 10.9.4-MariaDB-1:10.9.4+maria~ubu2204
--- PHP Version: 8.0.25
+-- Generation Time: Mar 16, 2023 at 12:48 PM
+-- Server version: 10.11.2-MariaDB-1:10.11.2+maria~ubu2204
+-- PHP Version: 8.1.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,20 +30,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `artist` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `genre` varchar(255) NOT NULL
+  `genre` varchar(255) NOT NULL,
+  `imagePath` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `artist`
 --
 
-INSERT INTO `artist` (`id`, `name`, `genre`) VALUES
-(1, 'Hardwell', 'dance and house'),
-(2, 'Armin van Buuren', 'trance and techo'),
-(3, 'Martin Garrix', 'dance and electronic'),
-(4, 'Tiësto', 'trance, techno, minimal, house and electro'),
-(5, 'Nicky Romero', 'electrohouse and progressive house'),
-(6, 'Afrojack', 'house');
+INSERT INTO `artist` (`id`, `name`, `genre`, `imagePath`) VALUES
+(1, 'Hardwell', 'dance and house', '/img/Artist1.png'),
+(2, 'Armin van Buuren', 'trance and techo', '/img/Artist2.png'),
+(3, 'Martin Garrix', 'dance and electronic', '/img/Artist3.png'),
+(4, 'Tiësto', 'trance, techno, minimal, house and electro', '/img/Artist4.png'),
+(5, 'Nicky Romero', 'electrohouse and progressive house', '/img/Artist5.png'),
+(6, 'Afrojack', 'house', '/img/Artist6.png');
 
 -- --------------------------------------------------------
 
@@ -117,6 +118,32 @@ CREATE TABLE `event_yummie` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `location`
+--
+
+CREATE TABLE `location` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `imagePath` varchar(255) DEFAULT NULL,
+  `capacity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `location`
+--
+
+INSERT INTO `location` (`id`, `name`, `address`, `imagePath`, `capacity`) VALUES
+(1, 'Lichtfabriek', 'Minckelersweg 2', '/img/danceLocation1.png', 1500),
+(2, 'Caprera Openluchttheater', 'Hoge Duin en Daalseweg 2', '/img/danceLocation2.png', 2000),
+(3, 'Club Stalker', 'Kromme Elleboogsteeg 2', '/img/danceLocation3.png', 200),
+(4, 'Jopenkerk', 'Gedemte Voldergracht 2', '/img/danceLocation4.png', 300),
+(5, 'XO the club', 'Grote Markt 8', '/img/danceLocation5.png', 200),
+(6, 'Club Ruis', 'Smedestraat 31', '/img/danceLocation6.png', 200);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `page`
 --
 
@@ -134,7 +161,7 @@ CREATE TABLE `page` (
 INSERT INTO `page` (`id`, `folder`, `name`, `html`) VALUES
 (1, NULL, 'martinGarrix', 'martijn'),
 (2, NULL, 'sub2', 'sub2'),
-(3, NULL, 'danceIndex', '<style>\r\n  @import url(\'https://fonts.googleapis.com/css2?family=Lato&display=swap\');\r\n\r\n  * {\r\n    padding: 0px;\r\n    margin: 0px;\r\n    /* outline: 1px solid red; */\r\n  }\r\n</style>\r\n\r\n<title>Dance</title>\r\n<script src=\"https://cdn.tailwindcss.com\"></script>\r\n\r\n<body class=\"h-[100vh] overflow-x-hidden bg-[#121212] flex flex-col items-center h-fit w-screen\">\r\n  <div id=\"content-wrapper\">\r\n    \r\n  </div>\r\n  <script src=\"/js/dance/index.js\"></script>\r\n</body>');
+(3, NULL, 'danceIndex', '<style>\r\n  @import url(\"https://fonts.googleapis.com/css2?family=Lato&display=swap\");\r\n\r\n  * {\r\n    padding: 0px;\r\n    margin: 0px;\r\n    /* outline: 1px solid red; */\r\n  }\r\n</style>\r\n\r\n<title>Dance</title>\r\n<script src=\"https://cdn.tailwindcss.com\"></script>\r\n\r\n<body class=\"h-[100vh] overflow-x-hidden bg-[#121212] flex flex-col items-center h-fit w-screen\">\r\n  <div id=\"content-wrapper\">\r\n    \r\n  </div>\r\n  <script src=\"/js/dance/index.js\"></script>\r\n</body>');
 
 -- --------------------------------------------------------
 
@@ -282,31 +309,6 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`) VALUES
 (3, 'employee', 'employee@gmail.com', '5d7845ac6ee7cfffafc5fe5f35cf666d', 1),
 (4, 'Test', 'test@gmail.com', '5d7845ac6ee7cfffafc5fe5f35cf666d', 0);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `venue`
---
-
-CREATE TABLE `venue` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `location` varchar(255) NOT NULL,
-  `capacity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `venue`
---
-
-INSERT INTO `venue` (`id`, `name`, `location`, `capacity`) VALUES
-(1, 'Lichtfabriek', 'Minckelersweg 2', 1500),
-(2, 'Caprera Openluchttheater', 'Hoge Duin en Daalseweg 2', 2000),
-(3, 'Club Stalker', 'Kromme Elleboogsteeg 2', 200),
-(4, 'Jopenkerk', 'Gedemte Voldergracht 2', 300),
-(5, 'XO the club', 'Grote Markt 8', 200),
-(6, 'Club Ruis', 'Smedestraat 31', 200);
-
 --
 -- Indexes for dumped tables
 --
@@ -349,6 +351,12 @@ ALTER TABLE `event_stroll`
 ALTER TABLE `event_yummie`
   ADD PRIMARY KEY (`id`),
   ADD KEY `restaurant` (`restaurant`);
+
+--
+-- Indexes for table `location`
+--
+ALTER TABLE `location`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `page`
@@ -416,12 +424,6 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `venue`
---
-ALTER TABLE `venue`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -436,6 +438,12 @@ ALTER TABLE `artist`
 --
 ALTER TABLE `events`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `location`
+--
+ALTER TABLE `location`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `page`
@@ -468,12 +476,6 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `venue`
---
-ALTER TABLE `venue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- Constraints for dumped tables
 --
 
@@ -488,7 +490,7 @@ ALTER TABLE `artist_event_edm`
 -- Constraints for table `event_edm`
 --
 ALTER TABLE `event_edm`
-  ADD CONSTRAINT `event_edm_ibfk_1` FOREIGN KEY (`venue`) REFERENCES `venue` (`id`),
+  ADD CONSTRAINT `event_edm_ibfk_1` FOREIGN KEY (`venue`) REFERENCES `location` (`id`),
   ADD CONSTRAINT `event_edm_ibfk_2` FOREIGN KEY (`id`) REFERENCES `events` (`id`);
 
 --

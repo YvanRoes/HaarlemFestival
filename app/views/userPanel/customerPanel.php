@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
 
-    <title>Admin Panel</title>
+    <title>User Panel</title>
 </head>
 
 <body class="w-[100vw] h-[100vh] overflow-hidden bg-[#F7F7FB]">
@@ -30,6 +30,7 @@
         <div class="col-start-2 col-span-5 row-start-2 row-span-5 flex justify-center" id="Content">
             <div class="w-10/12 h-max p-16 mt-16 rounded-lg shadow" id="ContentWrapper">
                 <div class="flex flex-col gap-4" id="contentItemsWrapper">
+                    <button name="changePassword" type="submit" class="text-[#29334E] text-[14px] underline"><a href='/resetPassword'>Change Password</button>
                 </div>
             </div>
         </div>

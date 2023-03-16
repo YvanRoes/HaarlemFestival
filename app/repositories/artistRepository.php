@@ -6,7 +6,7 @@ class ArtistRepository extends Repository
   public function get_AllArtists()
   {
     try {
-      $stmt = $this->conn->prepare("SELECT id, name, genre FROM artist");
+      $stmt = $this->conn->prepare("SELECT id, name, genre, imagePath FROM artist");
       $stmt->execute();
 
       $stmt->setFetchMode(PDO::FETCH_CLASS, 'Artist');
