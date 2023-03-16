@@ -2,6 +2,13 @@
 <html lang="en">
 <script src="https://cdn.tailwindcss.com"></script>
 
+<?php
+
+require_once __DIR__ . '/../header.php';
+
+generateHeader('home', 'dark');
+?>
+
 <body>
     <div class="w-full h-full flex justify-center items-center">
         <div class="w-[400px] h-[400px] bg-[#F7F7FB8A] rounded-[15px] flex flex-col justify-center items-center">

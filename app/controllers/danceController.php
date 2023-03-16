@@ -32,6 +32,9 @@ class DanceController extends Controller
 
         //insert html from db
         $page = $this->service->get_PageByName($name);
+        if(is_null($page)){
+            $this->displayView("404");
+        }
         echo $page->get_html();
 
         include __DIR__ . '/../views/danceFooter.php';

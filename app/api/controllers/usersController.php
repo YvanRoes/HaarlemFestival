@@ -2,30 +2,36 @@
 require __DIR__ . '/../../services/userservice.php';
 
 
-class UsersController{
+class UsersController
+{
   private $userService;
 
-  function __construct(){
+  function __construct()
+  {
     $this->userService = new UserService();
   }
 
-  public function index(){
-    if($_SERVER["REQUEST_METHOD"] == "GET"){
+  public function index()
+  {
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
       $users = $this->userService->get_AllUsers();
       header('Content-type: Application/JSON');
       echo json_encode($users);
     }
 
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $body = file_get_contents('php://input');
       $object = json_decode($body);
 
-      if($object == null){
+      if ($object == null) {
         return;
       }
-
-      if ($object->post_type == "delete") {
-        $this->userService->delete_UserById($object->id);
+      switch ($object->post_type) {
+        case "delete":
+          $this->userService->delete_UserById($object->id);
+          break;
+        case "edit":
+          $this->userService->edit_UserById($object->id, $object);
       }
     }
   }

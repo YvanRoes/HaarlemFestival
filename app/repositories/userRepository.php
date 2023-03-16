@@ -117,4 +117,13 @@ class UserRepository extends Repository
             echo $e;
         }
     }
+
+    public function edit_UserById($id, $username, $email){
+        try{
+            $stmt = $this->conn->prepare("UPDATE users SET username = '[:username]', email = '[':email]' WHERE id = :id");
+            $stmt->execute(array(':id' => $id, ':username' => $username, ':email' => $email));
+        }catch(PDOException $e){
+            echo $e;
+        }
+    }
 }

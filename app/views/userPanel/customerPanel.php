@@ -12,11 +12,11 @@
 </head>
 
 <body class="w-[100vw] h-[100vh] overflow-x-hidden bg-[#F7F7FB]">
-        <?php
-            include __DIR__ . '/../header.php';
-            generateHeader('home', 'dark');
-        ?>
-    <div class="w-screen h-[800px] grid grid-cols-6 grid-rows-6 mt-[100px]">
+    <?php
+    include __DIR__ . '/../header.php';
+    generateHeader('home', 'dark');
+    ?>
+    <div class="w-screen h-fit grid grid-cols-6 grid-rows-6 mt-[100px]">
         <div class="col-span-6 row-span-1 border-y-[1px] border-[#656262]" id="header">
             <div class="flex items-center justify-center h-[100%]" id="nav">
                 <ul class="decoration-none flex items-center justify-center flex-row gap-[20px] text-[#656262]">
@@ -25,15 +25,11 @@
                 </ul>
             </div>
         </div>
-
-        </div>
-        <div class="col-start-2 col-span-5 row-start-2 row-span-5 flex justify-center" id="Content">
-            <div class="w-10/12 h-max p-16 mt-16 rounded-lg shadow" id="ContentWrapper">
-                <div class="flex flex-col gap-4 w-[100px]" id="contentItemsWrapper">
-                    <button name="changePassword" type="submit" class="text-[#29334E] text-[14px] underline"><a href='/resetPassword'>Change Password</button>
-                </div>
+        <div class="flex flex-col gap-4 w-screen justify-center" id="contentItemsWrapper">
+                <button name="changePassword" type="submit" class="text-[#29334E] text-3xl underline mt-4"><a href='/resetPassword'>Change Password</button>
             </div>
-        </div>
+    </div>
+    </div>
     </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>

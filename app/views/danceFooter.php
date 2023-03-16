@@ -25,7 +25,7 @@
         <li class="hover:underline cursor-pointer">Activities</li>
       </ul>
     </div>
-    <div class="w-[15%] h-[175px] bg-[#88888D] rounded-[15px]" id="Social media">
+    <div class="w-fit h-[175px] bg-[#88888D] rounded-[15px] pr-5" id="Social media">
         <div class="grid grid-cols-3 mt-[10px]">
             <img class="ml-[20px]" src="/img/twitterIcon.png">
             <h2 class="text-[20px] col-span-2 mt-[5px]">@HaarlemFestival</h2>

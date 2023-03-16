@@ -135,17 +135,16 @@ function createUserContainer(element, id, username, email) {
 
 async function addUserSearch() {
   const searchInput = document.getElementById('searchInput');
-
-  objects = getDataFromUserAPI();
   searchInput.addEventListener('keyup', (event) => {
     const { value } = event.target;
-    searchUsers(objects, value);
+    searchUsers(value);
   });
 }
 
 loadUserData();
 
-async function searchUsers(objects, value) {
+async function searchUsers(value) {
+  objects = await getDataFromUserAPI();
   var newArr = [];
   for (element of objects) {
     if (element.username.includes(value)) newArr.push(element);
