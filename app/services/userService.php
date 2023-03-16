@@ -41,5 +41,9 @@ class UserService{
         $repo = new UserRepository();
         return $repo->verify_UserCredentials($email, $passwd);
     }
+    public function update_Password($user_id, $password){
+        $repo = new UserRepository();
+        return $repo->update_Password($user_id, $password);
+    }
 
 }
