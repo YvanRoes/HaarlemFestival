@@ -121,24 +121,24 @@
     </div>
 
     <!-- Festival locations-->
-    <div class="flex item-center center mt-[100px]">
+    <div class="flex item-center center mt-[100px] ml-[100px]">
       <div class="flex-none ">
         <img src="/img/Vector5.png" class="absolutew-[100px] h-[100px] mt-[50px] ml-[200px] ">
         <img src="/img/Vector1.png" class="absolute w-[100px] h-[100px] mt-[150px] ml-[70px]">
         <img src="/img/Vector2.png" class="absolute w-[100px] h-[100px] mt-[200px] ml-[100px] ">
       </div>
       <div class="flex-initial ml-[120px] ">
-        <p class=" font-extrabold tracking-wide text-3xl ">Locations</p>
+        <p class=" font-extrabold tracking-wide text-4xl ">Locations</p>
         <img src="/img/festival-map-locations.png" class="w-[700px] h-[500px] mt-10">
       </div>
       <div class="flex-none">
-        <img src="/img/Vector2.png" class="absolute w-[100px] h-[100px] mt-[100px] ml-[100px] ">
-        <img src="/img/Vector1.png" class="absolute w-[100px] h-[100px] mt-[180px] ml-[120px]">
+        <img src="/img/Vector2.png" class="absolute w-[100px] h-[100px] mt-[250px] ml-[100px] ">
+        <img src="/img/Vector1.png" class="absolute w-[100px] h-[100px] mt-[300px] ml-[120px]">
       </div>
     </div>
 
     <!-- Festival schedule -->
-    <div class="flex justify-center mt-[100px] mb-[100px]">
+    <div class="flex justify-center w-full mt-[100px] mb-[100px] ml-[200px]">
       <div>
         <h1 class="absolute font-extrabold text-3xl ">Schedule</h1>
       </div>
