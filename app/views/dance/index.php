@@ -81,7 +81,7 @@
     <div class="flex justify-center mt-[100px] mb-[50px]">
       <h1 class="text-[64px] text-[#F7F7FB] font-['Lato']">Locations</h1>
     </div>
-    <div class="grid grid-cols-2 grid-rows-3 gap-x-[20px] gap-y-[20px]">
+    <div class="grid grid-cols-2 gap-x-[20px] gap-y-[20px]">
       <div class="grid grid-cols-2 grid-rows-2 outline outline-1 outline-white">
         <h2 class="text-[24px] text-[#F7F7FB] font-['Lato'] mt-[20px] ml-[10px]">LichtFabriek</h2>
         <image class="grid justify-self-end row-span-2 w-[253px] h-[161px]" src="/img/danceLocation1.png">
@@ -119,6 +119,8 @@
   <div id="content-wrapper">
     
   </div>
+
+
 
   <?php
   include __DIR__ . '/../danceFooter.php';
