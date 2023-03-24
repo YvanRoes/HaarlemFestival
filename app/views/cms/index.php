@@ -20,8 +20,9 @@
         <div class="mt-[100px]">
             <button type="submit" class="w-[100px] h-[40px] ml-[10px] mb-[10px] text-[#ffffff] font-semibold dark:bg-blue-600 flex items-center justify-center border-2 border-[#29334E] cursor-pointer rounded-md" onclick="back()">Back</button>
             <textarea id="editor" name="editor">
-
+                <? $content?>
             </textarea>
+            
             <script>
                 CKEDITOR.replace( 'editor' );
                 CKEDITOR.config.height = 600;
