@@ -20,21 +20,29 @@
         <div class="col-span-6 row-span-1 border-y-[1px] border-[#656262]" id="header">
             <div class="flex items-center justify-center h-[100%]" id="nav">
                 <ul class="decoration-none flex items-center justify-center flex-row gap-[20px] text-[#656262]">
-                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">Database</a></li>
-                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">Statistics</a></li>
-                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">Content Management System</a></li>
+                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a
+                            href="">Database</a></li>
+                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a
+                            href="">Statistics</a></li>
+                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">Content
+                            Management System</a></li>
+                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">Ticket
+                            Management</a></li>
                 </ul>
             </div>
         </div>
-        <div class="col-start-1 col-span-1 row-start-2 row-span-5 flex justify-center border-[1px] border[#656262]" id="subMenu">
+        <div class="col-start-1 col-span-1 row-start-2 row-span-5 flex justify-center border-[1px] border[#656262]"
+            id="subMenu">
             <ul class="p-4 flex flex-col gap-[20px] h-fit" id="items">
                 <ul class="text-sm text-[#656262]" id="UsersList">
                     <li class="font-bold"><button onclick="loadUserData()">Users</button></li>
                     <li>
-                        <button onclick="loadCustomers()" class="block px-4 py-2 dark:hover:text-[#121212]">Customers</button>
+                        <button onclick="loadCustomers()"
+                            class="block px-4 py-2 dark:hover:text-[#121212]">Customers</button>
                     </li>
                     <li>
-                        <button onclick="loadEmployees()" class="block px-4 py-2 dark:hover:text-[#121212]">Emloyees</button>
+                        <button onclick="loadEmployees()"
+                            class="block px-4 py-2 dark:hover:text-[#121212]">Emloyees</button>
                     </li>
                     <li>
                         <button onclick="loadAdmins()" class="block px-4 py-2 dark:hover:text-[#121212]">Admins</button>

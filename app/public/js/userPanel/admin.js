@@ -9,6 +9,10 @@ async function loadCustomers() {
   createUserList(customers);
 }
 
+async function loadTicketManagement() {
+
+}
+
 async function loadEmployees() {
   employees = await getUsersByRole(1);
   createUserList(employees);
@@ -122,7 +126,7 @@ function createUserContainer(element, id, username, email) {
 
   buttonWrapper = document.createElement('div');
   buttonWrapper.classList.add('flex', 'flex-cols', 'col-start-3', 'justify-end');
-   buttonWrapper.appendChild(buttonEdit);
+  buttonWrapper.appendChild(buttonEdit);
   buttonWrapper.appendChild(buttonRemove);
 
   container.appendChild(idSpan);
@@ -141,8 +145,6 @@ async function addUserSearch() {
   });
 }
 
-loadUserData();
-
 async function searchUsers(value) {
   objects = await getDataFromUserAPI();
   var newArr = [];
@@ -153,6 +155,8 @@ async function searchUsers(value) {
   }
   createUserList(newArr);
 }
+
+loadTicketManagement()
 
 async function postData(url = '', data = {}) {
   // Default options are marked with *
