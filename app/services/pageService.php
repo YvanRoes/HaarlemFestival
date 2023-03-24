@@ -9,7 +9,7 @@ class PageService
     return $repo->get_AllPages();
   }
 
-  public function get_PageByName($name)
+  public function get_PageByName($name):Page
   {
     $pages = $this->get_AllPages();
     foreach ($pages as $page) {
