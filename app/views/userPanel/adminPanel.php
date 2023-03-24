@@ -26,8 +26,9 @@
                             href="">Statistics</a></li>
                     <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">Content
                             Management System</a></li>
-                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">Ticket
-                            Management</a></li>
+                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"
+                        onclick="loadTicketManagement()">Ticket
+                        Management</a></li>
                 </ul>
             </div>
         </div>

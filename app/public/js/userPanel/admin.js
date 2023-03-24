@@ -1,26 +1,78 @@
+const inputSearch = document.getElementById('searchInput');
+
 async function loadUserData() {
   var objects = await getDataFromUserAPI();
   createUserList(objects);
   addUserSearch();
+
 }
 
 async function loadCustomers() {
   customers = await getUsersByRole(0);
   createUserList(customers);
+  loadInputSearch();
 }
 
 async function loadTicketManagement() {
-
+  //  tickets = await getDataFromTicketAPI();
+  console.log('loading ticket management')
+  elements = document.getElementById('contentItemsWrapper');
+  elements.innerHTML = '';
+  contentWrapper = document.getElementById('ContentWrapper');
+  console.log('remvoing search input')
+  console.log(contentWrapper)
+  contentWrapper.removeChild(document.getElementById('searchInput'));
+  createTicketsForm();
 }
+
+async function createTicketList(tickets) {
+  parentElement = document.getElementById('contentItemsWrapper');
+  parentElement.innerHTML = 'Tickets';
+  for (let i = 0; i < tickets.length; i++) {
+    createTicketContainer(
+      parentElement,
+      tickets[i].id,
+      tickets[i].status,
+      tickets[i].email,
+      tickets[i].password
+    );
+  }
+};
+
+async function createTicketsForm() {
+  parentElement = document.getElementById('contentItemsWrapper');
+  //create form
+  console.log('creating form')
+  form = document.createElement('form');
+  form.classList.add('flex', 'flex-col', 'w-1/2', 'm-auto', 'p-4', 'bg-white', 'rounded-md', 'shadow-md');
+  form.setAttribute('id', 'ticketForm');
+  //create input fields
+  console.log('creating input fields')
+
+  inputTitle = document.createElement('input');
+  inputTitle.classList.add('p-2', 'm-2', 'rounded-md', 'border-2', 'border-gray-300', 'focus:outline-none', 'focus:border-slate-800');
+  inputTitle.setAttribute('type', 'text');
+  inputTitle.setAttribute('placeholder', 'Title');
+  inputTitle.setAttribute('id', 'ticketTitle');
+  form.appendChild(inputTitle);
+
+  console.log(form)
+  console.log(parentElement)
+  console.log('appending form')
+  parentElement.appendChild(form);
+
+};
 
 async function loadEmployees() {
   employees = await getUsersByRole(1);
   createUserList(employees);
+  loadInputSearch();
 }
 
 async function loadAdmins() {
   admins = await getUsersByRole(9);
   createUserList(admins);
+  loadInputSearch();
 }
 
 async function getUsersByRole(role) {
@@ -156,8 +208,6 @@ async function searchUsers(value) {
   createUserList(newArr);
 }
 
-loadTicketManagement()
-
 async function postData(url = '', data = {}) {
   // Default options are marked with *
   const response = await fetch(url, {
@@ -173,4 +223,12 @@ async function postData(url = '', data = {}) {
     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   });
+}
+
+async function loadInputSearch() {
+  if (document.getElementById('searchInput')) {
+    document.getElementById('searchInput').remove();
+  }
+  parentElement = document.getElementById('ContentWrapper');
+  parentElement.insertBefore(inputSearch, parentElement.childNodes[0]);
 }
