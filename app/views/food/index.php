@@ -13,12 +13,8 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <body class="overflow-x-hidden bg-[#F7F7FB] flex flex-col items-center h-fit w-screen">
-    <?php
-    include __DIR__ . '/../header.php';
-    generateHeader('yummie', 'dark');
-    ?>
-    <div class="pb-[2.5rem] lg:w-[1280px] md:w-[100vw] sm:w-[100vw]" id="content-container">
-        <div id="introSection" class="grid-cols-2 flex items-center pt-[150px] pb-[50px]">
+    <!-- <div class="lg:w-[1280px] md:w-[100vw] sm:w-[100vw]" id="content-container"> -->
+        <!-- <div id="introSection" class="grid-cols-2 flex items-center pt-[150px] pb-[50px]">
             <div id="introduction" class="">
                 <h1 class="text-[42px] font-bold"><span class="text-[#42BFDD]">Yummie!</span> Food Event</h1>
                 <p class="text-2xl">27 July - 31 July</p>
@@ -34,7 +30,7 @@
                     deducted upon payment.**</p>
             </div>
             <img class="w-[400px] h-[400px] ml-[180px]" src="/img/circleFoodImage.png" alt="circleFoodImage">
-        </div>
+        </div> -->
         <!-- <div id="restaurants" class="flex-col">
             <div id="ratatouilleSection" class="pb-[50px]">
                 <div class="flex">
@@ -142,13 +138,10 @@
                         <img class="w-[500px] h-[325px]" src="/img/frisImg2.png" alt="frisImage2">
                         <img class="w-[500px] h-[275px]" src="/img/frisImg1.png" alt="frisImage3">
                     </div>
-                </div>
-        </div> -->
+                </div> -->
+        <!-- </div> -->
         <div id="restaurants" class="flex justify-center w-[100%] flex-col">
         </div>
-    </div>
-    
-    <?php include __DIR__ . '/../footer.php'; ?>
-
+    <!-- </div> -->
     <script src="/js/food/index.js"></script>
 </body>

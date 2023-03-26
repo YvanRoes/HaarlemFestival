@@ -16,42 +16,44 @@
         require_once __DIR__ . '/../../controllers/cmsController.php';
         generateHeader('Content Management System', 'dark');
     ?>
-    <form method="post" id="editorForm" name="editorForm">
+
+    
+
+    
         <div class="mt-[100px]">
-            <button type="submit" class="w-[100px] h-[40px] ml-[10px] mb-[10px] text-[#ffffff] font-semibold dark:bg-blue-600 flex items-center justify-center border-2 border-[#29334E] cursor-pointer rounded-md" onclick="back()">Back</button>
-            <textarea id="editor" name="editor">
-                <?php
-
-                if(isset($_SESSION['EditableHTML'])){
-                    echo $_SESSION['EditableHTML'];
-                }
-
-                ?>
-            </textarea>
-            
-            <script>
-                CKEDITOR.replace( 'editor' );
-                CKEDITOR.config.height = 600;
-            </script>
-            <div class="flex justify-end">
-                <button type="submit" class="w-[100px] h-[40px] mr-[50px] mt-[20px] text-[#ffffff] font-semibold dark:bg-blue-600 flex items-center justify-center border-2 border-[#29334E] cursor-pointer rounded-md" onclick="save()">Save</button>
-            </div>
+        <button type="submit" class="w-[100px] h-[40px] ml-[10px] mb-[10px] text-[#ffffff] font-semibold dark:bg-blue-600 flex items-center justify-center border-2 border-[#29334E] cursor-pointer rounded-md" onclick="back()">Back</button>
+            <form method="post" id="editorForm" name="editorForm">
+                <textarea id="editor" name="editor">
+                    <?php
+                        echo $this->content;
+                    ?>
+                </textarea>
+                
+                <script>
+                    CKEDITOR.replace( 'editor' );
+                    CKEDITOR.config.height = 600;
+                    CKEDITOR.config.allowedContent = true;
+                </script>
+                <div class="flex justify-end">
+                    <button type="submit" class="w-[100px] h-[40px] mr-[50px] mt-[20px] text-[#ffffff] font-semibold dark:bg-blue-600 flex items-center justify-center border-2 border-[#29334E] cursor-pointer rounded-md" onclick="save()">Save</button>
+                </div>
+            </form>
         </div>
-    </form>
+   
     
     <script>
-        window.onbeforeunload = function() {
-            return 'All unsaved changes will be lost.  Are you sure you want to leave this page?';
-        };
-        
         function back() {
-            window.location.href = "http://localhost/userPanel";
+            window.confirm("Are you sure you want to go back?")
+            if (confirm()) {
+                window.location.href = "/userPanel";
+            } else {
+                return;
+            } 
         }
 
         function save() {
-            var data = CKEDITOR.instances.editor.getData();      
+            var data = CKEDITOR.instances.editor.getData();   
             document.getElementById("editorForm").submit();
         }
     </script>
-    <script src="/js/cms/index.js"></script>
 </body>

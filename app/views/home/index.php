@@ -11,16 +11,12 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <body class="h-[100vh] overflow-x-hidden bg-[white]">
-
-  <div id="content-container" class="pb-[2.5rem] w-[1280px]">
+  <div id="content-container" class="pb-[2.5rem]">
 
     <!-- Festival main screeen, background image -->
-    <div class=" w-screen h-[100vh] h-14">
+    <!-- <div class=" w-screen h-[100vh] h-14">
       <img src="/img/festival-homepage.png" class="absolute w-full h-full object-cover z-0" alt="Image description">
-      <?php
-      include __DIR__ . '/../header.php';
-      generateHeader('home', 'light');
-      ?>
+      
 
       <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center z-10">
         <p
@@ -33,14 +29,14 @@
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
 
 
     <!-- Festival events -->
     <div id="events" class=" flex justify-center w-[100%] flex-col  bg-white z-0">
 
-      <!-- stroll event -->
-      <!-- <div class="flex item-center center">
+      <!-- stroll event
+      <div class="flex item-center center">
         <div class="flex-none">
           <img src="/img/festival-stroll-haarlem.png" class=" w-[300px] h-[350px] ml-[100px]">
         </div>
@@ -121,7 +117,7 @@
     </div>
 
     <!-- Festival locations-->
-    <div class="flex item-center center mt-[100px]">
+    <!-- <div class="flex item-center center mt-[100px]">
       <div class="flex-none ">
         <img src="/img/Vector5.png" class="absolutew-[100px] h-[100px] mt-[50px] ml-[200px] ">
         <img src="/img/Vector1.png" class="absolute w-[100px] h-[100px] mt-[150px] ml-[70px]">
@@ -135,10 +131,10 @@
         <img src="/img/Vector2.png" class="absolute w-[100px] h-[100px] mt-[100px] ml-[100px] ">
         <img src="/img/Vector1.png" class="absolute w-[100px] h-[100px] mt-[180px] ml-[120px]">
       </div>
-    </div>
+    </div> -->
 
     <!-- Festival schedule -->
-    <div class="flex justify-center mt-[100px] mb-[100px]">
+    <!-- <div class="flex justify-center mt-[100px] mb-[100px]">
       <div>
         <h1 class="absolute font-extrabold text-3xl ">Schedule</h1>
       </div>
@@ -187,12 +183,8 @@
           <li class="text-sm w-20 pt-2">n/a</li>
         </ul>
       </div>
-    </div>
+    </div> -->
 
   </div>
-  <?php
-  include __DIR__ . '/../footer.php';
-  ?>
-
   <script src="/js/homepage/index.js"></script>
 </body>

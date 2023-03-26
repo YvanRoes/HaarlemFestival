@@ -4,23 +4,13 @@ function createEvents(events) {
 
     wrapper = document.getElementById('events');
 
-    generateLeft(events[0].small_title, events[0].title, events[0].description, wrapper);
-    generateRight(events[1].small_title, events[1].title, events[1].description, wrapper);
-    generateRight(events[2].small_title, events[2].title, events[2].description, wrapper);
-
-    // console.log('before loop')
-    // console.log(events[0].small_title)
-    // for (let i = 0; i <= events.length; i++) {
-    //     if (i = 0 || i % 3 == 0) {
-    //         console.log('before generate left')
-    //         generateLeft(events[i].small_title, events[i].title, events[i].description, wrapper);
-    //         console.log('test1');
-    //     } else {
-    //         console.log('before generate right')
-    //         generateRight(events[i].small_title, events[i].title, events[i].description, wrapper);
-    //         console.log('test2');
-    //     }
-    // }
+    for (let i = 0; i <= events.length; i++) {
+        if (i % 2 == 0) {
+            generateLeft(events[i].small_title, events[i].title, events[i].description, wrapper, events[i].imagePath);
+        } else {
+            generateRight(events[i].small_title, events[i].title, events[i].description, wrapper, events[i].imagePath);
+        }
+    }
 }
 
 async function getEvents() {
@@ -35,7 +25,7 @@ async function generateEvents() {
     createEvents(events);
 }
 
-function generateLeft(small_title, title, description, wrapper) {
+function generateLeft(small_title, title, description, wrapper, imagePath) {
 
     // event section
     console.log('before create element')
@@ -46,8 +36,7 @@ function generateLeft(small_title, title, description, wrapper) {
     imageContainer = document.createElement('div');
     imageContainer.classList.add('flex-none');
     img = new Image();
-    // img.src = 'img/' + event.toLowerCase() + 'Img1.png';
-    img.src = '/img/tourEvent.png';
+    img.src = imagePath;
     img.classList.add('w-[300px]', 'h-[350px]', 'ml-[100px]');
     // arrow & blob
     vectorContainer = document.createElement('div');
@@ -110,7 +99,7 @@ function generateLeft(small_title, title, description, wrapper) {
     wrapper.appendChild(eventSection);
 }
 
-function generateRight(small_title, title, description, wrapper) {
+function generateRight(small_title, title, description, wrapper, imagePath) {
 
     // event section
     eventSection = document.createElement('div');
@@ -155,8 +144,7 @@ function generateRight(small_title, title, description, wrapper) {
     imageContainer = document.createElement('div');
     imageContainer.classList.add('flex-none');
     img = new Image();
-    // img.src = 'img/' + event.toLowerCase() + 'Img1.png';
-    img.src = '/img/foodEvent.png';
+    img.src = imagePath;
     img.classList.add('w-[300px]', 'h-[350px]');
 
 

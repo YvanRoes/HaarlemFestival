@@ -19,4 +19,10 @@ class PageService
     }
     return null;
   }
+
+  public function update_Page($id, $html)
+  {
+    $repo = new PageRepository();
+    $repo->update_Page($id, $html);
+  }
 }
