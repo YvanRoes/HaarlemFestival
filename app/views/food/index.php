@@ -121,10 +121,10 @@
                     <p class="text-[20px] text-[#FC5B84] font-medium pl-[10px]">Modern, Dutch, European</p>
                 </div>
                 <div class="flex flex-row mb-[50px]">
-                    <img class="w-[500px] h-[275px] mr-[50px]" src="/img/cafeImg1.png" alt="cafeImage1">
-                    <img class="w-[500px] h-[275px]" src="/img/cafeImg2.png" alt="cafeImage2">
+                    <img class="w-[500px] h-[275px] mr-[50px]" src="/img/grandcafebrinkmannImg1.png" alt="cafeImage1">
+                    <img class="w-[500px] h-[275px]" src="/img/grandcafebrinkmannImg2.png" alt="cafeImage2">
                 </div>
-                <img class="w-[1050px] h-[325px]" src="/img/cafeImg3.png" alt="cafeImage3">
+                <img class="w-[1050px] h-[325px]" src="/img/grandcafebrinkmannImg3.png" alt="cafeImage3">
             </div>
             <div id="frisSection" class="pb-[50px]">
                 <div class="flex">

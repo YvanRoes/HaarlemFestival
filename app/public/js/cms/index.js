@@ -1,5 +1,0 @@
-function generatePageContent(pageName){
-    
-}
-
-

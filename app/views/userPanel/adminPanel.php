@@ -38,23 +38,23 @@
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                             aria-labelledby="dropdownDefaultButton">
                             <li>
-                                <button><a href="/cms" id="editHomepage"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="generatePageContent('home')">Homepage</a></button>
+                                <button><a href="/cms?page=home" id="editHomepage"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Homepage</a></button>
                             </li>
                             <li>
-                                <a href="/cms" id="editYummieEvent"
+                                <a href="/cms?page=food" id="editYummieEvent"
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yummie! Event</a>
                             </li>
                             <li>
-                                <a href="/cms" id="editStrollThroughHaarlem"
+                                <a href="/cms?page=tour" id="editStrollThroughHaarlem"
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Stroll Through Haarlem</a>
                             </li>
                             <li>
-                                <a href="/cms" id="editDanceEvent"
+                                <a href="/cms?page=dance" id="editDanceEvent"
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dance Event</a>
                             </li>
                             <li>
-                                <a href="/cms" id="editNewPage"
+                                <a href="/cms?page=edit" id="editNewPage"
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add New Page</a>
                             </li>
                         </ul>
