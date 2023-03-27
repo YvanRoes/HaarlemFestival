@@ -12,11 +12,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <body class="h-[100vh] overflow-x-hidden bg-[#121212] flex flex-col items-center h-fit w-screen">
-  <?php
-  include __DIR__ . '/../header.php';
-  generateHeader('dance', 'light');
-  ?>
-  <!-- <div class="pb-[2.5rem] mt-[100px] mb-[150px] lg:w-[1280px] md:w-[100vw] sm:w-[100vw]" id="content-container">
+  <div class="pb-[2.5rem] mt-[100px] mb-[150px] lg:w-[1280px] md:w-[100vw] sm:w-[100vw]" id="content-container">
     <div class="grid grid-cols-2 grid-rows-1 h-[600px]">
       <div class="flex flex-col justify-center text-[#F7F7FB] font-['Lato']">
         <h1 id="HeroHeader" class="text-[64px]">Let's Dance</h1>
@@ -114,17 +110,14 @@
           <h2 class="text-[20px] text-[#F7F7FB] font-['Lato'] ml-[10px]">Smedestraat 31, 2011 RE Haarlem</h2>
       </div>
     </div>
-  </div> -->
+  </div>
 
-  <div id="content-wrapper">
+</body>
+
+
+
+  <!-- <div id="content-wrapper">
     
   </div>
 
-
-
-  <?php
-  include __DIR__ . '/../danceFooter.php';
-  ?>
-
-  <script src="/js/dance/index.js"></script>
-</body>
+  <script src="/js/dance/index.js"></script> -->

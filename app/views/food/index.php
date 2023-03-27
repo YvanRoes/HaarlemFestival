@@ -12,7 +12,7 @@
 <title>Home</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
-<body class="overflow-x-hidden bg-[#F7F7FB] flex flex-col items-center h-fit w-screen">
+<!-- <body class="overflow-x-hidden bg-[#F7F7FB] flex flex-col items-center h-fit w-screen"> -->
     <!-- <div class="lg:w-[1280px] md:w-[100vw] sm:w-[100vw]" id="content-container"> -->
         <!-- <div id="introSection" class="grid-cols-2 flex items-center pt-[150px] pb-[50px]">
             <div id="introduction" class="">
@@ -140,8 +140,8 @@
                     </div>
                 </div> -->
         <!-- </div> -->
-        <div id="restaurants" class="flex justify-center w-[100%] flex-col">
-        </div>
+        <!-- <div id="restaurants" class="flex justify-center w-[100%] flex-col">
+        </div> -->
     <!-- </div> -->
-    <script src="/js/food/index.js"></script>
-</body>
+    <!-- <script src="/js/food/index.js"></script> -->
+<!-- </body> -->
