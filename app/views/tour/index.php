@@ -1,5 +1,3 @@
-
-
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
@@ -11,15 +9,11 @@
     }
 </style>
 
-<title>Home</title>
+<title>Haarlem Tour</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
-<body class="overflow-x-hidden bg-[#F7F7FB] flex flex-col items-center h-fit w-screen">
-    <?php 
-        require __DIR__ . '/../header.php';
-        generateHeader('home', 'dark');
-    ?>
-
+<!-- body class is always empty from db -->
+<!-- <body class="overflow-x-hidden bg-[#F7F7FB] flex flex-col items-center h-fit w-screen">
     <div class="lg:w-[1280px] md:w-[100vw] sm:w-[100vw] mt-[100px]" id="content-container">
         <div class="mt-[100px]" id="introSection">
             <h1 class="text-[36px] font-bold w-[600px]">Come join us on a stroll through <span class="text-[#42BFDD]">Haarlem’s</span> historic city centre</h1>
@@ -37,7 +31,7 @@
             <div class="col-span-3">
                 <h1 class="text-[36px] font-bold">Have a look at the route we will be following</h1>
                 <img class="w-[600px] h-[400px] mt-[40px] ml-[60px]" src="/img/tourRoute.png">
-                <button class="bg-[#42BFDD] text-white text-[24px] font-bold py-[10px] px-[20px] mt-[20px] rounded-[10px] mt-[40px] ml-[110px]">View more info on the route and location</button>
+                <a href="/tourOverview"><button class="bg-[#42BFDD] text-white text-[24px] font-bold py-[10px] px-[20px] mt-[20px] rounded-[10px] mt-[40px] ml-[110px]">View more info on the route and location</button></a>
             </div>
             <img class="w-[500px] h-[600px] col-span-2" src="/img/tourImg2.png">
         </div>
@@ -79,9 +73,4 @@
             <img class="w-[300px] h-[300px] mt-[300px] ml-[50px] col-span-1" src="/img/downloadApp.png">
         </div>
     </div>
-
-    <?php 
-        require __DIR__ . '/../footer.php';
-    ?>
-</body>
-</html>
+</body> -->

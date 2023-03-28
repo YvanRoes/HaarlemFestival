@@ -10,14 +10,12 @@
 <title>Home</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- <body class="h-[100vh] overflow-x-hidden bg-[white]"> -->
-  <!-- <div id="content-container" class="pb-[2.5rem] ml-[150px]"> -->
+<!-- <body class="h-[100vh] overflow-x-hidden bg-[white]">
+  <div id="content-container" class="pb-[2.5rem] ml-[150px]"> -->
 
     <!-- Festival main screeen, background image -->
     <!-- <div class=" w-screen h-[100vh] h-14">
       <img src="/img/festival-homepage.png" class="absolute w-full h-full object-cover z-0" alt="Image description">
-      
-
       <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center z-10">
         <p
           class="absolute left-40 pl-20 pb-30 font-extrabold tracking-wide text-violet-700 text-6xl text-center opacity-50 ">
@@ -182,11 +180,10 @@
           <li class="text-sm w-20 pt-2">n/a</li>
         </ul>
       </div>
-    </div> -->
+    </div>
 
-  <!-- </div> -->
+  </div>
+  <script src="/js/homepage/index.js"></script>
+</body> -->
 
-<!-- </body> -->
 
-
-  <!-- <script src="/js/homepage/index.js"></script> -->

@@ -6,9 +6,9 @@ function createEvents(events) {
 
     for (let i = 0; i <= events.length; i++) {
         if (i % 2 == 0) {
-            generateLeft(events[i].small_title, events[i].title, events[i].description, wrapper, events[i].imagePath);
+            generateLeft(events[i].small_title, events[i].title, events[i].description, wrapper, events[i].imagePath, events[i].pageLink);
         } else {
-            generateRight(events[i].small_title, events[i].title, events[i].description, wrapper, events[i].imagePath);
+            generateRight(events[i].small_title, events[i].title, events[i].description, wrapper, events[i].imagePath, events[i].pageLink);
         }
     }
 }
@@ -25,7 +25,7 @@ async function generateEvents() {
     createEvents(events);
 }
 
-function generateLeft(small_title, title, description, wrapper, imagePath) {
+function generateLeft(small_title, title, description, wrapper, imagePath, pageLink) {
 
     // event section
     console.log('before create element')
@@ -38,6 +38,10 @@ function generateLeft(small_title, title, description, wrapper, imagePath) {
     img = new Image();
     img.src = imagePath;
     img.classList.add('w-[300px]', 'h-[350px]', 'ml-[100px]');
+    link = document.createElement('a');
+    link.href = pageLink;
+    link.appendChild(img);
+
     // arrow & blob
     vectorContainer = document.createElement('div');
     vectorContainer.classList.add('flex-initial');
@@ -66,6 +70,7 @@ function generateLeft(small_title, title, description, wrapper, imagePath) {
     button = document.createElement('button');
     button.classList.add('bg-blue-500', 'text-white', 'drop-shadow-sm', 'font-bold', 'py-2', 'px-8', 'mt-[20px]');
     button.innerHTML = 'Explore now';
+    button.onclick = function () { window.location.href = pageLink };
     // more blobs
     blobsContainer = document.createElement('div');
     blobsContainer.classList.add('flex-none');
@@ -79,7 +84,7 @@ function generateLeft(small_title, title, description, wrapper, imagePath) {
     blob3.src = '/img/Vector5.png';
     blob3.classList.add('absolute', 'w-[100px]', 'h-[100px]', 'mt-[250px]', 'ml-[300px]');
 
-    imageContainer.appendChild(img);
+    imageContainer.appendChild(link);
     vectorContainer.appendChild(arrow1);
     vectorContainer.appendChild(vector1);
     textContainer.appendChild(textVector);
@@ -99,7 +104,7 @@ function generateLeft(small_title, title, description, wrapper, imagePath) {
     wrapper.appendChild(eventSection);
 }
 
-function generateRight(small_title, title, description, wrapper, imagePath) {
+function generateRight(small_title, title, description, wrapper, imagePath, pageLink) {
 
     // event section
     eventSection = document.createElement('div');
@@ -131,6 +136,8 @@ function generateRight(small_title, title, description, wrapper, imagePath) {
     button = document.createElement('button');
     button.classList.add('bg-blue-500', 'text-white', 'drop-shadow-sm', 'font-bold', 'py-2', 'px-8', 'mt-[20px]');
     button.innerHTML = 'Explore now';
+    button.onclick = function () { window.location.href = pageLink };
+
     // arrow & blob
     vectorContainer = document.createElement('div');
     vectorContainer.classList.add('flex-initial');
@@ -146,6 +153,9 @@ function generateRight(small_title, title, description, wrapper, imagePath) {
     img = new Image();
     img.src = imagePath;
     img.classList.add('w-[300px]', 'h-[350px]');
+    link = document.createElement('a');
+    link.href = pageLink;
+    link.appendChild(img);
 
 
     blobsContainer.appendChild(blob1);
@@ -157,7 +167,7 @@ function generateRight(small_title, title, description, wrapper, imagePath) {
     textContainer.appendChild(button);
     vectorContainer.appendChild(arrow1);
     vectorContainer.appendChild(vector1);
-    imageContainer.appendChild(img);
+    imageContainer.appendChild(link);
 
     eventSection.appendChild(blobsContainer);
     eventSection.appendChild(textContainer);
