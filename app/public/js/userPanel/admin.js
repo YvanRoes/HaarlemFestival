@@ -1,22 +1,44 @@
-async function loadUserData() {
+async function loadUserData(type) {
+  var objects = await getDataFromUserAPI();
+
+  switch (type) {
+    case 'customers':
+      loadCustomers();
+      break;
+    case 'employees':
+      loadEmployees();
+      break;
+    case 'admins':
+      loadAdmins();
+      break;
+    default:
+      loadAll();
+      break;
+  }
+}
+
+async function loadAll() {
   var objects = await getDataFromUserAPI();
   createUserList(objects);
-  addUserSearch();
+  addUserSearch(objects);
 }
 
 async function loadCustomers() {
   customers = await getUsersByRole(0);
-  createUserList(customers);
+  createUserList(customers, 'customers');
+  addUserSearch(customers);
 }
 
 async function loadEmployees() {
   employees = await getUsersByRole(1);
-  createUserList(employees);
+  createUserList(employees, 'employees');
+  addUserSearch(employees);
 }
 
 async function loadAdmins() {
   admins = await getUsersByRole(9);
-  createUserList(admins);
+  createUserList(admins, 'admins');
+  addUserSearch(admins);
 }
 
 async function getUsersByRole(role) {
@@ -37,7 +59,12 @@ async function getDataFromUserAPI() {
   return await response.json();
 }
 
-function createUserList(objects) {
+function createUserList(objects, type) {
+  UserListType = document.createElement('span');
+  UserListType.innerHTML = type;
+  UserListType.setAttribute('id', 'UserListType');
+  UserListType.classList.add('hidden');
+  document.body.appendChild(UserListType);
   parentElement = document.getElementById('contentItemsWrapper');
   parentElement.innerHTML = '';
   for (let i = 0; i < objects.length; i++) {
@@ -62,21 +89,26 @@ function createUserContainer(element, id, username, email) {
     'md:grid-cols-1',
     'text-left',
     'relative',
+    'gap-4'
   );
   //id
   idSpan = document.createElement('span');
   idSpan.innerHTML = id;
-  // idSpan.classList.add('col-span-1');
+  idSpan.classList.add('p-2');
 
   //username
   unameSpan = document.createElement('span');
   unameSpan.innerHTML = username;
-  unameSpan.classList.add('col-span-1');
+  unameSpan.classList.add('col-span-1', 'p-2');
+  unameSpan.contentEditable = 'false';
+  unameSpan.setAttribute('id', 'uSpan' + id);
 
   //email
   mailSpan = document.createElement('span');
   mailSpan.innerHTML = email;
-  mailSpan.classList.add('col-span-1');
+  mailSpan.classList.add('col-span-1', 'p-2');
+  mailSpan.contentEditable = 'false';
+  mailSpan.setAttribute('id', 'mSpan' + id);
 
   //remove user
   buttonRemove = document.createElement('button');
@@ -91,7 +123,6 @@ function createUserContainer(element, id, username, email) {
     'w-fit'
   );
   buttonRemove.addEventListener('click', () => {
-
     data = {
       post_type: 'delete',
       id: id,
@@ -113,16 +144,46 @@ function createUserContainer(element, id, username, email) {
     'col-start-3',
     'float-right'
   );
+  buttonEdit.setAttribute('id', 'b' + id);
   buttonEdit.addEventListener('click', () => {
-    // if (unameSpan.contentEditable == 'false') {
-    //   unameSpan.contentEditable = 'true';
-    //   unameSpan.focus();
-    // }
+    uSpan = document.getElementById('uSpan' + id);
+    mSpan = document.getElementById('mSpan' + id);
+    b = document.getElementById('b' + id);
+
+    if (b.innerHTML == 'EDIT') {
+      setEditableType(uSpan);
+      setEditableType(mSpan);
+      b.innerHTML = 'Save';
+      b.classList.add('bg-green-400', 'text-[#121212]');
+      return;
+    }
+    b.innerHTML = 'EDIT';
+    b.classList.remove('bg-green-400', 'text-[#121212]');
+    setEditableType(uSpan);
+    setEditableType(mSpan);
+
+    data = {
+      post_type: 'edit',
+      id: id,
+      username: uSpan.innerHTML,
+      email: mSpan.innerHTML,
+    };
+
+    console.log(data);
+    postData('http://localhost/api/users', data);
+
+    userListType = document.getElementById('UserListType').innerHTML;
+    loadUserData(userListType);
   });
 
   buttonWrapper = document.createElement('div');
-  buttonWrapper.classList.add('flex', 'flex-cols', 'col-start-3', 'justify-end');
-   buttonWrapper.appendChild(buttonEdit);
+  buttonWrapper.classList.add(
+    'flex',
+    'flex-cols',
+    'col-start-3',
+    'justify-end'
+  );
+  buttonWrapper.appendChild(buttonEdit);
   buttonWrapper.appendChild(buttonRemove);
 
   container.appendChild(idSpan);
@@ -133,23 +194,44 @@ function createUserContainer(element, id, username, email) {
   element.appendChild(container);
 }
 
-async function addUserSearch() {
+function setEditableType(element) {
+  if (element.isContentEditable) {
+    element.contentEditable = 'false';
+    element.classList.remove(
+      'outline',
+      'outline-2',
+      'outline-[#121212]',
+      'rounded-md'
+    );
+  } else {
+    element.contentEditable = 'true';
+    element.classList.add(
+      'outline',
+      'outline-2',
+      'outline-[#121212]',
+      'rounded-md'
+    );
+  }
+}
+
+async function addUserSearch(objects) {
   const searchInput = document.getElementById('searchInput');
   searchInput.addEventListener('keyup', (event) => {
     const { value } = event.target;
-    searchUsers(value);
+    searchUsers(value, objects);
   });
 }
 
-loadUserData();
-
-async function searchUsers(value) {
-  objects = await getDataFromUserAPI();
+async function searchUsers(value, objects) {
+  //objects = await getDataFromUserAPI();
   var newArr = [];
   for (element of objects) {
-    if (element.username.includes(value)) newArr.push(element);
-    if (element.id.toString().includes(value)) newArr.push(element);
-    //if (element.email.includes(value)) newArr.push(element);
+    if (
+      element.username.includes(value) ||
+      element.id.toString().includes(value) ||
+      element.email.includes(value)
+    )
+      newArr.push(element);
   }
   createUserList(newArr);
 }
@@ -170,3 +252,5 @@ async function postData(url = '', data = {}) {
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   });
 }
+
+loadUserData();
