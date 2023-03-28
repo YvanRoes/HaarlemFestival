@@ -10,6 +10,8 @@ class Event implements JsonSerializable
 
     private ?string $small_title = null;
 
+    private ?string $imagePath = null;
+
     public function get_small_title(): string
     {
         return $this->small_title;
@@ -54,13 +56,25 @@ class Event implements JsonSerializable
         return $this;
     }
 
+    public function get_imagePath(): string
+    {
+        return $this->imagePath;
+    }
+
+    public function __set_imagePath(string $imagePath): self
+    {
+        $this->imagePath = $imagePath;
+        return $this;
+    }
+
     public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'small_title' => $this->small_title
+            'small_title' => $this->small_title,
+            'imagePath' => $this->imagePath
         ];
     }
 }

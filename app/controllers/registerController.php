@@ -2,7 +2,6 @@
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../models/user.php';
 require_once __DIR__ . '/../services/userService.php';
-require_once __DIR__ . '/../services/captcha/captcha.php';
 
 class RegisterController extends Controller
 {

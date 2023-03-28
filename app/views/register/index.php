@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../../services/captcha/captcha.php';
 
 $msg = '';
 if (isset($_SESSION['registerMsg'])) {

@@ -8,7 +8,7 @@ class DanceController extends Controller
 
     public function index()
     {
-        $this->echoPage("danceIndex");
+        $this->echoPage("dance");
     }
 
 
@@ -28,7 +28,8 @@ class DanceController extends Controller
         $this->service = new PageService();
         //add header and footer
         require __DIR__ . '/../views/header.php';
-        generateHeader('home', 'light');
+
+        generateHeader('dance', 'light');
 
         //insert html from db
         $page = $this->service->get_PageByName($name);
@@ -36,8 +37,8 @@ class DanceController extends Controller
             $this->displayView("404");
         }
         echo $page->get_html();
-
-        include __DIR__ . '/../views/danceFooter.php';
+        
+        require __DIR__ . '/../views/danceFooter.php';
     }
 }
 

@@ -7,7 +7,7 @@ class EventRepository extends Repository
     public function get_AllEvents()
     {
         try {
-            $stmt = $this->conn->prepare("SELECT id, title, description, small_title FROM events");
+            $stmt = $this->conn->prepare("SELECT id, title, description, small_title, imagePath FROM events");
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Event');

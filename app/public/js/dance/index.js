@@ -209,7 +209,7 @@ function generateLocationSection(container) {
     sectionTitle.innerHTML = 'Locations';
 
     locationGrid = document.createElement('div');
-    locationGrid.classList.add('grid', 'grid-cols-2', 'grid-rows-3', 'gap-x-[20px]', 'gap-y-[20px]');
+    locationGrid.classList.add('grid', 'grid-cols-2', 'gap-x-[20px]', 'gap-y-[20px]');
 
     generateLocations(locationGrid);
 
