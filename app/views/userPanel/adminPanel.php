@@ -31,13 +31,13 @@
                 <ul class="text-sm text-[#656262]" id="UsersList">
                     <li class="font-bold"><button onclick="loadUserData()">Users</button></li>
                     <li>
-                        <button onclick="loadCustomers()" class="block px-4 py-2 dark:hover:text-[#121212]">Customers</button>
+                        <button onclick="loadUserData(`customers`)" class="block px-4 py-2 dark:hover:text-[#121212]">Customers</button>
                     </li>
                     <li>
-                        <button onclick="loadEmployees()" class="block px-4 py-2 dark:hover:text-[#121212]">Emloyees</button>
+                        <button onclick="loadUserData(`employees`)" class="block px-4 py-2 dark:hover:text-[#121212]">Emloyees</button>
                     </li>
                     <li>
-                        <button onclick="loadAdmins()" class="block px-4 py-2 dark:hover:text-[#121212]">Admins</button>
+                        <button onclick="loadUserData(`admins`)" class="block px-4 py-2 dark:hover:text-[#121212]">Admins</button>
                     </li>
                 </ul>
                 <ul class="text-sm text-[#656262] mt-4" id="TicketsList">
