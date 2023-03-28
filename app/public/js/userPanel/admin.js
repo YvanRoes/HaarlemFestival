@@ -1,6 +1,22 @@
 async function loadUserData(type) {
-  var objects = await getDataFromUserAPI();
+  title = document.getElementById('contentTitle');
+  title.innerHTML = 'Users';
 
+  headers = document.getElementById('ListHeaders');
+  headers.classList.add(
+    'px-10',
+    'rounded-md',
+    'grid',
+    'lg:grid-cols-6',
+    'md:grid-cols-1',
+    'text-left',
+    'relative',
+    'gap-4',
+    'text-center'
+  );
+
+  headers.innerHTML =
+    '<span>id</span><span>name</span><span>email</span><span>role</span>';
   switch (type) {
     case 'customers':
       loadCustomers();
@@ -73,42 +89,98 @@ function createUserList(objects, type) {
       objects[i].id,
       objects[i].username,
       objects[i].email,
-      objects[i].password
+      objects[i].role
     );
   }
 }
 
-function createUserContainer(element, id, username, email) {
+function createUserContainer(element, id, username, email, role) {
   container = document.createElement('span');
   container.classList.add(
     'bg-white',
     'p-2',
     'rounded-md',
     'grid',
-    'lg:grid-cols-[50px_minmax(400px,_1fr)_minmax(200px,_1fr)]',
+    'lg:grid-cols-6',
     'md:grid-cols-1',
     'text-left',
     'relative',
-    'gap-4'
+    'gap-4',
+    'text-center'
   );
   //id
   idSpan = document.createElement('span');
   idSpan.innerHTML = id;
-  idSpan.classList.add('p-2');
+  idSpan.classList.add(
+    'p-2',
+    'col-span-1',
+    'h-full',
+    'items-center',
+    'justify-center',
+    'flex',
+    'border-r-2',
+    'border-slate-800'
+  );
 
   //username
   unameSpan = document.createElement('span');
   unameSpan.innerHTML = username;
-  unameSpan.classList.add('col-span-1', 'p-2');
+  unameSpan.classList.add(
+    'col-span-1',
+    'p-2',
+    'h-full',
+    'items-center',
+    'justify-center',
+    'flex',
+    'border-r-2',
+    'border-slate-800'
+  );
   unameSpan.contentEditable = 'false';
   unameSpan.setAttribute('id', 'uSpan' + id);
 
   //email
   mailSpan = document.createElement('span');
   mailSpan.innerHTML = email;
-  mailSpan.classList.add('col-span-1', 'p-2');
+  mailSpan.classList.add(
+    'p-1',
+    'w-fit',
+    'h-full',
+    'items-center',
+    'justify-center',
+    'flex',
+    'border-r-2',
+    'border-slate-800'
+  );
   mailSpan.contentEditable = 'false';
   mailSpan.setAttribute('id', 'mSpan' + id);
+
+  //role
+  roleSpan = document.createElement('span');
+  switch (role) {
+    case 0:
+      roleSpan.innerHTML = 'User';
+      break;
+    case 1:
+      roleSpan.innerHTML = 'Employee';
+      break;
+    case 9:
+      roleSpan.innerHTML = 'Administrator';
+      break;
+    default:
+      roleSpan.innerHTML = 'unknown';
+      break;
+  }
+  roleSpan.classList.add(
+    'p-2',
+    'h-full',
+    'items-center',
+    'justify-center',
+    'flex',
+    'border-r-2',
+    'border-slate-800'
+  );
+  role.contentEditable = 'false';
+  roleSpan.setAttribute('íd', 'rSpan' + id);
 
   //remove user
   buttonRemove = document.createElement('button');
@@ -127,8 +199,11 @@ function createUserContainer(element, id, username, email) {
       post_type: 'delete',
       id: id,
     };
-    postData('http://localhost/api/users', data);
-    loadUserData();
+
+    if (confirm('are you sure you want to delete this user?')) {
+      postData('http://localhost/api/users', data);
+      loadUserData();
+    }
   });
 
   //edit user
@@ -141,8 +216,9 @@ function createUserContainer(element, id, username, email) {
     'rounded-md',
     'text-[#F7F7FB]',
     'bg-slate-800',
-    'col-start-3',
-    'float-right'
+    'w-fit',
+    'float-right',
+    'justify-center'
   );
   buttonEdit.setAttribute('id', 'b' + id);
   buttonEdit.addEventListener('click', () => {
@@ -176,20 +252,17 @@ function createUserContainer(element, id, username, email) {
     loadUserData(userListType);
   });
 
-  buttonWrapper = document.createElement('div');
-  buttonWrapper.classList.add(
-    'flex',
-    'flex-cols',
-    'col-start-3',
-    'justify-end'
-  );
-  buttonWrapper.appendChild(buttonEdit);
-  buttonWrapper.appendChild(buttonRemove);
+  // buttonWrapper = document.createElement('div');
+  // buttonWrapper.classList.add('flex', 'flex-cols', 'justify-end');
+  // buttonWrapper.appendChild(buttonEdit);
+  // buttonWrapper.appendChild(buttonRemove);
 
   container.appendChild(idSpan);
   container.appendChild(unameSpan);
   container.appendChild(mailSpan);
-  container.appendChild(buttonWrapper);
+  container.appendChild(roleSpan);
+  container.appendChild(buttonEdit);
+  container.appendChild(buttonRemove);
 
   element.appendChild(container);
 }
@@ -253,4 +326,14 @@ async function postData(url = '', data = {}) {
   });
 }
 
+function limit(string = '', limit = 0) {
+  return string.substring(0, limit);
+}
+
 loadUserData();
+
+updateUser(
+  user.id,
+  document.getElementById('userName' + user.id).innerHTML,
+  document.getElementById('userEmail${user.id}').innerHTML
+);

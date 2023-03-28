@@ -21,7 +21,6 @@
             <div class="flex items-center justify-center h-[100%]" id="nav">
                 <ul class="decoration-none flex items-center justify-center flex-row gap-[20px] text-[#656262]">
                     <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">Database</a></li>
-                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">Statistics</a></li>
                     <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">Content Management System</a></li>
                 </ul>
             </div>
@@ -52,25 +51,15 @@
                         <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">EDM</a>
                     </li>
                 </ul>
-                <ul class="text-sm text-[#656262] mt-4" id="EventsList">
-                    <li class="font-bold"><a href="">Events</a></li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">Yummie!</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">Stroll</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">EDM</a>
-                    </li>
-                </ul>
             </ul>
 
         </div>
         <div class="col-start-2 col-span-5 row-start-2 row-span-5 flex justify-center" id="Content">
             <div class="w-8/12 h-max p-16 mt-16 rounded-lg" id="ContentWrapper">
+                <h1 id="contentTitle" class="text-[64px]"></h1>
                 <input id="searchInput" type="text" placeholder="Search" />
-                <div class="flex flex-col gap-4" id="contentItemsWrapper">
+                <div id="ListHeaders"></div>
+                <div class="flex flex-col gap-4 bg px-10 py-5" id="contentItemsWrapper">
                 </div>
             </div>
         </div>
