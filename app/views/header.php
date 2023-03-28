@@ -81,8 +81,8 @@ function loadHTML()
   echo
   "<a href='/api/users'>
         <div class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['unselected'] . "] flex items-center gap-[10px] border-2 border-[" . $GLOBALS['unselected'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['headerTextColourValue'] . "] cursor-pointer'>
-        <i class='fa fa-location-arrow' style='font-size: 24px;'></i>
-          Plan your trip</div>
+        <i class='fa fa-shopping-cart' style='font-size: 24px;'></i>
+          cart</div>
         </a>
       </div>
     </div>
