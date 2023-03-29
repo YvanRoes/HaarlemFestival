@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 16, 2023 at 12:48 PM
+-- Generation Time: Mar 29, 2023 at 08:23 PM
 -- Server version: 10.11.2-MariaDB-1:10.11.2+maria~ubu2204
--- PHP Version: 8.1.16
+-- PHP Version: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -64,20 +64,8 @@ CREATE TABLE `artist_event_edm` (
 --
 
 CREATE TABLE `events` (
-  `id` int(11) NOT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `description` varchar(1000) DEFAULT NULL,
-  `small_title` varchar(255) DEFAULT NULL
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `events`
---
-
-INSERT INTO `events` (`id`, `title`, `description`, `small_title`) VALUES
-(1, 'A stroll through Haarlem', 'The city of Haarlem is holding a tour to showcase fun and important historical sites. Join us on this tour between the dates of 26-29 of July this year. If you are interested in Haarlem\'s history this tour is for you!', 'Explore the city'),
-(2, 'Food event', 'Enjoy the wide variety of culinary delights that the city of Haarlem has to offer. Join us as we explore the city one bite at a time.', 'Food'),
-(3, 'Let\'s dance', 'The city of Haarlem welcomes you to a dance party! from popular DJs to up and coming artists, we have it all at Haarlem Dance event. Welcome to the party everyone!', 'Life of the party');
 
 -- --------------------------------------------------------
 
@@ -114,6 +102,28 @@ CREATE TABLE `event_yummie` (
   `price_adult` double NOT NULL,
   `price_child` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hompage_events`
+--
+
+CREATE TABLE `hompage_events` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `title` varchar(255) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `small_title` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hompage_events`
+--
+
+INSERT INTO `hompage_events` (`id`, `title`, `description`, `small_title`) VALUES
+(1, 'A stroll through Haarlem', 'The city of Haarlem is holding a tour to showcase fun and important historical sites. Join us on this tour between the dates of 26-29 of July this year. If you are interested in Haarlem\'s history this tour is for you!', 'Explore the city'),
+(2, 'Food event', 'Enjoy the wide variety of culinary delights that the city of Haarlem has to offer. Join us as we explore the city one bite at a time.', 'Food'),
+(3, 'Let\'s dance', 'The city of Haarlem welcomes you to a dance party! from popular DJs to up and coming artists, we have it all at Haarlem Dance event. Welcome to the party everyone!', 'Life of the party');
 
 -- --------------------------------------------------------
 
@@ -248,7 +258,8 @@ CREATE TABLE `ticket` (
   `id` int(11) NOT NULL,
   `status` int(11) DEFAULT NULL,
   `price` double DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `exp_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -259,7 +270,6 @@ CREATE TABLE `ticket` (
 
 CREATE TABLE `ticket_edm` (
   `id` int(11) NOT NULL,
-  `type` int(11) NOT NULL,
   `event_edm_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
