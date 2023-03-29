@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 28, 2023 at 11:09 PM
+-- Generation Time: Mar 29, 2023 at 08:12 PM
 -- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
 -- PHP Version: 8.0.26
 
@@ -230,6 +230,7 @@ CREATE TABLE `route` (
 CREATE TABLE `stroll_location` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
   `address` varchar(255) NOT NULL,
   `imagePath` varchar(255) DEFAULT NULL
@@ -239,16 +240,16 @@ CREATE TABLE `stroll_location` (
 -- Dumping data for table `stroll_location`
 --
 
-INSERT INTO `stroll_location` (`id`, `name`, `description`, `address`, `imagePath`) VALUES
-(1, 'St. Bavo Church', 'The first time St. Bavo Church was mentioned was in 1245 and at that time it was considered a prominent church because of its belfry, and because Influential people like Arnoud van Sassenheim acted there as priests.\r\n\r\nA lot of the furniture dates back from before the iconoclasm of 1566 like the choir fence, choir benches, and copper lectern with pelican. ', 'Grote Markt 22', '/img/stBavoChurch.png'),
-(2, 'Grote Markt', NULL, 'Grote Markt', NULL),
-(3, 'The Hallen', NULL, 'Grote Markt 16', NULL),
-(4, 'Proveniershof', NULL, 'Grote Houtsstraat 140', NULL),
-(5, 'Jopenkerk', NULL, 'Emrikweg 21', NULL),
-(6, 'Waalse kerk', NULL, 'Begijnhof 30', NULL),
-(7, 'Molen de Adriaan', NULL, 'Papentorenvest 1a', NULL),
-(8, 'Amsterdamse Poort', NULL, 'Amsterdamsevaart', NULL),
-(9, 'Hof van Bakenes', NULL, 'Korte Begijnestraat 21ZW', NULL);
+INSERT INTO `stroll_location` (`id`, `name`, `title`, `description`, `address`, `imagePath`) VALUES
+(1, 'St. Bavo Church', 'History of the church:Importance to Haarlem.:The location and where we are on our tour.', 'The first time St. Bavo Church was mentioned was in 1245 and at that time it was considered a prominent church because of its belfry, and because Influential people like Arnoud van Sassenheim acted there as priests.\r\n\r\nA lot of the furniture dates back from before the iconoclasm of 1566 like the choir fence, choir benches, and copper lectern with pelican. ', 'Grote Markt 22', '/img/stBavoChurchImg1.png:/img/stBavoChurchImg2.png:\r\n/img/stBavoChurchImg3.png:'),
+(2, 'Grote Markt', '', NULL, 'Grote Markt', NULL),
+(3, 'The Hallen', '', NULL, 'Grote Markt 16', NULL),
+(4, 'Proveniershof', '', NULL, 'Grote Houtsstraat 140', NULL),
+(5, 'Jopenkerk', '', NULL, 'Emrikweg 21', NULL),
+(6, 'Waalse kerk', '', NULL, 'Begijnhof 30', NULL),
+(7, 'Molen de Adriaan', '', NULL, 'Papentorenvest 1a', NULL),
+(8, 'Amsterdamse Poort', '', NULL, 'Amsterdamsevaart', NULL),
+(9, 'Hof van Bakenes', '', NULL, 'Korte Begijnestraat 21ZW', NULL);
 
 -- --------------------------------------------------------
 
