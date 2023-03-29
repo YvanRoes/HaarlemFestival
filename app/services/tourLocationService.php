@@ -9,7 +9,7 @@ class TourLocationService
     return $repo->get_AllTourLocations();
   }
 
-  public function get_TourLocationById(int $id)
+  public function get_TourLocationById(int $id): TourLocation
   {
     $repo = new TourLocationRepository();
     return $repo->get_TourLocationById($id);

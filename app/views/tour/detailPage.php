@@ -20,21 +20,20 @@
 
 <body class="overflow-x-hidden bg-[#F7F7FB] flex flex-col items-center h-fit w-screen">  
     <div class="lg:w-[1280px] md:w-[100vw] sm:w-[100vw] mt-[100px] mb-[100px] grid" id="content-container">
-    <!-- <button type="submit" class="w-[100px] h-[40px] mt-[20px] text-[#ffffff] font-semibold dark:bg-blue-600 flex items-center justify-center  cursor-pointer rounded-md" onclick="back()">Back</button> -->
     <button type="submit" class="w-[100px] h-[40px] mt-[20px] bg-[#42BFDD] text-white text-[20px] font-bold rounded-[10px] cursor-pointer" onclick="back()">Back</button>
-        <h1 class="text-[36px] font-bold mt-[50px]">St. Bavo Church</h1>
+        <h1 class="text-[36px] font-bold mt-[50px]"><? echo $location->get_name() ?></h1>
         <div class="grid grid-cols-2">
             <img class="w-[700px] h-[300px] mt-[50px]" src="/img/stBavoChurchImg1.png" alt="St. Bavo Church">
             <img class="w-[600px] h-[300px] mt-[50px] justify-self-end" src="/img/stBavoChurchImg2.png" alt="St. Bavo Church">
         </div>
 
         <h1 class="text-[36px] font-bold mt-[100px] justify-self-center">History of the church</h1>
-        <p class="text-xl w-[700px] mt-[20px] justify-self-center">The first time St. Bavo Church was mentioned was in 1245 and at that time it was considered a prominent church because of its belfry, and because Influential people like Arnoud van Sassenheim acted there as priests. <br> A lot of the furniture dates back from before the iconoclasm of 1566 like the choir fence, choir benches, and copper lectern with pelican. </p>
+        <p class="text-xl w-[700px] mt-[20px] justify-self-center"><? echo $location->get_description()?></p>
 
         <div class="grid grid-cols-2">
             <div>
                 <h1 class="text-[36px] font-bold mt-[100px] mb-[20px]">Importance to Haarlem.</h1>
-                <p class="text-xl w-[600px] mt-[20px] ">Around the church there is a big market every week this is very important to Haarlem since a lot of people from the surrounding regions come to this market to sell.</p>
+                <p class="text-xl w-[600px] mt-[20px]">Around the church there is a big market every week this is very important to Haarlem since a lot of people from the surrounding regions come to this market to sell.</p>
             </div>
             <div>
                 <h1 class="text-[36px] w-[400px] font-bold mt-[100px] mb-[20px]">The location and where we are on our tour.</h1>

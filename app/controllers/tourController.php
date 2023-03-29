@@ -4,11 +4,6 @@
 
     class TourController extends Controller{
         private $service;
-        // public $location;
-        // public $name;
-        // public $description;
-        // public $address;
-        // public $imagePath;
 
         public function __construct(){
             $this->service = new TourLocationService();
@@ -23,16 +18,14 @@
         }
 
         public function detailPage(){
-            // if (isset($_GET['id'])){
-            //     $this->location = $this->service->get_TourLocationById(1);
-            //     $this->name = $this->location->get_name();
-            //     $this->description = $this->location->get_description();
-            //     $this->address = $this->location->get_address();
-            //     $this->imagePath = $this->location->get_imagePath();
-            // }
-            // require __DIR__ . '/../views/tour/detailPage.php';
+            if (isset($_GET['id'])){
+                $location = $this->service->get_TourLocationById($_GET['id']);
+                $string = $location->get_imagePath();
+                $imagePaths = explode(":", $string);
+            }
+            require __DIR__ . '/../views/tour/detailPage.php';
 
-            $this->displayView($this);
+            // $this->displayView($this);
         }
     }
 ?>

@@ -17,14 +17,16 @@ class TourLocationRepository extends Repository
     }
   }
 
+
   public function get_TourLocationById($id)
   {
     try {
       $stmt = $this->conn->prepare("SELECT id, name, description, address, imagePath FROM stroll_location WHERE id = :id");
-      $stmt->execute(array(':id' => $id));
+      $stmt->bindParam(':id', $id);
+      $stmt->execute();
 
       $stmt->setFetchMode(PDO::FETCH_CLASS, 'TourLocation');
-      $r = $stmt->fetchAll();
+      $r = $stmt->fetch();
       return $r;
     } catch (PDOException $e) {
       echo $e;
