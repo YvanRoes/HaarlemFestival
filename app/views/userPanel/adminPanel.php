@@ -25,7 +25,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-start-1 col-span-1 row-start-2 row-span-5 flex justify-center border-[1px] border[#656262]" id="subMenu">
+        <div class="col-start-1 col-span-1 row-start-2 row-span-5 flex justify-center border-x-[1px] border[#656262]" id="subMenu">
             <ul class="p-4 flex flex-col gap-[20px] h-fit" id="items">
                 <ul class="text-sm text-[#656262]" id="UsersList">
                     <li class="font-bold"><button onclick="loadUserData()">Users</button></li>
@@ -39,27 +39,45 @@
                         <button onclick="loadUserData(`admins`)" class="block px-4 py-2 dark:hover:text-[#121212]">Admins</button>
                     </li>
                 </ul>
-                <ul class="text-sm text-[#656262] mt-4" id="TicketsList">
-                    <li class="font-bold"><a href="">Tickets</a></li>
+                <ul class="text-sm text-[#656262] mt-4" id="edmEvent">
+                    <li class="font-bold"><span>EDM</span></li>
                     <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">Yummie!</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">Stroll</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">EDM</a>
+                        <button onclick="loadEDMData(`venues`)" class="block px-4 py-2 dark:hover:text-[#121212]">venues</button>
                     </li>
                 </ul>
             </ul>
 
         </div>
         <div class="col-start-2 col-span-5 row-start-2 row-span-5 flex justify-center" id="Content">
-            <div class="w-8/12 h-max p-16 mt-16 rounded-lg" id="ContentWrapper">
-                <h1 id="contentTitle" class="text-[64px]"></h1>
+            <div class="w-8/12 h-max p-16 mt-16 rounded-lg hidden" id="UserPane">
+                <h1 id="contentTitle" class="text-[64px]">Users</h1>
                 <input id="searchInput" type="text" placeholder="Search" />
+                <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+
+                    <input type="text" id="inputUserName" placeholder="name" required />
+                    <input type="password" id="inputUserPassword" placeholder="password" required />
+                    <input id="inputUserMail" type="text" placeholder="mail" required />
+                    <select name="role" id="userRoles">
+                        <option value="0">User</option>
+                        <option value="1">Employee</option>
+                        <option value="9">Admin</option>
+                    </select>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="addNewUser()">Add user</button>
+                </div>
+                <div class="flex flex-col gap-4 pb-5" id="contentUsersWrapper">
+                </div>
+            </div>
+            <div class="w-8/12 h-max p-16 mt-16 rounded-lg hidden" id="edmPane">
+                <h1 id="EDMTitle" class="text-[64px]"></h1>
+                <input id="searchInput" type="text" placeholder="Search" />
+                <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+                    <input type="" id="" placeholder="" required />
+                    <input type="" id="" placeholder="" required />
+                    <input id="" type="" placeholder="" required />
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick=""></button>
+                </div>
                 <div id="ListHeaders"></div>
-                <div class="flex flex-col gap-4 bg px-10 py-5" id="contentItemsWrapper">
+                <div class="flex flex-col gap-4 pb-5" id="contentEDMWrapper">
                 </div>
             </div>
         </div>

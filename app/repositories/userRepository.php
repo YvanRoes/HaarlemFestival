@@ -6,7 +6,7 @@ class UserRepository extends Repository
     public function get_AllUsers()
     {
         try {
-            $stmt = $this->conn->prepare("SELECT id, username, email, password, role FROM users");
+            $stmt = $this->conn->prepare("SELECT id, username, email, password, role, register_date FROM users");
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
@@ -100,8 +100,17 @@ class UserRepository extends Repository
     public function insert_User(User $user)
     {
         try {
-            $stmt = $this->conn->prepare("INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, 0)");
+            $stmt = $this->conn->prepare("INSERT INTO users (username, email, password, role, register_date) VALUES (:username, :email, :password, 0, CURRENT_DATE)");
             $stmt->execute(array(':username' => $user->get_username(), ':email' => $user->get_email(), ':password' => md5($user->get_password())));
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function insert_UserWithRole(User $user){
+        try {
+            $stmt = $this->conn->prepare("INSERT INTO users (username, email, password, role, register_date) VALUES (:username, :email, :password, :role, CURRENT_DATE)");
+            $stmt->execute(array(':username' => $user->get_username(), ':email' => $user->get_email(), ':password' => md5($user->get_password()), ':role' => $user->get_role()));
         } catch (PDOException $e) {
             echo $e;
         }

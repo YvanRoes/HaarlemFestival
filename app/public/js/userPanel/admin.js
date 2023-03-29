@@ -1,22 +1,14 @@
+// USER FUNCTIONALITY --START
+
 async function loadUserData(type) {
-  title = document.getElementById('contentTitle');
-  title.innerHTML = 'Users';
+  //show / hide panes
+  userPane = document.getElementById('UserPane');
+  userPane.classList.remove('hidden');
 
-  headers = document.getElementById('ListHeaders');
-  headers.classList.add(
-    'px-10',
-    'rounded-md',
-    'grid',
-    'lg:grid-cols-6',
-    'md:grid-cols-1',
-    'text-left',
-    'relative',
-    'gap-4',
-    'text-center'
-  );
-
-  headers.innerHTML =
-    '<span>id</span><span>name</span><span>email</span><span>role</span>';
+  edmPane = document.getElementById('edmPane');
+  if (!edmPane.classList.contains('hidden')) {
+    edmPane.classList.add('hidden');
+  }
   switch (type) {
     case 'customers':
       loadCustomers();
@@ -76,12 +68,14 @@ async function getDataFromUserAPI() {
 }
 
 function createUserList(objects, type) {
-  UserListType = document.createElement('span');
+  if (!document.body.contains(document.getElementById('UserListType'))) {
+    UserListType = document.createElement('span');
+    UserListType.setAttribute('id', 'UserListType');
+    UserListType.classList.add('hidden');
+    document.body.appendChild(UserListType);
+  }
   UserListType.innerHTML = type;
-  UserListType.setAttribute('id', 'UserListType');
-  UserListType.classList.add('hidden');
-  document.body.appendChild(UserListType);
-  parentElement = document.getElementById('contentItemsWrapper');
+  parentElement = document.getElementById('contentUsersWrapper');
   parentElement.innerHTML = '';
   for (let i = 0; i < objects.length; i++) {
     createUserContainer(
@@ -89,12 +83,13 @@ function createUserList(objects, type) {
       objects[i].id,
       objects[i].username,
       objects[i].email,
-      objects[i].role
+      objects[i].role,
+      objects[i].registered_at
     );
   }
 }
 
-function createUserContainer(element, id, username, email, role) {
+function createUserContainer(element, id, username, email, role, registeredAt) {
   container = document.createElement('span');
   container.classList.add(
     'bg-white',
@@ -117,9 +112,7 @@ function createUserContainer(element, id, username, email, role) {
     'h-full',
     'items-center',
     'justify-center',
-    'flex',
-    'border-r-2',
-    'border-slate-800'
+    'flex'
   );
 
   //username
@@ -131,9 +124,7 @@ function createUserContainer(element, id, username, email, role) {
     'h-full',
     'items-center',
     'justify-center',
-    'flex',
-    'border-r-2',
-    'border-slate-800'
+    'flex'
   );
   unameSpan.contentEditable = 'false';
   unameSpan.setAttribute('id', 'uSpan' + id);
@@ -147,9 +138,7 @@ function createUserContainer(element, id, username, email, role) {
     'h-full',
     'items-center',
     'justify-center',
-    'flex',
-    'border-r-2',
-    'border-slate-800'
+    'flex'
   );
   mailSpan.contentEditable = 'false';
   mailSpan.setAttribute('id', 'mSpan' + id);
@@ -175,9 +164,7 @@ function createUserContainer(element, id, username, email, role) {
     'h-full',
     'items-center',
     'justify-center',
-    'flex',
-    'border-r-2',
-    'border-slate-800'
+    'flex'
   );
   role.contentEditable = 'false';
   roleSpan.setAttribute('íd', 'rSpan' + id);
@@ -202,7 +189,8 @@ function createUserContainer(element, id, username, email, role) {
 
     if (confirm('are you sure you want to delete this user?')) {
       postData('http://localhost/api/users', data);
-      loadUserData();
+      userListType = document.getElementById('UserListType').innerHTML;
+      delay(1000).then(() => loadUserData(userListType));
     }
   });
 
@@ -252,10 +240,9 @@ function createUserContainer(element, id, username, email, role) {
     loadUserData(userListType);
   });
 
-  // buttonWrapper = document.createElement('div');
-  // buttonWrapper.classList.add('flex', 'flex-cols', 'justify-end');
-  // buttonWrapper.appendChild(buttonEdit);
-  // buttonWrapper.appendChild(buttonRemove);
+  register = document.createElement('span');
+  register.innerHTML = 'registration date:' + '\n' + registeredAt;
+  register.classList.add('text-left');
 
   container.appendChild(idSpan);
   container.appendChild(unameSpan);
@@ -263,6 +250,7 @@ function createUserContainer(element, id, username, email, role) {
   container.appendChild(roleSpan);
   container.appendChild(buttonEdit);
   container.appendChild(buttonRemove);
+  container.appendChild(register);
 
   element.appendChild(container);
 }
@@ -330,10 +318,60 @@ function limit(string = '', limit = 0) {
   return string.substring(0, limit);
 }
 
-loadUserData();
+function addNewUser() {
+  uName = document.getElementById('inputUserName');
+  uPasswd = document.getElementById('inputUserPassword');
+  uEmail = document.getElementById('inputUserMail');
+  role = document.getElementById('userRoles').value;
 
-updateUser(
-  user.id,
-  document.getElementById('userName' + user.id).innerHTML,
-  document.getElementById('userEmail${user.id}').innerHTML
-);
+  data = {
+    post_type: 'insert',
+    username: uName.value,
+    email: uEmail.value,
+    password: uPasswd.value,
+    role: this.role,
+  };
+
+  uName.value = '';
+  uPasswd.value = '';
+  uEmail.value = '';
+  console.log(data);
+
+  postData('http://localhost/api/users', data);
+  userListType = document.getElementById('UserListType').innerHTML;
+  delay(1000).then(() => loadUserData(userListType));
+}
+
+// loadUserData();
+// USER FUNCTIONALITY --END
+
+//EDM FUNCTIONALITY --START
+
+function loadEDMData(type){
+  edmPane = document.getElementById('edmPane');
+  edmPane.classList.remove('hidden');
+  userPane = document.getElementById('UserPane');
+  if (!userPane.classList.contains('hidden')) {
+    userPane.classList.add('hidden')
+  }
+
+
+  switch (type) {
+    case 'venues':
+      loadVenues();
+      break;
+  
+    default:
+      break;
+  }
+}
+
+function loadVenues() {
+  wrapper = document.getElementById('contentEDMWrapper');
+  title = document.getElementById('EDMTitle');
+  title.innerHTML = 'Venues';
+}
+
+function delay(time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}

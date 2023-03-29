@@ -33,6 +33,12 @@ class UserService
         $repo = new UserRepository();
         return $repo->insert_User($user);
     }
+
+    public function insert_UserWithRole($user)
+    {
+        $repo = new UserRepository();
+        return $repo->insert_UserWithRole($user);
+    }
     public function verify_UserCredentials(string $email, string $passwd): bool
     {
         $repo = new UserRepository();
