@@ -6,7 +6,7 @@ class TourLocationRepository extends Repository
   public function get_AllTourLocations()
   {
     try {
-      $stmt = $this->conn->prepare("SELECT id, name, description, address, imagePath FROM stroll_location");
+      $stmt = $this->conn->prepare("SELECT id, name, title, description, address, imagePath FROM stroll_location");
       $stmt->execute();
 
       $stmt->setFetchMode(PDO::FETCH_CLASS, 'TourLocation');
@@ -21,7 +21,7 @@ class TourLocationRepository extends Repository
   public function get_TourLocationById($id)
   {
     try {
-      $stmt = $this->conn->prepare("SELECT id, name, description, address, imagePath FROM stroll_location WHERE id = :id");
+      $stmt = $this->conn->prepare("SELECT id, name, title, description, address, imagePath FROM stroll_location WHERE id = :id");
       $stmt->bindParam(':id', $id);
       $stmt->execute();
 

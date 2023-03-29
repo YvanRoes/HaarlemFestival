@@ -39,6 +39,7 @@ function generateTourLocation(location, wrapper){
         'rounded-[10px]'
     );
     button.innerHTML = 'Read More';
+    button.onclick = function () { window.location.href = "/tour/detailPage?id=" + location.id };
 
     
     tourLocation.appendChild(titleContainer);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 29, 2023 at 09:34 PM
+-- Generation Time: Mar 29, 2023 at 09:57 PM
 -- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
 -- PHP Version: 8.0.26
 
@@ -260,7 +260,7 @@ CREATE TABLE `stroll_location` (
 --
 
 INSERT INTO `stroll_location` (`id`, `name`, `title`, `description`, `address`, `imagePath`) VALUES
-(1, 'St. Bavo Church', 'History of the church:Importance to Haarlem.:The location and where we are on our tour.', 'The first time St. Bavo Church was mentioned was in 1245 and at that time it was considered a prominent church because of its belfry, and because Influential people like Arnoud van Sassenheim acted there as priests.\r\n\r\nA lot of the furniture dates back from before the iconoclasm of 1566 like the choir fence, choir benches, and copper lectern with pelican. ', 'Grote Markt 22', '/img/stBavoChurchImg1.png:/img/stBavoChurchImg2.png:\r\n/img/stBavoChurchImg3.png:'),
+(1, 'St. Bavo Church', 'History of the church:Importance to Haarlem.:The location and where we are on our tour.', 'The first time St. Bavo Church was mentioned was in 1245 and at that time it was considered a prominent church because of its belfry, and because Influential people like Arnoud van Sassenheim acted there as priests.\r\n\r\nA lot of the furniture dates back from before the iconoclasm of 1566 like the choir fence, choir benches, and copper lectern with pelican.:Around the church there is a big market every week this is very important to Haarlem since a lot of people from the surrounding regions come to this market to sell.:This is the starting location of our tour. On the map below you can see the exact location.', 'Grote Markt 22', '/img/stBavoChurchImg1.png:/img/stBavoChurchImg2.png:\r\n/img/stBavoChurchImg3.png:'),
 (2, 'Grote Markt', '', NULL, 'Grote Markt', NULL),
 (3, 'The Hallen', '', NULL, 'Grote Markt 16', NULL),
 (4, 'Proveniershof', '', NULL, 'Grote Houtsstraat 140', NULL),
