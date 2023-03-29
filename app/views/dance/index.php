@@ -8,15 +8,11 @@
   }
 </style>
 
-<title>Home</title>
+<title>Dance</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
-<body class="h-[100vh] overflow-x-hidden bg-[#121212] flex flex-col items-center h-fit w-screen">
-  <?php
-  include __DIR__ . '/../header.php';
-  generateHeader('dance', 'light');
-  ?>
-  <!-- <div class="pb-[2.5rem] mt-[100px] mb-[150px] lg:w-[1280px] md:w-[100vw] sm:w-[100vw]" id="content-container">
+<!-- <body class="h-[100vh] overflow-x-hidden bg-[#121212] flex flex-col items-center h-fit w-screen">
+  <div class="pb-[2.5rem] mt-[100px] mb-[150px] lg:w-[1280px] md:w-[100vw] sm:w-[100vw]" id="content-container">
     <div class="grid grid-cols-2 grid-rows-1 h-[600px]">
       <div class="flex flex-col justify-center text-[#F7F7FB] font-['Lato']">
         <h1 id="HeroHeader" class="text-[64px]">Let's Dance</h1>
@@ -32,7 +28,11 @@
         <image src="/img/danceImg1.png" class="w-[500px]">
       </div>
     </div>
-    <div class="flex justify-center mt-[100px]">
+ -->
+
+
+    
+    <!-- <div class="flex justify-center mt-[100px]">
       <h1 class="text-[64px] text-[#F7F7FB] font-['Lato']">The Artists</h1>
     </div>
     <div class="grid grid-cols-3 grid-rows-2">
@@ -81,7 +81,7 @@
     <div class="flex justify-center mt-[100px] mb-[50px]">
       <h1 class="text-[64px] text-[#F7F7FB] font-['Lato']">Locations</h1>
     </div>
-    <div class="grid grid-cols-2 grid-rows-3 gap-x-[20px] gap-y-[20px]">
+    <div class="grid grid-cols-2 gap-x-[20px] gap-y-[20px]">
       <div class="grid grid-cols-2 grid-rows-2 outline outline-1 outline-white">
         <h2 class="text-[24px] text-[#F7F7FB] font-['Lato'] mt-[20px] ml-[10px]">LichtFabriek</h2>
         <image class="grid justify-self-end row-span-2 w-[253px] h-[161px]" src="/img/danceLocation1.png">
@@ -112,17 +112,23 @@
         <h2 class="text-[24px] text-[#F7F7FB] font-['Lato'] mt-[20px] ml-[10px]">Club Ruis</h2>
         <image class="grid justify-self-end row-span-2 w-[253px] h-[161px]" src="/img/danceLocation6.png">
           <h2 class="text-[20px] text-[#F7F7FB] font-['Lato'] ml-[10px]">Smedestraat 31, 2011 RE Haarlem</h2>
-      </div>
-    </div>
-  </div> -->
+      </div> 
+    </div> -->
 
-  <div id="content-wrapper">
+
+
+
+
+
+
+
+<!-- 
+
+    <div id="content-wrapper">
     
+    </div>
+
   </div>
 
-  <?php
-  include __DIR__ . '/../danceFooter.php';
-  ?>
-
   <script src="/js/dance/index.js"></script>
-</body>
+</body> -->

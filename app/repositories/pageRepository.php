@@ -16,4 +16,16 @@ class PageRepository extends Repository
       echo $e;
     }
   }
+
+  public function update_Page($id, $html)
+  {
+    try {
+      $stmt = $this->conn->prepare("UPDATE page SET html = :html WHERE id = :id");
+      $stmt->bindParam(':html', $html);
+      $stmt->bindParam(':id', $id);
+      $stmt->execute();
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
 }

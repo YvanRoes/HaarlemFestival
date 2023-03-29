@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../../services/captcha/captcha.php';
 
 $msg = '';
 if (isset($_SESSION['registerMsg'])) {
@@ -75,28 +74,25 @@ if (isset($_SESSION['registerMsg'])) {
                     class="block w-full h-[40px] m-auto my-4 py-2 px-2 text-sm text-gray-800 bg-[#F7F7FB] border-0 focus:ring-0 rounded-sm resize-none"
                     placeholder="password" required></input>
                 <input name="confirmPassword" type="password" rows="1"
-                    class="block w-full h-[40px] m-auto my-4 py-2 px-2 text-sm text-gray-800 bg-[#F7F7FB] border-0 focus:ring-0 rounded-sm resize-none"
-                    placeholder="confirm password" required></input>
-                <input name="captcha" rows="1"
-                    class="block w-full h-[40px] m-auto my-4 py-2 px-2 text-sm text-gray-800 bg-[#F7F7FB] border-0 focus:ring-0 rounded-sm resize-none mt-[50px]"
-                    placeholder="captcha" required></input>
+                    class="block w-full h-[40px] m-auto mb-[20px] my-4 py-2 px-2 text-sm text-gray-800 bg-[#F7F7FB] border-0 focus:ring-0 rounded-sm resize-none"
+                    placeholder="confirm password" required>
+                </input>
 
-                <img src="capacha.jpg" class="w-[300px] h-[60px] mb-[20px]"/>
+                <div class="g-recaptcha" data-sitekey="6Le8CB4lAAAAAJ-9nPHM5G4iJ-M-wE5tzEBBvQxg" style="transform:scale(0.93);-webkit-transform:scale(0.93);transform-origin:0 0;-webkit-transform-origin:0 0;">></div>
 
                 <span class="text-[#FC5B84] flex justify-center mb-[15px]">
                     <?php echo $msg; ?>
-                </span>
-              
-                <button name="submitRegister" type="submit"
-                    class="w-full h-[40px] text-[#29334E] flex items-center justify-center gap-[10px] border-2 border-[#29334E] cursor-pointer p-5 rounded-md">Register</button>
+                </span>         
+
+                <button name="submitRegister" type="submit" class="w-full h-[40px] text-[#29334E] flex items-center justify-center gap-[10px] border-2 border-[#29334E] cursor-pointer p-5 rounded-md">Register</button>
             </form>
 
             <form method="POST" action="" class="flex flex-col justify-center">
                 <p class="text-[#29334E]/50 pt-2 text-[14px]">already have an account?</p>
-                <button name="Login" type="submit" class="text-[#29334E] text-[14px] underline mb-[50px]"><a href='/login'>
-                        Log in here
-                </button>
+                <button name="Login" type="submit" class="text-[#29334E] text-[14px] underline mb-[50px]"><a href='/login'>Log in here</button>
             </form>
         </div>
     </div>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>

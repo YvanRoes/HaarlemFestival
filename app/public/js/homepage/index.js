@@ -4,23 +4,13 @@ function createEvents(events) {
 
     wrapper = document.getElementById('events');
 
-    generateLeft(events[0].small_title, events[0].title, events[0].description, wrapper);
-    generateRight(events[1].small_title, events[1].title, events[1].description, wrapper);
-    generateRight(events[2].small_title, events[2].title, events[2].description, wrapper);
-
-    // console.log('before loop')
-    // console.log(events[0].small_title)
-    // for (let i = 0; i <= events.length; i++) {
-    //     if (i = 0 || i % 3 == 0) {
-    //         console.log('before generate left')
-    //         generateLeft(events[i].small_title, events[i].title, events[i].description, wrapper);
-    //         console.log('test1');
-    //     } else {
-    //         console.log('before generate right')
-    //         generateRight(events[i].small_title, events[i].title, events[i].description, wrapper);
-    //         console.log('test2');
-    //     }
-    // }
+    for (let i = 0; i <= events.length; i++) {
+        if (i % 2 == 0) {
+            generateLeft(events[i].small_title, events[i].title, events[i].description, wrapper, events[i].imagePath, events[i].pageLink);
+        } else {
+            generateRight(events[i].small_title, events[i].title, events[i].description, wrapper, events[i].imagePath, events[i].pageLink);
+        }
+    }
 }
 
 async function getEvents() {
@@ -35,7 +25,7 @@ async function generateEvents() {
     createEvents(events);
 }
 
-function generateLeft(small_title, title, description, wrapper) {
+function generateLeft(small_title, title, description, wrapper, imagePath, pageLink) {
 
     // event section
     console.log('before create element')
@@ -46,9 +36,12 @@ function generateLeft(small_title, title, description, wrapper) {
     imageContainer = document.createElement('div');
     imageContainer.classList.add('flex-none');
     img = new Image();
-    // img.src = 'img/' + event.toLowerCase() + 'Img1.png';
-    img.src = '/img/tourEvent.png';
+    img.src = imagePath;
     img.classList.add('w-[300px]', 'h-[350px]', 'ml-[100px]');
+    link = document.createElement('a');
+    link.href = pageLink;
+    link.appendChild(img);
+
     // arrow & blob
     vectorContainer = document.createElement('div');
     vectorContainer.classList.add('flex-initial');
@@ -77,6 +70,7 @@ function generateLeft(small_title, title, description, wrapper) {
     button = document.createElement('button');
     button.classList.add('bg-blue-500', 'text-white', 'drop-shadow-sm', 'font-bold', 'py-2', 'px-8', 'mt-[20px]');
     button.innerHTML = 'Explore now';
+    button.onclick = function () { window.location.href = pageLink };
     // more blobs
     blobsContainer = document.createElement('div');
     blobsContainer.classList.add('flex-none');
@@ -90,7 +84,7 @@ function generateLeft(small_title, title, description, wrapper) {
     blob3.src = '/img/Vector5.png';
     blob3.classList.add('absolute', 'w-[100px]', 'h-[100px]', 'mt-[250px]', 'ml-[300px]');
 
-    imageContainer.appendChild(img);
+    imageContainer.appendChild(link);
     vectorContainer.appendChild(arrow1);
     vectorContainer.appendChild(vector1);
     textContainer.appendChild(textVector);
@@ -110,7 +104,7 @@ function generateLeft(small_title, title, description, wrapper) {
     wrapper.appendChild(eventSection);
 }
 
-function generateRight(small_title, title, description, wrapper) {
+function generateRight(small_title, title, description, wrapper, imagePath, pageLink) {
 
     // event section
     eventSection = document.createElement('div');
@@ -142,6 +136,8 @@ function generateRight(small_title, title, description, wrapper) {
     button = document.createElement('button');
     button.classList.add('bg-blue-500', 'text-white', 'drop-shadow-sm', 'font-bold', 'py-2', 'px-8', 'mt-[20px]');
     button.innerHTML = 'Explore now';
+    button.onclick = function () { window.location.href = pageLink };
+
     // arrow & blob
     vectorContainer = document.createElement('div');
     vectorContainer.classList.add('flex-initial');
@@ -155,9 +151,11 @@ function generateRight(small_title, title, description, wrapper) {
     imageContainer = document.createElement('div');
     imageContainer.classList.add('flex-none');
     img = new Image();
-    // img.src = 'img/' + event.toLowerCase() + 'Img1.png';
-    img.src = '/img/foodEvent.png';
+    img.src = imagePath;
     img.classList.add('w-[300px]', 'h-[350px]');
+    link = document.createElement('a');
+    link.href = pageLink;
+    link.appendChild(img);
 
 
     blobsContainer.appendChild(blob1);
@@ -169,7 +167,7 @@ function generateRight(small_title, title, description, wrapper) {
     textContainer.appendChild(button);
     vectorContainer.appendChild(arrow1);
     vectorContainer.appendChild(vector1);
-    imageContainer.appendChild(img);
+    imageContainer.appendChild(link);
 
     eventSection.appendChild(blobsContainer);
     eventSection.appendChild(textContainer);
