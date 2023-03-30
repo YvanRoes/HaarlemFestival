@@ -1,38 +1,31 @@
 <?php
-
-class Event implements JsonSerializable
+class TourLocation implements JsonSerializable
 {
-
     private ?int $id = null;
+    private ?string $name = null;
     private ?string $title = null;
-
     private ?string $description = null;
-
-    private ?string $small_title = null;
-
+    private ?string $address = null;
     private ?string $imagePath = null;
 
-    private ?string $pageLink = null;
-
-    public function get_small_title(): string
-    {
-        return $this->small_title;
-    }
-
-    public function __set_small_title(string $small_title): self
-    {
-        $this->small_title = $small_title;
-        return $this;
-    }
 
     public function get_id(): int
     {
         return $this->id;
     }
-
     public function __set_id(int $id): self
     {
         $this->id = $id;
+        return $this;
+    }
+
+    public function get_name(): string
+    {
+        return $this->name;
+    }
+    public function __set_name(string $name): self
+    {
+        $this->name = $name;
         return $this;
     }
 
@@ -58,6 +51,16 @@ class Event implements JsonSerializable
         return $this;
     }
 
+    public function get_address(): string
+    {
+        return $this->address;
+    }
+    public function __set_address(string $address): self
+    {
+        $this->address = $address;
+        return $this;
+    }
+
     public function get_imagePath(): string
     {
         return $this->imagePath;
@@ -68,27 +71,15 @@ class Event implements JsonSerializable
         $this->imagePath = $imagePath;
         return $this;
     }
-
-    public function get_pageLink(): string
-    {
-        return $this->pageLink;
-    }
-
-    public function __set_pageLink(string $pageLink): self
-    {
-        $this->pageLink = $pageLink;
-        return $this;
-    }
-
     public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'title' => $this->title,
             'description' => $this->description,
-            'small_title' => $this->small_title,
-            'imagePath' => $this->imagePath,
-            'pageLink' => $this->pageLink
+            'address' => $this->address,
+            'imagePath' => $this->imagePath
         ];
     }
 }
