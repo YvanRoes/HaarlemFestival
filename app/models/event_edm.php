@@ -5,13 +5,6 @@ class Event_edm extends Event2
     private ?location $venue = null;
     private ?array $artists = null;
 
-    public function __construct(int $id, location $venue, array $artists)
-    {
-        parent::__construct($id);
-        $this->venue = $venue;
-        $this->artists = $artists;
-    }
-
     public function get_venue(): location
     {
         return $this->venue;

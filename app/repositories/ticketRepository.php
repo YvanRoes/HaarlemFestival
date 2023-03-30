@@ -8,13 +8,8 @@ class TicketRepository extends Repository
         $sql = "SELECT * FROM tickets";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $tickets = [];
-        foreach ($result as $row) {
-            $ticket = new Ticket($row['id'], $row['status'], $row['price'], $row['user_id'], $row['exp_date']);
-            array_push($tickets, $ticket);
-        }
-        return $tickets;
+        $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+        return $result;
     }
 
     public function get_TicketById($id): Ticket
@@ -23,9 +18,8 @@ class TicketRepository extends Repository
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $ticket = new Ticket($result['id'], $result['status'], $result['price'], $result['user_id']);
-        return $ticket;
+        $result = $stmt->fetch(PDO::FETCH_CLASS);
+       return $result;
     }
     public function get_TicketsByStatus($status)
     {
@@ -33,13 +27,8 @@ class TicketRepository extends Repository
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':status', $status);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $tickets = [];
-        foreach ($result as $row) {
-            $ticket = new Ticket($row['id'], $row['status'], $row['price'], $row['user_id']);
-            array_push($tickets, $ticket);
-        }
-        return $tickets;
+        $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+        return $result;
     }
     public function get_TicketsByUserIdAndStatus($id, $status)
     {
@@ -48,12 +37,11 @@ class TicketRepository extends Repository
         $stmt->bindParam(':user_id', $_SESSION['user_id']);
         $stmt->bindParam(':status', $_SESSION['status']);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $tickets = [];
-        foreach ($result as $row) {
-            $ticket = new Ticket($row['id'], $row['status'], $row['price'], $row['user_id']);
-            array_push($tickets, $ticket);
-        }
-        return $tickets;
+        $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+        return $result;
+    }
+    public funtion post_Ticket($ticket)
+    {
+        
     }
 }

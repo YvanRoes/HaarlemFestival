@@ -6,14 +6,6 @@ class Event_tour extends Event2
     private ?string $language = null;
     private ?DateTime $datetime = null;
 
-    public function __construct(int $id, array $route, string $language, DateTime $datetime)
-    {
-        parent::__construct($id);
-        $this->route = $route;
-        $this->language = $language;
-        $this->datetime = $datetime;
-    }
-
     public function get_route(): array
     {
         return $this->route;

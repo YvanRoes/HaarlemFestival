@@ -6,6 +6,7 @@ class Ticket implements JsonSerializable
     private ?float $price = null;
     private ?string $user_id = null;
     private ?DateTime $expDate = null;
+    private ?int $event = null;
 
     public function getId(): ?int
     {
@@ -51,6 +52,14 @@ class Ticket implements JsonSerializable
     {
         $this->expDate = $expDate;
     }
+    public function getEvent(): ?int
+    {
+        return $this->event;
+    }
+    public function setEvent(?int $event): void
+    {
+        $this->event = $event;
+    }
 
 
 
@@ -62,6 +71,7 @@ class Ticket implements JsonSerializable
             'price' => $this->price,
             'user_id' => $this->user_id,
             'expDate' => $this->expDate,
+            'event' => $this->event
         ];
 
     }

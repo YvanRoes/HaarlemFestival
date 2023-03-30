@@ -5,13 +5,6 @@ class Event_yummie extends Event2
     private ?Restaurant $restaurant = null;
     private ?DateTime $datetime = null;
 
-    public function __construct(int $id, Restaurant $restaurant, DateTime $datetime)
-    {
-        parent::__construct($id);
-        $this->restaurant = $restaurant;
-        $this->datetime = $datetime;
-    }
-
     public function get_restaurant(): Restaurant
     {
         return $this->restaurant;
