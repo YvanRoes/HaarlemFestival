@@ -5,6 +5,10 @@
         public function index(){
             $this->echoPage("food");
         }
+
+        public function detailPage(){
+            $this->displayView($this);
+        }
     }
 ?>
 
