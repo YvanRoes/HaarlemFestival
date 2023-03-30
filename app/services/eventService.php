@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/../repositories/eventRepository.php';
 require_once __DIR__ . '/../models/event.php';
+require_once __DIR__ . '/../models/event2.php';
 
 class EventService
 {

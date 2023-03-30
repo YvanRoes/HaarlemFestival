@@ -17,5 +17,10 @@ class TicketsController
             header('Content-type: Application/JSON');
             echo json_encode($result);
         }
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $result = $this->ticketService->create_Ticket();
+            header('Content-type: Application/JSON');
+            echo json_encode($result);
+        }
     }
 }

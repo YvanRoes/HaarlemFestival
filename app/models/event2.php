@@ -4,10 +4,6 @@ class Event2 implements JsonSerializable
 {
 
     protected ?int $id = null;
-    public function __construct(?int $id)
-    {
-      $this->id = $id;
-    }
     public function get_id(): int
     {
       return $this->id;

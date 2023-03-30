@@ -2,11 +2,6 @@
 class Ticket_Yummie extends Ticket
 {
     private Event_yummie $yummie;
-    
-    public function __construct(Event_yummie $yummie)
-    {
-        $this->yummie = $yummie;
-    }
 
     public function jsonSerialize()
     {

@@ -11,7 +11,7 @@ class TicketRepository extends Repository
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $tickets = [];
         foreach ($result as $row) {
-            $ticket = new Ticket($row['id'], $row['status'], $row['price'], $row['user_id']);
+            $ticket = new Ticket($row['id'], $row['status'], $row['price'], $row['user_id'], $row['exp_date']);
             array_push($tickets, $ticket);
         }
         return $tickets;

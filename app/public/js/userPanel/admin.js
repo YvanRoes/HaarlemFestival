@@ -19,11 +19,10 @@ async function loadTicketManagement() {
   elements = document.getElementById('contentItemsWrapper');
   elements.innerHTML = '';
   contentWrapper = document.getElementById('ContentWrapper');
-  console.log('remvoing search input')
-  console.log(contentWrapper)
   contentWrapper.removeChild(document.getElementById('searchInput'));
   createTicketsForm();
-
+  events = getEvents();
+  
 }
 
 async function createTicketList(tickets) {

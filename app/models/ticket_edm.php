@@ -2,11 +2,7 @@
 class Ticket_Edm extends Ticket
 {
     private Event_edm $edm;
-    
-    public function __construct(Event_edm $edm)
-    {
-        $this->edm = $edm;
-    }
+
     
     public function jsonSerialize()
     {
