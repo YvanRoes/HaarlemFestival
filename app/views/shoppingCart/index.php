@@ -4,7 +4,7 @@
 
     * {
         font-family: 'Lato', sans-serif;
-        outline: 1px solid red;
+        /* outline: 1px solid red; */
 
     }
 </style>

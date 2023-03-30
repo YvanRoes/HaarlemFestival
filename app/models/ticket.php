@@ -51,8 +51,6 @@ class Ticket implements JsonSerializable
         $this->user_id = $user_id;
     }
 
-
-
     public function jsonSerialize(): mixed
     {
         return [

@@ -15,13 +15,9 @@ class ShoppingCartController extends Controller
                 $this->addTicket();
             } else if (isset($_POST['removeTicket'])) {
                 $this->removeTicket();
+            } else if (isset($_POST['checkout'])) {
+                $this->checkout();
             }
-            // else if(isset($_POST['removeAllTickets'])){
-            //     $this->removeAllTickets();
-            // }
-            // // else if(isset($_POST['buyTickets'])){
-            // //     $this->buyTickets();
-            // // }
         }
 
         $this->displayView($this);
