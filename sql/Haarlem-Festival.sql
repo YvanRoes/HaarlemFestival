@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 29, 2023 at 09:57 PM
+-- Generation Time: Mar 30, 2023 at 10:34 PM
 -- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
 -- PHP Version: 8.0.26
 
@@ -108,9 +108,20 @@ CREATE TABLE `event_stroll` (
 CREATE TABLE `event_yummie` (
   `id` int(11) NOT NULL,
   `restaurant` int(11) NOT NULL,
-  `price_adult` double NOT NULL,
-  `price_child` double NOT NULL
+  `adult_Price` double NOT NULL,
+  `kids_Price` double NOT NULL,
+  `session_startTime` time(5) NOT NULL,
+  `session_endTime` time(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event_yummie`
+--
+
+INSERT INTO `event_yummie` (`id`, `restaurant`, `adult_Price`, `kids_Price`, `session_startTime`, `session_endTime`) VALUES
+(1, 1, 45, 22.5, '17:00:00.00000', '19:00:00.00000'),
+(2, 1, 45, 22.5, '19:30:00.00000', '21:30:00.00000'),
+(3, 1, 45, 22.5, '22:00:00.00000', '00:00:00.00000');
 
 -- --------------------------------------------------------
 
@@ -146,7 +157,7 @@ CREATE TABLE `location` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
-  `imagePath` varchar(255) DEFAULT NULL,
+  `imagePath` varchar(1000) DEFAULT NULL,
   `capacity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -209,25 +220,27 @@ CREATE TABLE `restaurant` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `category` varchar(255) DEFAULT NULL,
-  `michelin_star` double NOT NULL,
+  `star` double NOT NULL,
+  `michelinStar` tinyint(1) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `address` varchar(1000) NOT NULL,
   `phone_number` varchar(20) NOT NULL,
-  `capacity` int(11) NOT NULL
+  `capacity` int(11) NOT NULL,
+  `imagePath` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `restaurant`
 --
 
-INSERT INTO `restaurant` (`id`, `name`, `category`, `michelin_star`, `description`, `address`, `phone_number`, `capacity`) VALUES
-(1, 'Ratatouille', 'French, Seafood, Eurpean', 4.7, 'Ratatouille is Haarlem’s only Michelin starred restaurant. Located in the city centre, and owned by a talented chef Jozua Jaring, the restaurant specialises in creating delicious French dishes using fresh, local ingredients. The menu features a wide variety of classic and modern takes on French favourites Offering indoor and outdoor seating, Ratatouille appeals to a broad range of tastes and is sure to please a wide variety of diners.', 'Spaarne 96', '+31 23 542 7270', 52),
-(2, 'Mr&Mrs', 'Dutch, Seafood, European', 4.7, 'lorem ipsum', 'Lange Veerstraat 4, 2011 DB Haarlem', '+31 23 531 5935', 40),
-(3, 'Specktakel', 'European, International, Asian', 4.5, 'lorem ipsum', 'Klokhuisplein 9, 2011 HK Haarlem', '+31 023 512 3910', 60),
-(4, 'Toujours', 'Dutch, Seafood, European', 4.4, 'lorem ipsum', 'Oude Groenmarkt 10-12, 2011 HL Haarlem', '+31 023 532 1699', 48),
-(5, 'ML', 'Dutch, Seafood, European', 4.1, 'lorem ipsum', 'Klokhuisplein 9, 2011 HK Haarlem', '+31 023 512 3910', 60),
-(6, 'Grand Cafe Brinkmann', 'Modern, Dutch, European', 4.1, 'lorem ipsum', 'Grote Markt 13, 2011 RC Haarlem', '+31 023 532 3111', 100),
-(7, 'Fris', 'Dutch, French, European', 4.1, 'lorem ipsum', 'Twijnderslaan 7, 2012 BG Haarlem', '+31 023 531 0717', 45);
+INSERT INTO `restaurant` (`id`, `name`, `category`, `star`, `michelinStar`, `description`, `address`, `phone_number`, `capacity`, `imagePath`) VALUES
+(1, 'Ratatouille', 'French, Seafood, Eurpean', 4.7, 1, 'Ratatouille is one of Haarlem’s only Michelin starred restaurant. Located in the city centre, and owned by a talented chef Jozua Jaring, the restaurant specialises in creating delicious French dishes using fresh, local ingredients. The menu features a wide variety of classic and modern takes on French favourites Offering indoor and outdoor seating, Ratatouille appeals to a broad range of tastes and is sure to please a wide variety of diners.', 'Spaarne 96', '+31 23 542 7270', 52, '/img/4.7Rating.png:/img/ratatouilleImg1.png:/img/ratatouilleImg2.png:/img/ratatouilleImg3.png:\r\n/img/detailRatatouilleImg1.png:\r\n/img/detailRatatouilleImg2.png:\r\n/img/detailRatatouilleImg3.png:\r\n/img/detailRatatouilleImg4.png:\r\n/img/detailRatatouilleImg5.png:'),
+(2, 'Mr&Mrs', 'Dutch, Seafood, European', 4.7, 0, 'lorem ipsum', 'Lange Veerstraat 4, 2011 DB Haarlem', '+31 23 531 5935', 40, '/img/4.7Rating.png:/img/mr&mrsImg1.png:/img/mr&mrsImg2.png:/img/mr&mrsImg3.png'),
+(3, 'Specktakel', 'European, International, Asian', 4.5, 0, 'lorem ipsum', 'Klokhuisplein 9, 2011 HK Haarlem', '+31 023 512 3910', 60, '/img/4.5Rating.png:/img/specktakelImg1.png:/img/specktakelImg2.png:/img/specktakelImg3.png:'),
+(4, 'Toujours', 'Dutch, Seafood, European', 4.4, 0, 'lorem ipsum', 'Oude Groenmarkt 10-12, 2011 HL Haarlem', '+31 023 532 1699', 48, '/img/4.4Rating.png:/img/toujoursImg1.png:/img/toujoursImg2.png:/img/toujoursImg3.png:'),
+(5, 'ML', 'Dutch, Seafood, European', 4.1, 1, 'lorem ipsum', 'Klokhuisplein 9, 2011 HK Haarlem', '+31 023 512 3910', 60, '/img/4.1Rating.png:/img/mlImg1.png:/img/mlImg2.png:\r\n/img/mlImg3.png:'),
+(6, 'Grand Cafe Brinkmann', 'Modern, Dutch, European', 4.1, 0, 'lorem ipsum', 'Grote Markt 13, 2011 RC Haarlem', '+31 023 532 3111', 100, '/img/4.4Rating.png:/img/grandcafebrinkmannImg1.png:\r\n/img/grandcafebrinkmannImg2.png:\r\n/img/grandcafebrinkmannImg3.png:'),
+(7, 'Fris', 'Dutch, French, European', 4.1, 1, 'lorem ipsum', 'Twijnderslaan 7, 2012 BG Haarlem', '+31 023 531 0717', 45, '/img/4.1Rating.png:/img/frisImg1.png:/img/frisImg2.png:\r\n/img/frisImg3.png:');
 
 -- --------------------------------------------------------
 
@@ -252,7 +265,7 @@ CREATE TABLE `stroll_location` (
   `title` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
   `address` varchar(255) NOT NULL,
-  `imagePath` varchar(255) DEFAULT NULL
+  `imagePath` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -304,17 +317,6 @@ CREATE TABLE `ticket_edm` (
 CREATE TABLE `ticket_stroll` (
   `id` int(11) NOT NULL,
   `event_stroll_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ticket_yummie`
---
-
-CREATE TABLE `ticket_yummie` (
-  `id` int(11) NOT NULL,
-  `event_yummie_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -445,12 +447,6 @@ ALTER TABLE `ticket_stroll`
   ADD KEY `event_stroll_id` (`event_stroll_id`);
 
 --
--- Indexes for table `ticket_yummie`
---
-ALTER TABLE `ticket_yummie`
-  ADD KEY `event_yummie_id` (`event_yummie_id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -471,6 +467,12 @@ ALTER TABLE `artist`
 --
 ALTER TABLE `events`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `event_yummie`
+--
+ALTER TABLE `event_yummie`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `location`
@@ -536,8 +538,7 @@ ALTER TABLE `event_stroll`
 -- Constraints for table `event_yummie`
 --
 ALTER TABLE `event_yummie`
-  ADD CONSTRAINT `event_yummie_ibfk_1` FOREIGN KEY (`restaurant`) REFERENCES `restaurant` (`id`),
-  ADD CONSTRAINT `event_yummie_ibfk_2` FOREIGN KEY (`id`) REFERENCES `events` (`id`);
+  ADD CONSTRAINT `event_yummie_ibfk_1` FOREIGN KEY (`restaurant`) REFERENCES `restaurant` (`id`);
 
 --
 -- Constraints for table `personal_program`
@@ -572,12 +573,6 @@ ALTER TABLE `ticket_edm`
 ALTER TABLE `ticket_stroll`
   ADD CONSTRAINT `ticket_stroll_ibfk_1` FOREIGN KEY (`id`) REFERENCES `ticket` (`id`),
   ADD CONSTRAINT `ticket_stroll_ibfk_2` FOREIGN KEY (`event_stroll_id`) REFERENCES `event_stroll` (`id`);
-
---
--- Constraints for table `ticket_yummie`
---
-ALTER TABLE `ticket_yummie`
-  ADD CONSTRAINT `ticket_yummie_ibfk_1` FOREIGN KEY (`event_yummie_id`) REFERENCES `event_yummie` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
