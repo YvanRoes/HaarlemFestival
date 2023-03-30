@@ -23,6 +23,7 @@ async function loadTicketManagement() {
   console.log(contentWrapper)
   contentWrapper.removeChild(document.getElementById('searchInput'));
   createTicketsForm();
+
 }
 
 async function createTicketList(tickets) {
@@ -39,10 +40,31 @@ async function createTicketList(tickets) {
   }
 };
 
+async function createTicketDropdown(){
+  parentElement = document.getElementById('ticketDropdown');
+  parentElement.innerHTML = '';
+  events = await getEvents();
+  for (let i = 0; i < events.length; i++) {
+    parent
+  }
+}
+async function getEvents() {
+  const response = await fetch('http://localhost/api/events2');
+  return await response.json();
+}
+
 async function createTicketsForm() {
+  parentElement = document.getElementById('contentItemsWrapper');
 
-
-  //
+{
+    fetch('js/userPanel/formGenerateTickets.html')
+    .then((response) => {
+      return response.text();
+    })
+    .then((html) => {
+      parentElement.innerHTML = html;  
+    });
+  }
 };
 
 async function loadEmployees() {

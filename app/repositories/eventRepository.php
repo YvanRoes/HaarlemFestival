@@ -17,4 +17,17 @@ class EventRepository extends Repository
             echo $e;
         }
     }
+    public function get_AllEvent2()
+    {
+        try {
+            $stmt = $this->conn->prepare("SELECT id FROM events");
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Event2');
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
 }

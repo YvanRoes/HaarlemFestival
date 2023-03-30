@@ -9,4 +9,9 @@ class EventService
         $repo = new EventRepository();
         return $repo->get_AllEvents();
     }
+    public function get_AllEvent2(): array
+    {
+        $repo = new EventRepository();
+        return $repo->get_AllEvent2();
+    }
 }
