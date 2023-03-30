@@ -28,8 +28,6 @@
                 $descriptions = explode(":", $descriptionString);
             }
             require __DIR__ . '/../views/tour/detailPage.php';
-
-            // $this->displayView($this);
         }
     }
 ?>

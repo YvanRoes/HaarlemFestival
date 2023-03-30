@@ -1,13 +1,13 @@
-function generate1(restaurantName, stars, tags) {
+function generate1(restaurantName, stars, michelinStar, tags, imagePath) {
   Restaurants = document.getElementById('restaurants');
 
   //restaurant section
   section = document.createElement('div');
   section.classList.add('pb-[50px]');
 
-  header = generateHeader(restaurantName, stars, tags);
+  header = generateHeader(restaurantName, stars, michelinStar, tags, imagePath);
 
-  grid = generateGrid1(restaurantName);
+  grid = generateGrid1(restaurantName, imagePath);
 
   section.appendChild(header);
   section.appendChild(grid);
@@ -15,7 +15,9 @@ function generate1(restaurantName, stars, tags) {
   Restaurants.appendChild(section);
 }
 
-function generateHeader(restaurantName, stars, tags) {
+function generateHeader(restaurantName, stars, michelinStar, tags, imagePath) {
+  imagePaths = imagePath.split(':');
+
   wrapper = document.createElement('div');
 
   header = document.createElement('div');
@@ -24,9 +26,19 @@ function generateHeader(restaurantName, stars, tags) {
   title.classList.add('text-3xl', 'font-bold', 'pl-[15px]');
   title.innerHTML = restaurantName;
 
-  starsImage = new Image();
-  starsImage.src = '/img/michelinIcon.png';
-  starsImage.classList.add('w-[24px]', 'h-[26px]', 'mt-[5px]', 'ml-[5px]');
+
+  if (michelinStar == 1) {
+    starsImage = new Image();
+    starsImage.src = '/img/michelinIcon.png';
+    starsImage.alt = 'Restaurant Rating ';
+    starsImage.classList.add('w-[24px]', 'h-[26px]', 'mt-[5px]', 'ml-[5px]');
+
+    header.appendChild(title);
+    header.appendChild(starsImage);
+  }
+  else{
+    header.appendChild(title);
+  }
 
   //sub header
   subHeader = document.createElement('div');
@@ -38,7 +50,8 @@ function generateHeader(restaurantName, stars, tags) {
   );
 
   subHeaderImage = new Image();
-  subHeaderImage.src = '/img/4.7Rating.png';
+  subHeaderImage.src = imagePaths[0];
+
 
   subParagraphStars = document.createElement('p');
   subParagraphStars.classList.add('text-[20px]', 'font-medium', 'pl-[10px]');
@@ -52,9 +65,6 @@ function generateHeader(restaurantName, stars, tags) {
     'pl-[15px]'
   );
   subParagraphTags.innerHTML = tags;
-
-  header.appendChild(title);
-  header.appendChild(starsImage);
 
   subHeader.appendChild(subHeaderImage);
   subHeader.appendChild(subParagraphStars);
@@ -65,65 +75,25 @@ function generateHeader(restaurantName, stars, tags) {
   return wrapper;
 }
 
-function generate2(restaurantName, stars, tags) {
+function generate2(restaurantName, stars, michelinStar, tags, imagePath) {
   Restaurants = document.getElementById('restaurants');
 
   //restaurant section
   section = document.createElement('div');
   section.classList.add('pb-[50px]');
 
-  header = document.createElement('div');
-  header.classList.add('flex');
-  title = document.createElement('h1');
-  title.classList.add('text-3xl', 'font-bold', 'pl-[15px]');
-  title.innerHTML = restaurantName;
+  header = generateHeader(restaurantName, stars, michelinStar, tags, imagePath);
 
-  starsImage = new Image();
-  starsImage.src = '/img/michelinIcon.png';
-  starsImage.classList.add('w-[24px]', 'h-[26px]', 'mt-[5px]', 'ml-[5px]');
-
-  //sub header
-  subHeader = document.createElement('div');
-  subHeader.classList.add(
-    'flex',
-    'justify-items-start',
-    'pl-[15px]',
-    'pb-[10px]'
-  );
-
-  subHeaderImage = new Image();
-  subHeaderImage.src = '/img/4.7Rating.png';
-
-  subParagraphStars = document.createElement('p');
-  subParagraphStars.classList.add('text-[20px]', 'font-medium', 'pl-[10px]');
-  subParagraphStars.innerHTML = stars;
-
-  subParagraphTags = document.createElement('p');
-  subParagraphTags.classList.add(
-    'text-[20px]',
-    'text-[#FC5B84]',
-    'font-medium',
-    'pl-[15px]'
-  );
-  subParagraphTags.innerHTML = tags;
-
-  grid = generateGrid2(restaurantName);
-
-  header.appendChild(title);
-  header.appendChild(starsImage);
-
-  subHeader.appendChild(subHeaderImage);
-  subHeader.appendChild(subParagraphStars);
-  subHeader.appendChild(subParagraphTags);
+  grid = generateGrid2(restaurantName, imagePath);
 
   section.appendChild(header);
-  section.appendChild(subHeader);
   section.appendChild(grid);
 
   Restaurants.appendChild(section);
 }
 
-function generateGrid1(restaurantName) {
+function generateGrid1(restaurantName, imagePath) {
+  imagePaths = imagePath.split(':');
   restaurantName = restaurantName.replace(/\s/g, '');
   grid = document.createElement('div');
   grid.classList.add(
@@ -137,9 +107,11 @@ function generateGrid1(restaurantName) {
   img1 = new Image();
   img2 = new Image();
   img3 = new Image();
-  img1.src = 'img/' + restaurantName.toLowerCase() + 'Img1.png';
-  img2.src = 'img/' + restaurantName.toLowerCase() + 'Img2.png';
-  img3.src = 'img/' + restaurantName.toLowerCase() + 'Img3.png';
+
+  img1.src = imagePaths[1];
+  img2.src = imagePaths[2];
+  img3.src = imagePaths[3];
+
 
   img2n3Wrapper = document.createElement('div');
   img2n3Wrapper.classList.add('flex', 'flex-col', 'gap-[50px]');
@@ -156,7 +128,8 @@ function generateGrid1(restaurantName) {
   return grid;
 }
 
-function generateGrid2(restaurantName) {
+function generateGrid2(restaurantName, imagePath) {
+  imagePaths = imagePath.split(':');
   restaurantName = restaurantName.replace(/\s/g, '');
   grid = document.createElement('div');
 
@@ -164,9 +137,10 @@ function generateGrid2(restaurantName) {
   img1 = new Image();
   img2 = new Image();
   img3 = new Image();
-  img1.src = 'img/' + restaurantName.toLowerCase() + 'Img1.png';
-  img2.src = 'img/' + restaurantName.toLowerCase() + 'Img2.png';
-  img3.src = 'img/' + restaurantName.toLowerCase() + 'Img3.png';
+
+  img1.src = imagePaths[1];
+  img2.src = imagePaths[2];
+  img3.src = imagePaths[3];
 
   img1n2Wrapper = document.createElement('div');
   img1n2Wrapper.classList.add('flex', 'flex-row', 'mb-[50px]');
@@ -205,9 +179,9 @@ function createRestaurants(objects) {
   parentElement.innerHTML = '';
   for (let i = 0; i < objects.length; i++) {
     if (i % 2 == 0) {
-      generate1(objects[i].name, objects[i].michelin_star, objects[i].category);
+      generate1(objects[i].name, objects[i].star, objects[i].michelinStar, objects[i].category, objects[i].imagePath);
     } else {
-      generate2(objects[i].name, objects[i].michelin_star, objects[i].category);
+      generate2(objects[i].name, objects[i].star, objects[i].michelinStar, objects[i].category, objects[i].imagePath);
     }
   }
 }
