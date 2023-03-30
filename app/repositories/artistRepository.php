@@ -16,4 +16,31 @@ class ArtistRepository extends Repository
       echo $e;
     }
   }
+
+  public function insert_Artist(Artist $artist){
+    try {
+      $stmt = $this->conn->prepare("INSERT INTO artist (name, genre, imagePath) VALUES (:name, :genre, :path)");
+      $stmt->execute(array(':name' => $artist->get_name(), ':genre' => $artist->get_genre(), ':path' => $artist->get_imagePath()));
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
+
+  public function delete_artistById($id){
+    try {
+      $stmt = $this->conn->prepare("DELETE FROM artist WHERE id = :id");
+      $stmt->execute(array(':id' => $id));
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
+
+  public function edit_artistById($id, $name, $genres){
+    try {
+      $stmt = $this->conn->prepare("UPDATE `artist` SET `name`=:name,`genre`=:genres,`imagePath`='tbd' WHERE id = :id");
+      $stmt->execute(array(':id' => $id, ':name' => $name, ':genres' => $genres));
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
 }

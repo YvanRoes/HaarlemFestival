@@ -69,6 +69,9 @@
                     <li>
                         <button onclick="loadEDMData(`venues`)" class="block px-4 py-2 dark:hover:text-[#121212]">venues</button>
                     </li>
+                    <li>
+                        <button onclick="loadEDMData(`artists`)" class="block px-4 py-2 dark:hover:text-[#121212]">artists</button>
+                    </li>
                 </ul>
             </ul>
 
@@ -94,15 +97,26 @@
             </div>
             <div class="w-8/12 h-max p-16 mt-16 rounded-lg hidden" id="edmPane">
                 <h1 id="EDMTitle" class="text-[64px]"></h1>
-                <input id="searchInput" type="text" placeholder="Search" />
-                <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
-                    <input type="text" id="venueName" placeholder="venue name" required />
-                    <input type="text" id="venueAddress" placeholder="address" required />
-                    <input type="number" id="venueCap" placeholder="Capacity" required />
-                    <input id="venueFile" type="file" title=" " class="col-span-2" />
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertVenue()">Add venue</button>
+                <div id="venueSubPane" class="hidden">
+                    <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+                        <input type="text" id="venueName" placeholder="venue name" required />
+                        <input type="text" id="venueAddress" placeholder="address" required />
+                        <input type="number" id="venueCap" placeholder="Capacity" required />
+                        <input id="venueFile" type="file" title=" " class="col-span-2" />
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertVenue()">Add venue</button>
+                    </div>
+                    <div class="flex flex-col gap-4 pb-5" id="contentVenueWrapper">
+                    </div>
                 </div>
-                <div class="flex flex-col gap-4 pb-5" id="contentEDMWrapper">
+                <div id="artistSubPane" class="hidden">
+                    <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+                        <input type="text" id="artistName" placeholder="artist name" required />
+                        <input type="text" id="artistGenre" placeholder="genres" required />
+                        <input id="artistPicture" type="file" title=" " class="col-span-2" />
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertArtist()">Add artist</button>
+                    </div>
+                    <div class="flex flex-col gap-4 pb-5" id="contentArtistWrapper">
+                    </div>
                 </div>
             </div>
         </div>
