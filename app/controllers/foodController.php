@@ -1,12 +1,15 @@
 <?php
     require_once __DIR__ . '/controller.php';
     require_once __DIR__ . '/../services/restaurantService.php';
+    require_once __DIR__ . '/../services/restaurantSessionService.php';
 
     class FoodController extends Controller{
-        private $service;
+        private $restaurantService;
+        private $restaurantSessionService;
 
         public function __construct(){
-            $this->service = new RestaurantService();
+            $this->restaurantService = new RestaurantService();
+            $this->restaurantSessionService = new RestaurantSessionService();
         }
 
         public function index(){
@@ -15,7 +18,8 @@
 
         public function detailPage(){
             if (isset($_GET['id'])){
-                $restaurant = $this->service->get_RestaurantById($_GET['id']);   
+                $restaurant = $this->restaurantService->get_RestaurantById($_GET['id']);   
+                $restaurantSessions = $this->restaurantSessionService->get_AllRestaurantSessionsByRestaurantId($_GET['id']);
                 $imageString = $restaurant->get_imagePath();
                 $imagePaths = explode(":", $imageString);
             }

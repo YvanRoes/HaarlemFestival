@@ -1,13 +1,13 @@
-function generate1(restaurantName, stars, michelinStar, tags, imagePath) {
+function generate1(id, restaurantName, stars, michelinStar, tags, imagePath) {
   Restaurants = document.getElementById('restaurants');
 
   //restaurant section
   section = document.createElement('div');
   section.classList.add('pb-[50px]');
 
-  header = generateHeader(restaurantName, stars, michelinStar, tags, imagePath);
+  header = generateHeader(id, restaurantName, stars, michelinStar, tags, imagePath);
 
-  grid = generateGrid1(restaurantName, imagePath);
+  grid = generateGrid1(id, restaurantName, imagePath);
 
   section.appendChild(header);
   section.appendChild(grid);
@@ -15,7 +15,24 @@ function generate1(restaurantName, stars, michelinStar, tags, imagePath) {
   Restaurants.appendChild(section);
 }
 
-function generateHeader(restaurantName, stars, michelinStar, tags, imagePath) {
+function generate2(id, restaurantName, stars, michelinStar, tags, imagePath) {
+  Restaurants = document.getElementById('restaurants');
+
+  //restaurant section
+  section = document.createElement('div');
+  section.classList.add('pb-[50px]');
+
+  header = generateHeader(id, restaurantName, stars, michelinStar, tags, imagePath);
+
+  grid = generateGrid2(id, restaurantName, imagePath);
+
+  section.appendChild(header);
+  section.appendChild(grid);
+
+  Restaurants.appendChild(section);
+}
+
+function generateHeader(id, restaurantName, stars, michelinStar, tags, imagePath) {
   imagePaths = imagePath.split(':');
 
   wrapper = document.createElement('div');
@@ -25,6 +42,9 @@ function generateHeader(restaurantName, stars, michelinStar, tags, imagePath) {
   title = document.createElement('h1');
   title.classList.add('text-3xl', 'font-bold', 'pl-[15px]');
   title.innerHTML = restaurantName;
+
+  link = document.createElement('a');
+  link.href = '/food/detailPage?id=' + id;
 
 
   if (michelinStar == 1) {
@@ -70,29 +90,14 @@ function generateHeader(restaurantName, stars, michelinStar, tags, imagePath) {
   subHeader.appendChild(subParagraphStars);
   subHeader.appendChild(subParagraphTags);
 
-  wrapper.appendChild(header);
-  wrapper.appendChild(subHeader);
+  link.appendChild(header);
+  link.appendChild(subHeader);
+  wrapper.appendChild(link);
+
   return wrapper;
 }
 
-function generate2(restaurantName, stars, michelinStar, tags, imagePath) {
-  Restaurants = document.getElementById('restaurants');
-
-  //restaurant section
-  section = document.createElement('div');
-  section.classList.add('pb-[50px]');
-
-  header = generateHeader(restaurantName, stars, michelinStar, tags, imagePath);
-
-  grid = generateGrid2(restaurantName, imagePath);
-
-  section.appendChild(header);
-  section.appendChild(grid);
-
-  Restaurants.appendChild(section);
-}
-
-function generateGrid1(restaurantName, imagePath) {
+function generateGrid1(id, restaurantName, imagePath) {
   imagePaths = imagePath.split(':');
   restaurantName = restaurantName.replace(/\s/g, '');
   grid = document.createElement('div');
@@ -112,23 +117,34 @@ function generateGrid1(restaurantName, imagePath) {
   img2.src = imagePaths[2];
   img3.src = imagePaths[3];
 
+  link1 = document.createElement('a');
+  link2 = document.createElement('a');
+  link3 = document.createElement('a');
+
+  link1.href = '/food/detailPage?id=' + id;
+  link2.href = '/food/detailPage?id=' + id;
+  link3.href = '/food/detailPage?id=' + id;
+
+  link1.appendChild(img1);
+  link2.appendChild(img2);
+  link3.appendChild(img3);
 
   img2n3Wrapper = document.createElement('div');
   img2n3Wrapper.classList.add('flex', 'flex-col', 'gap-[50px]');
-  img2n3Wrapper.appendChild(img2);
-  img2n3Wrapper.appendChild(img3);
+  img2n3Wrapper.appendChild(link2);
+  img2n3Wrapper.appendChild(link3);
 
   img1.classList.add('w-[500px]', 'h-[650px]');
   img2.classList.add('w-[500px]', 'h-[325px]');
   img3.classList.add('w-[500px]', 'h-[275px]');
 
-  grid.appendChild(img1);
+  grid.appendChild(link1);
   grid.appendChild(img2n3Wrapper);
 
   return grid;
 }
 
-function generateGrid2(restaurantName, imagePath) {
+function generateGrid2(id, restaurantName, imagePath) {
   imagePaths = imagePath.split(':');
   restaurantName = restaurantName.replace(/\s/g, '');
   grid = document.createElement('div');
@@ -142,17 +158,29 @@ function generateGrid2(restaurantName, imagePath) {
   img2.src = imagePaths[2];
   img3.src = imagePaths[3];
 
+  link1 = document.createElement('a');
+  link2 = document.createElement('a');
+  link3 = document.createElement('a');
+
+  link1.href = '/food/detailPage?id=' + id;
+  link2.href = '/food/detailPage?id=' + id;
+  link3.href = '/food/detailPage?id=' + id;
+  
+  link1.appendChild(img1);
+  link2.appendChild(img2);
+  link3.appendChild(img3);
+
   img1n2Wrapper = document.createElement('div');
   img1n2Wrapper.classList.add('flex', 'flex-row', 'mb-[50px]');
-  img1n2Wrapper.appendChild(img1);
-  img1n2Wrapper.appendChild(img2);
+  img1n2Wrapper.appendChild(link1);
+  img1n2Wrapper.appendChild(link2);
 
   img1.classList.add('w-[500px]', 'h-[275px]', 'mr-[50px]');
   img2.classList.add('w-[500px]', 'h-[275px]');
   img3.classList.add('w-[1050px]', 'h-[325px]');
 
   grid.appendChild(img1n2Wrapper);
-  grid.appendChild(img3);
+  grid.appendChild(link3);
 
   return grid;
 }
@@ -179,9 +207,9 @@ function createRestaurants(objects) {
   parentElement.innerHTML = '';
   for (let i = 0; i < objects.length; i++) {
     if (i % 2 == 0) {
-      generate1(objects[i].name, objects[i].star, objects[i].michelinStar, objects[i].category, objects[i].imagePath);
+      generate1(objects[i].id, objects[i].name, objects[i].star, objects[i].michelinStar, objects[i].category, objects[i].imagePath);
     } else {
-      generate2(objects[i].name, objects[i].star, objects[i].michelinStar, objects[i].category, objects[i].imagePath);
+      generate2(objects[i].id, objects[i].name, objects[i].star, objects[i].michelinStar, objects[i].category, objects[i].imagePath);
     }
   }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 30, 2023 at 10:34 PM
+-- Generation Time: Mar 31, 2023 at 05:51 PM
 -- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
 -- PHP Version: 8.0.26
 
@@ -107,21 +107,38 @@ CREATE TABLE `event_stroll` (
 
 CREATE TABLE `event_yummie` (
   `id` int(11) NOT NULL,
-  `restaurant` int(11) NOT NULL,
+  `restaurant_id` int(11) NOT NULL,
   `adult_Price` double NOT NULL,
   `kids_Price` double NOT NULL,
-  `session_startTime` time(5) NOT NULL,
-  `session_endTime` time(5) NOT NULL
+  `session_startTime` time(1) NOT NULL,
+  `session_endTime` time(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `event_yummie`
 --
 
-INSERT INTO `event_yummie` (`id`, `restaurant`, `adult_Price`, `kids_Price`, `session_startTime`, `session_endTime`) VALUES
-(1, 1, 45, 22.5, '17:00:00.00000', '19:00:00.00000'),
-(2, 1, 45, 22.5, '19:30:00.00000', '21:30:00.00000'),
-(3, 1, 45, 22.5, '22:00:00.00000', '00:00:00.00000');
+INSERT INTO `event_yummie` (`id`, `restaurant_id`, `adult_Price`, `kids_Price`, `session_startTime`, `session_endTime`) VALUES
+(1, 1, 45, 22.5, '17:00:00.0', '19:00:00.0'),
+(2, 1, 45, 22.5, '19:30:00.0', '21:30:00.0'),
+(3, 1, 45, 22.5, '22:00:00.0', '00:00:00.0'),
+(4, 2, 45, 22.5, '18:00:00.0', '19:30:00.0'),
+(5, 2, 45, 22.5, '20:00:00.0', '21:30:00.0'),
+(6, 2, 45, 22.5, '22:00:00.0', '23:30:00.0'),
+(7, 3, 35, 17.5, '17:00:00.0', '18:30:00.0'),
+(8, 3, 35, 17.5, '19:00:00.0', '20:30:00.0'),
+(9, 3, 35, 17.5, '21:00:00.0', '22:30:00.0'),
+(10, 4, 35, 17.5, '17:30:00.0', '19:00:00.0'),
+(11, 4, 35, 17.5, '19:30:00.0', '21:00:00.0'),
+(12, 4, 35, 17.5, '21:30:00.0', '23:00:00.0'),
+(13, 5, 45, 22.5, '17:00:00.0', '19:00:00.0'),
+(14, 5, 45, 22.5, '19:30:00.0', '21:30:00.0'),
+(15, 6, 35, 17.5, '16:30:00.0', '18:00:00.0'),
+(16, 6, 35, 17.5, '18:30:00.0', '20:00:00.0'),
+(17, 6, 35, 17.5, '20:30:00.0', '22:00:00.0'),
+(18, 7, 45, 22.5, '17:30:00.0', '19:00:00.0'),
+(19, 7, 45, 22.5, '19:30:00.0', '21:00:00.0'),
+(20, 7, 45, 22.5, '21:30:00.0', '23:00:00.0');
 
 -- --------------------------------------------------------
 
@@ -234,13 +251,13 @@ CREATE TABLE `restaurant` (
 --
 
 INSERT INTO `restaurant` (`id`, `name`, `category`, `star`, `michelinStar`, `description`, `address`, `phone_number`, `capacity`, `imagePath`) VALUES
-(1, 'Ratatouille', 'French, Seafood, Eurpean', 4.7, 1, 'Ratatouille is one of Haarlem’s only Michelin starred restaurant. Located in the city centre, and owned by a talented chef Jozua Jaring, the restaurant specialises in creating delicious French dishes using fresh, local ingredients. The menu features a wide variety of classic and modern takes on French favourites Offering indoor and outdoor seating, Ratatouille appeals to a broad range of tastes and is sure to please a wide variety of diners.', 'Spaarne 96', '+31 23 542 7270', 52, '/img/4.7Rating.png:/img/ratatouilleImg1.png:/img/ratatouilleImg2.png:/img/ratatouilleImg3.png:\r\n/img/detailRatatouilleImg1.png:\r\n/img/detailRatatouilleImg2.png:\r\n/img/detailRatatouilleImg3.png:\r\n/img/detailRatatouilleImg4.png:\r\n/img/detailRatatouilleImg5.png:'),
-(2, 'Mr&Mrs', 'Dutch, Seafood, European', 4.7, 0, 'lorem ipsum', 'Lange Veerstraat 4, 2011 DB Haarlem', '+31 23 531 5935', 40, '/img/4.7Rating.png:/img/mr&mrsImg1.png:/img/mr&mrsImg2.png:/img/mr&mrsImg3.png'),
-(3, 'Specktakel', 'European, International, Asian', 4.5, 0, 'lorem ipsum', 'Klokhuisplein 9, 2011 HK Haarlem', '+31 023 512 3910', 60, '/img/4.5Rating.png:/img/specktakelImg1.png:/img/specktakelImg2.png:/img/specktakelImg3.png:'),
-(4, 'Toujours', 'Dutch, Seafood, European', 4.4, 0, 'lorem ipsum', 'Oude Groenmarkt 10-12, 2011 HL Haarlem', '+31 023 532 1699', 48, '/img/4.4Rating.png:/img/toujoursImg1.png:/img/toujoursImg2.png:/img/toujoursImg3.png:'),
-(5, 'ML', 'Dutch, Seafood, European', 4.1, 1, 'lorem ipsum', 'Klokhuisplein 9, 2011 HK Haarlem', '+31 023 512 3910', 60, '/img/4.1Rating.png:/img/mlImg1.png:/img/mlImg2.png:\r\n/img/mlImg3.png:'),
-(6, 'Grand Cafe Brinkmann', 'Modern, Dutch, European', 4.1, 0, 'lorem ipsum', 'Grote Markt 13, 2011 RC Haarlem', '+31 023 532 3111', 100, '/img/4.4Rating.png:/img/grandcafebrinkmannImg1.png:\r\n/img/grandcafebrinkmannImg2.png:\r\n/img/grandcafebrinkmannImg3.png:'),
-(7, 'Fris', 'Dutch, French, European', 4.1, 1, 'lorem ipsum', 'Twijnderslaan 7, 2012 BG Haarlem', '+31 023 531 0717', 45, '/img/4.1Rating.png:/img/frisImg1.png:/img/frisImg2.png:\r\n/img/frisImg3.png:');
+(1, 'Ratatouille', 'French, Seafood, Eurpean', 4.7, 1, 'Ratatouille is one of Haarlem’s only Michelin starred restaurant. Located in the city centre, and owned by a talented chef Jozua Jaring, the restaurant specialises in creating delicious French dishes using fresh, local ingredients. The menu features a wide variety of classic and modern takes on French favourites Offering indoor and outdoor seating, Ratatouille appeals to a broad range of tastes and is sure to please a wide variety of diners.', 'Spaarne 96, 2011 CL Haarlem', '+31 23 542 7270', 52, '/img/4.7Rating.png:/img/ratatouilleImg1.png:/img/ratatouilleImg2.png:/img/ratatouilleImg3.png:\r\n/img/detailRatatouilleImg1.png:\r\n/img/detailRatatouilleImg2.png:\r\n/img/detailRatatouilleImg3.png:\r\n/img/detailRatatouilleImg4.png:\r\n/img/detailRatatouilleImg5.png:'),
+(2, 'Mr&Mrs', 'Dutch, Seafood, European', 4.7, 0, 'Mr&Mrs is nice little restaurant. Located in Haarlem, and owned by a lovely couple, the restaurant specialises in creating delicious Dutch dishes using fresh, local ingredients. The menu features a wide variety of classic and modern takes on Dutch favourites Offering indoor and outdoor seating, Mr&Mrs appeals to a broad range of tastes and is sure to please a wide variety of diners.', 'Lange Veerstraat 4, 2011 DB Haarlem', '+31 23 531 5935', 40, '/img/4.7Rating.png:/img/mr&mrsImg1.png:/img/mr&mrsImg2.png:/img/mr&mrsImg3.png:/img/mr&mrsImg3.png:/img/mr&mrsImg2.png:/img/mr&mrsImg4.png:/img/mr&mrsImg6.png:/img/mr&mrsImg5.png'),
+(3, 'Specktakel', 'European, International, Asian', 4.5, 0, 'Specktakel is a unique World Restaurant centrally located in the heart of Haarlem. With a special covered courtyard and a terrace with a view of the historic Vleeshal and the centuries-old Bavo church. In the world kitchen, true works of art are created where every sense is stimulated.\r\n\r\nSpecktakel is all about the experience, an experience that we create together, each in his or her own role. The world wines are selected with care, so that the wine is in harmony with the aromas and spices of the dish.\r\nThe colours, aromas and flavors create a wonderful interplay that can be talked about…', 'Klokhuisplein 9, 2011 HK Haarlem', '+31 023 512 3910', 60, '/img/4.5Rating.png:/img/specktakelImg1.png:/img/specktakelImg2.png:/img/specktakelImg3.png:/img/specktakelImg3.png:/img/specktakelImg4.png:/img/specktakelImg2.png:/img/specktakelImg1.png:/img/specktakelImg5.png:'),
+(4, 'Toujours', 'Dutch, Seafood, European', 4.4, 0, 'The wine is ready, the beer tap is running at full speed again and the cocktails are already being shaken. Sit comfortably on our terrace with a rug and patio heaters. And all that in combination with delicious dishes that we have on the menu. Let us spoil you with our appetizers & finger food. And if you want to go ALL OUT, then one of our signature dishes is perfect for you!', 'Oude Groenmarkt 10-12, 2011 HL Haarlem', '+31 023 532 1699', 48, '/img/4.4Rating.png:/img/toujoursImg1.png:/img/toujoursImg2.png:/img/toujoursImg3.png:/img/toujoursImg3.png:/img/toujoursImg2.png:/img/toujoursImg1.png:/img/toujoursImg4.png:/img/toujoursImg5.png:'),
+(5, 'ML', 'Dutch, Seafood, European', 4.1, 1, 'ML has been housing, in the beautiful, monumental building at Klokhuisplein since 2018. A place where you can eat, drink, meet and sleep.Restaurant ML is located in the courtyard of the historic printer Johan Enschedé and in the old style room of the former home of the Enschedé family. The decor is sleek and modern and includes a fine backdrop for the culinary sensations presented by chef Mark Gratama and his kitchen team. In 2021, restaurant ML is once again awarded with a Michelin star!', 'Klokhuisplein 9, 2011 HK Haarlem', '+31 023 512 3910', 60, '/img/4.1Rating.png:/img/mlImg1.png:/img/mlImg2.png:/img/mlImg3.png:\r\n/img/mlImg4.png:/img/mlImg2.png:\r\n/img/mlImg3.png:/img/mlImg1.png:\r\n/img/mlImg5.png:'),
+(6, 'Grand Cafe Brinkmann', 'Modern, Dutch, European', 4.1, 0, 'Brinkmann is a well-known grand café that has been located on the Grote Markt in Haarlem since 1881. In the thirties of the twentieth century, the business had grown into a large complex of entertainment venues. At the end of the seventies it made way for the Brinkmannpassage. Brinkmann has continued in a smaller form as a grand café. Come and have a taste of History.', 'Grote Markt 13, 2011 RC Haarlem', '+31 023 532 3111', 100, '/img/4.4Rating.png:/img/grandcafebrinkmannImg1.png:\r\n/img/grandcafebrinkmannImg2.png:\r\n/img/grandcafebrinkmannImg3.png:\r\n/img/grandcafebrinkmannImg3.png:\r\n/img/grandcafebrinkmannImg2.png:\r\n/img/grandcafebrinkmannImg1.png:\r\n/img/grandcafebrinkmannImg4.png:\r\n/img/grandcafebrinkmannImg5.png:'),
+(7, 'Fris', 'Dutch, French, European', 4.1, 1, 'Fris is One of the michelin starred restaurants and offer you class and great food. Original textures and product combinations ensure tasty flavors and a pleasant mouthfeel. And with a wines round off the story nicely. A unique experience and totally recommended.', 'Twijnderslaan 7, 2012 BG Haarlem', '+31 023 531 0717', 45, '/img/4.1Rating.png:/img/frisImg1.png:/img/frisImg2.png:/img/frisImg3.png:\r\n/img/frisImg5.png:/img/frisImg2.png:/img/frisImg3.png:/img/frisImg1.png:/img/frisImg6.png:');
 
 -- --------------------------------------------------------
 
@@ -385,7 +402,7 @@ ALTER TABLE `event_stroll`
 --
 ALTER TABLE `event_yummie`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `restaurant` (`restaurant`);
+  ADD KEY `restaurant` (`restaurant_id`);
 
 --
 -- Indexes for table `location`
@@ -472,7 +489,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `event_yummie`
 --
 ALTER TABLE `event_yummie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `location`
@@ -538,7 +555,7 @@ ALTER TABLE `event_stroll`
 -- Constraints for table `event_yummie`
 --
 ALTER TABLE `event_yummie`
-  ADD CONSTRAINT `event_yummie_ibfk_1` FOREIGN KEY (`restaurant`) REFERENCES `restaurant` (`id`);
+  ADD CONSTRAINT `event_yummie_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`id`);
 
 --
 -- Constraints for table `personal_program`

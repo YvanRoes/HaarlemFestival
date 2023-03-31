@@ -33,12 +33,12 @@
             <p class="text-[20px] text-[#FC5B84] font-medium pl-[10px]"><? echo $restaurant->get_category() ?></p>
         </div>
         <p class="text-xl w-[1000px] mt-[50px]"><? echo $restaurant->get_description() ?></p>
-        <img class="w-[1280px] h-[400px] mt-[50px]" src="<? echo $imagePaths[4] ?>">
+        <img class="w-[1280px] h-[400px] mt-[50px] rounded-[10px]" src="<? echo $imagePaths[4] ?>">
         <div class="grid grid-cols-3 grid-rows-2 gap-[50px] mt-[50px]">
-            <img class="h-[300px]" src="<? echo $imagePaths[5] ?>">
-            <img class="row-span-2 h-[650px]" src="<? echo $imagePaths[7] ?>">
-            <img class="row-span-2 h-[650px]" src="<? echo $imagePaths[8] ?>">
-            <img class="h-[300px]" src="<? echo $imagePaths[6] ?>">
+            <img class="h-[300px] rounded-[10px]" src="<? echo $imagePaths[5] ?>">
+            <img class="row-span-2 h-[650px] rounded-[10px]" src="<? echo $imagePaths[7] ?>">
+            <img class="row-span-2 h-[650px] rounded-[10px]" src="<? echo $imagePaths[8] ?>">
+            <img class="h-[300px] rounded-[10px]" src="<? echo $imagePaths[6] ?>">
         </div>
         <button type="submit" class="w-[200px] h-[40px]  bg-[#42BFDD] text-white text-[20px] font-bold rounded-[10px] cursor-pointer justify-self-end mt-[50px]" onclick="reserve()">Make reservation</button>
         <p class="text-l w-[200px] text-gray-700 mt-[10px] justify-self-end">** €10,- deposit pp. and mandatory reservation. Deposit will be deducted upon payment.**</p>
@@ -52,32 +52,35 @@
                 <p>Kids Price</p>
 
                 <div class="col-span-1">
-                    <p class="ml-[20px]">First Session</p>
-                    <p class="ml-[20px]">Second Session</p>
-                    <p class="ml-[20px]">Third Session</p>      
+                    <?php foreach ($restaurantSessions as $index => $session) { ?>
+                    <p class="ml-[20px]"><?php echo 'Session ' . ($index+1); ?></p>
+                    <?php } ?>
                 </div>
                 <div class="col-span-1">
-                    <p>17:00-19:00</p>
-                    <p>19:30-21:30</p>
-                    <p>22:00-00:00</p>
+                    <?php foreach ($restaurantSessions as $session) {
+                        $startTime = strtotime($session->get_session_startTime());
+                        $endTime = strtotime($session->get_session_endTime());
+                    ?>
+                        <p><?php echo date('H:i', $startTime); ?>-<?php echo date('H:i', $endTime); ?></p>
+                    <?php } ?>
                 </div>
                 <div class="col-span-1">
-                    <p>€45,00</p>
-                    <p>€45,00</p>
-                    <p>€45,00</p>
+                    <?php foreach ($restaurantSessions as $session) { ?>
+                        <p>€<?php echo $session->get_adult_Price(); ?></p>
+                    <?php } ?>
                 </div>
                 <div class="col-span-1">
-                    <p>€22,50</p>
-                    <p>€22,50</p>
-                    <p>€22,50</p>
+                <?php foreach ($restaurantSessions as $session) { ?>
+                        <p>€<?php echo $session->get_kids_Price(); ?></p>
+                    <?php } ?>
                 </div>
             </div>
         </div>
         
         <div class="bg-[#42BFDD] rounded-[10px] p-[10px] text-white w-[300px] mt-[100px]" id="contanct">
             <h1 class="text-3xl font-bold">Contact Us</h1>
-            <h2 class="text-[24px] mt-[10px]">Spaarne 96, 2011 CL Haarlem</h2>    
-            <p class="text-xl mt-[10px] mt-[10px]">Tel: +31 23 542 7270</p>
+            <h2 class="text-[24px] mt-[10px]"><? echo $restaurant->get_address() ?></h2>    
+            <p class="text-xl mt-[10px] mt-[10px]">Tel: <? echo $restaurant->get_phone_number() ?></p>
         </div>
 
 
@@ -86,7 +89,7 @@
 
 <script>
     function back() {
-        window.location.href = "/tour/tourOverview";
+        window.location.href = "/food";
     }
 
     function reserve() {
