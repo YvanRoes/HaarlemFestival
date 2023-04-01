@@ -8,4 +8,10 @@ class ArtistService
     $repo = new ArtistRepository();
     return $repo->get_AllArtists();
   }
+
+  public function get_ArtistById($id): Artist
+  {
+    $repo = new ArtistRepository();
+    return $repo->get_ArtistById($id);
+  }
 }

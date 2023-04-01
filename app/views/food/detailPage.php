@@ -9,13 +9,13 @@
     }
 </style>
 
-<title>Haarlem Tour</title>
+<title><? echo $restaurant->get_name() ?></title>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <?php
     include __DIR__ . '/../header.php';
     require_once __DIR__ . '/../../controllers/foodController.php';
-    generateHeader('login', 'dark');
+    generateHeader('Dnace', 'dark');
 ?>
 
 <body class="overflow-x-hidden bg-[#F7F7FB] flex flex-col items-center h-fit w-screen">  

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Mar 31, 2023 at 05:51 PM
+-- Generation Time: Apr 01, 2023 at 08:59 PM
 -- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
 -- PHP Version: 8.0.26
 
@@ -30,7 +30,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `artist` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `description` varchar(1000) NOT NULL,
   `genre` varchar(255) NOT NULL,
+  `popularSongs` varchar(255) DEFAULT NULL,
   `imagePath` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -38,13 +40,13 @@ CREATE TABLE `artist` (
 -- Dumping data for table `artist`
 --
 
-INSERT INTO `artist` (`id`, `name`, `genre`, `imagePath`) VALUES
-(1, 'Hardwell', 'dance and house', '/img/Artist1.png'),
-(2, 'Armin van Buuren', 'trance and techo', '/img/Artist2.png'),
-(3, 'Martin Garrix', 'dance and electronic', '/img/Artist3.png'),
-(4, 'Tiësto', 'trance, techno, minimal, house and electro', '/img/Artist4.png'),
-(5, 'Nicky Romero', 'electrohouse and progressive house', '/img/Artist5.png'),
-(6, 'Afrojack', 'house', '/img/Artist6.png');
+INSERT INTO `artist` (`id`, `name`, `description`, `genre`, `popularSongs`, `imagePath`) VALUES
+(1, 'Hardwell', '', 'dance and house', NULL, '/img/Artist1.png'),
+(2, 'Armin van Buuren', '', 'trance and techo', NULL, '/img/Artist2.png'),
+(3, 'Martin Garrix', '', 'dance and electronic', NULL, '/img/Artist3.png'),
+(4, 'Tiësto', '', 'trance, techno, minimal, house and electro', NULL, '/img/Artist4.png'),
+(5, 'Nicky Romero', 'Nick Rotteveel, a professional DJ from the Netherlands known as Nicky Romero came into the light thanks to his hit Toulouse in 2011. From then on he has worked with, and received support from DJs, such as Tiësto, David Guetta, Calvin Harris, Avicii and Hardwell.', 'electrohouse and progressive house', 'Toulouse:I Could Be The One:Lose My Mind', '/img/Artist5.png'),
+(6, 'Afrojack', '', 'house', NULL, '/img/Artist6.png');
 
 -- --------------------------------------------------------
 
@@ -56,6 +58,32 @@ CREATE TABLE `artist_event_edm` (
   `artist_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dance_location`
+--
+
+CREATE TABLE `dance_location` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `imagePath` varchar(1000) DEFAULT NULL,
+  `capacity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dance_location`
+--
+
+INSERT INTO `dance_location` (`id`, `name`, `address`, `imagePath`, `capacity`) VALUES
+(1, 'Lichtfabriek', 'Minckelersweg 2', '/img/danceLocation1.png', 1500),
+(2, 'Caprera Openluchttheater', 'Hoge Duin en Daalseweg 2', '/img/danceLocation2.png', 2000),
+(3, 'Club Stalker', 'Kromme Elleboogsteeg 2', '/img/danceLocation3.png', 200),
+(4, 'Jopenkerk', 'Gedemte Voldergracht 2', '/img/danceLocation4.png', 300),
+(5, 'XO the club', 'Grote Markt 8', '/img/danceLocation5.png', 200),
+(6, 'Club Ruis', 'Smedestraat 31', '/img/danceLocation6.png', 200);
 
 -- --------------------------------------------------------
 
@@ -85,8 +113,21 @@ INSERT INTO `events` (`id`) VALUES
 CREATE TABLE `event_edm` (
   `id` int(11) NOT NULL,
   `venue` int(11) NOT NULL,
+  `artist_id` int(11) NOT NULL,
+  `date` datetime(1) NOT NULL,
+  `session` varchar(255) NOT NULL,
+  `duration` int(11) NOT NULL,
+  `ticketsAmount` int(11) NOT NULL,
   `price` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event_edm`
+--
+
+INSERT INTO `event_edm` (`id`, `venue`, `artist_id`, `date`, `session`, `duration`, `ticketsAmount`, `price`) VALUES
+(1, 1, 5, '2023-07-27 20:00:00.0', 'Back2Back', 360, 1500, 75),
+(5, 3, 5, '2023-07-28 23:00:00.0', 'Club', 90, 200, 60);
 
 -- --------------------------------------------------------
 
@@ -163,32 +204,6 @@ INSERT INTO `homepage_events` (`id`, `title`, `description`, `small_title`, `ima
 (1, 'A stroll through Haarlem', 'The city of Haarlem is holding a tour to showcase fun and important historical sites. Join us on this tour between the dates of 26-29 of July this year. If you are interested in Haarlem\'s history this tour is for you!', 'Explore the city', '/img/festival-stroll-haarlem.png', '/tour'),
 (2, 'Food event', 'Enjoy the wide variety of culinary delights that the city of Haarlem has to offer. Join us as we explore the city one bite at a time.', 'Food', '/img/festival-yummie-event.png', '/food'),
 (3, 'Let\'s dance', 'The city of Haarlem welcomes you to a dance party! from popular DJs to up and coming artists, we have it all at Haarlem Dance event. Welcome to the party everyone!', 'Life of the party', '/img/festival-dance-event.png', '/dance');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `location`
---
-
-CREATE TABLE `location` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `imagePath` varchar(1000) DEFAULT NULL,
-  `capacity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `location`
---
-
-INSERT INTO `location` (`id`, `name`, `address`, `imagePath`, `capacity`) VALUES
-(1, 'Lichtfabriek', 'Minckelersweg 2', '/img/danceLocation1.png', 1500),
-(2, 'Caprera Openluchttheater', 'Hoge Duin en Daalseweg 2', '/img/danceLocation2.png', 2000),
-(3, 'Club Stalker', 'Kromme Elleboogsteeg 2', '/img/danceLocation3.png', 200),
-(4, 'Jopenkerk', 'Gedemte Voldergracht 2', '/img/danceLocation4.png', 300),
-(5, 'XO the club', 'Grote Markt 8', '/img/danceLocation5.png', 200),
-(6, 'Club Ruis', 'Smedestraat 31', '/img/danceLocation6.png', 200);
 
 -- --------------------------------------------------------
 
@@ -290,15 +305,15 @@ CREATE TABLE `stroll_location` (
 --
 
 INSERT INTO `stroll_location` (`id`, `name`, `title`, `description`, `address`, `imagePath`) VALUES
-(1, 'St. Bavo Church', 'History of the church:Importance to Haarlem.:The location and where we are on our tour.', 'The first time St. Bavo Church was mentioned was in 1245 and at that time it was considered a prominent church because of its belfry, and because Influential people like Arnoud van Sassenheim acted there as priests.\r\n\r\nA lot of the furniture dates back from before the iconoclasm of 1566 like the choir fence, choir benches, and copper lectern with pelican.:Around the church there is a big market every week this is very important to Haarlem since a lot of people from the surrounding regions come to this market to sell.:This is the starting location of our tour. On the map below you can see the exact location.', 'Grote Markt 22', '/img/stBavoChurchImg1.png:/img/stBavoChurchImg2.png:\r\n/img/stBavoChurchImg3.png:'),
-(2, 'Grote Markt', '', NULL, 'Grote Markt', NULL),
-(3, 'The Hallen', '', NULL, 'Grote Markt 16', NULL),
-(4, 'Proveniershof', '', NULL, 'Grote Houtsstraat 140', NULL),
-(5, 'Jopenkerk', '', NULL, 'Emrikweg 21', NULL),
-(6, 'Waalse kerk', '', NULL, 'Begijnhof 30', NULL),
-(7, 'Molen de Adriaan', '', NULL, 'Papentorenvest 1a', NULL),
-(8, 'Amsterdamse Poort', '', NULL, 'Amsterdamsevaart', NULL),
-(9, 'Hof van Bakenes', '', NULL, 'Korte Begijnestraat 21ZW', NULL);
+(1, 'St. Bavo Church', 'History of the church:Importance to Haarlem.:The location and where we are on our tour.', 'The first time St. Bavo Church was mentioned was in 1245 and at that time it was considered a prominent church because of its belfry, and because Influential people like Arnoud van Sassenheim acted there as priests.\r\n\r\nA lot of the furniture dates back from before the iconoclasm of 1566 like the choir fence, choir benches, and copper lectern with pelican.:Around the church there is a big market every week this is very important to Haarlem since a lot of people from the surrounding regions come to this market to sell.:This is the starting location of our tour. On the map below you can see the exact location.', 'Grote Markt 22', '/img/stBavoChurchImg4.png:\r\n/img/stBavoChurchImg1.png:\r\n/img/stBavoChurchImg2.png:\r\n/img/stBavoChurchImg3.png:'),
+(2, 'Grote Markt', 'History of the place:Importance to Haarlem.:The location.', 'The Grote Markt in Haarlem is a large square in the center of Haarlem, where a number of old and well-known buildings are located, such as the Grote or Sint-Bavokerk (more than 80 meters high) and the town hall. The Grote Markt used to be called \'t Sant. That name comes from a time when the market was still unpaved.\r\n\r\nThere is an important Haarlem symbol; Loutje, the statue of Laurens Janszoon Coster, a pioneer in the field of printing who was often seen as its inventor in the Netherlands in the past. Coster would have lived at 23 Grote Markt.:Gives this historic feel to the centre of haarlem:It is located in the centre of haarlem.\r\n\r\n\r\n', 'Grote Markt', '/img/groteMarktImg1.png:/img/groteMarktImg2.png:/img/groteMarktImg3.png:\r\n/img/groteMarktImg4.png:'),
+(3, 'The Hallen', 'History of the place:Importance to Haarlem.:The location.', 'De Hallen Haarlem regularly shows solo presentations by internationally acclaimed artists who have never exhibited in the Netherlands before.\r\n\r\nThree times a year, De Hallen Haarlem organizes an exhibition cluster about current developments in the visual arts. The museum thus offers a platform for artists from the Netherlands and abroad, with an emphasis on photography and video art.:Shows historical art over the years.:In the city centre.\r\n\r\n', 'Grote Markt 16', '/img/deHallenImg1.png:/img/deHallenImg2.png:\r\n/img/deHallenImg3.png:/img/deHallenImg4.png:\r\n'),
+(4, 'Proveniershof', 'History of the place:Importance to Haarlem.:The location.', 'The Proveniershof was founded in 1704 and has a rich history. In 1414, the stately Sint Michielsklooster for women was built here. In 1578, the nuns were driven out by the Protestants, at the time of the Reformation. Three years later, the monastery and the surrounding grounds were assigned to the city of Haarlem by the Prince of Orange. It served as compensation for the enormous damage the city had suffered during the Siege of Haarlem during the Eighty Years\' War.:The Proveniershof has a different appearance than the small courtyards in Haarlem. The houses of the Proveniershof were not a form of charity, but were intended for the well-to-do bourgeoisie, who bought in and could then live here at a later age. The Proveniershof is located on the busy shopping street Grote Houtstraat 144 and is freely accessible to visitors. : Located in the city centre.', 'Grote Houtsstraat 140', '/img/proverniershofImg1.png:/img/proverniershofImg2.png:/img/proverniershofImg3.png:/img/proverniershofImg4.png:'),
+(5, 'Jopenkerk', 'History of the church:Importance to Haarlem.:The location.', NULL, 'Emrikweg 21', NULL),
+(6, 'Waalse kerk', 'History of the church:Importance to Haarlem.:The location and where we are on our tour.', NULL, 'Begijnhof 30', NULL),
+(7, 'Molen de Adriaan', 'History of the place:Importance to Haarlem.:The location and where we are on our tour.', NULL, 'Papentorenvest 1a', NULL),
+(8, 'Amsterdamse Poort', 'History of the place:Importance to Haarlem.:The location and where we are on our tour.', NULL, 'Amsterdamsevaart', NULL),
+(9, 'Hof van Bakenes', 'History of the place:Importance to Haarlem.:The location and where we are on our tour.', NULL, 'Korte Begijnestraat 21ZW', NULL);
 
 -- --------------------------------------------------------
 
@@ -375,8 +390,14 @@ ALTER TABLE `artist`
 -- Indexes for table `artist_event_edm`
 --
 ALTER TABLE `artist_event_edm`
-  ADD KEY `artist_id` (`artist_id`),
-  ADD KEY `event_id` (`event_id`);
+  ADD KEY `event_id` (`event_id`),
+  ADD KEY `artist_id` (`artist_id`);
+
+--
+-- Indexes for table `dance_location`
+--
+ALTER TABLE `dance_location`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `events`
@@ -388,8 +409,9 @@ ALTER TABLE `events`
 -- Indexes for table `event_edm`
 --
 ALTER TABLE `event_edm`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `venue` (`venue`);
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `venue` (`venue`),
+  ADD KEY `artist` (`artist_id`) USING BTREE;
 
 --
 -- Indexes for table `event_stroll`
@@ -403,12 +425,6 @@ ALTER TABLE `event_stroll`
 ALTER TABLE `event_yummie`
   ADD PRIMARY KEY (`id`),
   ADD KEY `restaurant` (`restaurant_id`);
-
---
--- Indexes for table `location`
---
-ALTER TABLE `location`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `page`
@@ -480,22 +496,28 @@ ALTER TABLE `artist`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `dance_location`
+--
+ALTER TABLE `dance_location`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `event_edm`
+--
+ALTER TABLE `event_edm`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `event_yummie`
 --
 ALTER TABLE `event_yummie`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT for table `location`
---
-ALTER TABLE `location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `page`
@@ -542,8 +564,8 @@ ALTER TABLE `artist_event_edm`
 -- Constraints for table `event_edm`
 --
 ALTER TABLE `event_edm`
-  ADD CONSTRAINT `event_edm_ibfk_1` FOREIGN KEY (`venue`) REFERENCES `location` (`id`),
-  ADD CONSTRAINT `event_edm_ibfk_2` FOREIGN KEY (`id`) REFERENCES `events` (`id`);
+  ADD CONSTRAINT `event_edm_ibfk_1` FOREIGN KEY (`venue`) REFERENCES `dance_location` (`id`),
+  ADD CONSTRAINT `event_edm_ibfk_3` FOREIGN KEY (`artist_id`) REFERENCES `artist` (`id`);
 
 --
 -- Constraints for table `event_stroll`
