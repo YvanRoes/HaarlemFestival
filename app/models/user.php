@@ -5,6 +5,7 @@
         private ?string $email = null;
         private ?string $password = null;
         private ?int $role = null;
+        private $register_date = null;
 
         public function get_uid(): int{
             return $this->id;
@@ -53,6 +54,7 @@
                 'email' => $this->email,
                 'password' => $this->password,
                 'role' => $this->role,
+                'registered_at' => $this->register_date
             ];
         }
     }
