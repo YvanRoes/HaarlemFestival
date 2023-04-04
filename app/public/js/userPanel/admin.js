@@ -639,8 +639,16 @@ function createArtistContainer(element, id, name, genres) {
       artist_genres: aGenresSpan.innerHTML,
     };
 
-    console.log(data);
-    postData('http://localhost/api/artists', data);
+    let form = new FormData();
+    form.append('post_type', 'edit');
+    form.append('id', id);
+    form.append('artist_name', aNameSpan.value);
+    form.append('artist_genre', aGenresSpan.value);
+    form.append('picture', picture.files[0]);
+
+    
+    console.log(form);
+    postForm('http://localhost/api/artists', form);
     delay(1000).then(loadArtists());
   });
 
@@ -656,16 +664,15 @@ function createArtistContainer(element, id, name, genres) {
 function insertArtist() {
   aName = document.getElementById('artistName');
   aGenres = document.getElementById('artistGenre');
-  picture = document.getElementById('artistPicture').value;
+  picture = document.getElementById('artistPicture');
 
-  data = {
-    post_type: 'insert',
-    artist_name: aName.value,
-    artist_genres: aGenres.value,
-    picture: picture,
-  };
-  console.log(data);
-  postData('http://localhost/api/artists', data);
+  let form = new FormData();
+  form.append('post_type', 'insert');
+  form.append('artist_name', aName.value);
+  form.append('artist_genre', aGenres.value);
+  form.append('picture', picture.files[0]);
+  console.log(form);
+  postForm('http://localhost/api/artists', form);
   delay(1000).then(loadArtists());
 }
 
@@ -675,6 +682,19 @@ function insertArtist() {
 
 function delay(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+async function postForm(url = '', form){
+  const response = await fetch(url, {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: form,
+  });
+  console.log(response);
 }
 
 async function postData(url = '', data = {}) {
