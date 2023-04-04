@@ -6,7 +6,7 @@ class DanceSessionRepository extends Repository
   public function get_AllDanceSessions()
   {
     try {
-      $stmt = $this->conn->prepare("SELECT id, venue, artist_id, date, session, duration, ticketsAmount, price FROM event_edm");
+      $stmt = $this->conn->prepare("SELECT id, venue, artist_id, date, session, duration, ticketsAmount, price FROM event_edm ORDER BY date ASC");
       $stmt->execute();
 
       $stmt->setFetchMode(PDO::FETCH_CLASS, 'DanceSession');
@@ -20,7 +20,7 @@ class DanceSessionRepository extends Repository
   public function get_AllDanceSessionsByArtistId($artist_id)
   {
     try {
-      $stmt = $this->conn->prepare("SELECT id, venue, artist_id, date, session, duration, ticketsAmount, price FROM event_edm WHERE artist_id = :artist_id");
+      $stmt = $this->conn->prepare("SELECT id, venue, artist_id, date, session, duration, ticketsAmount, price FROM event_edm WHERE artist_id = :artist_id ORDER BY date ASC");
       $stmt->bindParam(':artist_id', $artist_id);
       $stmt->execute();
 

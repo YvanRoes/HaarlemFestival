@@ -24,7 +24,7 @@
     <div class="lg:w-[1280px] md:w-[100vw] sm:w-[100vw] mt-[100px] mb-[100px] grid text-white" id="content-container">
         <button type="submit" class="w-[100px] h-[40px] mt-[20px] bg-[#42BFDD] text-white text-[20px] font-bold rounded-[10px] cursor-pointer" onclick="back()">Back</button>
         <div class="mt-[100px] grid grid-cols-2 " id="introSection">
-            <img src="/img/nickyRomeroImg1.png" class="w-[500px]">
+            <img src="<? echo $artist->get_imagePath() ?>" class="w-[500px]">
             <div class="mt-[50px]">
                 <h1 class="text-[36px] font-bold mt-[50px] font-[Orbitron]"><? echo $artist->get_name() ?></h1>
                 <p class="text-xl w-[700px] mt-[20px] font-[Orbitron]"><? echo $artist->get_description() ?></p>

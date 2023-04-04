@@ -150,20 +150,19 @@ function generatePlanningItem(span, content, planningGrid) {
 async function generatePlanningItems(planningGrid) {
     sessions = await getDataFromSessionAPI();
     artists = await getDataFromArtistAPI();
-   
+    locations = await getDataFromLocationAPI();
 
-    for (let i = 0; i < sessions.length; i++) {
+    for (let i = 0; i <= sessions.length; i++) {
         const formatter = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' });
         const formattedDateTime = formatter.format(new Date(sessions[i].date));
+
+        locationID = sessions[i].venue;
+        artistID = sessions[i].artist_id;
+
+        console.log(locationID);
+
         generatePlanningItem(1, formattedDateTime, planningGrid);
-        generatePlanningItem(1, sessions[i].venue, planningGrid);
-
-        // for (let x = 0; x < artists.length; x++) {
-        //     if (sessions[i].artistId == artists[x].id) {
-        //         artist = artists[x].name;
-        //     }
-        // }
-
+        generatePlanningItem(1, locations[locationID].name, planningGrid);
         generatePlanningItem(2, sessions[i].artist_id, planningGrid);
         generatePlanningItem(1, sessions[i].ticketsAmount, planningGrid);
         generatePlanningItem(1, "€" + sessions[i].price, planningGrid);
