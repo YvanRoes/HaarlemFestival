@@ -11,6 +11,10 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
         array (
             'PHPMailer\\PHPMailer\\' => 20,
         ),
+        'M' => 
+        array (
+            'Mollie\\Api\\' => 11,
+        ),
         'E' => 
         array (
             'Endroid\\QrCode\\' => 15,
@@ -18,6 +22,10 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
         'D' => 
         array (
             'DASPRiD\\Enum\\' => 13,
+        ),
+        'C' => 
+        array (
+            'Composer\\CaBundle\\' => 18,
         ),
         'B' => 
         array (
@@ -30,6 +38,10 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
+        'Mollie\\Api\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mollie/mollie-api-php/src',
+        ),
         'Endroid\\QrCode\\' => 
         array (
             0 => __DIR__ . '/..' . '/endroid/qr-code/src',
@@ -37,6 +49,10 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
         'DASPRiD\\Enum\\' => 
         array (
             0 => __DIR__ . '/..' . '/dasprid/enum/src',
+        ),
+        'Composer\\CaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
         'BaconQrCode\\' => 
         array (

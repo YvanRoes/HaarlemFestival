@@ -6,20 +6,24 @@ use Mollie\Api\Exceptions\ApiException;
 use Mollie\Api\Resources\Payment;
 use Mollie\Api\Resources\PaymentLink;
 use Mollie\Api\Resources\PaymentLinkCollection;
-class PaymentLinkEndpoint extends \Mollie\Api\Endpoints\CollectionEndpointAbstract
+
+class PaymentLinkEndpoint extends CollectionEndpointAbstract
 {
     protected $resourcePath = "payment-links";
+
     /**
      * @var string
      */
     public const RESOURCE_ID_PREFIX = 'pl_';
+
     /**
      * @return PaymentLink
      */
     protected function getResourceObject()
     {
-        return new \Mollie\Api\Resources\PaymentLink($this->client);
+        return new PaymentLink($this->client);
     }
+
     /**
      * Get the collection object that is used by this API endpoint. Every API endpoint uses one type of collection object.
      *
@@ -30,8 +34,9 @@ class PaymentLinkEndpoint extends \Mollie\Api\Endpoints\CollectionEndpointAbstra
      */
     protected function getResourceCollectionObject($count, $_links)
     {
-        return new \Mollie\Api\Resources\PaymentLinkCollection($this->client, $count, $_links);
+        return new PaymentLinkCollection($this->client, $count, $_links);
     }
+
     /**
      * Creates a payment link in Mollie.
      *
@@ -45,6 +50,7 @@ class PaymentLinkEndpoint extends \Mollie\Api\Endpoints\CollectionEndpointAbstra
     {
         return $this->rest_create($data, $filters);
     }
+
     /**
      * Retrieve payment link from Mollie.
      *
@@ -57,11 +63,13 @@ class PaymentLinkEndpoint extends \Mollie\Api\Endpoints\CollectionEndpointAbstra
      */
     public function get($paymentLinkId, array $parameters = [])
     {
-        if (empty($paymentLinkId) || \strpos($paymentLinkId, self::RESOURCE_ID_PREFIX) !== 0) {
-            throw new \Mollie\Api\Exceptions\ApiException("Invalid payment link ID: '{$paymentLinkId}'. A payment link ID should start with '" . self::RESOURCE_ID_PREFIX . "'.");
+        if (empty($paymentLinkId) || strpos($paymentLinkId, self::RESOURCE_ID_PREFIX) !== 0) {
+            throw new ApiException("Invalid payment link ID: '{$paymentLinkId}'. A payment link ID should start with '".self::RESOURCE_ID_PREFIX."'.");
         }
+
         return parent::rest_read($paymentLinkId, $parameters);
     }
+
     /**
      * Retrieves a collection of Payment Links from Mollie.
      *

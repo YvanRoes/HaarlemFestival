@@ -5,16 +5,19 @@ namespace Mollie\Api\Endpoints;
 use Mollie\Api\Exceptions\ApiException;
 use Mollie\Api\Resources\Client;
 use Mollie\Api\Resources\ClientCollection;
-class ClientEndpoint extends \Mollie\Api\Endpoints\CollectionEndpointAbstract
+
+class ClientEndpoint extends CollectionEndpointAbstract
 {
     protected $resourcePath = "clients";
+
     /**
      * @return Client
      */
     protected function getResourceObject()
     {
-        return new \Mollie\Api\Resources\Client($this->client);
+        return new Client($this->client);
     }
+
     /**
      * Get the collection object that is used by this API endpoint. Every API endpoint uses one type of collection object.
      *
@@ -25,8 +28,9 @@ class ClientEndpoint extends \Mollie\Api\Endpoints\CollectionEndpointAbstract
      */
     protected function getResourceCollectionObject($count, $_links)
     {
-        return new \Mollie\Api\Resources\ClientCollection($this->client, $count, $_links);
+        return new ClientCollection($this->client, $count, $_links);
     }
+
     /**
      * Retrieve a client from Mollie.
      *
@@ -42,10 +46,12 @@ class ClientEndpoint extends \Mollie\Api\Endpoints\CollectionEndpointAbstract
     public function get($clientId, array $parameters = [])
     {
         if (empty($clientId)) {
-            throw new \Mollie\Api\Exceptions\ApiException("Client ID is empty.");
+            throw new ApiException("Client ID is empty.");
         }
+
         return parent::rest_read($clientId, $parameters);
     }
+
     /**
      * Retrieves a page of clients from Mollie.
      *
