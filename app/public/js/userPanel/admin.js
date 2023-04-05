@@ -138,31 +138,13 @@ function createUserContainer(element, id, username, email, role, registeredAt) {
   mailSpan.contentEditable = 'false';
   mailSpan.setAttribute('id', 'mSpan' + id);
 
-  //role
-  roleSpan = document.createElement('span');
-  switch (role) {
-    case 0:
-      roleSpan.innerHTML = 'User';
-      break;
-    case 1:
-      roleSpan.innerHTML = 'Employee';
-      break;
-    case 9:
-      roleSpan.innerHTML = 'Administrator';
-      break;
-    default:
-      roleSpan.innerHTML = 'unknown';
-      break;
-  }
-  roleSpan.classList.add(
-    'p-2',
-    'h-full',
-    'items-center',
-    'justify-center',
-    'flex'
-  );
-  role.contentEditable = 'false';
-  roleSpan.setAttribute('íd', 'rSpan' + id);
+  roleSelect = document.createElement('select');
+  roleSelect.classList.add('items-center', 'justify-center', 'flex');
+  roleSelect.innerHTML =
+    '<option value="0">Customer</option><option value="1">Employee</option><option value="9">Admin</option>';
+  roleSelect.value = role;
+  roleSelect.setAttribute('id', 'rSelect' + id);
+  roleSelect.disabled = true;
 
   //remove user
   buttonRemove = document.createElement('button');
@@ -207,15 +189,18 @@ function createUserContainer(element, id, username, email, role, registeredAt) {
   buttonEdit.addEventListener('click', () => {
     uSpan = document.getElementById('uSpan' + id);
     mSpan = document.getElementById('mSpan' + id);
+    roleSelect = document.getElementById('rSelect' + id);
     b = document.getElementById('b' + id);
 
     if (b.innerHTML == 'EDIT') {
       setEditableType(uSpan);
       setEditableType(mSpan);
+      roleSelect.disabled = false;
       b.innerHTML = 'Save';
       b.classList.add('bg-green-400', 'text-[#121212]');
       return;
     }
+    roleSelect.disabled = true;
     b.innerHTML = 'EDIT';
     b.classList.remove('bg-green-400', 'text-[#121212]');
     setEditableType(uSpan);
@@ -226,13 +211,14 @@ function createUserContainer(element, id, username, email, role, registeredAt) {
       id: id,
       username: uSpan.innerHTML,
       email: mSpan.innerHTML,
+      role: roleSelect.value
     };
 
     console.log(data);
     postData('http://localhost/api/users', data);
 
     userListType = document.getElementById('UserListType').innerHTML;
-    loadUserData(userListType);
+    delay(1000).then(() => loadUserData(userListType));
   });
 
   register = document.createElement('span');
@@ -242,7 +228,7 @@ function createUserContainer(element, id, username, email, role, registeredAt) {
   container.appendChild(idSpan);
   container.appendChild(unameSpan);
   container.appendChild(mailSpan);
-  container.appendChild(roleSpan);
+  container.appendChild(roleSelect);
   container.appendChild(buttonEdit);
   container.appendChild(buttonRemove);
   container.appendChild(register);
@@ -319,7 +305,6 @@ function addNewUser() {
   delay(1000).then(() => loadUserData(userListType));
 }
 
-// loadUserData();
 // USER FUNCTIONALITY --END
 
 //EDM FUNCTIONALITY --START
@@ -539,7 +524,7 @@ function createArtistList(objects) {
         parentElement,
         objects[i].id,
         objects[i].name,
-        objects[i].genre,
+        objects[i].genre
       );
     }
   });
@@ -572,7 +557,13 @@ function createArtistContainer(element, id, name, genres) {
 
   genresSpan = document.createElement('span');
   genresSpan.innerHTML = genres;
-  genresSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex', 'col-span-2');
+  genresSpan.classList.add(
+    'h-full',
+    'items-center',
+    'justify-center',
+    'flex',
+    'col-span-2'
+  );
   genresSpan.setAttribute('id', 'aGenresSpan' + id);
 
   //remove
@@ -646,7 +637,6 @@ function createArtistContainer(element, id, name, genres) {
     form.append('artist_genre', aGenresSpan.value);
     form.append('picture', picture.files[0]);
 
-    
     console.log(form);
     postForm('http://localhost/api/artists', form);
     delay(1000).then(loadArtists());
@@ -684,7 +674,7 @@ function delay(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-async function postForm(url = '', form){
+async function postForm(url = '', form) {
   const response = await fetch(url, {
     method: 'POST',
     mode: 'cors',
@@ -717,4 +707,6 @@ async function getData(url = '') {
   const response = await fetch(url);
   return response.json();
 }
-loadEDMData('artists');
+
+loadUserData();
+//loadEDMData('artists');
