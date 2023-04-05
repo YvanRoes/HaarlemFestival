@@ -25,8 +25,8 @@ class ArtistService
     return $repo->delete_artistById($id);
   }
 
-  public function edit_artistById($id, $name, $genres){
+  public function edit_artistById($id, $name, $genres, $description){
     $repo = new ArtistRepository();
-    return $repo->edit_artistById($id , $name, $genres);
+    return $repo->edit_artistById($id , $name, $genres, $description);
   }
 }

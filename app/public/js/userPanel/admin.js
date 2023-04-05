@@ -53,13 +53,13 @@ async function getUsersByRole(role) {
   let res = await getData('http://localhost/api/users');
   let customers = [];
   for (let i = 0; i < res.length; i++) {
-    if (role == "all") {
+    if (role == 'all') {
       customers = res;
       break;
     }
 
     if (res[i].role == role) {
-      customers.push(res[i]); 
+      customers.push(res[i]);
     }
   }
   return customers;
@@ -214,7 +214,7 @@ function createUserContainer(element, id, username, email, role, registeredAt) {
       id: id,
       username: uSpan.innerHTML,
       email: mSpan.innerHTML,
-      role: roleSelect.value
+      role: roleSelect.value,
     };
 
     console.log(data);
@@ -533,7 +533,7 @@ function createArtistList(objects) {
   });
 }
 
-function createArtistContainer(element, id, name, genres) {
+async function createArtistContainer(element, id, name, genres) {
   container = document.createElement('span');
   container.classList.add(
     'bg-white',
@@ -625,24 +625,16 @@ function createArtistContainer(element, id, name, genres) {
     setEditableType(aNameSpan);
     setEditableType(aGenresSpan);
 
-    //send data
-    data = {
-      post_type: 'edit',
-      id: id,
-      artist_name: aNameSpan.innerHTML,
-      artist_genres: aGenresSpan.innerHTML,
-    };
-
     let form = new FormData();
     form.append('post_type', 'edit');
     form.append('id', id);
-    form.append('artist_name', aNameSpan.value);
-    form.append('artist_genre', aGenresSpan.value);
-    form.append('picture', picture.files[0]);
+    form.append('artist_name', aNameSpan.innerHTML);
+    form.append('artist_description', 'temp description');
+    form.append('artist_genre', aGenresSpan.innerHTML);
 
     console.log(form);
-    postForm('http://localhost/api/artists', form);
-    delay(1000).then(loadArtists());
+    postForm('http://localhost/api/artists', form)
+      .then(delay(1000).then(loadArtists()));
   });
 
   container.appendChild(idSpan);
@@ -663,6 +655,7 @@ function insertArtist() {
   form.append('post_type', 'insert');
   form.append('artist_name', aName.value);
   form.append('artist_genre', aGenres.value);
+  form.append('artist_description', 'temp description');
   form.append('picture', picture.files[0]);
   console.log(form);
   postForm('http://localhost/api/artists', form);
@@ -706,7 +699,7 @@ async function postData(url = '', data = {}) {
   console.log(response);
 }
 
-async function getData(url = ''){
+async function getData(url = '') {
   const response = await fetch(url);
   return response.json();
 }
@@ -725,7 +718,7 @@ async function getCurrentPageUsers() {
       users = getUsersByRole(9);
       break;
     default:
-      users = getUsersByRole("all");
+      users = getUsersByRole('all');
       break;
   }
 
@@ -734,41 +727,43 @@ async function getCurrentPageUsers() {
 
 function sortByID() {
   users = getCurrentPageUsers()
-    .then(users => {
+    .then((users) => {
       users.sort((a, b) => (a.id > b.id ? 1 : -1));
       createUserList(users, document.getElementById('UserListType').innerHTML);
       addUserSearch(users);
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('Error fetching users:', error);
     });
 }
 
-function sortByUsername(){
+function sortByUsername() {
   users = getCurrentPageUsers()
-    .then(users => {
-      users.sort((a, b) => (a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1));
+    .then((users) => {
+      users.sort((a, b) =>
+        a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+      );
       createUserList(users, document.getElementById('UserListType').innerHTML);
       addUserSearch(users);
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('Error fetching users:', error);
     });
 }
 
-
-
-function sortByEmail(){
+function sortByEmail() {
   users = getCurrentPageUsers()
-  .then(users => {
-    users.sort((a, b) => (a.email.toLowerCase() > b.email.toLowerCase() ? 1 : -1));
-    createUserList(users, document.getElementById('UserListType').innerHTML);
-    addUserSearch(users);
-  })
-  .catch(error => {
-    console.error('Error fetching users:', error);
-  });
+    .then((users) => {
+      users.sort((a, b) =>
+        a.email.toLowerCase() > b.email.toLowerCase() ? 1 : -1
+      );
+      createUserList(users, document.getElementById('UserListType').innerHTML);
+      addUserSearch(users);
+    })
+    .catch((error) => {
+      console.error('Error fetching users:', error);
+    });
 }
 
-loadUserData();
-//loadEDMData('artists');
+//loadUserData();
+loadEDMData('artists');
