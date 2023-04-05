@@ -3,7 +3,9 @@ class Artist implements JsonSerializable
 {
     private ?int $id = null;
     private ?string $name = null;
+    private ?string $description = null;
     private ?string $genre = null;
+    private ?string $popularSongs = null;
     private ?string $imagePath = null;
 
     public function get_id(): int
@@ -26,6 +28,17 @@ class Artist implements JsonSerializable
         return $this;
     }
 
+    public function get_description(): string
+    {
+        return $this->description;
+    }
+
+    public function __set_description(string $description): self
+    {
+        $this->description = $description;
+        return $this;
+    }
+
     public function get_genre(): string
     {
         return $this->genre;
@@ -33,6 +46,17 @@ class Artist implements JsonSerializable
     public function __set_genre(string $genre): self
     {
         $this->genre = $genre;
+        return $this;
+    }
+
+    public function get_popularSongs(): string
+    {
+        return $this->popularSongs;
+    }
+
+    public function __set_popularSongs(string $popularSongs): self
+    {
+        $this->popularSongs = $popularSongs;
         return $this;
     }
 
@@ -52,7 +76,9 @@ class Artist implements JsonSerializable
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'description' => $this->description,
             'genre' => $this->genre,
+            'popularSongs' => $this->popularSongs,
             'imagePath' => $this->imagePath
         ];
     }

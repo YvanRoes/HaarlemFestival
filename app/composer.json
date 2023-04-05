@@ -1,8 +1,7 @@
 {
     "require": {
-        "phpmailer/phpmailer": "^6.8"
-    },
-    "require": {
-        "mollie/mollie-api-php": "^2.0"
+        "phpmailer/phpmailer": "^6.8",
+        "mollie/mollie-api-php": "^2.0",
+        "endroid/qr-code": "^4.8"
     }
 }

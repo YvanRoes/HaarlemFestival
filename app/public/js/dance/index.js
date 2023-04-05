@@ -46,8 +46,18 @@ function generateArtist(artist, mt, artistGrid) {
     image = new Image();
     image.src = artist.imagePath;
     image.classList.add('w-[300px]');
-    artistContainer.appendChild(image);
 
+    artistName = document.createElement('h2');
+    artistName.classList.add('text-[24px]', 'text-[#F7F7FB]', 'font-[\'Lato\']', 'font-bold', 'mb-[20px]');
+    artistName.innerHTML = artist.name;
+
+    link = document.createElement('a');
+    link.href = '/dance/detailPage?id=' + artist.id;
+
+    link.appendChild(image);
+     
+    artistContainer.appendChild(artistName);
+    artistContainer.appendChild(link);
     artistGrid.appendChild(artistContainer);
 }
 
@@ -96,6 +106,10 @@ function generatePlanningSection(container) {
     generatePlanningItem(1, 'Tickets', planningGrid);
     generatePlanningItem(1, 'Price', planningGrid);
 
+
+    generatePlanningItems(planningGrid);
+
+
     planningParagraph = document.createElement('p');
     planningParagraph.classList.add('text-[#656262]', 'mt-[10px]');
     planningParagraph.innerHTML = '* The capacity of the Club sessions is very limited. Availability for All-Access pas holders can not be garanteed due to safety regulations. Tickets available represents total capacity. (90% is sold as single tickets. 10% of total capacity is left for Walk ins/All-Acces passholders.)';
@@ -126,11 +140,39 @@ function generatePlanningSection(container) {
 
 function generatePlanningItem(span, content, planningGrid) {
     planningItem = document.createElement('h2');
-    planningItem.classList.add('col-span-'+span,'outline', 'outline-1', 'outline-white', 'pl-[3px]');
+    planningItem.classList.add('col-span-'+span,'outline', 'outline-1', 'outline-white', 'p-[10px]');
 
     planningItem.innerHTML = content;
 
     planningGrid.appendChild(planningItem);
+}
+
+async function generatePlanningItems(planningGrid) {
+    sessions = await getDataFromSessionAPI();
+    artists = await getDataFromArtistAPI();
+    locations = await getDataFromLocationAPI();
+
+    for (let i = 0; i <= sessions.length; i++) {
+        const formatter = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' });
+        const formattedDateTime = formatter.format(new Date(sessions[i].date));
+
+        locationID = sessions[i].venue;
+        artistID = sessions[i].artist_id;
+
+        console.log(locationID);
+
+        generatePlanningItem(1, formattedDateTime, planningGrid);
+        generatePlanningItem(1, locations[locationID].name, planningGrid);
+        generatePlanningItem(2, sessions[i].artist_id, planningGrid);
+        generatePlanningItem(1, sessions[i].ticketsAmount, planningGrid);
+        generatePlanningItem(1, "€" + sessions[i].price, planningGrid);
+    }
+}
+
+//get the data from the api
+async function getDataFromSessionAPI() {
+    const response = await fetch('http://localhost/api/danceSessions');
+    return await response.json();
 }
 
 function generateLocationSection(container) {
@@ -177,14 +219,14 @@ function generateLocation(locationGrid, location) {
 async function generateLocations(locationGrid) {
     locations = await getDataFromLocationAPI();
 
-    for (let i = 0; i <= locations.length; i++) {
+    for (let i = 0; i < locations.length; i++) {
         generateLocation(locationGrid, locations[i]);
     }
 }
 
 //get the data from the api
 async function getDataFromLocationAPI() {
-    const response = await fetch('http://localhost/api/locations');
+    const response = await fetch('http://localhost/api/danceLocations');
     return await response.json();
 }
 
