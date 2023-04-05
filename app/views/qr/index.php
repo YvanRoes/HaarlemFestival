@@ -3,9 +3,9 @@ require __DIR__ . '/../../vendor/autoload.php';
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
-use Endroid\QrCode\Writer\PdfWriter;
 use Endroid\QrCode\Label\Label;
 use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
+use Dompdf\Dompdf;
 
 $qrcode = new QrCode("Testing QR Code");
 
@@ -16,10 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                     -> setErrorCorrectionLevel(new ErrorCorrectionLevelHigh); //makes the qr code more resillient
 
     //creates a png writer               
-    //$writer = new PNGWriter();
-
-    //creates a pdf writer
-    $writer = new PdfWriter();
+    $writer = new PNGWriter();
 
     //adds label to qr code
     $label = Label::create("Scan Ticket");
@@ -27,13 +24,21 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     //generates the qr code
     $result = $writer->write($qr_code, label: $label);
 
+    $dataUri = $result->getDataUri();
+
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml("<title>Register</title> <img src='$dataUri'>");
+    $dompdf->setPaper('A4', 'landscape');
+    $dompdf->render();
+    $dompdf->stream($filename = "Ticket.pdf", $options = []);
+
     //header("Content-Type: image/png");
     
     //print qr code on website
     //echo $result->getString();
 
     //save qr code as png
-    $result->saveToFile("qrCode.pdf");
+    //$result->saveToFile("qrCode.png");
 
     // validates the qr code with the desired value
     //$writer->validateResult($result, 'Life is too short to be generating QR codes');
