@@ -198,7 +198,7 @@ async function generatePlanningItems() {
   console.log(sessions);
   for (let i = 0; i < sessions.length; i++) {
     const formattedDateTime = formatter.format(new Date(sessions[i].date));
-    locationID = sessions[i].venue;
+    locationID = sessions[i].venue - 1;
     artistID = sessions[i].artist_id - 1;
 
       
