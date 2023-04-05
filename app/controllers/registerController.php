@@ -7,13 +7,12 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {    
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['g-recaptcha-response'])) {
                 $this->register();
-            }   
-            else {
+            } else {
                 $_SESSION['registerMsg'] = 'Captcha Failed';
-            }           
+            }
         }
         $this->displayView($this);
     }

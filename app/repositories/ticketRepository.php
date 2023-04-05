@@ -3,18 +3,18 @@ require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/ticket.php';
 class TicketRepository extends Repository
 {
-    public function get_AllTickets(): array
+    public function get_AllTickets()
     {
-        $sql = "SELECT * FROM tickets";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $tickets = [];
-        foreach ($result as $row) {
-            $ticket = new Ticket($row['id'], $row['status'], $row['price'], $row['user_id']);
-            array_push($tickets, $ticket);
+        try {
+            $sql = "SELECT id, status, price, user_id FROM ticket";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Ticket');
+            $r = $stmt->fetchAll();
+            return $r;
+        } catch (PDOException $e) {
+            echo $e;
         }
-        return $tickets;
     }
 
     public function get_TicketById($id): Ticket

@@ -88,8 +88,8 @@ class UserRepository extends Repository
     public function verify_UserCredentials(string $email, $passwd)
     {
         try {
-            $stmt = $this->conn->prepare("SELECT users.id FROM users WHERE email = :email AND password = :passwd");
-            $stmt->execute(array(':email' => htmlspecialchars($email), ':passwd' => htmlspecialchars($passwd)));
+            $stmt = $this->conn->prepare("SELECT users.id FROM users WHERE email = :email AND password = :password");
+            $stmt->execute(array(':email' => htmlspecialchars($email), ':password' => htmlspecialchars($passwd)));
             return $stmt->rowCount() == 1 ? true : false;
         } catch (PDOException $e) {
             echo $e;
@@ -107,7 +107,8 @@ class UserRepository extends Repository
         }
     }
 
-    public function insert_UserWithRole(User $user){
+    public function insert_UserWithRole(User $user)
+    {
         try {
             $stmt = $this->conn->prepare("INSERT INTO users (username, email, password, role, register_date) VALUES (:username, :email, :password, :role, CURRENT_DATE)");
             $stmt->execute(array(':username' => $user->get_username(), ':email' => $user->get_email(), ':password' => md5($user->get_password()), ':role' => $user->get_role()));

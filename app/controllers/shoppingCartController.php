@@ -7,41 +7,42 @@ require_once __DIR__ . '/../services/mailService.php';
 
 class ShoppingCartController extends Controller
 {
+    private $ticketService;
+    private $shoppingCartService;
+    function __construct()
+    {
+        $this->ticketService = new TicketService();
+        $this->shoppingCartService = new ShoppingCartService();
+
+
+    }
 
     public function index()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            if (isset($_POST['addTicket'])) {
-                $this->addTicket();
-            } else if (isset($_POST['removeTicket'])) {
-                $this->removeTicket();
-            } else if (isset($_POST['checkout'])) {
-                $this->checkout();
-            }
+        if ($_SESSION['user'] == null) {
+            header('Location: /login');
+        } else {
+            $this->displayView($this);
         }
 
-        $this->displayView($this);
     }
 
     public function addTicket()
     {
-        $ticketService = new TicketService();
-        $ticket = $ticketService->get_TicketById($_POST['ticketId']);
+        $ticket = $this->ticketService->get_TicketById($_POST['ticketId']);
         $shoppingCartService = new ShoppingCartService();
         $shoppingCartService->addTicket($ticket);
     }
 
     public function removeTicket()
     {
-        $ticketService = new TicketService();
-        $ticket = $ticketService->get_TicketById($_POST['ticketId']);
+        $ticket = $this->ticketService->get_TicketById($_POST['ticketId']);
         $shoppingCartService = new ShoppingCartService();
         $shoppingCartService->removeTicket($ticket);
     }
 
     public function checkout()
     {
-        $shoppingCartService = new ShoppingCartService();
-        $shoppingCartService->checkout();
+        $this->shoppingCartService->checkout();
     }
 }

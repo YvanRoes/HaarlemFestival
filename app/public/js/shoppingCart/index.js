@@ -49,7 +49,8 @@ function createItems(ticket) {
 
     const itemTotal = document.createElement('div');
     itemTotal.classList.add('item-total');
-    itemTotal.innerHTML = ticket.total;
+    itemTotal.innerHTML = ticket.quantity * ticket.price;
+
 
     itemContainer.appendChild(itemTitle);
     itemContainer.appendChild(itemPrice);

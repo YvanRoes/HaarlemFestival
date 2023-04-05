@@ -6,14 +6,6 @@ class Ticket implements JsonSerializable
     private ?float $price = null;
     private ?string $user_id = null;
 
-    public function __construct(?int $id, ?string $status, ?float $price, ?string $user_id)
-    {
-        $this->id = $id;
-        $this->status = $status;
-        $this->price = $price;
-        $this->user_id = $user_id;
-    }
-
     public function getId(): ?int
     {
         return $this->id;

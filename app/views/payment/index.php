@@ -8,11 +8,12 @@
 
     }
 </style>
-<title>Home</title>
+<title>Payment</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <?php
 include __DIR__ . '/../header.php';
+
 generateHeader('home', 'dark');
 ?>
 
@@ -37,11 +38,15 @@ generateHeader('home', 'dark');
             </form>
         </div>
         <div class="w-full h-full flex justify-center items-center" id="items-wrapper">
-            <?php
 
-            ?>
+        </div>
+
+        <div>
+
         </div>
 
     </div>
 
     <script src="/js/shoppingCart/index.js"></script>
+
+</body>
