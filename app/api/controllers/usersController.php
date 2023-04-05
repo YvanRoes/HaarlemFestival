@@ -32,7 +32,7 @@ class UsersController
           $this->userService->delete_UserById($object->id);
           break;
         case "edit":
-          $this->userService->edit_UserById($object->id, htmlspecialchars($object->username), htmlspecialchars($object->email));
+          $this->userService->edit_UserById($object->id, htmlspecialchars($object->username), htmlspecialchars($object->email), $object->role);
           echo $object->id;
           break;
         case "insert":
