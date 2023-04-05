@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Apr 01, 2023 at 08:59 PM
+-- Generation Time: Apr 05, 2023 at 05:39 PM
 -- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
 -- PHP Version: 8.0.26
 
@@ -41,12 +41,12 @@ CREATE TABLE `artist` (
 --
 
 INSERT INTO `artist` (`id`, `name`, `description`, `genre`, `popularSongs`, `imagePath`) VALUES
-(1, 'Hardwell', '', 'dance and house', NULL, '/img/Artist1.png'),
-(2, 'Armin van Buuren', '', 'trance and techo', NULL, '/img/Artist2.png'),
-(3, 'Martin Garrix', '', 'dance and electronic', NULL, '/img/Artist3.png'),
-(4, 'Tiësto', '', 'trance, techno, minimal, house and electro', NULL, '/img/Artist4.png'),
-(5, 'Nicky Romero', 'Nick Rotteveel, a professional DJ from the Netherlands known as Nicky Romero came into the light thanks to his hit Toulouse in 2011. From then on he has worked with, and received support from DJs, such as Tiësto, David Guetta, Calvin Harris, Avicii and Hardwell.', 'electrohouse and progressive house', 'Toulouse:I Could Be The One:Lose My Mind', '/img/Artist5.png'),
-(6, 'Afrojack', '', 'house', NULL, '/img/Artist6.png');
+(1, 'Hardwell', 'Robbert van de Corput, born January 7, 1988 , known professionally as Hardwell, is a Dutch DJ and music producer from Breda. He was voted the world\'s number one DJ by DJ Mag in 2013 and again in 2014. In 2022, he was ranked at number 43 in the top 100 DJs poll by DJ Mag. He is best known for his sets at music festivals, including Ultra Music Festival, Sunburn and Tomorrowland. ', 'dance and house', 'Bella Ciao:Spaceman:Apollo', '/img/Artist4.png'),
+(2, 'Armin van Buuren', 'Armin Jozef Jacobus Daniël van Buuren, born 25 December 1976 is a Dutch DJ and record producer. Since 2001, he has hosted A State of Trance (ASOT), a weekly radio show, which is broadcast to nearly 40 million listeners in 84 countries on over 100 FM radio stations. According to the website DJs and Festivals, \"the radio show propelled him to stardom and helped cultivate an interest in trance music around the world\".', 'trance and techo', 'Blah Blah Blah:This Is What It Feels Like:No Fun', '/img/Artist5.png'),
+(3, 'Martin Garrix', 'Martijn Gerard Garritsen, born on 14 May 1996, known professionally as Martin Garrix and also as Ytram and GRX, is a Dutch DJ and record producer who was ranked number one on DJ Mag\'s Top 100 DJs list for three consecutive years—2016, 2017, and 2018. He is best known for his singles \"Animals\", \"In the Name of Love\", and \"Scared to Be Lonely\".\r\n\r\nGarrix has performed at music festivals such as Coachella, Electric Daisy Carnival, Ultra Music Festival, Tomorrowland, and Creamfields. In 2014, he headlined the first edition of Ultra South Africa, making this his first major festival. In the same year, he became the youngest DJ to headline 2014 Ultra Music Festival at the age of 17. He was a resident DJ at Spain\'s Hï Ibiza (2017) and Ushuaïa Ibiza (2016 and 2018). He founded the label Stmpd Rcrds in 2016, months after leaving Spinnin\' Records and before signing with Sony Music. ', 'dance and electronic', 'Animals:In The Name Of Love:Scared To Be Lonely', '/img/Artist6.png'),
+(4, 'Tiësto', 'Tijs Michiel Verwest, born on 17 January 1969, known professionally as Tiësto  is a Dutch DJ and music producer. He was voted \"The Greatest DJ of All Time\" by Mix magazine in a 2010/2011 poll amongst fans. In 2013, he was voted by DJ Mag readers as the \"best DJ of the last 20 years\". He is also regarded as the \"Godfather of EDM\" by many sources. ', 'trance, techno, minimal, house and electro', 'Adagio For Strings:Feel It In My Bones:Lethal Industry', '/img/Artist3.png'),
+(5, 'Nicky Romero', 'Nick Rotteveel, a professional DJ from the Netherlands known as Nicky Romero came into the light thanks to his hit Toulouse in 2011. From then on he has worked with, and received support from DJs, such as Tiësto, David Guetta, Calvin Harris, Avicii and Hardwell.', 'electrohouse and progressive house', 'Toulouse:I Could Be The One:Lose My Mind', '/img/Artist1.png'),
+(6, 'Afrojack', 'Nick Leonardus van de Wall, born on 9 September 1987, better known as Afrojack, is a Dutch DJ, music producer and remixer. In 2007, he founded the record label Wall Recordings; his debut album Forget the World was released in 2014. Afrojack regularly features as one of the ten best artists in the Top 100 DJs published by DJ Mag. He is also the CEO of LDH Europe.', 'house', 'Hey Mama:Alone Again:Anywhere With You', '/img/Artist2.png');
 
 -- --------------------------------------------------------
 
@@ -127,7 +127,23 @@ CREATE TABLE `event_edm` (
 
 INSERT INTO `event_edm` (`id`, `venue`, `artist_id`, `date`, `session`, `duration`, `ticketsAmount`, `price`) VALUES
 (1, 1, 5, '2023-07-27 20:00:00.0', 'Back2Back', 360, 1500, 75),
-(5, 3, 5, '2023-07-28 23:00:00.0', 'Club', 90, 200, 60);
+(6, 3, 4, '2023-07-27 22:00:00.0', 'Club', 90, 200, 60),
+(7, 4, 1, '2023-07-27 23:00:00.0', 'Club', 90, 300, 60),
+(8, 5, 2, '2023-07-27 22:00:00.0', 'Club', 90, 200, 60),
+(9, 6, 3, '2023-07-27 22:00:00.0', 'Club', 90, 200, 60),
+(10, 2, 1, '2023-07-28 14:00:00.0', 'Back2Back', 540, 2000, 110),
+(11, 4, 6, '2023-07-28 22:00:00.0', 'Club', 90, 300, 60),
+(12, 1, 4, '2023-07-28 21:00:00.0', 'TiëstoWorld', 240, 1500, 75),
+(13, 3, 5, '2023-07-28 23:00:00.0', 'Club', 90, 200, 60),
+(14, 2, 6, '2023-07-29 14:00:00.0', 'Back2Back', 540, 2000, 110),
+(15, 2, 3, '2023-07-28 14:00:00.0', 'Back2Back', 540, 2000, 110),
+(16, 2, 2, '2023-07-28 14:00:00.0', 'Back2Back', 540, 2000, 110),
+(17, 2, 4, '2023-07-29 14:00:00.0', 'Back2Back', 540, 2000, 110),
+(18, 2, 5, '2023-07-29 14:00:00.0', 'Back2Back', 540, 2000, 110),
+(19, 4, 2, '2023-07-29 19:00:00.0', 'Club', 90, 300, 60),
+(20, 5, 1, '2023-07-29 21:00:00.0', 'Club', 90, 1500, 90),
+(21, 3, 3, '2023-07-29 16:00:00.0', 'Club', 90, 200, 60),
+(22, 1, 6, '2023-07-27 20:00:00.0', 'Back2Back', 360, 1500, 75);
 
 -- --------------------------------------------------------
 
@@ -511,7 +527,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `event_edm`
 --
 ALTER TABLE `event_edm`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `event_yummie`
