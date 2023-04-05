@@ -51,10 +51,14 @@ async function loadAdmins() {
 
 async function getUsersByRole(role) {
   let res = await getData('http://localhost/api/users');
-  console.log(res);
   let customers = [];
 
   for (let i = 0; i < res.length; i++) {
+    if (role == "all") {
+      customers = res;
+      break;
+    }
+
     if (res[i].role == role) {
       customers.push(res[i]);
     }
@@ -713,8 +717,69 @@ async function postData(url = '', data = {}) {
   console.log(response);
 }
 
-async function getData(url = '') {
+async function getData(url = ''){
   const response = await fetch(url);
   return response.json();
 }
-loadEDMData('artists');
+
+async function getCurrentPageUsers() {
+  userListType = document.getElementById('UserListType').innerHTML;
+  users = [];
+  switch (userListType) {
+    case 'customers':
+      users = getUsersByRole(0);
+      break;
+    case 'employees':
+      users = getUsersByRole(1);
+      break;
+    case 'admins':
+      users = getUsersByRole(9);
+      break;
+    default:
+      users = getUsersByRole("all");
+      break;
+  }
+
+  return users;
+}
+
+function sortByID() {
+  users = getCurrentPageUsers()
+    .then(users => {
+      users.sort((a, b) => (a.id > b.id ? 1 : -1));
+      createUserList(users, document.getElementById('UserListType').innerHTML);
+      addUserSearch(users);
+    })
+    .catch(error => {
+      console.error('Error fetching users:', error);
+    });
+}
+
+function sortByUsername(){
+  users = getCurrentPageUsers()
+    .then(users => {
+      users.sort((a, b) => (a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1));
+      createUserList(users, document.getElementById('UserListType').innerHTML);
+      addUserSearch(users);
+    })
+    .catch(error => {
+      console.error('Error fetching users:', error);
+    });
+}
+
+
+
+function sortByEmail(){
+  users = getCurrentPageUsers()
+  .then(users => {
+    users.sort((a, b) => (a.email.toLowerCase() > b.email.toLowerCase() ? 1 : -1));
+    createUserList(users, document.getElementById('UserListType').innerHTML);
+    addUserSearch(users);
+  })
+  .catch(error => {
+    console.error('Error fetching users:', error);
+  });
+}
+
+loadUserData();
+//loadEDMData('artists');

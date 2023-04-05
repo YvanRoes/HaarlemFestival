@@ -91,8 +91,15 @@
                         <option value="9">Admin</option>
                     </select>
                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="addNewUser()">Add user</button>
+                 
+                </div>
+                <div class="grid gap-4 w-full grid-cols-6 text-center">
+                    <button class="font-bold" onclick="sortByID()">ID</button>
+                    <button class="font-bold" onclick="sortByUsername()">Username</button>
+                    <button class="font-bold" onclick="sortByEmail()">Email</button>
                 </div>
                 <div class="flex flex-col gap-4 pb-5" id="contentUsersWrapper">
+                
                 </div>
             </div>
             <div class="w-8/12 h-max p-16 mt-16 rounded-lg hidden" id="edmPane">

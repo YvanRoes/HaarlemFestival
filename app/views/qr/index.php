@@ -16,10 +16,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                     -> setErrorCorrectionLevel(new ErrorCorrectionLevelHigh); //makes the qr code more resillient
 
     //creates a png writer               
-    $writer = new PNGWriter();
+    //$writer = new PNGWriter();
 
     //creates a pdf writer
-    //$writer = new PdfWriter();
+    $writer = new PdfWriter();
 
     //adds label to qr code
     $label = Label::create("Scan Ticket");
@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     //echo $result->getString();
 
     //save qr code as png
-    $result->saveToFile("qrCode.png");
+    $result->saveToFile("qrCode.pdf");
 
     // validates the qr code with the desired value
     //$writer->validateResult($result, 'Life is too short to be generating QR codes');
