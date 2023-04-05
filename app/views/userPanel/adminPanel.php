@@ -77,7 +77,7 @@
 
         </div>
         <div class="col-start-2 col-span-5 row-start-2 row-span-5 flex justify-center" id="Content">
-            <div class="w-8/12 h-max p-16 mt-16 rounded-lg hidden" id="UserPane">
+            <div class="w-9/12 h-max p-16 mt-16 rounded-lg hidden" id="UserPane">
                 <h1 id="contentTitle" class="text-[64px]">Users</h1>
                 <input id="searchInput" type="text" placeholder="Search" />
                 <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">

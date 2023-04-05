@@ -15,7 +15,7 @@
         //add header and footer
         require __DIR__ . '/../views/header.php';
 
-        if ($name == "dance"){
+        if ($name == "dance" || $name == "home"){
             generateHeader($name, 'light');
         }
         else{

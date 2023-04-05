@@ -135,11 +135,11 @@ class UserRepository extends Repository
         }
     }
 
-    public function edit_UserById($id, $username, $email)
+    public function edit_UserById($id, $username, $email, $role_id)
     {
         try {
-            $stmt = $this->conn->prepare("UPDATE `users` SET `username`=:username,`email`=:email WHERE id = :id;");
-            $stmt->execute(array(':id' => $id, ':username' => $username, ':email' => $email));
+            $stmt = $this->conn->prepare("UPDATE `users` SET `username`=:username,`email`=:email,`role`=:role WHERE id = :id;");
+            $stmt->execute(array(':id' => $id, ':username' => $username, ':email' => $email, ':role' => $role_id));
         } catch (PDOException $e) {
             echo $e;
         }
