@@ -6,7 +6,7 @@ class ArtistRepository extends Repository
   public function get_AllArtists()
   {
     try {
-      $stmt = $this->conn->prepare("SELECT id, name, genre, imagePath FROM artist");
+      $stmt = $this->conn->prepare("SELECT id, name, description, genre, popularSongs, imagePath FROM artist");
       $stmt->execute();
 
       $stmt->setFetchMode(PDO::FETCH_CLASS, 'Artist');
@@ -17,6 +17,20 @@ class ArtistRepository extends Repository
     }
   }
 
+  public function get_ArtistById($id)
+  {
+    try {
+      $stmt = $this->conn->prepare("SELECT id, name, description, genre, popularSongs, imagePath FROM artist WHERE id = :id");
+      $stmt->bindParam(':id', $id);
+      $stmt->execute();
+
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'Artist');
+      $r = $stmt->fetch();
+      return $r;
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
   public function insert_Artist(Artist $artist){
     try {
       $stmt = $this->conn->prepare("INSERT INTO artist (name, genre, imagePath) VALUES (:name, :genre, :path)");

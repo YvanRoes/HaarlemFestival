@@ -1,5 +1,5 @@
 <?php
-class Location implements JsonSerializable
+class DanceLocation implements JsonSerializable
 {
     private ?int $id = null;
     private ?string $name = null;
