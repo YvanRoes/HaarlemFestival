@@ -53,8 +53,11 @@ async function getUsersByRole(role) {
   let res = await getData('http://localhost/api/users');
   console.log(res);
   let customers = [];
-
   for (let i = 0; i < res.length; i++) {
+    if (role == "all") {
+      customers = res;
+      break;
+    }
     if (res[i].role == role) {
       customers.push(res[i]);
     }
