@@ -137,7 +137,7 @@
                         <div></div>
                         <div></div>
                         <div></div>
-                        <textarea type="text" for="songInput" id="songInput" rows="1" class="block w-full float-left m-auto  py-2 px-2 text-sm text-gray-800 bg-white border-1 resize-none rounded-lg col-span-2" placeholder="User email..." required></textarea>
+                        <textarea type="text" for="songInput" id="songInput" rows="1" class="block w-full float-left m-auto  py-2 px-2 text-sm text-gray-800 bg-white border-1 resize-none rounded-lg col-span-2" placeholder="Popular songs" required></textarea>
                         <button type="button" class="w-fit h-fit inline-flex items-center px-5 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800 ml-1" id="addSongToList">Add</button>
                         <ul id="songList" class="flex flex-col gap-1 mt-2 text-gray-500 col-span-2"></ul>
                     </div>

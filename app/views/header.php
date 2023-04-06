@@ -79,7 +79,7 @@ function loadHTML()
           <i class='fa fa-user' style='font-size: 24px;'></i>Account<i class='fa fa-caret-down mt-[5px]'></i></button>";
   }
   echo
-  "<a href='/api/users'>
+  "<a href='/cart'>
         <div class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['unselected'] . "] flex items-center gap-[10px] border-2 border-[" . $GLOBALS['unselected'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['headerTextColourValue'] . "] cursor-pointer'>
         <i class='fa fa-shopping-cart' style='font-size: 24px;'></i>
           cart</div>
