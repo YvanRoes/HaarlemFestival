@@ -25,4 +25,22 @@ class TokenRepository extends Repository{
       echo $e;
     }
   }
+
+  public function delete_token($id){
+    try {
+      $stmt = $this->conn->prepare("DELETE FROM API_KEYS WHERE id = :id");
+      $stmt->execute(array(':id' => htmlspecialchars($id)));
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
+
+  public function create_token($uuid){
+    try {
+      $stmt = $this->conn->prepare("INSERT INTO API_KEYS(uuid) VALUES(:uuid)");
+      $stmt->execute(array(':uuid' => htmlspecialchars($uuid)));
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
 }

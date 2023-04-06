@@ -31,6 +31,15 @@ class Api_TokensController
       $body = file_get_contents("php://input");
       $object = json_decode($body);
 
+
+      if(isset($object->post_type)){
+        if($object->post_type == 'delete'){
+          $this->tokenService->delete_token($object->id);
+        }
+        if($object->post_type == 'create'){
+          $this->tokenService->create_token();
+        }
+      }
       if (isset($object->token)) {
         if ($this->tokenService->verify_token($object->token)) {
           echo "success";

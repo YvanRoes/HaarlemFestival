@@ -16,4 +16,12 @@ class TokenService
   public function get_all_tokens(): array{
     return $this->repo->get_all_tokens();
   }
+  public function delete_token($id){
+    return $this->repo->delete_token($id);
+  }
+
+  public function create_token(){
+      $token = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
+      $this->repo->create_token($token);
+  }
 }

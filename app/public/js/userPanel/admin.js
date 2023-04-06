@@ -5,6 +5,10 @@ async function loadUserData(type) {
   userPane = document.getElementById('UserPane');
   userPane.classList.remove('hidden');
 
+  yummiePane = document.getElementById('yummiePane');
+  if (!yummiePane.classList.contains('hidden')) {
+    yummiePane.classList.add('hidden');
+  }
   edmPane = document.getElementById('edmPane');
   if (!edmPane.classList.contains('hidden')) {
     edmPane.classList.add('hidden');
@@ -792,6 +796,11 @@ async function loadSessions() {
   if (!artistPane.classList.contains('hidden')) {
     artistPane.classList.add('hidden');
   }
+
+  yummiePane = document.getElementById('yummiePane');
+  if (!yummiePane.classList.contains('hidden')) {
+    yummiePane.classList.add('hidden');
+  }
   venuePane = document.getElementById('venueSubPane');
   if (!venuePane.classList.contains('hidden')) {
     venuePane.classList.add('hidden');
@@ -986,14 +995,19 @@ function insertSession() {
   sessionType = document.getElementById('sessionType');
   sessionDuration = document.getElementById('sessionDuration');
 
-  if (sessionPrice.value == '' || sessionType.value == '' || sessionDuration.value == '' || sessionDate.value == '') {
+  if (
+    sessionPrice.value == '' ||
+    sessionType.value == '' ||
+    sessionDuration.value == '' ||
+    sessionDate.value == ''
+  ) {
     alert('one or multiple fields are empty');
     return;
   }
   date = new Date(sessionDate.value)
-      .toISOString()
-      .slice(0, 19)
-      .replace('T', ' ')
+    .toISOString()
+    .slice(0, 19)
+    .replace('T', ' ');
   data = {
     post_type: 'insert',
     session_date: date,
@@ -1002,7 +1016,7 @@ function insertSession() {
     session_type: sessionType.value,
     session_ticket_amount: parseInt(sessionTickets.value),
     session_price: parseFloat(sessionPrice.value),
-    session_duration: parseInt(sessionDuration.value)
+    session_duration: parseInt(sessionDuration.value),
   };
 
   console.log(data);
@@ -1044,11 +1058,7 @@ function editSession(id) {
   sArtist.disabled = true;
   sDate.disabled = true;
 
-
-  date = new Date(sDate.value)
-    .toISOString()
-    .slice(0, 19)
-    .replace('T', ' ');
+  date = new Date(sDate.value).toISOString().slice(0, 19).replace('T', ' ');
 
   data = {
     post_type: 'edit',
@@ -1062,7 +1072,6 @@ function editSession(id) {
     session_type: sType.innerHTML,
   };
 
-  console.log(dd);
   postData('http://localhost/api/danceSessions', data);
 }
 function removeSession(id) {
@@ -1080,12 +1089,338 @@ function removeSession(id) {
 async function assignOptionsToSelect(element, data, selected) {
   objects = await data;
   for (let i = 0; i < objects.length; i++) {
-    element.innerHTML += '<option value="' + objects[i].id + '">' + objects[i].name + '</option>';
+    element.innerHTML +=
+      '<option value="' + objects[i].id + '">' + objects[i].name + '</option>';
   }
   element.value = selected;
 }
 
 //DANCE FUNCTIONALITY --END
+
+//YUMMIE FUNCTIONALITY --START ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function loadYummieData(type) {
+  yummiePane = document.getElementById('yummiePane');
+  yummiePane.classList.remove('hidden');
+
+  userPane = document.getElementById('UserPane');
+  edmPane = document.getElementById('edmPane');
+  if (!userPane.classList.contains('hidden')) {
+    userPane.classList.add('hidden');
+  }
+  if (!edmPane.classList.contains('hidden')) {
+    edmPane.classList.add('hidden');
+  }
+
+  switch (type) {
+    case 'restaurants':
+      loadRestaurants();
+      break;
+    case 'sessions':
+      loadSessions();
+    default:
+      break;
+  }
+}
+
+function loadRestaurants() {
+  restaurantPane = document.getElementById('yummiePane');
+  restaurantPane.classList.remove('hidden');
+
+  sessionsPane = document.getElementById('sessionSubPane');
+  if (!sessionsPane.classList.contains('hidden')) {
+    sessionsPane.classList.add('hidden');
+  }
+
+  objects = getData('/api/restaurants');
+  createRestaurantList(objects);
+}
+
+function createRestaurantList(objects) {
+  parentElement = document.getElementById('contentRestaurantWrapper');
+  title = document.getElementById('YummieTitle');
+  title.innerHTML = 'Restaurants';
+  parentElement.innerHTML = '';
+
+  objects.then((objects) => {
+    for (let i = 0; i < objects.length; i++) {
+      createRestaurantContainer(
+        parentElement,
+        objects[i].id,
+        objects[i].name,
+        objects[i].category,
+        objects[i].star,
+        objects[i].michelinStar,
+        objects[i].description,
+        objects[i].address,
+        objects[i].phone_number,
+        objects[i].capacity
+      );
+    }
+  });
+}
+
+function createRestaurantContainer(
+  element,
+  id,
+  name,
+  category,
+  star,
+  michelinStar,
+  description,
+  address,
+  phoneNumber,
+  capacity
+) {
+  container = document.createElement('span');
+  container.classList.add(
+    'bg-white',
+    'p-2',
+    'rounded-md',
+    'grid',
+    'lg:grid-cols-6',
+    'lg:grid-rows-2',
+    'md:grid-cols-1',
+    'text-left',
+    'relative',
+    'gap-4',
+    'text-center'
+  );
+
+  idSpan = document.createElement('span');
+  idSpan.innerHTML = id;
+  idSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  idSpan.setAttribute('id', 'rIdSpan' + id);
+
+  nameSpan = document.createElement('span');
+  nameSpan.innerHTML = name;
+  nameSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  nameSpan.setAttribute('name', 'rNameSpan' + id);
+
+  categorySpan = document.createElement('span');
+  categorySpan.innerHTML = category;
+  categorySpan.classList.add(
+    'h-full',
+    'items-center',
+    'justify-center',
+    'flex'
+  );
+  categorySpan.setAttribute('category', 'rCategorySpan' + id);
+
+  starSpan = document.createElement('span');
+  starSpan.innerHTML = star;
+  starSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  starSpan.setAttribute('star', 'rStarSpan' + id);
+
+  michelinStarSpan = document.createElement('span');
+  michelinStarSpan.classList.add('text-[#F7F7FB]', 'text-sm', 'font-bold');
+  michelinStarSpan.innerHTML = michelinStar;
+  michelinStarSpan.classList.add(
+    'h-full',
+    'items-center',
+    'justify-center',
+    'flex'
+  );
+  michelinStarSpan.setAttribute('michelinStar', 'rMichelinStarSpan' + id);
+
+  descriptionSpan = document.createElement('span');
+  descriptionSpan.innerHTML = description;
+  descriptionSpan.classList.add(
+    'h-full',
+    'items-center',
+    'justify-center',
+    'flex'
+  );
+  descriptionSpan.setAttribute('description', 'rDescriptionSpan' + id);
+  addressSpan = document.createElement('span');
+  addressSpan.innerHTML = address;
+  addressSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  addressSpan.setAttribute('address', 'rAddressSpan' + id);
+
+  phoneNumberSpan = document.createElement('span');
+  phoneNumberSpan.innerHTML = phoneNumber;
+  phoneNumberSpan.classList.add(
+    'h-full',
+    'items-center',
+    'justify-center',
+    'flex'
+  );
+  phoneNumberSpan.setAttribute('phoneNumber', 'rPhoneNumberSpan' + id);
+
+  capacitySpan = document.createElement('span');
+  capacitySpan.innerHTML = capacity;
+  capacitySpan.classList.add(
+    'h-full',
+    'items-center',
+    'justify-center',
+    'flex'
+  );
+  capacitySpan.setAttribute('capacity', 'rCapacitySpan' + id);
+
+  //remove user
+  buttonRemove = document.createElement('button');
+  buttonRemove.innerHTML = 'REMOVE';
+  buttonRemove.classList.add(
+    'm-2',
+    'py-2',
+    'px-4',
+    'rounded-md',
+    'text-[#F7F7FB]',
+    'bg-red-500',
+    'w-fit'
+  );
+  buttonRemove.addEventListener('click', () => {
+    removeRestaurant(id);
+  });
+
+  //edit user
+  buttonEdit = document.createElement('button');
+  buttonEdit.innerHTML = 'EDIT';
+  buttonEdit.classList.add(
+    'm-2',
+    'py-2',
+    'px-8',
+    'rounded-md',
+    'text-[#F7F7FB]',
+    'bg-slate-800',
+    'w-fit',
+    'float-right',
+    'justify-center'
+  );
+
+  buttonEdit.setAttribute('id', 'restaurantB' + id);
+  buttonEdit.addEventListener('click', () => {
+    editRestaurant(id);
+  });
+
+  container.appendChild(nameSpan);
+  container.appendChild(categorySpan);
+  container.appendChild(starSpan);
+  container.appendChild(michelinStarSpan);
+  container.appendChild(descriptionSpan);
+  container.appendChild(addressSpan);
+  container.appendChild(phoneNumberSpan);
+  container.appendChild(capacitySpan);
+  container.appendChild(buttonRemove);
+  container.appendChild(buttonEdit);
+
+  element.appendChild(container);
+}
+
+function editRestaurant(id) {
+  rNamespan = document.getElementById('rNameSpan' + id);
+  rCategoryspan = document.getElementById('rCategorySpan' + id);
+  rStarspan = document.getElementById('rStarSpan' + id);
+  rMichelinStarspan = document.getElementById('rMichelinStarSpan' + id);
+  rDescriptionspan = document.getElementById('rDescriptionSpan' + id);
+  rAddressspan = document.getElementById('rAddressSpan' + id);
+  rPhonenumberspan = document.getElementById('rPhoneNumberSpan' + id);
+  rCapacitySpan = document.getElementById('rCapacitySpan' + id);
+
+  b = document.getElementById('restaurantB' + id);
+
+  if (b.innerHTML == 'EDIT') {
+    setEditableType(rNamespan);
+    setEditableType(rCategoryspan);
+    setEditableType(rStarspan);
+    setEditableType(rMichelinStarspan);
+    setEditableType(rDescriptionspan);
+    setEditableType(rAddressspan);
+    setEditableType(rPhonenumberspan);
+    setEditableType(rCapacitySpan);
+    b.innerHTML = 'Save';
+    b.classList.add('bg-green-400', 'text-[#121212]');
+    return;
+  }
+  b.innerHTML = 'EDIT';
+  b.classList.remove('bg-green-400', 'text-[#121212]');
+  setEditableType(rNamespan);
+  setEditableType(rCategoryspan);
+  setEditableType(rStarspan);
+  setEditableType(rMichelinStarspan);
+  setEditableType(rDescriptionspan);
+  setEditableType(rAddressspan);
+  setEditableType(rPhonenumberspan);
+  setEditableType(rCapacitySpan);
+
+  //check for NaN
+  if (isNaN(rCapacitySpan.innerHTML)) {
+    alert('capacity is not a number');
+    return;
+  }
+
+  if (isNaN(rStarSpan.innerHTML)) {
+    alert('star is not a number');
+    return;
+  }
+
+  //send data
+  let form = new FormData();
+  form.append('post_type', 'edit');
+  form.append('id', id);
+  form.append('restaurant_name', rNamespan.innerHTML);
+  form.append('restaurant_category', rCategoryspan.innerHTML);
+  form.append('restaurant_star', rStarspan.innerHTML);
+  form.append('restaurant_michelinStar', rMichelinStarspan.innerHTML);
+  form.append('restaurant_description', rDescriptionspan.innerHTML);
+  form.append('restaurant_address', rAddressspan.innerHTML);
+  form.append('restaurant_phoneNumber', rPhonenumberspan.innerHTML);
+  form.append('restaurant_capacity', rCapacitySpan.innerHTML);
+
+  console.log(data);
+  postForm('http://localhost/api/restaurants', form).then(
+    delay(1000).then(() => loadRestaurants())
+  );
+}
+
+function removeRestaurant(id) {
+  data = {
+    post_type: 'delete',
+    id: id,
+  };
+
+  if (confirm('are you sure you want to delete this restaurant?')) {
+    postData('http://localhost/api/restaurants', data);
+    delay(1000).then(loadRestaurants());
+  }
+}
+
+function insertRestaurant() {
+  rNamespan = document.getElementById('rNameSpan' + id);
+  rCategoryspan = document.getElementById('rCategorySpan' + id);
+  rStarspan = document.getElementById('rStarSpan' + id);
+  rMichelinStarspan = document.getElementById('rMichelinStarSpan' + id);
+  rDescriptionspan = document.getElementById('rDescriptionSpan' + id);
+  rAddressspan = document.getElementById('rAddressSpan' + id);
+  rPhonenumberspan = document.getElementById('rPhoneNumberSpan' + id);
+  rCapacitySpan = document.getElementById('rCapacitySpan' + id);
+  picture = document.getElementById('restaurantFile');
+
+  data = {
+    post_type: 'insert',
+    restaurant_name: rNamespan.innerHTML,
+    restaurant_category: rCategoryspan.innerHTML,
+    restaurant_star: rStarspan.innerHTML,
+    restaurant_michelinStar: rMichelinStarspan.innerHTML,
+    restaurant_description: rDescriptionspan.innerHTML,
+    restaurant_address: rAddressspan.innerHTML,
+    restaurant_phoneNumber: rPhonenumberspan.innerHTML,
+    restaurant_capacity: rCapacitySpan.innerHTML,
+    picture1: picture.files[0],
+    picture2: picture.files[1],
+    picture3: picture.files[2],
+    picture4: picture.files[3],
+    picture5: picture.files[4],
+    picture6: picture.files[5],
+    picture7: picture.files[6],
+    picture8: picture.files[7],
+    picture9: picture.files[8],
+  };
+
+  postForm('http://localhost/api/restaurants', form).then(
+    delay(1000).then(() => loadRestaurants())
+  );
+}
 
 //GLOBAL
 

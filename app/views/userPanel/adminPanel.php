@@ -76,6 +76,15 @@
                         <button onclick="loadEDMData(`sessions`)" class="block px-4 py-2 dark:hover:text-[#121212]">sessions</button>
                     </li>
                 </ul>
+                <ul class="text-sm text-[#656262] mt-4" id="yummieEvent">
+                    <li class="font-bold"><span>Yummie</span></li>
+                    <li>
+                        <button onclick="loadYummieData(`restaurants`)" class="block px-4 py-2 dark:hover:text-[#121212]">restaurants</button>
+                    </li>
+                    <li>
+                        <button onclick="loadYummieData(`smth`)" class="block px-4 py-2 dark:hover:text-[#121212]">sessions</button>
+                    </li>
+                </ul>
             </ul>
 
         </div>
@@ -152,6 +161,35 @@
                             <span class="col-span-1">ticket count</span>
                             <span class="col-span-1">ticket price</span>
                         </div>
+                    </div>
+                    <div class="flex flex-col gap-4 pb-5" id="contentSessionWrapper">
+                    </div>
+                </div>
+            </div>
+            <div class="w-8/12 h-max p-16 mt-16 rounded-lg hidden" id="yummiePane">
+                <h1 id="YummieTitle" class="text-[64px]"></h1>
+                <div id="restaurantSubPane" class="hidden">
+                    <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+                        <input type="text" id="restaurantName" placeholder="restaurant name" required />
+                        <input type="text" id="restaurantCategory" placeholder="category" required />
+                        <input type="number" step="0.1" min="0" max="5" id="restaurantStar" placeholder="star" required />
+                        <select id="restaurantMichelinStar" required>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                        <input type="text" id="restaurantDescription" placeholder="description" required />
+                        <input type="text" id="restaurantAddress" placeholder="address" required />
+                        <input type="text" id="restaurantPhoneNumber" placeholder="phone number" required />
+                        <input type="number" id="restaurantCap" placeholder="Capacity" required />
+                        <input id="restaurantFile" type="file" title=" " class="col-span-2" />
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurant()">Add restaurants</button>
+                    </div>
+                    <div class="flex flex-col gap-4 pb-5" id="contentRestaurantWrapper">
+                    </div>
+                </div>
+                <div id="sessionSubPane" class="hidden">
+                    <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+
                     </div>
                     <div class="flex flex-col gap-4 pb-5" id="contentSessionWrapper">
                     </div>
