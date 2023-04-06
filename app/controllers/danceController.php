@@ -30,9 +30,12 @@ class DanceController extends Controller
             $songsString = $artist->get_popularSongs();
             $popularSongs = explode(":", $songsString);
             $danceSessions = $this->danceSessionService->get_AllDanceSessionsByArtistId($_GET['id']);
-
+            $venues = [];
+            
             foreach ($danceSessions as $session) {
                 $venue = $this->danceLocationService->get_DanceLocationById($session->get_venue());
+                
+                array_push($venues, $venue);	
             }
         }
         require __DIR__ . '/../views/dance/detailPage.php';
