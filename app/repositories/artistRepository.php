@@ -34,8 +34,8 @@ class ArtistRepository extends Repository
   public function insert_Artist(Artist $artist)
   {
     try {
-      $stmt = $this->conn->prepare("INSERT INTO artist (name, description, genre, imagePath) VALUES (:name, :genre, :des, :path)");
-      $stmt->execute(array(':name' => $artist->get_name(), ':des' => $artist->get_description(), ':genre' => $artist->get_genre(), ':path' => $artist->get_imagePath()));
+      $stmt = $this->conn->prepare("INSERT INTO artist (name, description, genre, popularSongs, imagePath) VALUES (:name, :genre, :des, :songs, :path)");
+      $stmt->execute(array(':name' => $artist->get_name(), ':des' => $artist->get_description(), ':genre' => $artist->get_genre(),':songs' => $artist->get_popularSongs(), ':path' => $artist->get_imagePath()));
     } catch (PDOException $e) {
       echo $e;
     }

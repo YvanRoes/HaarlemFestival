@@ -34,7 +34,8 @@ class ArtistsController
             $a = new Artist();
             $a->__set_name(htmlspecialchars($_POST['artist_name']));
             $a->__set_genre(htmlspecialchars($_POST['artist_genre']));
-            $a->__set_description(htmlspecialchars($_POST['artist_genre']));
+            $a->__set_description(htmlspecialchars($_POST['artist_description']));
+            $a->__set_popularSongs(htmlspecialchars($_POST['artist_songs']));
             $file = $_FILES['picture'];
 
             $curr = getcwd();
@@ -48,7 +49,6 @@ class ArtistsController
             $uploadPath = $curr . $img . basename($file['name']);
             move_uploaded_file($fileTmpName, $uploadPath);
             $a->__set_imagePath(('/img/' . $file['name']));
-            var_dump($a);
             $this->artistService->insert_Artist($a);
             break;
           default:

@@ -308,6 +308,67 @@ function addNewUser() {
   delay(1000).then(() => loadUserData(userListType));
 }
 
+async function getCurrentPageUsers() {
+  userListType = document.getElementById('UserListType').innerHTML;
+  users = [];
+  switch (userListType) {
+    case 'customers':
+      users = getUsersByRole(0);
+      break;
+    case 'employees':
+      users = getUsersByRole(1);
+      break;
+    case 'admins':
+      users = getUsersByRole(9);
+      break;
+    default:
+      users = getUsersByRole('all');
+      break;
+  }
+
+  return users;
+}
+
+function sortByID() {
+  users = getCurrentPageUsers()
+    .then((users) => {
+      users.sort((a, b) => (a.id > b.id ? 1 : -1));
+      createUserList(users, document.getElementById('UserListType').innerHTML);
+      addUserSearch(users);
+    })
+    .catch((error) => {
+      console.error('Error fetching users:', error);
+    });
+}
+
+function sortByUsername() {
+  users = getCurrentPageUsers()
+    .then((users) => {
+      users.sort((a, b) =>
+        a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+      );
+      createUserList(users, document.getElementById('UserListType').innerHTML);
+      addUserSearch(users);
+    })
+    .catch((error) => {
+      console.error('Error fetching users:', error);
+    });
+}
+
+function sortByEmail() {
+  users = getCurrentPageUsers()
+    .then((users) => {
+      users.sort((a, b) =>
+        a.email.toLowerCase() > b.email.toLowerCase() ? 1 : -1
+      );
+      createUserList(users, document.getElementById('UserListType').innerHTML);
+      addUserSearch(users);
+    })
+    .catch((error) => {
+      console.error('Error fetching users:', error);
+    });
+}
+
 // USER FUNCTIONALITY --END
 
 //EDM FUNCTIONALITY --START
@@ -416,7 +477,7 @@ function createVenueContainer(element, id, name, address, capacity) {
     };
 
     if (confirm('are you sure you want to delete this venue?')) {
-      postData('http://localhost/api/locations', data);
+      postData('http://localhost/api/danceLocations', data);
       delay(1000).then(loadVenues());
     }
   });
@@ -462,18 +523,17 @@ function createVenueContainer(element, id, name, address, capacity) {
       return;
     }
 
-    //send data
-    data = {
-      post_type: 'edit',
-      id: id,
-      venue_name: vNameSpan.innerHTML,
-      venue_address: vAddressSpan.innerHTML,
-      venue_capacity: vCapSpan.innerHTML,
-    };
+    //send form
+    let form = new FormData();
+    form.append('post_type', 'edit');
+    form.append('id', id);
+    form.append('venue_name', vNameSpan.innerHTML);
+    form.append('venue_address', vAddressSpan.innerHTML);
+    form.append('venue_capacity', vCapSpan.innerHTML);
 
-    console.log(data);
-    postData('http://localhost/api/locations', data);
-    delay(1000).then(loadVenues());
+    postForm('http://localhost/api/danceLocations', form).then(
+      delay(1000).then(() => loadVenues())
+    );
   });
 
   container.appendChild(idSpan);
@@ -490,17 +550,25 @@ function insertVenue() {
   vName = document.getElementById('venueName');
   vAddress = document.getElementById('venueAddress');
   vCap = document.getElementById('venueCap');
-
+  picture = document.getElementById('venueFile');
   data = {
     post_type: 'insert',
-    venue_name: vName.value,
+    venue_name: vName.innerHTML,
     venue_address: vAddress.value,
     venue_capacity: vCap.value,
-    file: this.file,
+    picture: this.file,
   };
 
-  postData('http://localhost/api/locations', data);
-  delay(1000).then(loadVenues());
+  let form = new FormData();
+  form.append('post_type', 'insert');
+  form.append('venue_name', vName.value);
+  form.append('venue_address', vAddress.value);
+  form.append('venue_capacity', vCap.value);
+  form.append('picture', picture.files[0]);
+
+  postForm('http://localhost/api/danceLocations', form).then(
+    delay(1000).then(() => loadVenues())
+  );
 }
 
 function loadArtists() {
@@ -633,8 +701,9 @@ async function createArtistContainer(element, id, name, genres) {
     form.append('artist_genre', aGenresSpan.innerHTML);
 
     console.log(form);
-    postForm('http://localhost/api/artists', form)
-      .then(delay(1000).then(loadArtists()));
+    postForm('http://localhost/api/artists', form).then(
+      delay(1000).then(loadArtists())
+    );
   });
 
   container.appendChild(idSpan);
@@ -649,13 +718,20 @@ async function createArtistContainer(element, id, name, genres) {
 function insertArtist() {
   aName = document.getElementById('artistName');
   aGenres = document.getElementById('artistGenre');
+  aDescription = document.getElementById('artistDescription');
+  aSongs = document.getElementById('artistSongs');
   picture = document.getElementById('artistPicture');
 
+  if (aName.value == '' || aGenres.value == '' || aDescription.value == '') {
+    alert('not all fields have been filled in');
+    return;
+  }
   let form = new FormData();
   form.append('post_type', 'insert');
   form.append('artist_name', aName.value);
   form.append('artist_genre', aGenres.value);
-  form.append('artist_description', 'temp description');
+  form.append('artist_description', aDescription.value);
+  form.append('artist_songs', aSongs.value);
   form.append('picture', picture.files[0]);
   console.log(form);
   postForm('http://localhost/api/artists', form);
@@ -704,66 +780,5 @@ async function getData(url = '') {
   return response.json();
 }
 
-async function getCurrentPageUsers() {
-  userListType = document.getElementById('UserListType').innerHTML;
-  users = [];
-  switch (userListType) {
-    case 'customers':
-      users = getUsersByRole(0);
-      break;
-    case 'employees':
-      users = getUsersByRole(1);
-      break;
-    case 'admins':
-      users = getUsersByRole(9);
-      break;
-    default:
-      users = getUsersByRole('all');
-      break;
-  }
-
-  return users;
-}
-
-function sortByID() {
-  users = getCurrentPageUsers()
-    .then((users) => {
-      users.sort((a, b) => (a.id > b.id ? 1 : -1));
-      createUserList(users, document.getElementById('UserListType').innerHTML);
-      addUserSearch(users);
-    })
-    .catch((error) => {
-      console.error('Error fetching users:', error);
-    });
-}
-
-function sortByUsername() {
-  users = getCurrentPageUsers()
-    .then((users) => {
-      users.sort((a, b) =>
-        a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
-      );
-      createUserList(users, document.getElementById('UserListType').innerHTML);
-      addUserSearch(users);
-    })
-    .catch((error) => {
-      console.error('Error fetching users:', error);
-    });
-}
-
-function sortByEmail() {
-  users = getCurrentPageUsers()
-    .then((users) => {
-      users.sort((a, b) =>
-        a.email.toLowerCase() > b.email.toLowerCase() ? 1 : -1
-      );
-      createUserList(users, document.getElementById('UserListType').innerHTML);
-      addUserSearch(users);
-    })
-    .catch((error) => {
-      console.error('Error fetching users:', error);
-    });
-}
-
 //loadUserData();
-loadEDMData('artists');
+loadEDMData('venues');
