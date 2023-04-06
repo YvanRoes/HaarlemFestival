@@ -82,7 +82,7 @@
                         <button onclick="loadYummieData(`restaurants`)" class="block px-4 py-2 dark:hover:text-[#121212]">restaurants</button>
                     </li>
                     <li>
-                        <button onclick="loadYummieData(`smth`)" class="block px-4 py-2 dark:hover:text-[#121212]">sessions</button>
+                        <button onclick="loadYummieData(`sessions`)" class="block px-4 py-2 dark:hover:text-[#121212]">sessions</button>
                     </li>
                 </ul>
             </ul>
@@ -169,21 +169,22 @@
             <div class="w-8/12 h-max p-16 mt-16 rounded-lg hidden" id="yummiePane">
                 <h1 id="YummieTitle" class="text-[64px]"></h1>
                 <div id="restaurantSubPane" class="hidden">
-                    <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
-                        <input type="text" id="restaurantName" placeholder="restaurant name" required />
+                    <form action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+                        <input type="text" id="restaurantName" placeholder="restaurantName" required />
                         <input type="text" id="restaurantCategory" placeholder="category" required />
                         <input type="number" step="0.1" min="0" max="5" id="restaurantStar" placeholder="star" required />
                         <select id="restaurantMichelinStar" required>
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
+                            <option value="" disabled selected>Michelin star</option>
+                            <option value="0">False</option>
+                            <option value="1">True</option>
                         </select>
                         <input type="text" id="restaurantDescription" placeholder="description" required />
                         <input type="text" id="restaurantAddress" placeholder="address" required />
                         <input type="text" id="restaurantPhoneNumber" placeholder="phone number" required />
-                        <input type="number" id="restaurantCap" placeholder="Capacity" required />
+                        <input type="number" id="restaurantCapacity" placeholder="Capacity" required />
                         <input id="restaurantFile" type="file" title=" " class="col-span-2" />
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurant()">Add restaurants</button>
-                    </div>
+                    </form>
                     <div class="flex flex-col gap-4 pb-5" id="contentRestaurantWrapper">
                     </div>
                 </div>

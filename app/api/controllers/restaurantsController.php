@@ -18,5 +18,65 @@ class RestaurantsController
       header('Content-type: Application/JSON');
       echo json_encode($r);
     }
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      if (isset($_POST['post_type'])) {
+        switch ($_POST['post_type']) {
+          case 'edit':
+            echo $_POST['id'];
+            echo $_POST['restaurant_name'];
+            echo $_POST['restaurant_category'];
+            echo $_POST['restaurant_star'];
+            echo $_POST['restaurant_michelinStar'];
+            echo $_POST['restaurant_description'];
+            echo $_POST['restaurant_address'];
+            echo $_POST['restaurant_phoneNumber'];
+            echo $_POST['restaurant_capacity'];
+
+            $this->restaurantService->edit_Restaurant($_POST["id"], htmlspecialchars($_POST['restaurant_name']), htmlspecialchars($_POST['restaurant_category']), htmlspecialchars($_POST['restaurant_star']), htmlspecialchars($_POST['restaurant_michelinStar']), htmlspecialchars($_POST['restaurant_description']), htmlspecialchars($_POST['restaurant_address']), htmlspecialchars($_POST['restaurant_phoneNumber']), htmlspecialchars($_POST['restaurant_capacity']));
+            break;
+          case 'insert':
+            $r = new Restaurant();
+            $r->__set_name(htmlspecialchars($_POST['restaurant_name']));
+            $r->__set_category(htmlspecialchars($_POST['restaurant_category']));
+            $r->__set_stars(htmlspecialchars($_POST['restaurant_star']));
+            $r->__set_michelinStar(htmlspecialchars($_POST['restaurant_michelinStar']));
+            $r->__set_description(htmlspecialchars($_POST['restaurant_description']));
+            $r->__set_address(htmlspecialchars($_POST['restaurant_address']));
+            $r->__set_phone_number(htmlspecialchars($_POST['restaurant_phoneNumber']));
+            $r->__set_capacity(htmlspecialchars($_POST['restaurant_capacity']));
+           
+            $file = $_FILES['picture'];
+
+            $curr = getcwd();
+            $img = '/img/';
+
+            //add extension check
+            $fileExtensionsAllowed = ['jpeg', 'jpg', 'png'];
+
+            $fileTmpName = $file['tmp_name'];
+
+            $uploadPath = $curr . $img . basename($file['name']);
+            move_uploaded_file($fileTmpName, $uploadPath);
+            $r->__set_imagePath(('/img/' . $file['name']));
+            $this->restaurantService->insert_Restaurant($r);
+            break;
+          default:
+            break;
+        }
+        return;
+      }
+      $body =  file_get_contents('php://input');
+      $object = json_decode($body);
+
+
+      if ($object == null) {
+        return;
+      }
+
+      if ($object->post_type == 'delete') {
+        $this->restaurantService->delete_Restaurant($object->id);
+      }
+    }
   }
 }

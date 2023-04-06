@@ -1095,8 +1095,12 @@ async function assignOptionsToSelect(element, data, selected) {
   element.value = selected;
 }
 
-//DANCE FUNCTIONALITY --END
-
+//DANCE FUNCTIONALITY --END //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//
+//
+//
 //YUMMIE FUNCTIONALITY --START ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function loadYummieData(type) {
@@ -1123,8 +1127,8 @@ function loadYummieData(type) {
   }
 }
 
-function loadRestaurants() {
-  restaurantPane = document.getElementById('yummiePane');
+async function loadRestaurants() {
+  restaurantPane = document.getElementById('restaurantSubPane');
   restaurantPane.classList.remove('hidden');
 
   sessionsPane = document.getElementById('sessionSubPane');
@@ -1132,7 +1136,7 @@ function loadRestaurants() {
     sessionsPane.classList.add('hidden');
   }
 
-  objects = getData('/api/restaurants');
+  objects = getData('/restaurants');
   createRestaurantList(objects);
 }
 
@@ -1160,18 +1164,7 @@ function createRestaurantList(objects) {
   });
 }
 
-function createRestaurantContainer(
-  element,
-  id,
-  name,
-  category,
-  star,
-  michelinStar,
-  description,
-  address,
-  phoneNumber,
-  capacity
-) {
+function createRestaurantContainer(element, id, name, category, star, michelinStar, description, address, phoneNumber, capacity) {
   container = document.createElement('span');
   container.classList.add(
     'bg-white',
@@ -1199,12 +1192,7 @@ function createRestaurantContainer(
 
   categorySpan = document.createElement('span');
   categorySpan.innerHTML = category;
-  categorySpan.classList.add(
-    'h-full',
-    'items-center',
-    'justify-center',
-    'flex'
-  );
+  categorySpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
   categorySpan.setAttribute('category', 'rCategorySpan' + id);
 
   starSpan = document.createElement('span');
@@ -1213,25 +1201,15 @@ function createRestaurantContainer(
   starSpan.setAttribute('star', 'rStarSpan' + id);
 
   michelinStarSpan = document.createElement('span');
-  michelinStarSpan.classList.add('text-[#F7F7FB]', 'text-sm', 'font-bold');
-  michelinStarSpan.innerHTML = michelinStar;
-  michelinStarSpan.classList.add(
-    'h-full',
-    'items-center',
-    'justify-center',
-    'flex'
-  );
+  michelinStarSpan.innerHTML = michelinStar.toString();
+  michelinStarSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
   michelinStarSpan.setAttribute('michelinStar', 'rMichelinStarSpan' + id);
 
   descriptionSpan = document.createElement('span');
   descriptionSpan.innerHTML = description;
-  descriptionSpan.classList.add(
-    'h-full',
-    'items-center',
-    'justify-center',
-    'flex'
-  );
+  descriptionSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
   descriptionSpan.setAttribute('description', 'rDescriptionSpan' + id);
+
   addressSpan = document.createElement('span');
   addressSpan.innerHTML = address;
   addressSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
@@ -1239,22 +1217,12 @@ function createRestaurantContainer(
 
   phoneNumberSpan = document.createElement('span');
   phoneNumberSpan.innerHTML = phoneNumber;
-  phoneNumberSpan.classList.add(
-    'h-full',
-    'items-center',
-    'justify-center',
-    'flex'
-  );
+  phoneNumberSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
   phoneNumberSpan.setAttribute('phoneNumber', 'rPhoneNumberSpan' + id);
 
   capacitySpan = document.createElement('span');
   capacitySpan.innerHTML = capacity;
-  capacitySpan.classList.add(
-    'h-full',
-    'items-center',
-    'justify-center',
-    'flex'
-  );
+  capacitySpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
   capacitySpan.setAttribute('capacity', 'rCapacitySpan' + id);
 
   //remove user
@@ -1361,7 +1329,7 @@ function editRestaurant(id) {
   form.append('restaurant_name', rNamespan.innerHTML);
   form.append('restaurant_category', rCategoryspan.innerHTML);
   form.append('restaurant_star', rStarspan.innerHTML);
-  form.append('restaurant_michelinStar', rMichelinStarspan.innerHTML);
+  form.append('restaurant_michelinStar', rMichelinStarspan.value);
   form.append('restaurant_description', rDescriptionspan.innerHTML);
   form.append('restaurant_address', rAddressspan.innerHTML);
   form.append('restaurant_phoneNumber', rPhonenumberspan.innerHTML);
@@ -1386,26 +1354,26 @@ function removeRestaurant(id) {
 }
 
 function insertRestaurant() {
-  rNamespan = document.getElementById('rNameSpan' + id);
-  rCategoryspan = document.getElementById('rCategorySpan' + id);
-  rStarspan = document.getElementById('rStarSpan' + id);
-  rMichelinStarspan = document.getElementById('rMichelinStarSpan' + id);
-  rDescriptionspan = document.getElementById('rDescriptionSpan' + id);
-  rAddressspan = document.getElementById('rAddressSpan' + id);
-  rPhonenumberspan = document.getElementById('rPhoneNumberSpan' + id);
-  rCapacitySpan = document.getElementById('rCapacitySpan' + id);
+  rName = document.getElementById('restaurantName');
+  rCategory = document.getElementById('restaurantCategory');
+  rStars = document.getElementById('restaurantStar');
+  rMichelinStar = document.getElementById('restaurantMichelinStar');
+  rDescription = document.getElementById('restaurantDescription');
+  rAddress = document.getElementById('restaurantAddress');
+  rPhonenumber = document.getElementById('restaurantPhoneNumber');
+  rCapacity = document.getElementById('restaurantCapacity');
   picture = document.getElementById('restaurantFile');
 
   data = {
     post_type: 'insert',
-    restaurant_name: rNamespan.innerHTML,
-    restaurant_category: rCategoryspan.innerHTML,
-    restaurant_star: rStarspan.innerHTML,
-    restaurant_michelinStar: rMichelinStarspan.innerHTML,
-    restaurant_description: rDescriptionspan.innerHTML,
-    restaurant_address: rAddressspan.innerHTML,
-    restaurant_phoneNumber: rPhonenumberspan.innerHTML,
-    restaurant_capacity: rCapacitySpan.innerHTML,
+    restaurant_name: rName.innerHTML,
+    restaurant_category: rCategory.innerHTML,
+    restaurant_star: rStars.innerHTML,
+    restaurant_michelinStar: rMichelinStar.innerHTML,
+    restaurant_description: rDescription.innerHTML,
+    restaurant_address: rAddress.innerHTML,
+    restaurant_phoneNumber: rPhonenumber.innerHTML,
+    restaurant_capacity: rCapacity.innerHTML,
     picture1: picture.files[0],
     picture2: picture.files[1],
     picture3: picture.files[2],
@@ -1416,6 +1384,26 @@ function insertRestaurant() {
     picture8: picture.files[7],
     picture9: picture.files[8],
   };
+
+  let form = new FormData();
+  form.append('post_type', 'insert');
+  form.append('restaurant_name', rName.innerHTML);
+  form.append('restaurant_category', rCategory.innerHTML);
+  form.append('restaurant_star', rStars.innerHTML);
+  form.append('restaurant_michelinStar', rMichelinStar.value);
+  form.append('restaurant_description', rDescription.innerHTML);
+  form.append('restaurant_address', rAddress.innerHTML);
+  form.append('restaurant_phoneNumber', rPhonenumber.innerHTML);
+  form.append('restaurant_capacity', rCapacity.innerHTML);
+  form.append('picture1', picture.files[0]);
+  form.append('picture2', picture.files[1]);
+  form.append('picture3', picture.files[2]);
+  form.append('picture4', picture.files[3]);
+  form.append('picture5', picture.files[4]);
+  form.append('picture6', picture.files[5]);
+  form.append('picture7', picture.files[6]);
+  form.append('picture8', picture.files[7]);
+  form.append('picture9', picture.files[8]);
 
   postForm('http://localhost/api/restaurants', form).then(
     delay(1000).then(() => loadRestaurants())
