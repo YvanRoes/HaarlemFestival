@@ -128,14 +128,19 @@
                     </div>
                 </div>
                 <div id="artistSubPane" class="hidden">
-                    <form action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+                    <div class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
                         <input type="text" id="artistName" placeholder="artist name" required />
                         <input type="text" id="artistGenre" placeholder="genres" required />
                         <input id="artistPicture" type="file" title=" " class="col-span-2" />
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertArtist()">Add artist</button>
                         <textarea id="artistDescription" class="col-span-2" placeholder="description" required></textarea>
-                        <textarea id="artistSongs" class="col-span-2" placeholder="popular songs"></textarea>
-                    </form>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <textarea type="text" for="songInput" id="songInput" rows="1" class="block w-full float-left m-auto  py-2 px-2 text-sm text-gray-800 bg-white border-1 resize-none rounded-lg col-span-2" placeholder="Popular songs" required></textarea>
+                        <button type="button" class="w-fit h-fit inline-flex items-center px-5 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800 ml-1" id="addSongToList">Add</button>
+                        <ul id="songList" class="flex flex-col gap-1 mt-2 text-gray-500 col-span-2"></ul>
+                    </div>
                     <div class="flex flex-col gap-4 pb-5" id="contentArtistWrapper">
                     </div>
                 </div>

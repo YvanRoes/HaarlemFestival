@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../repositories/TokenRepository.php';
+require __DIR__ . '/../repositories/tokenRepository.php';
 require_once __DIR__ . '/../models/token.php';
 
 class TokenService
