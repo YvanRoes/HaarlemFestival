@@ -387,6 +387,9 @@ function loadEDMData(type) {
       break;
     case 'artists':
       loadArtists();
+      break;
+    case 'sessions':
+      loadSessions();
     default:
       break;
   }
@@ -399,6 +402,11 @@ function loadVenues() {
   artistPane = document.getElementById('artistSubPane');
   if (!artistPane.classList.contains('hidden')) {
     artistPane.classList.add('hidden');
+  }
+
+  sessionPane = document.getElementById('sessionSubPane');
+  if (!sessionPane.classList.contains('hidden')) {
+    sessionPane.classList.add('hidden');
   }
   objects = getData('http://localhost/api/locations');
   createVenueList(objects);
@@ -578,7 +586,10 @@ function loadArtists() {
   if (!venuePane.classList.contains('hidden')) {
     venuePane.classList.add('hidden');
   }
-
+  sessionPane = document.getElementById('sessionSubPane');
+  if (!sessionPane.classList.contains('hidden')) {
+    sessionPane.classList.add('hidden');
+  }
   objects = getData('http://localhost/api/artists');
   createArtistList(objects);
 }
@@ -738,6 +749,35 @@ function insertArtist() {
   delay(1000).then(loadArtists());
 }
 
+async function loadSessions() {
+  sessionPane = document.getElementById('sessionSubPane');
+  sessionPane.classList.remove('hidden');
+
+  artistPane = document.getElementById('artistSubPane');
+  if (!artistPane.classList.contains('hidden')) {
+    artistPane.classList.add('hidden');
+  }
+  venuePane = document.getElementById('venueSubPane');
+  if (!venuePane.classList.contains('hidden')) {
+    venuePane.classList.add('hidden');
+  }
+
+  //conf artistselect
+  artistSelect = document.getElementById('sessionArtist');
+  artistObjects = await getData('http://localhost/api/artists');
+  for (let i = 0; i < artistObjects.length; i++) {
+    artistSelect.innerHTML += '<option value="' + artistObjects[i].id + '">' + artistObjects[i].name + '</option>';
+  }
+
+  //conf venueSelect
+  venueSelect = document.getElementById('sessionVenue');
+  venueObjects = await getData('http://localhost/api/danceLocations');
+  for (let i = 0; i < venueObjects.length; i++) {
+    venueSelect.innerHTML +=
+      '<option value="' + venueObjects[i].id + '">' + venueObjects[i].name + '</option>';
+  }
+}
+
 //EDM FUNCTIONALITY --END
 
 //GLOBAL
@@ -781,4 +821,4 @@ async function getData(url = '') {
 }
 
 //loadUserData();
-loadEDMData('venues');
+loadEDMData('sessions');

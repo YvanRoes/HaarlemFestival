@@ -39,6 +39,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     //$writer->validateResult($result, 'Life is too short to be generating QR codes');
 }
 
+
+
+//function for uuid gen 
+
+function get_new_uuid(){
+    return
+    vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));;
+}
+
+
 ?>
 
 
@@ -106,6 +116,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
                 <button name="submitRegister" type="submit" class="w-full h-[40px] text-[#29334E] flex items-center justify-center gap-[10px] border-2 border-[#29334E] cursor-pointer p-5 rounded-md">Register</button>
             </form>
+
+            <span><?php echo get_new_uuid(); ?></span>
         </div>
     </div>
 </body>

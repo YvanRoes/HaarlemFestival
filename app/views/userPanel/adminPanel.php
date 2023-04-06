@@ -72,6 +72,9 @@
                     <li>
                         <button onclick="loadEDMData(`artists`)" class="block px-4 py-2 dark:hover:text-[#121212]">artists</button>
                     </li>
+                    <li>
+                        <button onclick="loadEDMData(`sessions`)" class="block px-4 py-2 dark:hover:text-[#121212]">sessions</button>
+                    </li>
                 </ul>
             </ul>
 
@@ -123,6 +126,21 @@
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertArtist()">Add artist</button>
                         <textarea id="artistDescription" class="col-span-2" placeholder="description" required></textarea>
                         <textarea id="artistSongs" class="col-span-2" placeholder="popular songs"></textarea>
+                    </form>
+                    <div class="flex flex-col gap-4 pb-5" id="contentArtistWrapper">
+                    </div>
+                </div>
+                <div id="sessionSubPane" class="hidden">
+                    <form action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+                        <input type="date" id="sessionDate" placeholder="session date" required />
+                        <select id="sessionVenue" required></select>
+                        <select id="sessionArtist" required></select>
+                        <input id="sessionTickets" type="number" placeholder="ticket count" class="col-span-2" />
+                        <input id="sessionPrice" type="number" placeholder="ticket price" class="col-span-2" />
+                        <input id="sessionType" type="text" placeholder="Session type" class="col-span-2" />
+                        <input id="sessionDuration" type="number" step="15" placeholder="session duration" class="col-span-2" />
+
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertArtist()">Add artist</button>
                     </form>
                     <div class="flex flex-col gap-4 pb-5" id="contentArtistWrapper">
                     </div>
