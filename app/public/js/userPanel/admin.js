@@ -985,7 +985,7 @@ function insertSession() {
   sessionType = document.getElementById('sessionType');
   sessionDuration = document.getElementById('sessionDuration');
 
-  if (sessionTickets.value = '' || sessionPrice.value == '' || sessionType.value == '' || sessionDuration.value == '' || sessionDate.value == '') {
+  if (sessionPrice.value == '' || sessionType.value == '' || sessionDuration.value == '' || sessionDate.value == '') {
     alert('one or multiple fields are empty');
     return;
   }
