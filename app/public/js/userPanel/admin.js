@@ -633,13 +633,14 @@ function createArtistList(objects) {
         parentElement,
         objects[i].id,
         objects[i].name,
-        objects[i].genre
+        objects[i].genre,
+        objects[i].description
       );
     }
   });
 }
 
-async function createArtistContainer(element, id, name, genres) {
+async function createArtistContainer(element, id, name, genres, description) {
   container = document.createElement('span');
   container.classList.add(
     'bg-white',
@@ -713,12 +714,31 @@ async function createArtistContainer(element, id, name, genres) {
     editArtist(id);
   });
 
+
+  //description
+
+  descriptionS = document.createElement('TEXTAREA');
+  descriptionS.innerHTML = description;
+  descriptionS.classList.add(
+    'h-full',
+    'col-span-4',
+    'text-ellipsis',
+    'items-center',
+    'justify-center',
+    'flex',
+    'text-ellipsis'
+  );
+  descriptionS.setAttribute('id', 'aDesSpan' + id);
+  descriptionS.setAttribute('disabled', 'true');
+
+
   //append
   container.appendChild(idSpan);
   container.appendChild(nameSpan);
   container.appendChild(genresSpan);
   container.appendChild(buttonEdit);
   container.appendChild(buttonRemove);
+  container.appendChild(descriptionS);
 
   element.appendChild(container);
 }
@@ -734,26 +754,58 @@ function insertArtist() {
     alert('not all fields have been filled in');
     return;
   }
+
+  songs = getAllSongsFromList();
   let form = new FormData();
   form.append('post_type', 'insert');
   form.append('artist_name', aName.value);
   form.append('artist_genre', aGenres.value);
   form.append('artist_description', aDescription.value);
-  form.append('artist_songs', aSongs.value);
+  form.append('artist_songs', songs);
   form.append('picture', picture.files[0]);
-  console.log(form);
+  console.log(songs);
   postForm('http://localhost/api/artists', form);
   delay(1000).then(loadArtists());
 }
 
+function getAllSongsFromList(){
+  let list = document.getElementById('songList').children;
+  let songs = '';
+  for (let i = 0; i < list.length; i++){
+    songs += list[i].innerText + ':';
+  }
+  return songs;
+}
+
+function updateSongList() {
+  song = document.getElementById('songInput');
+  if (song.value == '') {
+    return;
+  }
+  list = document.getElementById('songList');
+
+  if (list.children.length >= 3) {
+    alert('cant have more than 3 songs');
+    return;
+  }
+  songWrapper = document.createElement('span');
+  songText = document.createElement('span');
+  songText.innerHTML = song.value;
+  songWrapper.appendChild(songText);
+  list.appendChild(songWrapper);
+}
+document.getElementById('addSongToList').onclick = updateSongList;
+
 function editArtist(id) {
   aNameSpan = document.getElementById('aNameSpan' + id);
   aGenresSpan = document.getElementById('aGenresSpan' + id);
+  aDescription = document.getElementById('aDesSpan' + id);
   b = document.getElementById('artistButton' + id);
 
   if (b.innerHTML == 'EDIT') {
     setEditableType(aNameSpan);
     setEditableType(aGenresSpan);
+    aDescription.removeAttribute('disabled');
     b.innerHTML = 'Save';
     b.classList.add('bg-green-400', 'text-[#121212]');
     return;
@@ -762,17 +814,18 @@ function editArtist(id) {
   b.classList.remove('bg-green-400', 'text-[#121212]');
   setEditableType(aNameSpan);
   setEditableType(aGenresSpan);
+  aDescription.setAttribute('disabled', 'true');
 
   let form = new FormData();
   form.append('post_type', 'edit');
   form.append('id', id);
   form.append('artist_name', aNameSpan.innerHTML);
-  form.append('artist_description', 'temp description');
+  form.append('artist_description', aDescription.value);
   form.append('artist_genre', aGenresSpan.innerHTML);
 
   console.log(form);
   postForm('http://localhost/api/artists', form).then(
-    delay(1000).then(loadArtists())
+    delay(1000).then(()=> loadArtists())
   );
 }
 
@@ -1463,4 +1516,4 @@ async function getData(url = '') {
 }
 
 //loadUserData();
-loadEDMData('sessions');
+loadEDMData('artists');
