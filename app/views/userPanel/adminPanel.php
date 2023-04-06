@@ -131,18 +131,29 @@
                     </div>
                 </div>
                 <div id="sessionSubPane" class="hidden">
-                    <form action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+                    <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
                         <input type="date" id="sessionDate" placeholder="session date" required />
                         <select id="sessionVenue" required></select>
                         <select id="sessionArtist" required></select>
-                        <input id="sessionTickets" type="number" placeholder="ticket count" class="col-span-2" />
+                        <input type="number" id="sessionTickets" placeholder="ticket count" class="col-span-2"></input>
                         <input id="sessionPrice" type="number" placeholder="ticket price" class="col-span-2" />
                         <input id="sessionType" type="text" placeholder="Session type" class="col-span-2" />
                         <input id="sessionDuration" type="number" step="15" placeholder="session duration" class="col-span-2" />
 
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertArtist()">Add artist</button>
-                    </form>
-                    <div class="flex flex-col gap-4 pb-5" id="contentArtistWrapper">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertSession()">Add session</button>
+                    </div>
+                    <div class="flex flex-col gap-4 pb-5">
+                        <div class="grid grid-cols-8 text-center">
+                            <span class="col-span-2 text-left">date</span>
+                            <span class="col-span-1">location</span>
+                            <span class="col-span-1">artist</span>
+                            <span class="col-span-1">session type</span>
+                            <span class="col-span-1">duration</span>
+                            <span class="col-span-1">ticket count</span>
+                            <span class="col-span-1">ticket price</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-4 pb-5" id="contentSessionWrapper">
                     </div>
                 </div>
             </div>

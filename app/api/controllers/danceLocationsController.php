@@ -20,16 +20,16 @@ class DanceLocationsController
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if(isset($_POST["post_type"])){
+      if (isset($_POST["post_type"])) {
         switch ($_POST["post_type"]) {
           case 'edit':
-            $this->danceLocationService->edit_locationById($_POST["id"], htmlspecialchars($_POST["venue_name"]), htmlspecialchars($_POST["venue_address"]), $_POST["venue_capacity"]);
+            $this->danceLocationService->edit_locationById(htmlspecialchars($_POST["id"]), htmlspecialchars($_POST["venue_name"]), htmlspecialchars($_POST["venue_address"]), htmlspecialchars($_POST["venue_capacity"]));
             break;
           case 'insert':
             $l = new DanceLocation();
             $l->__set_name(htmlspecialchars($_POST["venue_name"]));
             $l->__set_address(htmlspecialchars($_POST["venue_address"]));
-            $l->__set_capacity($_POST["venue_capacity"]);
+            $l->__set_capacity(htmlspecialchars($_POST["venue_capacity"]));
             //file
             $file = $_FILES['picture'];
             $curr = getcwd();
@@ -55,10 +55,9 @@ class DanceLocationsController
         error_log('no object');
       }
 
-      if($object->post_type == "delete"){
-        $this->danceLocationService->delete_locationById($object->id);
+      if ($object->post_type == "delete") {
+        $this->danceLocationService->delete_locationById(htmlspecialchars($object->id));
       }
-
     }
   }
 }
