@@ -116,25 +116,33 @@ function loadHTML()
     <li>
       <?php
       if (isset($_SESSION['USER_ID'])) {
-        echo "<a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Personal program</a>";
+        if($_SESSION['USER_ROLE'] == 9){
+          echo "<a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Manage Website & Database</a>";
+        }else{
+          echo "<a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Dasboard</a>";
+        }
       } else {
-        echo "<a href='/login' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Personal program</a>";
+        echo "<a href='/login' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Dashoard</a>";
       }
       ?>
     </li>
     <?php
-    if (isset($_SESSION['USER_ID'])) {
-      echo "
+    if(isset($_SESSION['USER_ROLE'])){
+      if($_SESSION['USER_ROLE'] == 9){
+
+      }
+      if($_SESSION['USER_ROLE'] == 0){
+        if (isset($_SESSION['USER_ID'])) {
+          echo "
       <li>
-        <a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Dashboard</a>
-      </li>
-      <li>
-        <a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Settings</a>
+        <a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>account details</a>
       </li>";
-    } else {
-      echo "<li>
+        } else {
+          echo "<li>
         <a href='/register' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Register</a>
       </li>";
+        }
+      }
     }
 
     ?>
