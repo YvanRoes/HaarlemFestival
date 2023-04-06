@@ -1,5 +1,7 @@
 <?php
 require __DIR__ . '/../../services/tokenService.php';
+require_once __DIR__ . '/../../models/token.php';
+
 
 
 class Api_TokensController
@@ -13,6 +15,18 @@ class Api_TokensController
 
   public function index()
   {
+    if($_SERVER["REQUEST_METHOD"] == "GET"){
+
+      //avoid direct and unauthorised get requests
+      // if ($_SERVER['HTTP_REFERER'] !== 'localhost/userPanel/manageAPI/') {
+      //   die('Unauthorized access');
+      // }
+      $r = $this->tokenService->get_all_tokens();
+      header('Content-type: Application/JSON');
+      echo json_encode($r);
+    }
+
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $body = file_get_contents("php://input");
       $object = json_decode($body);

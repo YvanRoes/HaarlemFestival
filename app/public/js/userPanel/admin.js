@@ -856,6 +856,7 @@ async function createSessionContainer(
   dateSpan = document.createElement('input');
   dateSpan.setAttribute('type', 'datetime-local');
   dateSpan.setAttribute('id', 'sessionDate' + id);
+  dateSpan.setAttribute('disabled', 'true');
   dateSpan.classList.add('col-span-2');
   dateSpan.value = date;
 
