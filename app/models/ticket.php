@@ -1,17 +1,18 @@
 <?php
+use Ramsey\Uuid\Uuid;
 class Ticket implements JsonSerializable
 {
-    private ?int $id = null;
+    private ?Uuid $id = null;
     private ?string $status = null;
     private ?float $price = null;
     private ?DateTime $expDate = null;
     private ?int $event = null;
 
-    public function getId(): ?int
+    public function getId(): ?Uuid
     {
         return $this->id;
     }
-    public function setId(?int $id): void
+    public function setId(?Uuid $id): void
     {
         $this->id = $id;
     }
