@@ -1,5 +1,4 @@
 <?php
-require(__DIR__ . '/../models/ticket.php');
 require_once(__DIR__ . '/../repositories/repository.php');
 
 class ShoppingCartRepository extends Repository

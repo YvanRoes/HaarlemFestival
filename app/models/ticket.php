@@ -1,11 +1,11 @@
 <?php
 use Ramsey\Uuid\Uuid;
+require_once __DIR__ . '/../models/event2.php';
 class Ticket implements JsonSerializable
 {
     private ?Uuid $id = null;
     private ?string $status = null;
     private ?float $price = null;
-    private ?DateTime $expDate = null;
     private ?int $event = null;
 
     public function getId(): ?Uuid
@@ -33,14 +33,6 @@ class Ticket implements JsonSerializable
     {
         $this->price = $price;
     }
-    public function getExpDate(): ?DateTime
-    {
-        return $this->expDate;
-    }
-    public function setExpDate(?DateTime $expDate): void
-    {
-        $this->expDate = $expDate;
-    }
     public function getEvent(): ?int
     {
         return $this->event;
@@ -49,19 +41,14 @@ class Ticket implements JsonSerializable
     {
         $this->event = $event;
     }
-
-
-
     public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->id,
             'status' => $this->status,
             'price' => $this->price,
-            'expDate' => $this->expDate,
             'event' => $this->event
         ];
-
     }
 }
 ?>

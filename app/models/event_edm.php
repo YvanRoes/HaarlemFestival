@@ -2,14 +2,14 @@
 
 class Event_edm extends Event2 
 {
-    private ?location $venue = null;
+    private ?DanceLocation $venue = null;
     private ?array $artists = null;
 
-    public function get_venue(): location
+    public function get_venue(): DanceLocation
     {
         return $this->venue;
     }
-    public function __set_venue(location $venue): self
+    public function __set_venue(DanceLocation $venue): self
     {
         $this->venue = $venue;
         return $this;

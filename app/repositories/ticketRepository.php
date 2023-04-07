@@ -6,8 +6,19 @@ class TicketRepository extends Repository
 {
     public function get_AllTickets(): array
     {
-        $sql = "SELECT * FROM tickets";
+        $sql = "SELECT * FROM ticket";
         $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+        return $result;
+    }
+
+    public function Get_AllTicketsByEventIdAndStatus($id, $status): array
+    {
+        $sql = "SELECT * FROM ticket WHERE event_id = :id AND status = :status";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':status', $status);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_CLASS);
         return $result;
@@ -15,7 +26,7 @@ class TicketRepository extends Repository
 
     public function get_TicketById($id): Ticket
     {
-        $sql = "SELECT * FROM tickets WHERE id = :id";
+        $sql = "SELECT * FROM ticket WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -24,7 +35,7 @@ class TicketRepository extends Repository
     }
     public function get_TicketsByStatus($status)
     {
-        $sql = "SELECT * FROM tickets WHERE status = :status";
+        $sql = "SELECT * FROM ticket WHERE status = :status";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':status', $status);
         $stmt->execute();
@@ -33,7 +44,7 @@ class TicketRepository extends Repository
     }
     public function get_TicketsByUserIdAndStatus($id, $status)
     {
-        $sql = "SELECT * FROM tickets WHERE user_id = :user_id AND status = :status";
+        $sql = "SELECT * FROM ticket WHERE user_id = :user_id AND status = :status";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':user_id', $_SESSION['user_id']);
         $stmt->bindParam(':status', $_SESSION['status']);
