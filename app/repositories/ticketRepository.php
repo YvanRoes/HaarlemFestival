@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/ticket.php';
+USE Ramsey\Uuid\Uuid;
 class TicketRepository extends Repository
 {
     public function get_AllTickets(): array
@@ -40,8 +41,13 @@ class TicketRepository extends Repository
         $result = $stmt->fetchAll(PDO::FETCH_CLASS);
         return $result;
     }
-    public funtion post_Ticket($ticket)
+    public function post_Ticket($price, $event)
     {
-        
+        $sql = "INSERT INTO tickets(id,status,price,exp_date,event) VALUES (:uuid, available, :price, null, :event)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':uuid',  Uuid::uuid4());
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':event', $event);
+        $stmt->execute();
     }
 }

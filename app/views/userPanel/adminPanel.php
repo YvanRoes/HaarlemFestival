@@ -14,6 +14,7 @@
 <body class="w-[100vw] h-[100vh] overflow-x-hidden bg-[#F7F7FB]">
     <?php
     include __DIR__ . '/../header.php';
+    use Ramsey\Uuid\Uuid;
     generateHeader('adminPanel', 'dark');
     ?>
     <div class="w-screen h-[800px] grid grid-cols-6 grid-rows-6 mt-[100px]">
@@ -58,7 +59,9 @@
                 </ul>
             </div>
         </div>
-        <div class="col-start-1 col-span-1 row-start-2 row-span-5 flex justify-center border-[1px] border[#656262]" id="subMenu">
+        <div class="col-start-1 col-span-1 row-start-2 row-span-5 flex justify-center border-[1px] border[#656262]"
+            id="subMenu">
+
             <ul class="p-4 flex flex-col gap-[20px] h-fit" id="items">
                 <ul class="text-sm text-[#656262]" id="UsersList">
                     <li class="font-bold"><button onclick="loadUserData()">Users</button></li>
