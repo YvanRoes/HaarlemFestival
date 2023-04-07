@@ -120,7 +120,7 @@
                     <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
                         <input type="text" id="venueName" placeholder="venue name" required />
                         <input type="text" id="venueAddress" placeholder="address" required />
-                        <input type="number" id="venueCap" placeholder="Capacity" required />
+                        <input type="number" min="0" id="venueCap" placeholder="Capacity" required />
                         <input id="venueFile" type="file" title=" " class="col-span-2" />
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertVenue()">Add venue</button>
                     </div>
@@ -149,7 +149,7 @@
                         <input type="date" id="sessionDate" placeholder="session date" required />
                         <select id="sessionVenue" required></select>
                         <select id="sessionArtist" required></select>
-                        <input type="number" id="sessionTickets" placeholder="ticket count" class="col-span-2"></input>
+                        <input type="number" min="0" id="sessionTickets" placeholder="ticket count" class="col-span-2"></input>
                         <input id="sessionPrice" type="number" placeholder="ticket price" class="col-span-2" />
                         <input id="sessionType" type="text" placeholder="Session type" class="col-span-2" />
                         <input id="sessionDuration" type="number" step="15" placeholder="session duration" class="col-span-2" />
@@ -174,7 +174,7 @@
             <div class="w-8/12 h-max p-16 mt-16 rounded-lg hidden" id="yummiePane">
                 <h1 id="YummieTitle" class="text-[64px]"></h1>
                 <div id="restaurantSubPane" class="hidden">
-                    <form action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+                    <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
                         <input type="text" id="restaurantName" placeholder="restaurantName" required />
                         <input type="text" id="restaurantCategory" placeholder="category" required />
                         <input type="number" step="0.1" min="0" max="5" id="restaurantStar" placeholder="star" required />
@@ -186,18 +186,24 @@
                         <input type="text" id="restaurantDescription" placeholder="description" required />
                         <input type="text" id="restaurantAddress" placeholder="address" required />
                         <input type="text" id="restaurantPhoneNumber" placeholder="phone number" required />
-                        <input type="number" id="restaurantCapacity" placeholder="Capacity" required />
-                        <input id="restaurantFile" type="file" title=" " class="col-span-2" />
+                        <input type="number" min="0" id="restaurantCapacity" placeholder="Capacity" required />
+                        <input id="restaurantFile" type="file" multiple="multiple" title=" " class="col-span-2" />
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurant()">Add restaurants</button>
-                    </form>
+                    </div>
                     <div class="flex flex-col gap-4 pb-5" id="contentRestaurantWrapper">
                     </div>
                 </div>
-                <div id="sessionSubPane" class="hidden">
+                <div id="restaurantSessionSubPane" class="hidden">                   
                     <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
-
+                        <select id="sessionRestaurant" required></select>
+                        <input id="sessionRestaurantAdultPrice" type="number" step="0.50" min="0" placeholder="Adult price" required />
+                        <input id="sessionRestaurantKidsPrice" type="number" step="0.50" min="0" placeholder="Kids price" required />
+                        <input type="datetime-local" id="sessionRestaurantStartTime" placeholder="Start time" required />
+                        <input type="datetime-local" id="sessionRestaurantEndTime" placeholder="End time" required />
+                       
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurantSession()">Add sessions</button>
                     </div>
-                    <div class="flex flex-col gap-4 pb-5" id="contentSessionWrapper">
+                    <div class="flex flex-col gap-4 pb-5" id="contentRestaurantSessionWrapper">
                     </div>
                 </div>
             </div>

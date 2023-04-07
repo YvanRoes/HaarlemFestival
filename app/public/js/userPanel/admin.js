@@ -933,11 +933,11 @@ async function createSessionContainer(
 
   artistSelect = document.createElement('select');
   artistSelect.classList.add('items-center', 'justify-center', 'flex');
-  artistSelect.value = venue;
+  artistSelect.value = artist_id;
   artistSelect.setAttribute('id', 'sessionArtistSelect' + id);
   artistSelect.disabled = true;
   dataV = getData('/artists');
-  assignOptionsToSelect(artistSelect, dataV, venue);
+  assignOptionsToSelect(artistSelect, dataV, artist_id);
 
   sessionSpan = document.createElement('span');
   sessionSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
@@ -1029,7 +1029,7 @@ async function createSessionList(objects) {
       parentElement,
       objects[i].id,
       objects[i].venue,
-      artistObjects[objects[i].artist_id - 1].name,
+      objects[i].artist_id,
       objects[i].date,
       objects[i].session,
       objects[i].duration,
@@ -1174,7 +1174,7 @@ function loadYummieData(type) {
       loadRestaurants();
       break;
     case 'sessions':
-      loadSessions();
+      loadRestaurantSessions();
     default:
       break;
   }
@@ -1184,7 +1184,7 @@ async function loadRestaurants() {
   restaurantPane = document.getElementById('restaurantSubPane');
   restaurantPane.classList.remove('hidden');
 
-  sessionsPane = document.getElementById('sessionSubPane');
+  sessionsPane = document.getElementById('restaurantSessionSubPane');
   if (!sessionsPane.classList.contains('hidden')) {
     sessionsPane.classList.add('hidden');
   }
@@ -1314,6 +1314,7 @@ function createRestaurantContainer(element, id, name, category, star, michelinSt
     editRestaurant(id);
   });
 
+  container.appendChild(idSpan);
   container.appendChild(nameSpan);
   container.appendChild(categorySpan);
   container.appendChild(starSpan);
@@ -1379,14 +1380,14 @@ function editRestaurant(id) {
   let form = new FormData();
   form.append('post_type', 'edit');
   form.append('id', id);
-  form.append('restaurant_name', rNamespan.innerHTML);
-  form.append('restaurant_category', rCategoryspan.innerHTML);
-  form.append('restaurant_star', rStarspan.innerHTML);
+  form.append('restaurant_name', rNamespan.value);
+  form.append('restaurant_category', rCategoryspan.value);
+  form.append('restaurant_star', rStarspan.value);
   form.append('restaurant_michelinStar', rMichelinStarspan.value);
-  form.append('restaurant_description', rDescriptionspan.innerHTML);
-  form.append('restaurant_address', rAddressspan.innerHTML);
-  form.append('restaurant_phoneNumber', rPhonenumberspan.innerHTML);
-  form.append('restaurant_capacity', rCapacitySpan.innerHTML);
+  form.append('restaurant_description', rDescriptionspan.value);
+  form.append('restaurant_address', rAddressspan.value);
+  form.append('restaurant_phoneNumber', rPhonenumberspan.value);
+  form.append('restaurant_capacity', rCapacitySpan.value);
 
   console.log(data);
   postForm('http://localhost/api/restaurants', form).then(
@@ -1419,51 +1420,202 @@ function insertRestaurant() {
 
   data = {
     post_type: 'insert',
-    restaurant_name: rName.innerHTML,
-    restaurant_category: rCategory.innerHTML,
-    restaurant_star: rStars.innerHTML,
-    restaurant_michelinStar: rMichelinStar.innerHTML,
-    restaurant_description: rDescription.innerHTML,
-    restaurant_address: rAddress.innerHTML,
-    restaurant_phoneNumber: rPhonenumber.innerHTML,
-    restaurant_capacity: rCapacity.innerHTML,
+    restaurant_name: rName.value,
+    restaurant_category: rCategory.value,
+    restaurant_star: rStars.value,
+    restaurant_michelinStar: rMichelinStar.value,
+    restaurant_description: rDescription.value,
+    restaurant_address: rAddress.value,
+    restaurant_phoneNumber: rPhonenumber.value,
+    restaurant_capacity: rCapacity.value,
     picture1: picture.files[0],
     picture2: picture.files[1],
-    picture3: picture.files[2],
-    picture4: picture.files[3],
-    picture5: picture.files[4],
-    picture6: picture.files[5],
-    picture7: picture.files[6],
-    picture8: picture.files[7],
-    picture9: picture.files[8],
+    // picture3: picture.files[2],
+    // picture4: picture.files[3],
+    // picture5: picture.files[4],
+    // picture6: picture.files[5],
+    // picture7: picture.files[6],
+    // picture8: picture.files[7],
+    // picture9: picture.files[8],
   };
 
   let form = new FormData();
   form.append('post_type', 'insert');
-  form.append('restaurant_name', rName.innerHTML);
-  form.append('restaurant_category', rCategory.innerHTML);
-  form.append('restaurant_star', rStars.innerHTML);
-  form.append('restaurant_michelinStar', rMichelinStar.value);
-  form.append('restaurant_description', rDescription.innerHTML);
-  form.append('restaurant_address', rAddress.innerHTML);
-  form.append('restaurant_phoneNumber', rPhonenumber.innerHTML);
-  form.append('restaurant_capacity', rCapacity.innerHTML);
+  form.append('restaurant_name', "BBQ");
+  form.append('restaurant_category', "BBQ");
+  form.append('restaurant_star', 4.1);
+  form.append('restaurant_michelinStar', 0);
+  form.append('restaurant_description', "BBQ");
+  form.append('restaurant_address', "BBQ");
+  form.append('restaurant_phoneNumber', "123456789");
+  form.append('restaurant_capacity', parseInt(100));
   form.append('picture1', picture.files[0]);
   form.append('picture2', picture.files[1]);
-  form.append('picture3', picture.files[2]);
-  form.append('picture4', picture.files[3]);
-  form.append('picture5', picture.files[4]);
-  form.append('picture6', picture.files[5]);
-  form.append('picture7', picture.files[6]);
-  form.append('picture8', picture.files[7]);
-  form.append('picture9', picture.files[8]);
+  // form.append('picture3', picture.files[2]);
+  // form.append('picture4', picture.files[3]);
+  // form.append('picture5', picture.files[4]);
+  // form.append('picture6', picture.files[5]);
+  // form.append('picture7', picture.files[6]);
+  // form.append('picture8', picture.files[7]);
+  // form.append('picture9', picture.files[8]);
+
+  console.log(form);
+
 
   postForm('http://localhost/api/restaurants', form).then(
     delay(1000).then(() => loadRestaurants())
   );
 }
 
-//GLOBAL
+async function loadRestaurantSessions() {
+  sessionPane = document.getElementById('restaurantSessionSubPane');
+  sessionPane.classList.remove('hidden');
+
+  restaurantPane = document.getElementById('restaurantSubPane');
+  if (!restaurantPane.classList.contains('hidden')) {
+    restaurantPane.classList.add('hidden');
+  }
+
+  restaurantSelect = document.getElementById('sessionRestaurantSelect');
+  restaurantObjects = await getData('/restaurants');
+  restaurantSelect.innerHTML = '';
+  for (let i = 0; i < restaurantObjects.length; i++) {
+    restaurantSelect.innerHTML +=
+      '<option value="' +
+      restaurantObjects[i].id +
+      '">' +
+      restaurantObjects[i].name +
+      '</option>';
+  }
+
+  objects = getData('/restaurantSessions');
+  createRestaurantList(objects);
+}
+
+async function createRestaurantSessionList(objects) {
+  parentElement = document.getElementById('contentRestaurantSessionWrapper');
+  title = document.getElementById('YummieTitle');
+  title.innerHTML = 'Restaurant Sessions';
+  parentElement.innerHTML = '';
+
+  restaurantObjects = await getData('/restaurants');
+
+  for (let i = 0; i < objects.length; i++) {
+    createRestaurantSessionContainer(
+      parentElement,
+      objects[i].id,
+      objects[i].restaurant_id,
+      objects[i].adult_Price,
+      objects[i].kids_Price,
+      objects[i].session_startTime,
+      objects[i].session_endTime,
+    );
+  }
+
+}
+
+async function createRestaurantSessionContainer(element, id, restaurant_id, adult_price, kids_price, start_time, end_time) {
+  container = document.createElement('div');
+  container.classList.add(
+    'bg-white',
+    'p-2',
+    'rounded-md',
+    'grid',
+    'lg:grid-cols-6',
+    'lg:grid-rows-2',
+    'md:grid-cols-1',
+    'text-left',
+    'relative',
+    'gap-4',
+    'text-center'
+  );
+
+  restaurantSelect = document.createElement('select');
+  restaurantSelect.classList.add('items-center', 'justify-center', 'flex');
+  restaurantSelect.setAttribute('id', 'sessionRestaurantSelect' + id);
+  restaurantSelect.disabled = true;
+  
+  dataV = getData('/restaurants');
+  assignOptionsToSelect(restaurantSelect, dataV, restaurant_id);
+
+  adultPriceSpan = document.createElement('span');
+  adultPriceSpan.innerHTML = adult_price;
+  adultPriceSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  adultPriceSpan.setAttribute('id', 'sessionRestaurantAdultPrice' + id);
+
+  kidsPriceSpan = document.createElement('span');
+  kidsPriceSpan.innerHTML = kids_price;
+  kidsPriceSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  kidsPriceSpan.setAttribute('id', 'sessionRestaurantKidsPrice' + id);
+
+  startTimeSpan = document.createElement('input');
+  startTimeSpan.setAttribute('type', 'time');
+  startTimeSpan.setAttribute('id', 'sessionStartTime' + id);
+  startTimeSpan.setAttribute('disabled', 'true');
+  startTimeSpan.classList.add('col-span-2');
+  startTimeSpan.value = start_time;
+
+  endTimeSpan = document.createElement('input');
+  endTimeSpan.setAttribute('type', 'time');
+  endTimeSpan.setAttribute('id', 'sessionEndTime' + id);
+  endTimeSpan.setAttribute('disabled', 'true');
+  endTimeSpan.classList.add('col-span-2');
+  endTimeSpan.value = end_time;
+
+  //remove user
+  buttonRemove = document.createElement('button');
+  buttonRemove.innerHTML = 'REMOVE';
+  buttonRemove.classList.add(
+    'm-2',
+    'py-2',
+    'px-4',
+    'rounded-md',
+    'text-[#F7F7FB]',
+    'bg-red-500',
+    'w-fit'
+  );
+  buttonRemove.addEventListener('click', () => {
+    removeRestaurantSession(id);
+  });
+
+  //edit user
+  buttonEdit = document.createElement('button');
+  buttonEdit.innerHTML = 'EDIT';
+  buttonEdit.classList.add(
+    'm-2',
+    'py-2',
+    'px-8',
+    'rounded-md',
+    'text-[#F7F7FB]',
+    'bg-slate-800',
+    'w-fit',
+    'float-right',
+    'justify-center'
+  );
+
+  buttonEdit.setAttribute('id', 'restaurantSessionB' + id);
+  buttonEdit.addEventListener('click', () => {
+    editRestaurantSession(id);
+  });
+
+  container.appendChild(restaurantSelect);
+  container.appendChild(adultPriceSpan);
+  container.appendChild(kidsPriceSpan);
+  container.appendChild(startTimeSpan);
+  container.appendChild(endTimeSpan);
+  container.appendChild(buttonRemove);
+  container.appendChild(buttonEdit);
+
+  element.appendChild(container);
+}
+
+//YUMMIE FUNCTIONALTIES END//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//
+//
+//
+//GLOBAL //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function delay(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
@@ -1504,4 +1656,7 @@ async function getData(url = '') {
 }
 
 //loadUserData();
-loadEDMData('artists');
+//loadEDMData('artists');
+loadYummieData('sessions');
+//loadYummieData('restaurants');
+

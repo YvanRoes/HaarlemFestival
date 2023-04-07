@@ -8,4 +8,10 @@ class RestaurantSessionService
     $repo = new RestaurantSessionRepository();
     return $repo->get_AllRestaurantSessionsByRestaurantId($restaurant_id);
   }
+
+  public function get_AllRestaurantSessions()
+  {
+    $repo = new RestaurantSessionRepository();
+    return $repo->get_AllRestaurantSessions();
+  }
 }

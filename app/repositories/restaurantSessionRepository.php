@@ -17,4 +17,19 @@ class RestaurantSessionRepository extends Repository
       echo $e;
     }
   }
+
+  public function get_AllRestaurantSessions()
+  {
+    try {
+      $stmt = $this->conn->prepare("SELECT id, restaurant_id, adult_Price, kids_Price, session_startTime, session_endTime FROM event_yummie");
+      $stmt->execute();
+
+      $stmt->setFetchMode(PDO::FETCH_CLASS, 'RestaurantSession');
+      $r = $stmt->fetchAll();
+      return $r;
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
+  
 }
