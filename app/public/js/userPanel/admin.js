@@ -1,4 +1,3 @@
-
 const inputSearch = document.getElementById('searchInput');
 
 async function loadUserData() {
@@ -6,7 +5,6 @@ async function loadUserData() {
   createUserList(objects);
   addUserSearch();
 }
-
 // USER FUNCTIONALITY --START
 
 async function loadUserData(type) {
@@ -42,7 +40,6 @@ async function loadAll() {
 
 async function loadCustomers() {
   customers = await getUsersByRole(0);
-
   createUserList(customers);
   loadInputSearch();
 }
@@ -50,16 +47,11 @@ async function loadCustomers() {
 async function loadTicketManagement() {
   //  tickets = await getDataFromTicketAPI();
   console.log('loading ticket management')
-  elements = document.getElementById('contentItemsWrapper');
-  elements.innerHTML = '';
-  contentWrapper = document.getElementById('ContentWrapper');
-  contentWrapper.removeChild(document.getElementById('searchInput'));
+  contentWrapper = document.getElementById('UserPane');
+  contentWrapper.innerHTML = '';
   createTicketsForm();
   events = getEvents();
   console.log(events.value);
-
-  createUserList(customers, 'customers');
-  addUserSearch(customers);
 }
 
 async function createTicketList(tickets) {
@@ -90,7 +82,7 @@ async function getEvents() {
 }
 
 async function createTicketsForm() {
-  parentElement = document.getElementById('contentItemsWrapper');
+  parentElement = document.getElementById('UserPane');
   console.log('creating form')
 {
     fetch('js/userPanel/formGenerateTickets.html')
@@ -107,14 +99,14 @@ async function createTicketsForm() {
 
 async function loadEmployees() {
   employees = await getUsersByRole(1);
-  createUserList(employees);
-  loadInputSearch();
+  createUserList(employees, 'employees');
+  addUserSearch(employees);
 }
 
 async function loadAdmins() {
   admins = await getUsersByRole(9);
-  createUserList(admins);
-  loadInputSearch();
+  createUserList(admins, 'admins');
+  addUserSearch(admins);
 }
 
 async function getUsersByRole(role) {
@@ -296,6 +288,9 @@ function createUserContainer(element, id, username, email, role, registeredAt) {
   buttonWrapper.classList.add('flex', 'flex-cols', 'col-start-3', 'justify-end');
   buttonWrapper.appendChild(buttonEdit);
   buttonWrapper.appendChild(buttonRemove);
+  register = document.createElement('span');
+  register.innerHTML = 'registration date:' + '\n' + registeredAt;
+  register.classList.add('text-left');
 
   container.appendChild(idSpan);
   container.appendChild(unameSpan);
@@ -336,8 +331,7 @@ async function addUserSearch(objects) {
   });
 }
 
-async function searchUsers(value) {
-  objects = await getDataFromUserAPI();
+async function searchUsers(value, objects) {
   var newArr = [];
   for (element of objects) {
     if (
@@ -783,3 +777,69 @@ async function loadInputSearch() {
   parentElement = document.getElementById('ContentWrapper');
   parentElement.insertBefore(inputSearch, parentElement.childNodes[0]);
 }
+async function getData(url = ''){
+  const response = await fetch(url);
+  return response.json();
+}
+
+async function getCurrentPageUsers() {
+  userListType = document.getElementById('UserListType').innerHTML;
+  users = [];
+  switch (userListType) {
+    case 'customers':
+      users = getUsersByRole(0);
+      break;
+    case 'employees':
+      users = getUsersByRole(1);
+      break;
+    case 'admins':
+      users = getUsersByRole(9);
+      break;
+    default:
+      users = getUsersByRole("all");
+      break;
+  }
+
+  return users;
+}
+
+function sortByID() {
+  users = getCurrentPageUsers()
+    .then(users => {
+      users.sort((a, b) => (a.id > b.id ? 1 : -1));
+      createUserList(users, document.getElementById('UserListType').innerHTML);
+      addUserSearch(users);
+    })
+    .catch(error => {
+      console.error('Error fetching users:', error);
+    });
+}
+
+function sortByUsername(){
+  users = getCurrentPageUsers()
+    .then(users => {
+      users.sort((a, b) => (a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1));
+      createUserList(users, document.getElementById('UserListType').innerHTML);
+      addUserSearch(users);
+    })
+    .catch(error => {
+      console.error('Error fetching users:', error);
+    });
+}
+
+
+
+function sortByEmail(){
+  users = getCurrentPageUsers()
+  .then(users => {
+    users.sort((a, b) => (a.email.toLowerCase() > b.email.toLowerCase() ? 1 : -1));
+    createUserList(users, document.getElementById('UserListType').innerHTML);
+    addUserSearch(users);
+  })
+  .catch(error => {
+    console.error('Error fetching users:', error);
+  });
+}
+
+loadUserData();
+//loadEDMData('artists');
