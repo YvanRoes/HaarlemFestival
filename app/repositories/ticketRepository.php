@@ -41,12 +41,10 @@ class TicketRepository extends Repository
         $result = $stmt->fetchAll(PDO::FETCH_CLASS);
         return $result;
     }
-    public function post_Ticket($price, $event)
+    public function post_Ticket($event)
     {
-        $sql = "INSERT INTO tickets(id,status,price,exp_date,event) VALUES (:uuid, available, :price, null, :event)";
+        $sql = "INSERT INTO ticket(uuid,status,event_id,price,user_id,exp_date) VALUES (uuid(), 'available', :event, null, null, null)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':uuid',  Uuid::uuid4());
-        $stmt->bindParam(':price', $price);
         $stmt->bindParam(':event', $event);
         $stmt->execute();
     }

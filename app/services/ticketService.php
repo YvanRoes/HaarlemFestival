@@ -15,10 +15,10 @@ class TicketService
         $repo = new TicketRepository();
         return $repo->get_TicketById($id);
     }
-    public function insert_Ticket($price, $event)
+    public function post_Ticket($event)
     {
         $repo = new TicketRepository();
-        return $repo->post_Ticket($price, $event);
+        return $repo->post_Ticket($event);
     }
 
 

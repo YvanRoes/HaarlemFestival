@@ -7,12 +7,10 @@ class UserPanelController extends Controller
     public function index()
     {
         if (isset($_POST['event_id'])) {
-            echo $_POST['event_id'];
-            echo $_POST['quantity'];
-            echo $_POST['price'];
-            foreach ($_POST['quantity'] as $num) {
-                $this->postTickets();
+            for ($i = 0; $i < (int)$_POST['quantity']; $i++) {
+                $this->post_Tickets();
             }
+            $_POST['event_id'] = null;
         }
         if (!isset($_SESSION['USER_ID'])) {
             header('Location: /home');
@@ -36,10 +34,10 @@ class UserPanelController extends Controller
         }
 
     }
-    private function postTickets()
+    private function post_Tickets()
     {
         $ticketService = new TicketService();
-        $this->$ticketService->postTicket($_POST['price'], $_POST['event_id']);
+        $ticketService->post_Ticket($_POST['event_id']);
     }
 }
 
