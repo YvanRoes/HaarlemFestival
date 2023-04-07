@@ -22,7 +22,6 @@ async function loadTicketManagement() {
   contentWrapper.removeChild(document.getElementById('searchInput'));
   createTicketsForm();
   events = getEvents();
-  console.log(events.value);
 }
 
 async function createTicketList(tickets) {
@@ -55,16 +54,14 @@ async function getEvents() {
 async function createTicketsForm() {
   parentElement = document.getElementById('contentItemsWrapper');
   console.log('creating form')
-{
-    fetch('js/userPanel/formGenerateTickets.html')
+    fetch('/js/userPanel/formGenerateTickets.html')
     .then((response) => {
       return response.text();
     })
     .then((html) => {
       parentElement.innerHTML = html;  
-      
+      console.log(html);
     });
-  }
   console.log('fetched log')
 };
 

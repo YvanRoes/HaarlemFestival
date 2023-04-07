@@ -4,7 +4,6 @@ class Ticket implements JsonSerializable
     private ?int $id = null;
     private ?string $status = null;
     private ?float $price = null;
-    private ?string $user_id = null;
     private ?DateTime $expDate = null;
     private ?int $event = null;
 
@@ -33,17 +32,6 @@ class Ticket implements JsonSerializable
     {
         $this->price = $price;
     }
-
-    public function getUserId(): ?string
-    {
-        return $this->user_id;
-    }
-
-
-    public function setUserId(?string $user_id): void
-    {
-        $this->user_id = $user_id;
-    }
     public function getExpDate(): ?DateTime
     {
         return $this->expDate;
@@ -69,7 +57,6 @@ class Ticket implements JsonSerializable
             'id' => $this->id,
             'status' => $this->status,
             'price' => $this->price,
-            'user_id' => $this->user_id,
             'expDate' => $this->expDate,
             'event' => $this->event
         ];
