@@ -179,7 +179,6 @@
                         <input type="text" id="restaurantCategory" placeholder="category" required />
                         <input type="number" step="0.1" min="0" max="5" id="restaurantStar" placeholder="star" required />
                         <select id="restaurantMichelinStar" required>
-                            <option value="" disabled selected>Michelin star</option>
                             <option value="0">False</option>
                             <option value="1">True</option>
                         </select>

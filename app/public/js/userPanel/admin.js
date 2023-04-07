@@ -1418,18 +1418,18 @@ function insertRestaurant() {
   rCapacity = document.getElementById('restaurantCapacity');
   picture = document.getElementById('restaurantFile');
 
-const data = new FormData();
-data.append("post_type", "insert");
-data.append("restaurant_name", rName.value);
-data.append("restaurant_category", rCategory.value);
-data.append("restaurant_michelinStar", rMichelinStar.value);
-data.append("restaurant_description", rDescription.value);
-data.append("restaurant_address", rAddress.value);
-data.append("restaurant_phoneNumber", rPhonenumber.value);
-data.append("restaurant_star", rStars.value);
-data.append("restaurant_capacity", rCapacity.value);
-data.append("picture1", picture.files[0]);
-data.append("picture2", picture.files[1]);
+  const data = new FormData();
+  data.append("post_type", "insert");
+  data.append("restaurant_name", rName.value);
+  data.append("restaurant_category", rCategory.value);
+  data.append("restaurant_michelinStar", rMichelinStar.value == 1 ? true : false);
+  data.append("restaurant_description", rDescription.value);
+  data.append("restaurant_address", rAddress.value);
+  data.append("restaurant_phoneNumber", rPhonenumber.value);
+  data.append("restaurant_star", rStars.value);
+  data.append("restaurant_capacity", rCapacity.value);
+  data.append("picture1", picture.files[0]);
+  data.append("picture2", picture.files[1]);
 
   console.log(data);
 
@@ -1629,6 +1629,6 @@ async function getData(url = '') {
 
 //loadUserData();
 //loadEDMData('artists');
-loadYummieData('sessions');
-//loadYummieData('restaurants');
+//loadYummieData('sessions');
+loadYummieData('restaurants');
 
