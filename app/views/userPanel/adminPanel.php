@@ -197,8 +197,8 @@
                         <select id="sessionRestaurant" required></select>
                         <input id="sessionRestaurantAdultPrice" type="number" step="0.50" min="0" placeholder="Adult price" required />
                         <input id="sessionRestaurantKidsPrice" type="number" step="0.50" min="0" placeholder="Kids price" required />
-                        <input type="datetime-local" id="sessionRestaurantStartTime" placeholder="Start time" required />
-                        <input type="datetime-local" id="sessionRestaurantEndTime" placeholder="End time" required />
+                        <input type="time" id="sessionRestaurantStartTime" placeholder="Start time" required />
+                        <input type="time" id="sessionRestaurantEndTime" placeholder="End time" required />
                        
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurantSession()">Add sessions</button>
                     </div>

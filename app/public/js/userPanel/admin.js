@@ -1254,7 +1254,7 @@ function createRestaurantContainer(element, id, name, category, star, michelinSt
   starSpan.setAttribute('star', 'rStarSpan' + id);
 
   michelinStarSpan = document.createElement('span');
-  //michelinStarSpan.innerHTML = michelinStar.toString();
+  michelinStarSpan.innerHTML = michelinStar;
   michelinStarSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
   michelinStarSpan.setAttribute('michelinStar', 'rMichelinStarSpan' + id);
 
@@ -1448,20 +1448,20 @@ async function loadRestaurantSessions() {
     restaurantPane.classList.add('hidden');
   }
 
-  // restaurantSelect = document.getElementById('sessionRestaurantSelect');
-  // restaurantObjects = await getData('/restaurants');
-  // restaurantSelect.innerHTML = '';
-  // for (let i = 0; i < restaurantObjects.length; i++) {
-  //   restaurantSelect.innerHTML +=
-  //     '<option value="' +
-  //     restaurantObjects[i].id +
-  //     '">' +
-  //     restaurantObjects[i].name +
-  //     '</option>';
-  // }
+  restaurantSelect = document.getElementById('sessionRestaurant');
+  restaurantObjects = await getData('/restaurants');
+  restaurantSelect.innerHTML = '';
+  for (let i = 0; i < restaurantObjects.length; i++) {
+    restaurantSelect.innerHTML +=
+      '<option value="' +
+      restaurantObjects[i].id +
+      '">' +
+      restaurantObjects[i].name +
+      '</option>';
+  }
 
   objects = getData('/restaurantSessions');
-  createRestaurantList(objects);
+  createRestaurantSessionList(objects);
 }
 
 async function createRestaurantSessionList(objects) {
@@ -1469,8 +1469,6 @@ async function createRestaurantSessionList(objects) {
   title = document.getElementById('YummieTitle');
   title.innerHTML = 'Restaurant Sessions';
   parentElement.innerHTML = '';
-
-  restaurantObjects = await getData('/restaurants');
 
   for (let i = 0; i < objects.length; i++) {
     createRestaurantSessionContainer(
@@ -1580,6 +1578,16 @@ async function createRestaurantSessionContainer(element, id, restaurant_id, adul
 
   element.appendChild(container);
 }
+
+function editRestaurantSession(id) {
+}
+
+function removeRestaurantSession(id) {
+}
+
+function insertRestaurantSession() {
+}
+
 
 //YUMMIE FUNCTIONALTIES END//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
