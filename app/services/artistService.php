@@ -8,4 +8,25 @@ class ArtistService
     $repo = new ArtistRepository();
     return $repo->get_AllArtists();
   }
+
+  public function get_ArtistById($id): Artist
+  {
+    $repo = new ArtistRepository();
+    return $repo->get_ArtistById($id);
+  }
+  
+  public function insert_Artist(Artist $artist){
+    $repo = new ArtistRepository();
+    return $repo->insert_Artist($artist);
+  }
+
+  public function delete_artistById($id){
+    $repo = new ArtistRepository();
+    return $repo->delete_artistById($id);
+  }
+
+  public function edit_artistById($id, $name, $genres){
+    $repo = new ArtistRepository();
+    return $repo->edit_artistById($id , $name, $genres);
+  }
 }

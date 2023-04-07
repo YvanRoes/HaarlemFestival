@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/../../services/userservice.php';
+require_once __DIR__ . '/../../models/user.php';
 
 
 class UsersController
@@ -31,7 +32,17 @@ class UsersController
           $this->userService->delete_UserById($object->id);
           break;
         case "edit":
-          $this->userService->edit_UserById($object->id, $object);
+          $this->userService->edit_UserById($object->id, htmlspecialchars($object->username), htmlspecialchars($object->email), $object->role);
+          echo $object->id;
+          break;
+        case "insert":
+          $user = new User();
+          $user->__set_Username(htmlspecialchars($object->username));
+          $user->__set_Email(htmlspecialchars($object->email));
+          $user->__set_Password(htmlspecialchars($object->password));
+          $user->__set_role($object->role);
+          $this->userService->insert_UserWithRole($user);
+          break;
       }
     }
   }

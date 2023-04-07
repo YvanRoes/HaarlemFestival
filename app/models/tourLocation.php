@@ -3,6 +3,7 @@ class TourLocation implements JsonSerializable
 {
     private ?int $id = null;
     private ?string $name = null;
+    private ?string $title = null;
     private ?string $description = null;
     private ?string $address = null;
     private ?string $imagePath = null;
@@ -25,6 +26,17 @@ class TourLocation implements JsonSerializable
     public function __set_name(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function get_title(): string
+    {
+        return $this->title;
+    }
+
+    public function __set_title(string $title): self
+    {
+        $this->title = $title;
         return $this;
     }
 
@@ -64,6 +76,7 @@ class TourLocation implements JsonSerializable
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'title' => $this->title,
             'description' => $this->description,
             'address' => $this->address,
             'imagePath' => $this->imagePath

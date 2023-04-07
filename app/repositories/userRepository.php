@@ -3,9 +3,10 @@ require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/user.php';
 class UserRepository extends Repository
 {
-    public function get_AllUsers(){
+    public function get_AllUsers()
+    {
         try {
-            $stmt = $this->conn->prepare("SELECT id, username, email, password, role FROM users");
+            $stmt = $this->conn->prepare("SELECT id, username, email, password, role, register_date FROM users");
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
@@ -13,10 +14,11 @@ class UserRepository extends Repository
             return $users;
         } catch (PDOException $e) {
             echo $e;
-            }
-         }
-       public function get_AllCustomers(){
-        try{
+        }
+    }
+    public function get_AllCustomers()
+    {
+        try {
             $stmt = $this->conn->prepare("SELECT id, username, email, password FROM users customers WHERE users.id = customers.id");
             $stmt->execute();
 
@@ -28,7 +30,8 @@ class UserRepository extends Repository
         }
     }
 
-    public function get_UserById(int $id): User{
+    public function get_UserById(int $id): User
+    {
         try {
             $stmt = $this->conn->prepare("SELECT id, username, email, password FROM User WHERE id = :uid");
             $stmt->execute(array(':uid' => $id));
@@ -41,7 +44,8 @@ class UserRepository extends Repository
         }
     }
 
-    public function get_UserByEmail(string $email): User{
+    public function get_UserByEmail(string $email): User
+    {
         try {
             $stmt = $this->conn->prepare("SELECT id, username, email, password, role FROM users WHERE email = :email");
             $stmt->execute(array(':email' => $email));
@@ -49,12 +53,13 @@ class UserRepository extends Repository
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
             $user = $stmt->fetch();
             return $user;
-         }catch(PDOException $e){
+        } catch (PDOException $e) {
             echo $e;
         }
     }
 
-    public function get_UserByUsername(string $username): User{
+    public function get_UserByUsername(string $username): User
+    {
         try {
             $stmt = $this->conn->prepare("SELECT id, username, email, password FROM users WHERE username = :username");
             $stmt->execute(array(':username' => $username));
@@ -62,12 +67,13 @@ class UserRepository extends Repository
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
             $user = $stmt->fetch();
             return $user;
-         }catch(PDOException $e){
+        } catch (PDOException $e) {
             echo $e;
         }
     }
 
-    public function get_UserPrivilegeById($id){
+    public function get_UserPrivilegeById($id)
+    {
         try {
             //TODO
             $stmt = $this->conn->prepare("");
@@ -79,7 +85,8 @@ class UserRepository extends Repository
         }
     }
 
-    public function verify_UserCredentials(string $email, $passwd){
+    public function verify_UserCredentials(string $email, $passwd)
+    {
         try {
             $stmt = $this->conn->prepare("SELECT users.id FROM users WHERE email = :email AND password = :passwd");
             $stmt->execute(array(':email' => htmlspecialchars($email), ':passwd' => htmlspecialchars($passwd)));
@@ -89,17 +96,26 @@ class UserRepository extends Repository
         }
     }
 
-    
+
     public function insert_User(User $user)
     {
         try {
-            $stmt = $this->conn->prepare("INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, 0)");
+            $stmt = $this->conn->prepare("INSERT INTO users (username, email, password, role, register_date) VALUES (:username, :email, :password, 0, CURRENT_DATE)");
             $stmt->execute(array(':username' => $user->get_username(), ':email' => $user->get_email(), ':password' => md5($user->get_password())));
         } catch (PDOException $e) {
             echo $e;
         }
     }
-    
+
+    public function insert_UserWithRole(User $user){
+        try {
+            $stmt = $this->conn->prepare("INSERT INTO users (username, email, password, role, register_date) VALUES (:username, :email, :password, :role, CURRENT_DATE)");
+            $stmt->execute(array(':username' => $user->get_username(), ':email' => $user->get_email(), ':password' => md5($user->get_password()), ':role' => $user->get_role()));
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
     public function update_Password(int $user_id, string $password)
     {
         try {
@@ -109,7 +125,8 @@ class UserRepository extends Repository
             echo $e;
         }
     }
-    public function delete_UserById($id){
+    public function delete_UserById($id)
+    {
         try {
             $stmt = $this->conn->prepare("DELETE FROM users WHERE id = :id");
             $stmt->execute(array(':id' => $id));
@@ -118,11 +135,12 @@ class UserRepository extends Repository
         }
     }
 
-    public function edit_UserById($id, $username, $email){
-        try{
-            $stmt = $this->conn->prepare("UPDATE users SET username = '[:username]', email = '[':email]' WHERE id = :id");
-            $stmt->execute(array(':id' => $id, ':username' => $username, ':email' => $email));
-        }catch(PDOException $e){
+    public function edit_UserById($id, $username, $email, $role_id)
+    {
+        try {
+            $stmt = $this->conn->prepare("UPDATE `users` SET `username`=:username,`email`=:email,`role`=:role WHERE id = :id;");
+            $stmt->execute(array(':id' => $id, ':username' => $username, ':email' => $email, ':role' => $role_id));
+        } catch (PDOException $e) {
             echo $e;
         }
     }

@@ -7,7 +7,7 @@ function generateTourOverviewPage(){
 
 function generateTourLocation(location, wrapper){
     tourLocation = document.createElement('div');
-    tourLocation.classList.add('col-span-2');
+    tourLocation.classList.add('col-span-2', 'mt-[50px]');
 
     titleContainer = document.createElement('div');
     titleContainer.classList.add('flex', 'col', 'gap-[10px]');
@@ -39,6 +39,7 @@ function generateTourLocation(location, wrapper){
         'rounded-[10px]'
     );
     button.innerHTML = 'Read More';
+    button.onclick = function () { window.location.href = "/tour/detailPage?id=" + location.id };
 
     
     tourLocation.appendChild(titleContainer);
@@ -46,11 +47,16 @@ function generateTourLocation(location, wrapper){
     tourLocation.appendChild(button);
 
     image = new Image();
-    image.src = location.imagePath;
-    image.classList.add('w-[500px]', 'mb-[100px]');
+    imagePaths = location.imagePath.split(':');
+    image.src = imagePaths[0];
+    image.classList.add('w-[500px]', 'mb-[100px]', 'mt-[50px]');
+
+    link = document.createElement('a');
+    link.href = "/tour/detailPage?id=" + location.id;
+    link.appendChild(image);
 
     wrapper.appendChild(tourLocation);
-    wrapper.appendChild(image);
+    wrapper.appendChild(link);
 }
 
 async function getDataFromArtistAPI() {
@@ -60,9 +66,7 @@ async function getDataFromArtistAPI() {
 
 async function generateTourLocations(wrapper) {
     tourLocations = await getDataFromArtistAPI();
-
     for (let i = 0; i <= tourLocations.length; i++) {
-
         generateTourLocation(tourLocations[i], wrapper);
     }
 }

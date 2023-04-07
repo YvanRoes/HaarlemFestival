@@ -16,17 +16,17 @@ function generateHeader(string $pageName, string $mode)
   switch ($mode) {
     case 'dark':
       $unselected = '#29334E';
-      $selected = '#FC5B84';
+      $selected = '#42BFDD';
       $headerTextColourValue = '#F7F7FB';
       break;
     case 'light':
       $unselected = '#F7F7FB';
-      $selected = '#FC5B84';
+      $selected = '#42BFDD';
       $headerTextColourValue = '#29334E';
       break;
     default:
       $unselected = '';
-      $selected = '#FC5B84';
+      $selected = '#42BFDD';
       break;
   }
   global $colours;
@@ -75,14 +75,14 @@ function loadHTML()
           <i class='fa fa-user' style='font-size: 24px;'></i>My Account<i class='fa fa-caret-down mt-[5px]'></i></button>";
   } else {
     echo "
-          <button data-dropdown-toggle='dropdownInformation' class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['unselected'] . "] flex items-center gap-[10px] border-2 border-[" . $GLOBALS['unselected'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['headerTextColourValue'] . "] cursor-pointer'>
+          <button data-dropdown-toggle='dropdownInformation' class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['unselected'] . "] flex items-center gap-[10px] border-2 border-[" . $GLOBALS['unselected'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['selected'] . "] cursor-pointer'>
           <i class='fa fa-user' style='font-size: 24px;'></i>Account<i class='fa fa-caret-down mt-[5px]'></i></button>";
   }
   echo
     "<a href='/shoppingCart'>
         <div class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['unselected'] . "] flex items-center gap-[10px] border-2 border-[" . $GLOBALS['unselected'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['headerTextColourValue'] . "] cursor-pointer'>
-        <i class='fa fa-location-arrow' style='font-size: 24px;'></i>
-          Plan your trip</div>
+        <i class='fa fa-shopping-cart' style='font-size: 24px;'></i>
+          cart</div>
         </a>
       </div>
     </div>

@@ -8,4 +8,10 @@ class RestaurantService
     $repo = new RestaurantRepository();
     return $repo->get_AllRestaurants();
   }
+
+  public function get_RestaurantById($id): Restaurant
+  {
+    $repo = new RestaurantRepository();
+    return $repo->get_RestaurantById($id);
+  }
 }

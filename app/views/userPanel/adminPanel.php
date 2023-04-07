@@ -36,89 +36,108 @@
                         </svg>
                     </button>
                     <!-- Dropdown menu -->
-                    <form method="post" id="dropdown"
-                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                            aria-labelledby="dropdownDefaultButton">
+                    <form method="post" id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                             <li>
-                                <button><a href="/cms?page=home" id="editHomepage"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Homepage</a></button>
+                                <button><a href="/cms?page=home" id="editHomepage" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Homepage</a></button>
                             </li>
                             <li>
-                                <a href="/cms?page=food" id="editYummieEvent"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yummie! Event</a>
+                                <a href="/cms?page=food" id="editYummieEvent" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yummie! Event</a>
                             </li>
                             <li>
-                                <a href="/cms?page=tour" id="editStrollThroughHaarlem"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Stroll Through Haarlem</a>
+                                <a href="/cms?page=tour" id="editStrollThroughHaarlem" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Stroll Through Haarlem</a>
                             </li>
                             <li>
-                                <a href="/cms?page=dance" id="editDanceEvent"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dance Event</a>
+                                <a href="/cms?page=dance" id="editDanceEvent" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dance Event</a>
                             </li>
                             <li>
-                                <a href="/cms?page=edit" id="editNewPage"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add New Page</a>
+                                <a href="/cms?page=edit" id="editNewPage" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add New Page</a>
                             </li>
                         </ul>
                     </form>
                 </ul>
             </div>
         </div>
-        <div class="col-start-1 col-span-1 row-start-2 row-span-5 flex justify-center border-[1px] border[#656262]"
-            id="subMenu">
+        <div class="col-start-1 col-span-1 row-start-2 row-span-5 flex justify-center border-[1px] border[#656262]" id="subMenu">
             <ul class="p-4 flex flex-col gap-[20px] h-fit" id="items">
                 <ul class="text-sm text-[#656262]" id="UsersList">
                     <li class="font-bold"><button onclick="loadUserData()">Users</button></li>
                     <li>
-                        <button onclick="loadCustomers()"
-                            class="block px-4 py-2 dark:hover:text-[#121212]">Customers</button>
+                        <button onclick="loadUserData(`customers`)" class="block px-4 py-2 dark:hover:text-[#121212]">Customers</button>
                     </li>
                     <li>
-                        <button onclick="loadEmployees()"
-                            class="block px-4 py-2 dark:hover:text-[#121212]">Emloyees</button>
+                        <button onclick="loadUserData(`employees`)" class="block px-4 py-2 dark:hover:text-[#121212]">Emloyees</button>
                     </li>
                     <li>
-                        <button onclick="loadAdmins()" class="block px-4 py-2 dark:hover:text-[#121212]">Admins</button>
+                        <button onclick="loadUserData(`admins`)" class="block px-4 py-2 dark:hover:text-[#121212]">Admins</button>
                     </li>
                 </ul>
-                <ul class="text-sm text-[#656262] mt-4" id="TicketsList">
-                    <li class="font-bold"><a href="">Tickets</a></li>
+                <ul class="text-sm text-[#656262] mt-4" id="edmEvent">
+                    <li class="font-bold"><span>EDM</span></li>
                     <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">Yummie!</a>
+                        <button onclick="loadEDMData(`venues`)" class="block px-4 py-2 dark:hover:text-[#121212]">venues</button>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">Stroll</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">EDM</a>
-                    </li>
-                </ul>
-                <ul class="text-sm text-[#656262] mt-4" id="EventsList">
-                    <li class="font-bold"><a href="">Events</a></li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">Yummie!</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">Stroll</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 dark:hover:text-[#121212]">EDM</a>
+                        <button onclick="loadEDMData(`artists`)" class="block px-4 py-2 dark:hover:text-[#121212]">artists</button>
                     </li>
                 </ul>
             </ul>
 
         </div>
         <div class="col-start-2 col-span-5 row-start-2 row-span-5 flex justify-center" id="Content">
-            <div class="w-8/12 h-max p-16 mt-16 rounded-lg" id="ContentWrapper">
+            <div class="w-9/12 h-max p-16 mt-16 rounded-lg hidden" id="UserPane">
+                <h1 id="contentTitle" class="text-[64px]">Users</h1>
                 <input id="searchInput" type="text" placeholder="Search" />
-                <div class="flex flex-col gap-4" id="contentItemsWrapper">
+                <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+
+                    <input type="text" id="inputUserName" placeholder="name" required />
+                    <input type="password" id="inputUserPassword" placeholder="password" required />
+                    <input id="inputUserMail" type="text" placeholder="mail" required />
+                    <select name="role" id="userRoles">
+                        <option value="0">User</option>
+                        <option value="1">Employee</option>
+                        <option value="9">Admin</option>
+                    </select>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="addNewUser()">Add user</button>
+                 
+                </div>
+                <div class="grid gap-4 w-full grid-cols-6 text-center">
+                    <button class="font-bold" onclick="sortByID()">ID</button>
+                    <button class="font-bold" onclick="sortByUsername()">Username</button>
+                    <button class="font-bold" onclick="sortByEmail()">Email</button>
+                </div>
+                <div class="flex flex-col gap-4 pb-5" id="contentUsersWrapper">
+                
+                </div>
+            </div>
+            <div class="w-8/12 h-max p-16 mt-16 rounded-lg hidden" id="edmPane">
+                <h1 id="EDMTitle" class="text-[64px]"></h1>
+                <div id="venueSubPane" class="hidden">
+                    <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+                        <input type="text" id="venueName" placeholder="venue name" required />
+                        <input type="text" id="venueAddress" placeholder="address" required />
+                        <input type="number" id="venueCap" placeholder="Capacity" required />
+                        <input id="venueFile" type="file" title=" " class="col-span-2" />
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertVenue()">Add venue</button>
+                    </div>
+                    <div class="flex flex-col gap-4 pb-5" id="contentVenueWrapper">
+                    </div>
+                </div>
+                <div id="artistSubPane" class="hidden">
+                    <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+                        <input type="text" id="artistName" placeholder="artist name" required />
+                        <input type="text" id="artistGenre" placeholder="genres" required />
+                        <input id="artistPicture" type="file" title=" " class="col-span-2" />
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertArtist()">Add artist</button>
+                    </div>
+                    <div class="flex flex-col gap-4 pb-5" id="contentArtistWrapper">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     </div>
-    
+
     <script src="./js/userPanel/admin.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 

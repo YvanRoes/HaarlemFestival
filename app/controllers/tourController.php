@@ -20,12 +20,14 @@
         public function detailPage(){
             if (isset($_GET['id'])){
                 $location = $this->service->get_TourLocationById($_GET['id']);
-                $string = $location->get_imagePath();
-                $imagePaths = explode(":", $string);
+                $imageString = $location->get_imagePath();
+                $titleString = $location->get_title();
+                $descriptionString = $location->get_description();
+                $imagePaths = explode(":", $imageString);
+                $titles = explode(":", $titleString);
+                $descriptions = explode(":", $descriptionString);
             }
             require __DIR__ . '/../views/tour/detailPage.php';
-
-            // $this->displayView($this);
         }
     }
 ?>
