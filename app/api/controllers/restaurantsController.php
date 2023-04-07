@@ -60,7 +60,7 @@ class RestaurantsController
             }
             $r->__set_imagePath($imagePath);
             var_dump($r);
-            // $this->restaurantService->insert_Restaurant($r);
+            $this->restaurantService->insert_Restaurant($r);
 
             break;
           default:

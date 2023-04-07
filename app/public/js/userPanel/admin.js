@@ -1254,7 +1254,7 @@ function createRestaurantContainer(element, id, name, category, star, michelinSt
   starSpan.setAttribute('star', 'rStarSpan' + id);
 
   michelinStarSpan = document.createElement('span');
-  michelinStarSpan.innerHTML = michelinStar.toString();
+  //michelinStarSpan.innerHTML = michelinStar.toString();
   michelinStarSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
   michelinStarSpan.setAttribute('michelinStar', 'rMichelinStarSpan' + id);
 
@@ -1418,51 +1418,23 @@ function insertRestaurant() {
   rCapacity = document.getElementById('restaurantCapacity');
   picture = document.getElementById('restaurantFile');
 
-  data = {
-    post_type: 'insert',
-    restaurant_name: rName.value,
-    restaurant_category: rCategory.value,
-    restaurant_star: rStars.value,
-    restaurant_michelinStar: rMichelinStar.value,
-    restaurant_description: rDescription.value,
-    restaurant_address: rAddress.value,
-    restaurant_phoneNumber: rPhonenumber.value,
-    restaurant_capacity: rCapacity.value,
-    picture1: picture.files[0],
-    picture2: picture.files[1],
-    // picture3: picture.files[2],
-    // picture4: picture.files[3],
-    // picture5: picture.files[4],
-    // picture6: picture.files[5],
-    // picture7: picture.files[6],
-    // picture8: picture.files[7],
-    // picture9: picture.files[8],
-  };
+const data = new FormData();
+data.append("post_type", "insert");
+data.append("restaurant_name", rName.value);
+data.append("restaurant_category", rCategory.value);
+data.append("restaurant_michelinStar", rMichelinStar.value);
+data.append("restaurant_description", rDescription.value);
+data.append("restaurant_address", rAddress.value);
+data.append("restaurant_phoneNumber", rPhonenumber.value);
+data.append("restaurant_star", rStars.value);
+data.append("restaurant_capacity", rCapacity.value);
+data.append("picture1", picture.files[0]);
+data.append("picture2", picture.files[1]);
 
-  let form = new FormData();
-  form.append('post_type', 'insert');
-  form.append('restaurant_name', "BBQ");
-  form.append('restaurant_category', "BBQ");
-  form.append('restaurant_star', 4.1);
-  form.append('restaurant_michelinStar', 0);
-  form.append('restaurant_description', "BBQ");
-  form.append('restaurant_address', "BBQ");
-  form.append('restaurant_phoneNumber', "123456789");
-  form.append('restaurant_capacity', parseInt(100));
-  form.append('picture1', picture.files[0]);
-  form.append('picture2', picture.files[1]);
-  // form.append('picture3', picture.files[2]);
-  // form.append('picture4', picture.files[3]);
-  // form.append('picture5', picture.files[4]);
-  // form.append('picture6', picture.files[5]);
-  // form.append('picture7', picture.files[6]);
-  // form.append('picture8', picture.files[7]);
-  // form.append('picture9', picture.files[8]);
-
-  console.log(form);
+  console.log(data);
 
 
-  postForm('http://localhost/api/restaurants', form).then(
+  postForm('http://localhost/api/restaurants', data).then(
     delay(1000).then(() => loadRestaurants())
   );
 }
@@ -1476,17 +1448,17 @@ async function loadRestaurantSessions() {
     restaurantPane.classList.add('hidden');
   }
 
-  restaurantSelect = document.getElementById('sessionRestaurantSelect');
-  restaurantObjects = await getData('/restaurants');
-  restaurantSelect.innerHTML = '';
-  for (let i = 0; i < restaurantObjects.length; i++) {
-    restaurantSelect.innerHTML +=
-      '<option value="' +
-      restaurantObjects[i].id +
-      '">' +
-      restaurantObjects[i].name +
-      '</option>';
-  }
+  // restaurantSelect = document.getElementById('sessionRestaurantSelect');
+  // restaurantObjects = await getData('/restaurants');
+  // restaurantSelect.innerHTML = '';
+  // for (let i = 0; i < restaurantObjects.length; i++) {
+  //   restaurantSelect.innerHTML +=
+  //     '<option value="' +
+  //     restaurantObjects[i].id +
+  //     '">' +
+  //     restaurantObjects[i].name +
+  //     '</option>';
+  // }
 
   objects = getData('/restaurantSessions');
   createRestaurantList(objects);
