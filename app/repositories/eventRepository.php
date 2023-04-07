@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/event.php';
+require_once __DIR__ . '/../models/event2.php';
 
 class EventRepository extends Repository
 {
@@ -11,6 +12,19 @@ class EventRepository extends Repository
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Event');
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+    public function get_AllEvent2()
+    {
+        try {
+            $stmt = $this->conn->prepare("SELECT id FROM events");
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Event2');
             $result = $stmt->fetchAll();
             return $result;
         } catch (PDOException $e) {

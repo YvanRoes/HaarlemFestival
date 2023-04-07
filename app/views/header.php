@@ -79,7 +79,7 @@ function loadHTML()
           <i class='fa fa-user' style='font-size: 24px;'></i>Account<i class='fa fa-caret-down mt-[5px]'></i></button>";
   }
   echo
-  "<a href='/api/users'>
+    "<a href='/shoppingCart'>
         <div class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['unselected'] . "] flex items-center gap-[10px] border-2 border-[" . $GLOBALS['unselected'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['headerTextColourValue'] . "] cursor-pointer'>
         <i class='fa fa-shopping-cart' style='font-size: 24px;'></i>
           cart</div>
@@ -103,7 +103,8 @@ function loadHTML()
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 
-<div id='dropdownInformation' class='z-20 hidden divide-y divide-gray-100 rounded-lg shadow w-44 bg-[#29334E] dark:divide-gray-600'>
+<div id='dropdownInformation'
+  class='z-20 hidden divide-y divide-gray-100 rounded-lg shadow w-44 bg-[#29334E] dark:divide-gray-600'>
   <div class='px-4 py-3 text-sm text-gray-900 dark:text-white'>
     <?php
     if (isset($_SESSION['USER_ID'])) {
@@ -140,7 +141,8 @@ function loadHTML()
     ?>
   </ul>
   <div class='py-2'>
-    <a href='/login' class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'>
+    <a href='/login'
+      class='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'>
       <?php
       if (isset($_SESSION['USER_ID'])) {
         echo 'Sign out';
