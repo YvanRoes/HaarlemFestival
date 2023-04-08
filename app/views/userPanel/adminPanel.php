@@ -181,12 +181,12 @@
                         <select id="restaurantMichelinStar" required>
                             <option value="0">False</option>
                             <option value="1">True</option>
-                        </select>
-                        <input type="text" id="restaurantDescription" placeholder="description" required />
+                        </select>          
                         <input type="text" id="restaurantAddress" placeholder="address" required />
                         <input type="text" id="restaurantPhoneNumber" placeholder="phone number" required />
                         <input type="number" min="0" id="restaurantCapacity" placeholder="Capacity" required />
                         <input id="restaurantFile" type="file" multiple="multiple" title=" " class="col-span-2" />
+                        <textarea class="col-span-5" id="restaurantDescription" placeholder="description" required></textarea> 
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurant()">Add restaurants</button>
                     </div>
                     <div class="flex flex-col gap-4 pb-5" id="contentRestaurantWrapper">

@@ -23,17 +23,7 @@ class RestaurantsController
       if (isset($_POST['post_type'])) {
         switch ($_POST['post_type']) {
           case 'edit':
-            echo $_POST['id'];
-            echo $_POST['restaurant_name'];
-            echo $_POST['restaurant_category'];
-            echo $_POST['restaurant_star'];
-            echo $_POST['restaurant_michelinStar'];
-            echo $_POST['restaurant_description'];
-            echo $_POST['restaurant_address'];
-            echo $_POST['restaurant_phoneNumber'];
-            echo $_POST['restaurant_capacity'];
-
-            $this->restaurantService->edit_Restaurant ($_POST["id"], htmlspecialchars($_POST['restaurant_name']), htmlspecialchars($_POST['restaurant_category']), htmlspecialchars($_POST['restaurant_star']), htmlspecialchars($_POST['restaurant_michelinStar']), htmlspecialchars($_POST['restaurant_description']), htmlspecialchars($_POST['restaurant_address']), htmlspecialchars($_POST['restaurant_phoneNumber']), htmlspecialchars($_POST['restaurant_capacity']));
+            $this->restaurantService->edit_Restaurant (htmlspecialchars($_POST["id"]), htmlspecialchars($_POST['restaurant_name']), htmlspecialchars($_POST['restaurant_category']), htmlspecialchars($_POST['restaurant_star']), htmlspecialchars($_POST['restaurant_michelinStar']), htmlspecialchars($_POST['restaurant_description']), htmlspecialchars($_POST['restaurant_address']), htmlspecialchars($_POST['restaurant_phoneNumber']), htmlspecialchars($_POST['restaurant_capacity']));
             break;
           case 'insert':
             $r = new Restaurant();
