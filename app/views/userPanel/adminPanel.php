@@ -82,7 +82,7 @@
                         <button onclick="loadYummieData(`restaurants`)" class="block px-4 py-2 dark:hover:text-[#121212]">restaurants</button>
                     </li>
                     <li>
-                        <button onclick="loadYummieData(`sessions`)" class="block px-4 py-2 dark:hover:text-[#121212]">sessions</button>
+                        <button onclick="loadYummieData(`restaurantSessions`)" class="block px-4 py-2 dark:hover:text-[#121212]">sessions</button>
                     </li>
                 </ul>
             </ul>
