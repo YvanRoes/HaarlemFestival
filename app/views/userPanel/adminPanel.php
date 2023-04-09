@@ -82,7 +82,7 @@
                         <button onclick="loadYummieData(`restaurants`)" class="block px-4 py-2 dark:hover:text-[#121212]">restaurants</button>
                     </li>
                     <li>
-                        <button onclick="loadYummieData(`sessions`)" class="block px-4 py-2 dark:hover:text-[#121212]">sessions</button>
+                        <button onclick="loadYummieData(`restaurantSessions`)" class="block px-4 py-2 dark:hover:text-[#121212]">sessions</button>
                     </li>
                 </ul>
             </ul>
@@ -179,15 +179,14 @@
                         <input type="text" id="restaurantCategory" placeholder="category" required />
                         <input type="number" step="0.1" min="0" max="5" id="restaurantStar" placeholder="star" required />
                         <select id="restaurantMichelinStar" required>
-                            <option value="" disabled selected>Michelin star</option>
                             <option value="0">False</option>
                             <option value="1">True</option>
-                        </select>
-                        <input type="text" id="restaurantDescription" placeholder="description" required />
+                        </select>          
                         <input type="text" id="restaurantAddress" placeholder="address" required />
                         <input type="text" id="restaurantPhoneNumber" placeholder="phone number" required />
                         <input type="number" min="0" id="restaurantCapacity" placeholder="Capacity" required />
                         <input id="restaurantFile" type="file" multiple="multiple" title=" " class="col-span-2" />
+                        <textarea class="col-span-5" id="restaurantDescription" placeholder="description" required></textarea> 
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurant()">Add restaurants</button>
                     </div>
                     <div class="flex flex-col gap-4 pb-5" id="contentRestaurantWrapper">
@@ -198,8 +197,8 @@
                         <select id="sessionRestaurant" required></select>
                         <input id="sessionRestaurantAdultPrice" type="number" step="0.50" min="0" placeholder="Adult price" required />
                         <input id="sessionRestaurantKidsPrice" type="number" step="0.50" min="0" placeholder="Kids price" required />
-                        <input type="datetime-local" id="sessionRestaurantStartTime" placeholder="Start time" required />
-                        <input type="datetime-local" id="sessionRestaurantEndTime" placeholder="End time" required />
+                        <input type="time" id="sessionRestaurantStartTime" placeholder="Start time" required />
+                        <input type="time" id="sessionRestaurantEndTime" placeholder="End time" required />
                        
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurantSession()">Add sessions</button>
                     </div>
