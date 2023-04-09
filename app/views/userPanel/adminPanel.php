@@ -29,19 +29,7 @@
                     </button>
                     <!-- Dropdown menu -->
                     <form method="post" id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                            <li>
-                                <button><a href="/cms?page=home" id="editHomepage" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Homepage</a></button>
-                            </li>
-                            <li>
-                                <a href="/cms?page=food" id="editYummieEvent" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yummie! Event</a>
-                            </li>
-                            <li>
-                                <a href="/cms?page=tour" id="editStrollThroughHaarlem" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Stroll Through Haarlem</a>
-                            </li>
-                            <li>
-                                <a href="/cms?page=dance" id="editDanceEvent" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dance Event</a>
-                            </li>
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" id="dropDownPagesOption" aria-labelledby="dropdownDefaultButton">
                             <li>
                                 <a href="/cms?page=custom" id="editNewPage" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add New Page</a>
                             </li>

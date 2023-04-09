@@ -4,6 +4,8 @@ class Page implements JsonSerializable
 {
   private ?int $id = null;
   private ?string $name = null;
+
+  private ?string $title = null;
   private ?string $html = null;
 
   public function get_id(): int
@@ -26,6 +28,17 @@ class Page implements JsonSerializable
     return $this;
   }
 
+  public function get_title(): string
+  {
+    return $this->title;
+  }
+
+  public function __set_title(string $title): self
+  {
+    $this->title = $title;
+    return $this;
+  }
+
   public function get_html(): string
   {
     return $this->html;
@@ -42,6 +55,7 @@ class Page implements JsonSerializable
     return [
       'id' => $this->id,
       'name' => $this->name,
+      'title' => $this->title,
       'html' => $this->html,
     ];
   }
