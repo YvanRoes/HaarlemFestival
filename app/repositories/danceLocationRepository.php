@@ -31,4 +31,34 @@ class DanceLocationRepository extends Repository
       echo $e;
     }
   }
+
+  public function insert_location(DanceLocation $location)
+  {
+    try {
+      $stmt = $this->conn->prepare("INSERT INTO `dance_location`(`name`, `address`, `imagePath`, `capacity`) VALUES (:name,:address,:path, :cap)");
+      $stmt->execute(array(':name' => $location->get_name(), ':address' => $location->get_address(), ':cap' => $location->get_capacity(), ':path' => $location->get_imagePath()));
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
+
+  public function delete_locationById($id)
+  {
+    try {
+      $stmt = $this->conn->prepare("DELETE FROM dance_location WHERE id = :id ");
+      $stmt->execute(array(':id' => $id));
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
+
+  public function edit_locationById($id, $name, $address, $cap)
+  {
+    try {
+      $stmt = $this->conn->prepare("UPDATE `dance_location` SET `name`=:name,`address`=:address, `capacity`=:cap WHERE id = :id;");
+      $stmt->execute(array(':id' => $id, ':name' => $name, ':address' => $address, 'cap' => $cap));
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
 }

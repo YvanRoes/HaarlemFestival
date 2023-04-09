@@ -79,7 +79,7 @@ function loadHTML()
           <i class='fa fa-user' style='font-size: 24px;'></i>Account<i class='fa fa-caret-down mt-[5px]'></i></button>";
   }
   echo
-  "<a href='/api/users'>
+  "<a href='/cart'>
         <div class='w-max h-[40px] mt-[15px] text-[" . $GLOBALS['unselected'] . "] flex items-center gap-[10px] border-2 border-[" . $GLOBALS['unselected'] . "] rounded-md px-4 py-5 transition ease-in-out hover:bg-[" . $GLOBALS['unselected'] . "] hover:border-[" . $GLOBALS['unselected'] . "] hover:text-[" . $GLOBALS['headerTextColourValue'] . "] cursor-pointer'>
         <i class='fa fa-shopping-cart' style='font-size: 24px;'></i>
           cart</div>
@@ -116,25 +116,33 @@ function loadHTML()
     <li>
       <?php
       if (isset($_SESSION['USER_ID'])) {
-        echo "<a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Personal program</a>";
+        if($_SESSION['USER_ROLE'] == 9){
+          echo "<a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Manage Website & Database</a>";
+        }else{
+          echo "<a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Dasboard</a>";
+        }
       } else {
-        echo "<a href='/login' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Personal program</a>";
+        echo "<a href='/login' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Dashoard</a>";
       }
       ?>
     </li>
     <?php
-    if (isset($_SESSION['USER_ID'])) {
-      echo "
+    if(isset($_SESSION['USER_ROLE'])){
+      if($_SESSION['USER_ROLE'] == 9){
+
+      }
+      if($_SESSION['USER_ROLE'] == 0){
+        if (isset($_SESSION['USER_ID'])) {
+          echo "
       <li>
-        <a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Dashboard</a>
-      </li>
-      <li>
-        <a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Settings</a>
+        <a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>account details</a>
       </li>";
-    } else {
-      echo "<li>
+        } else {
+          echo "<li>
         <a href='/register' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Register</a>
       </li>";
+        }
+      }
     }
 
     ?>
