@@ -1290,11 +1290,8 @@ function createRestaurantContainer(element, id, name, category, star, michelinSt
     'text-[#F7F7FB]',
     'bg-red-500',
     'w-fit',
-<<<<<<< HEAD
-    'h-fit'
-=======
-    'h-[50px]'
->>>>>>> c53b0532c2264361939add7832fa3fa007754652
+    'h-fit',
+    'h-[50px]',
   );
   buttonRemove.addEventListener('click', () => {
 
@@ -1311,7 +1308,6 @@ function createRestaurantContainer(element, id, name, category, star, michelinSt
     'text-[#F7F7FB]',
     'bg-slate-800',
     'w-fit',
-    'h-fit',
     'float-right',
     'justify-center',
     'h-[50px]'
@@ -1385,20 +1381,6 @@ function editRestaurant(id) {
   //   return;
   // }
 
-<<<<<<< HEAD
-  //send data
-  let form = new FormData();
-  form.append('post_type', 'edit');
-  form.append('id', id);
-  form.append('restaurant_name', rNamespan.value);
-  form.append('restaurant_category', rCategoryspan.value);
-  form.append('restaurant_star', rStarspan.value);
-  form.append('restaurant_michelinStar', rMichelinStarspan.value == 1 ? true : false);
-  form.append('restaurant_description', rDescriptionspan.value);
-  form.append('restaurant_address', rAddressspan.value);
-  form.append('restaurant_phoneNumber', rPhonenumberspan.value);
-  form.append('restaurant_capacity', rCapacitySpan.value);
-=======
   const data = new FormData();
   data.append("post_type", "edit");
   data.append("id", id);
@@ -1410,7 +1392,6 @@ function editRestaurant(id) {
   data.append("restaurant_address", rAddressSpan.innerHTML);
   data.append("restaurant_phoneNumber", rPhonenumberSpan.innerHTML);
   data.append("restaurant_capacity", rCapacitySpan.innerHTML);
->>>>>>> c53b0532c2264361939add7832fa3fa007754652
 
   console.log(data);
 
