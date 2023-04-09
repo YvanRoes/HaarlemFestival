@@ -1288,7 +1288,8 @@ function createRestaurantContainer(element, id, name, category, star, michelinSt
     'rounded-md',
     'text-[#F7F7FB]',
     'bg-red-500',
-    'w-fit'
+    'w-fit',
+    'h-fit'
   );
   buttonRemove.addEventListener('click', () => {
     removeRestaurant(id);
@@ -1305,6 +1306,7 @@ function createRestaurantContainer(element, id, name, category, star, michelinSt
     'text-[#F7F7FB]',
     'bg-slate-800',
     'w-fit',
+    'h-fit',
     'float-right',
     'justify-center'
   );
@@ -1383,7 +1385,7 @@ function editRestaurant(id) {
   form.append('restaurant_name', rNamespan.value);
   form.append('restaurant_category', rCategoryspan.value);
   form.append('restaurant_star', rStarspan.value);
-  form.append('restaurant_michelinStar', rMichelinStarspan.value);
+  form.append('restaurant_michelinStar', rMichelinStarspan.value == 1 ? true : false);
   form.append('restaurant_description', rDescriptionspan.value);
   form.append('restaurant_address', rAddressspan.value);
   form.append('restaurant_phoneNumber', rPhonenumberspan.value);

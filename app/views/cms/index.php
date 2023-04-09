@@ -15,6 +15,13 @@
         include __DIR__ . '/../header.php';
         require_once __DIR__ . '/../../controllers/cmsController.php';
         generateHeader('Content Management System', 'dark');
+
+        $postType = 'edit';
+        if(isset($_GET["page"])){
+            if($_GET["page"] == "custom"){
+                $postType = "insert";
+            }
+        }
     ?>
 
     
@@ -23,6 +30,7 @@
         <div class="mt-[100px]">
         <button type="submit" class="w-[100px] h-[40px] ml-[10px] mb-[10px] text-[#ffffff] font-semibold dark:bg-blue-600 flex items-center justify-center border-2 border-[#29334E] cursor-pointer rounded-md" onclick="back()">Back</button>
             <form method="post" id="editorForm" name="editorForm">
+                <input type="text" id="type" class="hidden" name="type" value="<?php echo $postType; ?>"></input>
                 <textarea id="editor" name="editor">
                     <?php
                         echo $this->content;

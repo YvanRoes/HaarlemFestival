@@ -40,7 +40,7 @@ class RestaurantsController
             $r->__set_name(htmlspecialchars($_POST['restaurant_name']));
             $r->__set_category(htmlspecialchars($_POST['restaurant_category']));
             $r->__set_stars(htmlspecialchars($_POST['restaurant_star']));
-            $r->__set_michelinStar((bool)htmlspecialchars($_POST['restaurant_michelinStar']));
+            $r->__set_michelinStar(htmlspecialchars($_POST['restaurant_michelinStar']));
             $r->__set_description(htmlspecialchars($_POST['restaurant_description']));
             $r->__set_address(htmlspecialchars($_POST['restaurant_address']));
             $r->__set_phone_number(htmlspecialchars($_POST['restaurant_phoneNumber']));
