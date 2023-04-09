@@ -27,7 +27,7 @@ class ArtistsController
           case 'edit':
             //$this->artistService->edit_artistById($_POST["id"], htmlspecialchars($_POST["artist_name"]), htmlspecialchars($_POST["artist_genre"]));
             echo 'edited';
-            break;
+          break;
           case 'insert':
             $a = new Artist();
             $a->__set_name(htmlspecialchars($_POST['artist_name']));
