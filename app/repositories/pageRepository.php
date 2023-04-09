@@ -28,4 +28,16 @@ class PageRepository extends Repository
       echo $e;
     }
   }
+
+  public function create_Page($page)
+  {
+    try {
+      $stmt = $this->conn->prepare("INSERT INTO page (name, html) VALUES (:name, :html)");
+      $stmt->bindParam(':name', $page->get_name());
+      $stmt->bindParam(':html', $page->get_html());
+      $stmt->execute();
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
 }

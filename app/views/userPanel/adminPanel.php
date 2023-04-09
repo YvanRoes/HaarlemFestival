@@ -43,7 +43,7 @@
                                 <a href="/cms?page=dance" id="editDanceEvent" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dance Event</a>
                             </li>
                             <li>
-                                <a href="/cms?page=edit" id="editNewPage" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add New Page</a>
+                                <a href="/cms?page=custom" id="editNewPage" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add New Page</a>
                             </li>
                         </ul>
                     </form>

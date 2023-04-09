@@ -390,10 +390,17 @@ function sortByEmail() {
 function loadEDMData(type) {
   edmPane = document.getElementById('edmPane');
   edmPane.classList.remove('hidden');
+
   userPane = document.getElementById('UserPane');
   if (!userPane.classList.contains('hidden')) {
     userPane.classList.add('hidden');
   }
+
+  yummiePane = document.getElementById('yummiePane');
+  if (!yummiePane.classList.contains('hidden')) {
+    yummiePane.classList.add('hidden');
+  }
+
 
   switch (type) {
     case 'venues':
@@ -610,9 +617,11 @@ function loadArtists() {
   artistPane = document.getElementById('artistSubPane');
   artistPane.classList.remove('hidden');
   venuePane = document.getElementById('venueSubPane');
+
   if (!venuePane.classList.contains('hidden')) {
     venuePane.classList.add('hidden');
   }
+
   sessionPane = document.getElementById('sessionSubPane');
   if (!sessionPane.classList.contains('hidden')) {
     sessionPane.classList.add('hidden');
@@ -850,10 +859,6 @@ async function loadSessions() {
     artistPane.classList.add('hidden');
   }
 
-  yummiePane = document.getElementById('yummiePane');
-  if (!yummiePane.classList.contains('hidden')) {
-    yummiePane.classList.add('hidden');
-  }
   venuePane = document.getElementById('venueSubPane');
   if (!venuePane.classList.contains('hidden')) {
     venuePane.classList.add('hidden');
