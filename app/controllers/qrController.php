@@ -13,9 +13,4 @@ class QRController extends Controller
     {
         require __DIR__ . '/../views/qr/invoice.php';
     }
-
-    public function scanner()
-    {
-        require __DIR__ . '/../views/qr/scanner.php';
-    }
 }

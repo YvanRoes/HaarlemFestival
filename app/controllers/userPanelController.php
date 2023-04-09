@@ -29,7 +29,7 @@ class UserPanelController extends Controller
                 require __DIR__ . '/../views/userPanel/customerPanel.php';
                 break;
             case 1:
-                echo "employee";
+                require __DIR__ . '/../views/userPanel/employeePanel.php';
                 break;
             case 9:
                 require __DIR__ . '/../views/userPanel/adminPanel.php';

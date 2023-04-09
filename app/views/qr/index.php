@@ -23,10 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     //generates the qr code
     $result = $writer->write($qr_code, label: $label);
+
+    //saves the qr code to a file
+    // $result->saveToFile(__DIR__ . "/qrCode.png");
+
     $dataUri = $result->getDataUri();
 
     $dompdf = new Dompdf();
+
+    //image in pdf format
     // $dompdf->loadHtml("<img src='$dataUri'>");
+
+    //invoice in pdf format
     $dompdf->loadHtml(
         "
             <style>
@@ -212,7 +220,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </aside>
         </body>
     </html>
-        ");
+        "
+    );
 
     $dompdf->setPaper('A4', 'landscape');
     $dompdf->render();
@@ -223,8 +232,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //print qr code on website
     //echo $result->getString();
 
-    //save qr code as png
-    //$result->saveToFile("qrCode.png");
 
     // validates the qr code with the desired value
     //$writer->validateResult($result, 'Life is too short to be generating QR codes');
