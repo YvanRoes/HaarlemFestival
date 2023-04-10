@@ -15,4 +15,10 @@ class EventService
         $repo = new EventRepository();
         return $repo->get_AllEvent2();
     }
+
+    public function get_Event2ById($id): Event2
+    {
+        $repo = new EventRepository();
+        return $repo->get_Event2ById($id);
+    }
 }

@@ -3,7 +3,6 @@ require_once(__DIR__ . '/../repositories/repository.php');
 
 class ShoppingCartRepository extends Repository
 {
-
     public function addTicket(Ticket $ticket)
     {
         if (!isset($_SESSION['shoppingCart'])) {
@@ -21,7 +20,6 @@ class ShoppingCartRepository extends Repository
             }
         }
     }
-
     public function editTicket(Ticket $ticket)
     {
         if (isset($_SESSION['shoppingCart'])) {

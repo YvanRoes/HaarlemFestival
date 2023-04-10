@@ -31,4 +31,30 @@ class EventRepository extends Repository
             echo $e;
         }
     }
+    public function get_EventYummie($id){
+        try {
+            $stmt = $this->conn->prepare("SELECT * FROM event_yummie WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Event2');
+            $result = $stmt->fetch();
+            return $result;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+    public function get_Event2ById($id){
+        try {
+            $stmt = $this->conn->prepare("SELECT * FROM events WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Event2');
+            $result = $stmt->fetch();
+            return $result;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
 }

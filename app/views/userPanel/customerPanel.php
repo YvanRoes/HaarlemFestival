@@ -20,14 +20,17 @@
         <div class="col-span-6 row-span-1 border-y-[1px] border-[#656262]" id="header">
             <div class="flex items-center justify-center h-[100%]" id="nav">
                 <ul class="decoration-none flex items-center justify-center flex-row gap-[20px] text-[#656262]">
-                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">User information</a></li>
-                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">Personal Program</a></li>
+                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">User
+                            information</a></li>
+                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">Personal
+                            Program</a></li>
                 </ul>
             </div>
         </div>
         <div class="flex flex-col gap-4 w-screen justify-center" id="contentItemsWrapper">
-                <button name="changePassword" type="submit" class="text-[#29334E] text-3xl underline mt-4"><a href='/resetPassword'>Change Password</button>
-            </div>
+            <button name="changePassword" type="submit" class="text-[#29334E] text-3xl underline mt-4"><a
+                    href='/resetPassword'>Change Password</button>
+        </div>
     </div>
     </div>
     </div>
