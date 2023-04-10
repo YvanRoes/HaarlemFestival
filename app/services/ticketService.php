@@ -20,6 +20,11 @@ class TicketService
         $repo = new TicketRepository();
         return $repo->post_Ticket($event);
     }
+    public function get_TicketsByStatus($status)
+    {
+        $repo = new TicketRepository();
+        return $repo->get_TicketsByStatus($status);
+    }
     public function get_AvailableEventTickets($eventTable){
         $repo = new TicketRepository();
         return $repo->get_AvailableEventTickets($eventTable);

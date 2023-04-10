@@ -11,6 +11,7 @@ class ShoppingCartController extends Controller
 {
     public function index()
     {
+        $this->checkPendingTickets();
         if (!isset($_SESSION['USER_ID'])) {
             header('Location: /login');
         }
@@ -93,6 +94,28 @@ class ShoppingCartController extends Controller
             $ticketService->update_Ticket($ticket);
         } catch (Exception $e) {
             echo $e->getMessage();
+        }
+    }
+    public function checkPendingTickets(){
+        $ticketService = new TicketService();
+        $tickets = $ticketService->get_TicketsByStatus('pending');
+        foreach ($tickets as $ticket) {
+            $date = date_create('now');
+            $realTicket = new Ticket();
+            $realTicket->setId($ticket->uuid);
+            $realTicket->setEvent($ticket->event_id);
+            $realTicket->setStatus($ticket->status);
+            $realTicket->setUser($ticket->user_id);
+            $realTicket->setPrice($ticket->price);
+            $exp_date = date_create($ticket->exp_date);
+            $realTicket->setExpDate($exp_date);
+            if($realTicket->getExpDate() < $date){
+                $realTicket->setStatus('available');
+                $realTicket->setUser(null);
+                $realTicket->setPrice(null);
+                $realTicket->setExpDate(null);
+                $ticketService->update_Ticket($ticket);
+            }
         }
     }
 
