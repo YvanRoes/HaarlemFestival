@@ -15,8 +15,13 @@ class ShoppingCartController extends Controller
         if (!isset($_SESSION['USER_ID'])) {
             header('Location: /login');
         }
-        if (isset($_POST['selectedTicket'])) {
-            $this->assignTicketToUser();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['selectedTicket'])) {
+                $this->assignTicketToUser();
+            }
+            if (isset($_POST['removePendingTicket'])) {
+                $this->removePendingTicket($_POST['removePendingTicket']);
+            }   
         }
         $this->getPendingUserTickets();
         $this->setAllAvailableTickets();
@@ -71,6 +76,22 @@ class ShoppingCartController extends Controller
             $ticketService = new TicketService();
             $tickets = $ticketService->get_TicketsByUserIdAndStatus($_SESSION['USER_ID'], 'pending');
             $_SESSION['pendingTickets'] = $tickets;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function removePendingTicket($uuid){
+        try{
+            $ticketService = new TicketService();
+            $result = $ticketService->get_TicketById($_POST['removePendingTicket']);
+            $ticket = new Ticket();
+            $ticket->setId($result[0]->uuid);
+            $ticket->setEvent($result[0]->event_id);
+            $ticket->setStatus('available');
+            $ticket->setUser(null);
+            $ticket->setPrice(null);
+            $ticket->setExpDate(null);
+            $ticketService->update_Ticket($ticket);
         } catch (Exception $e) {
             echo $e->getMessage();
         }

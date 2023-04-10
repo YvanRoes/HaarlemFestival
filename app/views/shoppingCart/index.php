@@ -77,7 +77,10 @@ generateHeader('home', 'dark');
             <?php 
             if (isset($_SESSION['pendingTickets'])) {
                 foreach ($_SESSION['pendingTickets'] as $ticket) {
-                    echo '<p class="ticket">'.$ticket->uuid.'</p>';
+                    echo '<form method="POST">
+                     <input type="hidden" name="removePendingTicket" value="'.$ticket->uuid.'">';
+                    echo '<p class="ticket">'.$ticket->uuid.'</p> 
+                    <button type="submit" value="send">';
                 }
             }
             ?>

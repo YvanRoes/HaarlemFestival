@@ -62,6 +62,12 @@ class TicketRepository extends Repository
         $result = $stmt->fetch(PDO::FETCH_NUM);
         return $result[0];
     }
+    public function removePendingTicket($ticket_id){
+        $sql = "UPDATE ticket WHERE uuid = :ticket_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':ticket_id', $ticket_id);
+        $stmt->execute();
+    }
     public function get_AvailableEventTickets($eventTable){
         try
         {
@@ -134,7 +140,12 @@ class TicketRepository extends Repository
         $status=$ticket->getStatus();
         $user_id=$ticket->getUser();
         $date=$ticket->getExpDate();
-        $exp_date = $date->format('Y-m-d H:i:s');
+        if (isset($date)){
+            $exp_date = $date->format('Y-m-d H:i:s');
+        }
+        else{
+            $exp_date = null;
+        }
         $price = $ticket->getPrice();
         $stmt->bindParam(':status', $status);
         $stmt->bindParam(':user_id', $user_id);
