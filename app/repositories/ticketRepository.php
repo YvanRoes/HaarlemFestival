@@ -31,7 +31,6 @@ class TicketRepository extends Repository
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_CLASS);
-        echo 'returning result' ;
        return $result;
     }
     public function get_TicketsByStatus($status)
@@ -45,10 +44,10 @@ class TicketRepository extends Repository
     }
     public function get_TicketsByUserIdAndStatus($id, $status)
     {
-        $sql = "SELECT * FROM ticket JOIN WHERE user_id = :user_id AND status = :status";
+        $sql = "SELECT * FROM ticket WHERE user_id = :user_id AND status = :status";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':user_id', $_SESSION['user_id']);
-        $stmt->bindParam(':status', $_SESSION['status']);
+        $stmt->bindParam(':user_id', $id);
+        $stmt->bindParam(':status', $status);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_CLASS);
         return $result;
@@ -129,13 +128,19 @@ class TicketRepository extends Repository
     }
     public function update_Ticket($ticket)
     {
-        echo 'in update ticket';
-        $sql = "UPDATE ticket SET status = :status, user_id = :user_id, exp_date = :exp_date WHERE uuid = :id";
+        $sql = "UPDATE ticket SET status = :status, price = :price, user_id = :user_id, exp_date = :exp_date WHERE uuid = :id";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':status', $ticket->status);
-        $stmt->bindParam(':user_id', $ticket->user_id);
-        $stmt->bindParam(':exp_date', $ticket->exp_date);
-        $stmt->bindParam(':id', $ticket->uuid);
+        $id=$ticket->getId();
+        $status=$ticket->getStatus();
+        $user_id=$ticket->getUser();
+        $date=$ticket->getExpDate();
+        $exp_date = $date->format('Y-m-d H:i:s');
+        $price = $ticket->getPrice();
+        $stmt->bindParam(':status', $status);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':exp_date', $exp_date);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':price', $price);
         $stmt->execute();
     }
 }

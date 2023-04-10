@@ -12,12 +12,12 @@ class ShoppingCartController extends Controller
 
     public function index()
     {
+        $this->getPendingUserTickets();
         if (isset($_POST['selectedTicket'])) {
             $this->assignTicketToUser();
         }
         $this->setAllAvailableTickets();
         $this->displayView('shoppingCart');
-
     }
 
     public function addTicket()
@@ -28,17 +28,17 @@ class ShoppingCartController extends Controller
         $shoppingCartService->addTicket($ticket);
     }
     public function assignTicketToUser()
-    {
+    { //this method is a mess but hey it workd.
         try{
             $ticketService = new TicketService();
             $eventService = new EventService();
             $result = $ticketService->get_TicketById($_POST['selectedTicket']);
-            var_dump($result);
             $ticket = new Ticket();
-            $ticket->setEvent($_POST['selectedTicket']->event_id);
+            $ticket->setId($result[0]->uuid);
+            $ticket->setEvent($result[0]->event_id);
             $ticket->setStatus('pending');
             $ticket->setUser($_SESSION['USER_ID']);
-            $event= $eventService->get_Event2ById($_POST['selectedTicket']->event_id);
+            $event= $eventService->get_Event2ById($ticket->getEvent());
             $ticket->setPrice($event->get_price());
             $date = date_create('now');
             date_add($date, date_interval_create_from_date_string('1 day'));
@@ -62,6 +62,15 @@ class ShoppingCartController extends Controller
         $_SESSION['edmTickets'] = $ticketService->get_AvailableEventEdmTickets();
         $_SESSION['yummieTickets'] = $ticketService->get_AvailableEventYummieTickets();
         $_SESSION['strollTickets'] = $ticketService->get_AvailableEventStrollTickets();
+    }
+    public function getPendingUserTickets(){
+        try{
+            $ticketService = new TicketService();
+            $tickets = $ticketService->get_TicketsByUserIdAndStatus($_SESSION['USER_ID'], 'pending');
+            $_SESSION['pendingTickets'] = $tickets;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     public function checkout()

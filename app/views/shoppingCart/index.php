@@ -74,16 +74,11 @@ generateHeader('home', 'dark');
             <p class="ticket">
             <h1 class="text-4xl">Your shopping cart</h1>
             </p>
-            <p class="ticket">
-            <form method="post">
-                <?php
-               echo ' <input type="hidden" name="selectedTicket" value="1">';
-                ?>
-                                <a href="/shoppingCart">
-                                    <button type="submit" value="Send">click me</button>
-                                </a>
-                        </form>
-            </p>
+            <?php 
+            foreach ($_SESSION['pendingTickets'] as $ticket) {
+                echo '<p class="ticket">'.$ticket->uuid.'</p>';
+            }
+            ?>
 
             <div class="absolute-bottom w-full flex justify-center items-center">
                 <a href="/shoppingCart"
