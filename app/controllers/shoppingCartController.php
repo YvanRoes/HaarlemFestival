@@ -9,7 +9,6 @@ require_once __DIR__ . '/../services/eventService.php';
 
 class ShoppingCartController extends Controller
 {
-
     public function index()
     {
         if (!isset($_SESSION['USER_ID'])) {
@@ -80,7 +79,7 @@ class ShoppingCartController extends Controller
             echo $e->getMessage();
         }
     }
-    public function removePendingTicket($uuid){
+    public function removePendingTicket($uuid){// also a mess of a method, sorry.
         try{
             $ticketService = new TicketService();
             $result = $ticketService->get_TicketById($_POST['removePendingTicket']);
