@@ -75,8 +75,10 @@ generateHeader('home', 'dark');
             <h1 class="text-4xl">Your shopping cart</h1>
             </p>
             <?php 
-            foreach ($_SESSION['pendingTickets'] as $ticket) {
-                echo '<p class="ticket">'.$ticket->uuid.'</p>';
+            if (isset($_SESSION['pendingTickets'])) {
+                foreach ($_SESSION['pendingTickets'] as $ticket) {
+                    echo '<p class="ticket">'.$ticket->uuid.'</p>';
+                }
             }
             ?>
 

@@ -12,10 +12,13 @@ class ShoppingCartController extends Controller
 
     public function index()
     {
-        $this->getPendingUserTickets();
+        if (!isset($_SESSION['USER_ID'])) {
+            header('Location: /login');
+        }
         if (isset($_POST['selectedTicket'])) {
             $this->assignTicketToUser();
         }
+        $this->getPendingUserTickets();
         $this->setAllAvailableTickets();
         $this->displayView('shoppingCart');
     }
