@@ -1796,8 +1796,33 @@ async function getData(url = '') {
   return await response.json();
 }
 
+function loadCustomPageTabs(){
+  getData('/pages').then((objects) => {
+    objects.forEach((element) => {
+      insertCustomPageTab(element.name, element.title);
+    });
+  });
+}
+
+function insertCustomPageTab(name, title) {
+  dropDownMenu = document.getElementById('dropDownPagesOption');
+  container = document.createElement('li');
+
+  a = document.createElement('a');
+  a.innerHTML = title;
+  a.classList.add('block', 'px-4', 'py-2', 'hover:bg-gray-100', 'dark:hover:bg-gray-600', 'dark:hover:text-white');
+  a.setAttribute('href', 'http://localhost/cms?page=' + name);
+
+  container.appendChild(a);
+  dropDownMenu.appendChild(container);
+}
+
+//GLOBAL END/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 //loadUserData();
 //loadEDMData('artists');
 // loadYummieData('restaurants');
 loadYummieData('restaurantSessions');
-
+loadCustomPageTabs();

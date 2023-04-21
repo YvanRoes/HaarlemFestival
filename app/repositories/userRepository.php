@@ -33,7 +33,7 @@ class UserRepository extends Repository
     public function get_UserById(int $id): User
     {
         try {
-            $stmt = $this->conn->prepare("SELECT id, username, email, password FROM User WHERE id = :uid");
+            $stmt = $this->conn->prepare("SELECT id, username, email, password FROM users WHERE id = :uid");
             $stmt->execute(array(':uid' => $id));
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
@@ -140,6 +140,16 @@ class UserRepository extends Repository
         try {
             $stmt = $this->conn->prepare("UPDATE `users` SET `username`=:username,`email`=:email,`role`=:role WHERE id = :id;");
             $stmt->execute(array(':id' => $id, ':username' => $username, ':email' => $email, ':role' => $role_id));
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function update_UsernameAndEmail(int $user_id, string $username, string $email)
+    {
+        try {
+            $stmt = $this->conn->prepare("UPDATE users SET username = :username, email = :email WHERE id = :id");
+            $stmt->execute(array(':username' => $username, ':email' => $email, ':id' => $user_id));
         } catch (PDOException $e) {
             echo $e;
         }

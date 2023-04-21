@@ -137,9 +137,11 @@ function generatePlanningSection() {
 
   container.appendChild(planning);
 
+  generatePlanningItem('Date', 'Location', 'Artist', 'Tickets', 'Price');
   generatePlanningItems();
 }
 
+//generate the planning items
 function generatePlanningItem(date, location, artist, tickets, price) {
   grid = document.getElementById('planningGrid');
 
@@ -182,6 +184,7 @@ function generatePlanningItem(date, location, artist, tickets, price) {
   grid.appendChild(wrapper);
 }
 
+//get the data from the api and generate the planning items
 async function generatePlanningItems() {
   sessions = await getDataFromSessionAPI();
   artists = await getDataFromArtistAPI();
@@ -203,7 +206,7 @@ async function generatePlanningItems() {
 
       
       console.log(artists[artistID].name);
-    generatePlanningItem(
+      generatePlanningItem(
       formattedDateTime,
       locations[locationID].name,
       artists[artistID].name,
@@ -219,6 +222,7 @@ async function getDataFromSessionAPI() {
   return await response.json();
 }
 
+//generate the location section of the page
 function generateLocationSection() {
   container = document.getElementById('content-wrapper');
   sectionTitleContainer = document.createElement('div');
@@ -248,6 +252,7 @@ function generateLocationSection() {
   container.appendChild(locationGrid);
 }
 
+//generate a location
 function generateLocation(locationGrid, location) {
   locationContainer = document.createElement('div');
   locationContainer.classList.add(
@@ -295,6 +300,7 @@ function generateLocation(locationGrid, location) {
   locationGrid.appendChild(locationContainer);
 }
 
+//get the data from the api and generate the locations
 async function generateLocations(locationGrid) {
   locations = await getDataFromLocationAPI();
 

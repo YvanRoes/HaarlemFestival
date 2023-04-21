@@ -8,4 +8,9 @@ class QRController extends Controller
     {
         $this->displayView($this);
     }
+
+    public function invoice()
+    {
+        require __DIR__ . '/../views/qr/invoice.php';
+    }
 }

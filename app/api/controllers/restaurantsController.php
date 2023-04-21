@@ -41,7 +41,7 @@ class RestaurantsController
             $fileExtensionsAllowed = ['jpeg', 'jpg', 'png'];
             $imagePath = "";
 
-            for ($i = 0; $i < 2; $i++) {
+            for ($i = 0; $i < 9; $i++) {
               $files = $_FILES['picture'. $i + 1];
               $fileTmpName = $files['tmp_name'];
               $uploadPath = $curr . $img . basename($files['name']);

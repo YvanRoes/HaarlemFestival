@@ -59,4 +59,10 @@ class UserService
         $repo = new UserRepository();
         return $repo->edit_UserById($id, $username, $email, $role_id);
     }
+
+    public function update_UsernameAndEmail(int $user_id, string $username, string $email)
+    {
+        $repo = new UserRepository();
+        return $repo->update_UsernameAndEmail($user_id, $username, $email);
+    }
 }

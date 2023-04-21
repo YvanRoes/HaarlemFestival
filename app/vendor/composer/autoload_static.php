@@ -11,6 +11,11 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
     );
 
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Svg\\' => 4,
+            'Sabberworm\\CSS\\' => 15,
+        ),
         'R' => 
         array (
             'Ramsey\\Uuid\\' => 12,
@@ -20,16 +25,26 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
         array (
             'PHPMailer\\PHPMailer\\' => 20,
         ),
+        'M' => 
+        array (
+            'Masterminds\\' => 12,
+        ),
+        'F' => 
+        array (
+            'FontLib\\' => 8,
+        ),
         'E' => 
         array (
             'Endroid\\QrCode\\' => 15,
         ),
         'D' => 
         array (
+            'Dompdf\\' => 7,
             'DASPRiD\\Enum\\' => 13,
         ),
         'B' => 
         array (
+            'Brick\\Math\\' => 11,
             'BaconQrCode\\' => 12,
         ),
         'b' => 
@@ -39,6 +54,14 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
     );
 
     public static $prefixDirsPsr4 = array (
+        'Svg\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
+        ),
+        'Sabberworm\\CSS\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
+        ),
         'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
@@ -51,13 +74,29 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
+        'Masterminds\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
+        'FontLib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
+        ),
         'Endroid\\QrCode\\' => 
         array (
             0 => __DIR__ . '/..' . '/endroid/qr-code/src',
         ),
+        'Dompdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
+        ),
         'DASPRiD\\Enum\\' => 
         array (
             0 => __DIR__ . '/..' . '/dasprid/enum/src',
+        ),
+        'Brick\\Math\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/brick/math/src',
         ),
         'BaconQrCode\\' => 
         array (
@@ -71,6 +110,7 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Dompdf\\Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
