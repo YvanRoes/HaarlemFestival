@@ -56,6 +56,17 @@ class PatternRouter
         // dynamically call relevant controller method
         try {
             $controllerObj = new $controllerName;
+
+            //redirect for page/__pageName__
+            if($explodedUri[0] == "page"){
+                if(isset($explodedUri[1])){
+                    $controllerObj->echoPage($explodedUri[1]);
+                }
+                else{
+                    echo $explodedUri[1];
+                }
+                return;
+            }
             if (method_exists($controllerObj, $methodName)) {
                 $controllerObj->{$methodName}();
             }else{
