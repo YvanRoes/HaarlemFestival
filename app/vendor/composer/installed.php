@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'b4caaa77019ef02c218cddad9b6ed34a8f35ed3a',
+        'reference' => '5b8c03c1e353326c13199f58a5b1f7b7f21ef62f',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'b4caaa77019ef02c218cddad9b6ed34a8f35ed3a',
+            'reference' => '5b8c03c1e353326c13199f58a5b1f7b7f21ef62f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -61,12 +61,6 @@
             'reference' => '2436c2333a3931c95e2b96eb82f16f53143d6bba',
             'type' => 'library',
             'install_path' => __DIR__ . '/../endroid/qr-code',
-        'brick/math' => array(
-            'pretty_version' => '0.10.2',
-            'version' => '0.10.2.0',
-            'reference' => '459f2781e1a08d52ee56b0b1444086e038561e3f',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../brick/math',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -140,5 +134,4 @@
             'dev_requirement' => false,
         ),
     ),
-),
 );

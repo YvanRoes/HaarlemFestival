@@ -45,7 +45,7 @@ async function loadAll() {
 async function loadCustomers() {
   customers = await getUsersByRole(0);
   createUserList(customers);
-  loadInputSearch();
+  addUserSearch(customers);
 }
 
 async function loadTicketManagement() {
@@ -871,43 +871,52 @@ function editArtist(id) {
   aDescription = document.getElementById('aDesSpan' + id);
   b = document.getElementById('artistButton' + id);
   }
-async function loadInputSearch() {
-  if (document.getElementById('searchInput')) {
-    document.getElementById('searchInput').remove();
-  }
-  parentElement = document.getElementById('ContentWrapper');
-  parentElement.insertBefore(inputSearch, parentElement.childNodes[0]);
-}
+// async function loadInputSearch() {
+//   if (document.getElementById('searchInput')) {
+//     document.getElementById('searchInput').remove();
+//   }
+//   parentElement = document.getElementById('ContentWrapper');
+//   parentElement.insertBefore(inputSearch, parentElement.childNodes[0]);
+
+  
+// }
+
+// THIS GOES SOMEWHERE DONT KNOW WHERE YET
+
+
+// if (b.innerHTML == 'EDIT') {
+//   setEditableType(aNameSpan);
+//   setEditableType(aGenresSpan);
+//   aDescription.removeAttribute('disabled');
+//   b.innerHTML = 'Save';
+//   b.classList.add('bg-green-400', 'text-[#121212]');
+//   return;
+// }
+// b.innerHTML = 'EDIT';
+// b.classList.remove('bg-green-400', 'text-[#121212]');
+// setEditableType(aNameSpan);
+// setEditableType(aGenresSpan);
+// aDescription.setAttribute('disabled', 'true');
+
+// let form = new FormData();
+// form.append('post_type', 'edit');
+// form.append('id', id);
+// form.append('artist_name', aNameSpan.innerHTML);
+// form.append('artist_description', aDescription.value);
+// form.append('artist_genre', aGenresSpan.innerHTML);
+
+// console.log(form);
+// postForm('http://localhost/api/artists', form).then(
+//   delay(1000).then(() => loadArtists())
+// );
+
+
+
+
+
 async function getData(url = ''){
   const response = await fetch(url);
   return response.json();
-}
-
-  if (b.innerHTML == 'EDIT') {
-    setEditableType(aNameSpan);
-    setEditableType(aGenresSpan);
-    aDescription.removeAttribute('disabled');
-    b.innerHTML = 'Save';
-    b.classList.add('bg-green-400', 'text-[#121212]');
-    return;
-  }
-  b.innerHTML = 'EDIT';
-  b.classList.remove('bg-green-400', 'text-[#121212]');
-  setEditableType(aNameSpan);
-  setEditableType(aGenresSpan);
-  aDescription.setAttribute('disabled', 'true');
-
-  let form = new FormData();
-  form.append('post_type', 'edit');
-  form.append('id', id);
-  form.append('artist_name', aNameSpan.innerHTML);
-  form.append('artist_description', aDescription.value);
-  form.append('artist_genre', aGenresSpan.innerHTML);
-
-  console.log(form);
-  postForm('http://localhost/api/artists', form).then(
-    delay(1000).then(()=> loadArtists())
-  );
 }
 
 function removeArtist(id) {

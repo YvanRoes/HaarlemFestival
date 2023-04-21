@@ -14,26 +14,21 @@
 <body class="w-[100vw] h-[100vh] overflow-x-hidden bg-[#F7F7FB]">
     <?php
     include __DIR__ . '/../header.php';
+
     use Ramsey\Uuid\Uuid;
+
     generateHeader('adminPanel', 'dark');
     ?>
     <div class="w-screen h-[800px] grid grid-cols-6 grid-rows-6 mt-[100px]">
         <div class="col-span-6 row-span-1 border-y-[1px] border-[#656262]" id="header">
             <div class="flex items-center justify-center h-[100%]" id="nav">
                 <ul class="decoration-none flex items-center justify-center flex-row gap-[20px] text-[#656262]">
-                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a
-                            href="">Database</a></li>
-                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a
-                            href="">Statistics</a></li>
-                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"
-                        onclick='loadTicketManagement()'>Ticket
+                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]"><a href="">Database</a></li>
+                    <li class="transition ease-in-out hover:translate-y-[-5px] hover:text-[#121212]" onclick='loadTicketManagement()'>Ticket
                         Management</a></li>
-                    <button id="cms" data-dropdown-toggle="dropdown"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        type="button">Content Management System
-                        <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    <button id="cms" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Content Management System
+                        <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
                     <!-- Dropdown menu -->
@@ -47,8 +42,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-start-1 col-span-1 row-start-2 row-span-5 flex justify-center border-[1px] border[#656262]"
-            id="subMenu">
+        <div class="col-start-1 col-span-1 row-start-2 row-span-5 flex justify-center border-[1px] border[#656262]" id="subMenu">
 
             <ul class="p-4 flex flex-col gap-[20px] h-fit" id="items">
                 <ul class="text-sm text-[#656262]" id="UsersList">
@@ -180,25 +174,25 @@
                         <select id="restaurantMichelinStar" required>
                             <option value="0">False</option>
                             <option value="1">True</option>
-                        </select>          
+                        </select>
                         <input type="text" id="restaurantAddress" placeholder="address" required />
                         <input type="text" id="restaurantPhoneNumber" placeholder="phone number" required />
                         <input type="number" min="0" id="restaurantCapacity" placeholder="Capacity" required />
                         <input id="restaurantFile" type="file" multiple="multiple" title=" " class="col-span-2" />
-                        <textarea class="col-span-5" id="restaurantDescription" placeholder="description" required></textarea> 
+                        <textarea class="col-span-5" id="restaurantDescription" placeholder="description" required></textarea>
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurant()">Add restaurants</button>
                     </div>
                     <div class="flex flex-col gap-4 pb-5" id="contentRestaurantWrapper">
                     </div>
                 </div>
-                <div id="restaurantSessionSubPane" class="hidden">                   
+                <div id="restaurantSessionSubPane" class="hidden">
                     <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
                         <select id="sessionRestaurant" required></select>
                         <input id="sessionRestaurantAdultPrice" type="number" step="0.50" min="0" placeholder="Adult price" required />
                         <input id="sessionRestaurantKidsPrice" type="number" step="0.50" min="0" placeholder="Kids price" required />
                         <input type="time" id="sessionRestaurantStartTime" placeholder="Start time" required />
                         <input type="time" id="sessionRestaurantEndTime" placeholder="End time" required />
-                       
+
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurantSession()">Add sessions</button>
                     </div>
                     <div class="flex flex-col gap-4 pb-5" id="contentRestaurantSessionWrapper">
