@@ -1,3 +1,10 @@
+const inputSearch = document.getElementById('searchInput');
+
+async function loadUserData() {
+  var objects = await getDataFromUserAPI();
+  createUserList(objects);
+  addUserSearch();
+}
 // USER FUNCTIONALITY --START
 
 async function loadUserData(type) {
@@ -37,9 +44,59 @@ async function loadAll() {
 
 async function loadCustomers() {
   customers = await getUsersByRole(0);
-  createUserList(customers, 'customers');
-  addUserSearch(customers);
+  createUserList(customers);
+  loadInputSearch();
 }
+
+async function loadTicketManagement() {
+  //  tickets = await getDataFromTicketAPI();
+  console.log('loading ticket management')
+  contentWrapper = document.getElementById('UserPane');
+  contentWrapper.innerHTML = '';
+  createTicketsForm();
+  events = getEvents();
+}
+
+async function createTicketList(tickets) {
+  parentElement = document.getElementById('contentItemsWrapper');
+  parentElement.innerHTML = 'Tickets';
+  for (let i = 0; i < tickets.length; i++) {
+    createTicketContainer(
+      parentElement,
+      tickets[i].id,
+      tickets[i].status,
+      tickets[i].email,
+      tickets[i].password
+    );
+  }
+};
+
+async function createTicketDropdown(){
+  parentElement = document.getElementById('ticketDropdown');
+  parentElement.innerHTML = '';
+  events = await getEvents();
+  for (let i = 0; i < events.length; i++) {
+    parent
+  }
+}
+async function getEvents() {
+  const response = await fetch('http://localhost/api/events2');
+  return await response.json();
+}
+
+async function createTicketsForm() {
+  parentElement = document.getElementById('UserPane');
+  console.log('creating form')
+    fetch('/js/userPanel/formGenerateTickets.html')
+    .then((response) => {
+      return response.text();
+    })
+    .then((html) => {
+      parentElement.innerHTML = html;  
+      console.log(html);
+    });
+  console.log('fetched log')
+};
 
 async function loadEmployees() {
   employees = await getUsersByRole(1);
@@ -189,7 +246,10 @@ function createUserContainer(element, id, username, email, role, registeredAt) {
     editUser(id);
   });
 
-  //reg date
+  buttonWrapper = document.createElement('div');
+  buttonWrapper.classList.add('flex', 'flex-cols', 'col-start-3', 'justify-end');
+  buttonWrapper.appendChild(buttonEdit);
+  buttonWrapper.appendChild(buttonRemove);
   register = document.createElement('span');
   register.innerHTML = 'registration date:' + '\n' + registeredAt;
   register.classList.add('text-left');
@@ -810,6 +870,18 @@ function editArtist(id) {
   aGenresSpan = document.getElementById('aGenresSpan' + id);
   aDescription = document.getElementById('aDesSpan' + id);
   b = document.getElementById('artistButton' + id);
+  }
+async function loadInputSearch() {
+  if (document.getElementById('searchInput')) {
+    document.getElementById('searchInput').remove();
+  }
+  parentElement = document.getElementById('ContentWrapper');
+  parentElement.insertBefore(inputSearch, parentElement.childNodes[0]);
+}
+async function getData(url = ''){
+  const response = await fetch(url);
+  return response.json();
+}
 
   if (b.innerHTML == 'EDIT') {
     setEditableType(aNameSpan);

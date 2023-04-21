@@ -1,5 +1,5 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
@@ -358,33 +358,12 @@ INSERT INTO `stroll_location` (`id`, `name`, `title`, `description`, `address`, 
 --
 
 CREATE TABLE `ticket` (
-  `id` int(11) NOT NULL,
-  `status` int(11) DEFAULT NULL,
+  `uuid` uuid NOT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `event_id` int(11) NOT NULL,
   `price` double DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ticket_edm`
---
-
-CREATE TABLE `ticket_edm` (
-  `id` int(11) NOT NULL,
-  `type` int(11) NOT NULL,
-  `event_edm_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ticket_stroll`
---
-
-CREATE TABLE `ticket_stroll` (
-  `id` int(11) NOT NULL,
-  `event_stroll_id` int(11) NOT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `exp_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -505,22 +484,7 @@ ALTER TABLE `stroll_location`
 -- Indexes for table `ticket`
 --
 ALTER TABLE `ticket`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
-
---
--- Indexes for table `ticket_edm`
---
-ALTER TABLE `ticket_edm`
-  ADD KEY `id` (`id`),
-  ADD KEY `event_edm_id` (`event_edm_id`);
-
---
--- Indexes for table `ticket_stroll`
---
-ALTER TABLE `ticket_stroll`
-  ADD KEY `id` (`id`),
-  ADD KEY `event_stroll_id` (`event_stroll_id`);
 
 --
 -- Indexes for table `users`
@@ -587,12 +551,6 @@ ALTER TABLE `stroll_location`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `ticket`
---
-ALTER TABLE `ticket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -647,20 +605,6 @@ ALTER TABLE `route`
 --
 ALTER TABLE `ticket`
   ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `ticket_edm`
---
-ALTER TABLE `ticket_edm`
-  ADD CONSTRAINT `ticket_edm_ibfk_1` FOREIGN KEY (`id`) REFERENCES `ticket` (`id`),
-  ADD CONSTRAINT `ticket_edm_ibfk_2` FOREIGN KEY (`event_edm_id`) REFERENCES `event_edm` (`id`);
-
---
--- Constraints for table `ticket_stroll`
---
-ALTER TABLE `ticket_stroll`
-  ADD CONSTRAINT `ticket_stroll_ibfk_1` FOREIGN KEY (`id`) REFERENCES `ticket` (`id`),
-  ADD CONSTRAINT `ticket_stroll_ibfk_2` FOREIGN KEY (`event_stroll_id`) REFERENCES `event_stroll` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
