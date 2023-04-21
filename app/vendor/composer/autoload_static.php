@@ -6,11 +6,20 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
 {
+    public static $files = array (
+        'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
             'Svg\\' => 4,
             'Sabberworm\\CSS\\' => 15,
+        ),
+        'R' => 
+        array (
+            'Ramsey\\Uuid\\' => 12,
+            'Ramsey\\Collection\\' => 18,
         ),
         'P' => 
         array (
@@ -35,6 +44,7 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
         ),
         'B' => 
         array (
+            'Brick\\Math\\' => 11,
             'BaconQrCode\\' => 12,
         ),
     );
@@ -47,6 +57,14 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
         'Sabberworm\\CSS\\' => 
         array (
             0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
+        ),
+        'Ramsey\\Uuid\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ramsey/uuid/src',
+        ),
+        'Ramsey\\Collection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ramsey/collection/src',
         ),
         'PHPMailer\\PHPMailer\\' => 
         array (
@@ -71,6 +89,10 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
         'DASPRiD\\Enum\\' => 
         array (
             0 => __DIR__ . '/..' . '/dasprid/enum/src',
+        ),
+        'Brick\\Math\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/brick/math/src',
         ),
         'BaconQrCode\\' => 
         array (
