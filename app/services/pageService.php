@@ -15,11 +15,11 @@ class PageService
     return $this->repo->get_AllPages();
   }
 
-  public function get_PageByName($name):Page
+  public function get_PageByPath($path):Page
   {
     $pages = $this->get_AllPages();
     foreach ($pages as $page) {
-      if ($page->get_name() == $name) {
+      if ($page->get_path() == $path) {
         return $page;
       }
     }

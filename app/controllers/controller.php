@@ -24,7 +24,7 @@
         }
         
         //insert html from db
-        $page = $this->service->get_PageByName($name);
+        $page = $this->service->get_PageByPath($name);
         if(is_null($page)){
             $this->displayView("404");
         }

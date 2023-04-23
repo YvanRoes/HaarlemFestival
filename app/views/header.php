@@ -186,7 +186,7 @@ function loadHTML()
     //get listElement
     div = document.getElementById('pageList');
     for (let i = 0; i < pages.length; i++) {
-      pageList.innerHTML += '<li class="transition ease-out hover:translate-y-[-5px]"><a href="/page/' + pages[i].name + '">' + pages[i].name + '</a></li>'
+      pageList.innerHTML += '<li class="transition ease-out hover:translate-y-[-5px]"><a href="/page/' + pages[i].path + '">' + pages[i].title + '</a></li>'
     }
   }
   load();

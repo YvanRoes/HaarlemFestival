@@ -15,23 +15,22 @@ class CmsController extends Controller
     public function index() {
         error_reporting(E_ALL & ~E_NOTICE);
         if (isset($_GET['page'])) {
+            $path = $_GET['page'];
 
-            $pageName = $_GET['page'];
-
-            if($pageName != "custom"){
-                $page = $this->service->get_PageByName($pageName);
+            if($path != "custom"){
+                $page = $this->service->get_PageByPath($path);
                 $this->content = $page->get_html();
             }
             require __DIR__ . '/../views/cms/index.php';
 
             // insert page
-            if (isset($_POST['editor']) && $pageName == 'custom') {
+            if (isset($_POST['editor']) && $path == 'custom') {
                 $this->insert_page();
                 return;
             }    
             // update page
-            else if (isset($_POST['editor']) && $pageName != 'custom') {
-                $this->update_page($page, $pageName);
+            else if (isset($_POST['editor']) && $path != 'custom') {
+                $this->update_page($page, $path);
                 return;
             }
             return;        
@@ -42,19 +41,21 @@ class CmsController extends Controller
 
     function insert_page(){
         $html = $_POST['editor'];
+        $title = $_POST['pageNameInput'];
         $newPage = new Page();
-        $newPage->__set_name($_POST['pageNameInput']);
+        $path = preg_replace('/\s+/', '', $title);
+        $newPage->__set_path($path);
         $newPage->__set_html($html);
-        $newPage->__set_title("newPage");
+        $newPage->__set_title($title);
         $this->service->create_Page($newPage);
         return;
     }
 
 
-    function update_page($page, $pageName) {
+    function update_page($page, $path) {
         $html = ($_POST['editor']);
         $this->service->update_Page($page->get_id(), $html);
-        $page = $this->service->get_PageByName($pageName);
+        $page = $this->service->get_PageByPath($path);
         $this->content = $page->get_html();
     }
 }

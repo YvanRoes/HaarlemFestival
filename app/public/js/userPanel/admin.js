@@ -59,12 +59,12 @@ async function getData(url = '') {
 function loadCustomPageTabs() {
   getData('/pages').then((objects) => {
     objects.forEach((element) => {
-      insertCustomPageTab(element.name, element.title);
+      insertCustomPageTab(element.path, element.title);
     });
   });
 }
 
-function insertCustomPageTab(name, title) {
+function insertCustomPageTab(path, title) {
   dropDownMenu = document.getElementById('dropDownPagesOption');
   container = document.createElement('li');
 
@@ -78,7 +78,7 @@ function insertCustomPageTab(name, title) {
     'dark:hover:bg-gray-600',
     'dark:hover:text-white'
   );
-  a.setAttribute('href', 'http://localhost/cms?page=' + name);
+  a.setAttribute('href', 'http://localhost/cms?page=' + path);
 
   container.appendChild(a);
   dropDownMenu.appendChild(container);

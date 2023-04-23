@@ -3,7 +3,7 @@
 class Page implements JsonSerializable
 {
   private ?int $id = null;
-  private ?string $name = null;
+  private ?string $path = null;
   private ?string $title = null;
   private ?string $html = null;
 
@@ -17,13 +17,14 @@ class Page implements JsonSerializable
     return $this;
   }
 
-  public function get_name(): string
+  public function get_path(): string
   {
-    return $this->name;
+    return $this->path;
   }
-  public function __set_name(string $name): self
+
+  public function __set_path(string $path): self
   {
-    $this->name = $name;
+    $this->path = $path;
     return $this;
   }
 
@@ -53,7 +54,7 @@ class Page implements JsonSerializable
     //$images = [new Image(1, "d", "g"), new Image(2, "y", "s")];
     return [
       'id' => $this->id,
-      'name' => $this->name,
+      'path' => $this->path,
       'title' => $this->title,
       'html' => $this->html,
     ];
