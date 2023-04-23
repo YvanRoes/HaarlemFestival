@@ -32,9 +32,10 @@ class PageRepository extends Repository
   public function create_Page($page)
   {
     try {
-      $stmt = $this->conn->prepare("INSERT INTO page (name, html) VALUES (:name, :html)");
+      $stmt = $this->conn->prepare("INSERT INTO page (name, title, html) VALUES (:name, :title, :html)");
       $stmt->bindParam(':name', $page->get_name());
       $stmt->bindParam(':html', $page->get_html());
+      $stmt->bindParam(':title', $page->get_title());
       $stmt->execute();
     } catch (PDOException $e) {
       echo $e;

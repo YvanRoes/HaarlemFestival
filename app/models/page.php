@@ -4,7 +4,6 @@ class Page implements JsonSerializable
 {
   private ?int $id = null;
   private ?string $name = null;
-
   private ?string $title = null;
   private ?string $html = null;
 
