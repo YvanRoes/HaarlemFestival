@@ -203,6 +203,10 @@
     </div>
     </div>
 
+    <script src="./js/userPanel/admin_userCRUD.js"></script>
+    <script src="./js/userPanel/admin_danceCRUD.js"></script>
+    <script src="./js/userPanel/admin_foodCRUD.js"></script>
+
     <script src="./js/userPanel/admin.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 
