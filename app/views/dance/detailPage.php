@@ -38,17 +38,18 @@
             </div>
         
         <h1 class="text-[36px] font-bold mt-[100px] font-[Orbitron]">Planning</h1>
-        <div class="grid grid-cols-7 mt-[50px] text-[24px] text-[#F7F7FB] ">
+        <div class="grid grid-cols-8 mt-[50px] text-[24px] text-[#F7F7FB] ">
             <h2 class="pl-[3px] font-['Orbitron'] mb-[20px]">Date</h2>
-            <h2 class="pl-[3px] font-['Orbitron'] mb-[20px]">Location</h2>
+            <h2 class="col-span-2 pl-[3px] font-['Orbitron'] mb-[20px]">Location</h2>
             <h2 class="col-span-2 pl-[3px] font-['Orbitron'] mb-[20px]">Session</h2>
             <h2 class="pl-[3px] font-['Orbitron'] mb-[20px]">Duration</h2>
             <h2 class="pl-[3px] font-['Orbitron'] mb-[20px]">Tickets</h2>
             <h2 class="pl-[3px] font-['Orbitron'] mb-[20px]">Price</h2>
 
-            <?php foreach ($danceSessions as $session) {  $date = strtotime($session->get_date());?>
+            <?php $i = 0; foreach ($danceSessions as $session) {  $date = strtotime($session->get_date());?>
+
                 <h2 class="outline outline-1 outline-white p-[10px] font-['Orbitron']"><?php echo date('D, M. j H:i', $date);?></h2>
-                <h2 class="outline outline-1 outline-white p-[10px] font-['Orbitron']"><?php echo $venue->get_name() ?></h2>
+                <h2 class="col-span-2 outline outline-1 outline-white p-[10px] font-['Orbitron']"><?php echo $venues[$i++]->get_name() ?></h2>
                 <h2 class="col-span-2 outline outline-1 outline-white p-[10px] font-['Orbitron']"><?php echo $session->get_session(); ?></h2>
                 <h2 class="outline outline-1 outline-white p-[10px] font-['Orbitron']"><?php echo ($session->get_duration() / 60); ?>hours</h2>
                 <h2 class="outline outline-1 outline-white p-[10px] font-['Orbitron']"><?php echo $session->get_ticketsAmount(); ?></h2>

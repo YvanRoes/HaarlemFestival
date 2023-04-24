@@ -1,4 +1,7 @@
 <?php
+
+require_once __DIR__ . '/../services/pageService.php';
+require_once __DIR__ . '/../models/page.php';
 global $headerTextColourValue;
 $headerTextColourValue = '#F7F7FB'; // white
 global $unselected;
@@ -7,6 +10,8 @@ $unselected = '#F7F7FB'; //white
 $selected = '#FC5B84'; // pink
 global $colours;
 $colours = array("yummie" => '', "tour" => '', "dance" => '', "login" => '');
+
+$service = new PageService();
 
 function generateHeader(string $pageName, string $mode)
 {
@@ -67,6 +72,10 @@ function loadHTML()
             <li class='transition ease-out hover:translate-y-[-5px] text-[" . $GLOBALS['colours']['dance'] . "]'>
               <a href='/dance'>Dance</a>
             </li>
+            </li>
+            <button data-dropdown-toggle='dropdownPages' class='transition ease-out hover:translate-y-[-5px] text-[" . $GLOBALS['colours']['dance'] . "]'>
+              Pages
+            </button>
           </ul>
         </div>";
   if (isset($_SESSION['USER_ID'])) {
@@ -117,25 +126,32 @@ function loadHTML()
     <li>
       <?php
       if (isset($_SESSION['USER_ID'])) {
-        echo "<a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Personal program</a>";
+        if ($_SESSION['USER_ROLE'] == 9) {
+          echo "<a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Manage Website & Database</a>";
+        } else {
+          echo "<a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Dasboard</a>";
+        }
       } else {
-        echo "<a href='/login' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Personal program</a>";
+        echo "<a href='/login' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Dashboard</a>";
       }
       ?>
     </li>
     <?php
-    if (isset($_SESSION['USER_ID'])) {
-      echo "
+    if (isset($_SESSION['USER_ROLE'])) {
+      if ($_SESSION['USER_ROLE'] == 9) {
+      }
+      if ($_SESSION['USER_ROLE'] == 0) {
+        if (isset($_SESSION['USER_ID'])) {
+          echo "
       <li>
-        <a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Dashboard</a>
-      </li>
-      <li>
-        <a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Settings</a>
+        <a href='/userPanel' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>account details</a>
       </li>";
-    } else {
-      echo "<li>
+        } else {
+          echo "<li>
         <a href='/register' class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>Register</a>
       </li>";
+        }
+      }
     }
 
     ?>
@@ -153,4 +169,25 @@ function loadHTML()
       ?>
     </a>
   </div>
+  <div id="ddsf"></div>
 </div>
+
+
+<div id='dropdownPages' class='z-20 hidden divide-y divide-gray-100 rounded-lg shadow w-44 bg-[#29334E] dark:divide-gray-600'>
+  <ul class='py-2 text-sm text-gray-700 dark:text-gray-200 flex flex-col gap-[25px] mt-[15px]' aria-labelledby='dropdownInformationButton' id="pageList">
+  </ul>
+</div>
+
+<script>
+  async function load() {
+    const response = await fetch('http://localhost/api/pages');
+    pages = await response.json();
+
+    //get listElement
+    div = document.getElementById('pageList');
+    for (let i = 0; i < pages.length; i++) {
+      pageList.innerHTML += '<li class="transition ease-out hover:translate-y-[-5px]"><a href="/page/' + pages[i].name + '">' + pages[i].name + '</a></li>'
+    }
+  }
+  load();
+</script>

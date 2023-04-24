@@ -15,6 +15,11 @@ class TicketService
         $repo = new TicketRepository();
         return $repo->get_TicketById($id);
     }
+    public function post_Ticket($event)
+    {
+        $repo = new TicketRepository();
+        return $repo->post_Ticket($event);
+    }
 
 
 }

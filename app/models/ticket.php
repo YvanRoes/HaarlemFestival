@@ -1,16 +1,18 @@
 <?php
+use Ramsey\Uuid\Uuid;
+require_once __DIR__ . '/../models/event2.php';
 class Ticket implements JsonSerializable
 {
-    private ?int $id = null;
+    private ?Uuid $id = null;
     private ?string $status = null;
     private ?float $price = null;
-    private ?string $user_id = null;
+    private ?int $event = null;
 
-    public function getId(): ?int
+    public function getId(): ?Uuid
     {
         return $this->id;
     }
-    public function setId(?int $id): void
+    public function setId(?Uuid $id): void
     {
         $this->id = $id;
     }
@@ -31,27 +33,22 @@ class Ticket implements JsonSerializable
     {
         $this->price = $price;
     }
-
-    public function getUserId(): ?string
+    public function getEvent(): ?int
     {
-        return $this->user_id;
+        return $this->event;
     }
-
-
-    public function setUserId(?string $user_id): void
+    public function setEvent(?int $event): void
     {
-        $this->user_id = $user_id;
+        $this->event = $event;
     }
-
     public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->id,
             'status' => $this->status,
             'price' => $this->price,
-            'user_id' => $this->user_id
+            'event' => $this->event
         ];
-
     }
 }
 ?>

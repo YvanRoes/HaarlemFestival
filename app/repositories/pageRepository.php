@@ -6,7 +6,7 @@ class PageRepository extends Repository
   public function get_AllPages()
   {
     try {
-      $stmt = $this->conn->prepare("SELECT id, name, html FROM page");
+      $stmt = $this->conn->prepare("SELECT id, name, title, html FROM page");
       $stmt->execute();
 
       $stmt->setFetchMode(PDO::FETCH_CLASS, 'Page');
@@ -23,6 +23,18 @@ class PageRepository extends Repository
       $stmt = $this->conn->prepare("UPDATE page SET html = :html WHERE id = :id");
       $stmt->bindParam(':html', $html);
       $stmt->bindParam(':id', $id);
+      $stmt->execute();
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
+
+  public function create_Page($page)
+  {
+    try {
+      $stmt = $this->conn->prepare("INSERT INTO page (name, html) VALUES (:name, :html)");
+      $stmt->bindParam(':name', $page->get_name());
+      $stmt->bindParam(':html', $page->get_html());
       $stmt->execute();
     } catch (PDOException $e) {
       echo $e;

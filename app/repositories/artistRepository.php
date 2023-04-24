@@ -31,16 +31,18 @@ class ArtistRepository extends Repository
       echo $e;
     }
   }
-  public function insert_Artist(Artist $artist){
+  public function insert_Artist(Artist $artist)
+  {
     try {
-      $stmt = $this->conn->prepare("INSERT INTO artist (name, genre, imagePath) VALUES (:name, :genre, :path)");
-      $stmt->execute(array(':name' => $artist->get_name(), ':genre' => $artist->get_genre(), ':path' => $artist->get_imagePath()));
+      $stmt = $this->conn->prepare("INSERT INTO artist (name, description, genre, popularSongs, imagePath) VALUES (:name, :genre, :des, :songs, :path)");
+      $stmt->execute(array(':name' => $artist->get_name(), ':des' => $artist->get_description(), ':genre' => $artist->get_genre(),':songs' => $artist->get_popularSongs(), ':path' => $artist->get_imagePath()));
     } catch (PDOException $e) {
       echo $e;
     }
   }
 
-  public function delete_artistById($id){
+  public function delete_artistById($id)
+  {
     try {
       $stmt = $this->conn->prepare("DELETE FROM artist WHERE id = :id");
       $stmt->execute(array(':id' => $id));
@@ -49,10 +51,11 @@ class ArtistRepository extends Repository
     }
   }
 
-  public function edit_artistById($id, $name, $genres){
+  public function edit_artistById($id, $name, $genre, $description)
+  {
     try {
-      $stmt = $this->conn->prepare("UPDATE `artist` SET `name`=:name,`genre`=:genres,`imagePath`='tbd' WHERE id = :id");
-      $stmt->execute(array(':id' => $id, ':name' => $name, ':genres' => $genres));
+      $stmt = $this->conn->prepare("UPDATE `artist` SET `name`=:name,`description`=:des,`genre`=:genre WHERE id = :id");
+      $stmt->execute(array(':id' => $id, ':name' => $name, ':genre' => $genre, ':des' => $description));
     } catch (PDOException $e) {
       echo $e;
     }

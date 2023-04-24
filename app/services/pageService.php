@@ -3,10 +3,16 @@ require_once __DIR__ . '/../repositories/pageRepository.php';
 require_once __DIR__ . '/../models/page.php';
 class PageService
 {
+  private $repo;
+
+  public function __construct()
+  {
+    $this->repo = new PageRepository();
+  }
+
   public function get_AllPages(): array
   {
-    $repo = new PageRepository();
-    return $repo->get_AllPages();
+    return $this->repo->get_AllPages();
   }
 
   public function get_PageByName($name):Page
@@ -22,7 +28,11 @@ class PageService
 
   public function update_Page($id, $html)
   {
-    $repo = new PageRepository();
-    $repo->update_Page($id, $html);
+    $this->repo->update_Page($id, $html);
+  }
+
+  public function create_Page($page)
+  {
+    $this->repo->create_Page($page);
   }
 }
