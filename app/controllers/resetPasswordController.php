@@ -35,12 +35,10 @@ class ResetPasswordController extends Controller
             else
             {
                 $this->displayView($this);
-                echo 'Something went wrong';
             }
 
         } else {
             $this->displayView($this);
-            echo 'start';
         }
 
     }
