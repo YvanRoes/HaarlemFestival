@@ -23,6 +23,15 @@ class TicketRepository extends Repository
         $result = $stmt->fetchAll(PDO::FETCH_CLASS);
         return $result;
     }
+    public function get_TicketsByEventId($id): array
+    {
+        $sql = "SELECT * FROM ticket WHERE event_id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+        return $result;
+    }
 
     public function get_TicketById($id): Ticket
     {
@@ -54,7 +63,7 @@ class TicketRepository extends Repository
     }
     public function post_Ticket($event)
     {
-        $sql = "INSERT INTO ticket(uuid,status,event_id,price,user_id,exp_date) VALUES (uuid(), 'available', :event, null, null, null)";
+        $sql = "INSERT INTO ticket(uuid,status,event_id,price,user_id,exp_date,order_id) VALUES (uuid(), 'available', :event, null, null, null,null)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':event', $event);
         $stmt->execute();

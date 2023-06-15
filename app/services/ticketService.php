@@ -10,6 +10,12 @@ class TicketService
         return $repo->get_AllTickets();
     }
 
+    public function get_TicketsByEventId($id): array
+    {
+        $repo = new TicketRepository();
+        return $repo->get_TicketsByEventId($id);
+    }
+
     public function get_TicketById($id): Ticket
     {
         $repo = new TicketRepository();
