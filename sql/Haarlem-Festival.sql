@@ -3,10 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Apr 21, 2023 at 01:58 PM
--- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
--- PHP Version: 8.0.26
-
+-- Generation Time: Jun 16, 2023 at 10:49 AM
+-- Server version: 11.0.2-MariaDB-1:11.0.2+maria~ubu2204
+-- PHP Version: 8.1.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -123,7 +122,78 @@ CREATE TABLE `events` (
 INSERT INTO `events` (`id`) VALUES
 (1),
 (2),
-(3);
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9),
+(10),
+(11),
+(12),
+(13),
+(14),
+(15),
+(16),
+(17),
+(18),
+(19),
+(20),
+(21),
+(22),
+(23),
+(24),
+(25),
+(26),
+(27),
+(28),
+(29),
+(30),
+(31),
+(32),
+(33),
+(34),
+(35),
+(36),
+(37),
+(38),
+(39),
+(40),
+(41),
+(42),
+(43),
+(44),
+(45),
+(46),
+(47),
+(48),
+(49),
+(50),
+(51),
+(52),
+(53),
+(54),
+(55),
+(56),
+(57),
+(58),
+(59),
+(60),
+(61),
+(62),
+(63),
+(64),
+(65),
+(66),
+(67),
+(68),
+(69),
+(70),
+(71),
+(72),
+(73),
+(74);
 
 -- --------------------------------------------------------
 
@@ -147,24 +217,24 @@ CREATE TABLE `event_edm` (
 --
 
 INSERT INTO `event_edm` (`id`, `venue`, `artist_id`, `date`, `session`, `duration`, `ticketsAmount`, `price`) VALUES
-(1, 1, 1, '2023-07-27 10:00:00.0', 'Back2Back', 360, 1500, 75),
-(6, 3, 4, '2023-07-27 22:00:00.0', 'Club', 90, 200, 60),
-(7, 4, 1, '2023-07-27 23:00:00.0', 'Club', 90, 300, 60),
-(8, 5, 2, '2023-07-27 22:00:00.0', 'Club', 90, 200, 60),
-(9, 6, 3, '2023-07-27 22:00:00.0', 'Club', 90, 200, 60),
-(10, 2, 1, '2023-07-28 14:00:00.0', 'Back2Back', 540, 2000, 110),
-(11, 4, 6, '2023-07-28 22:00:00.0', 'Club', 90, 300, 60),
-(12, 1, 4, '2023-07-28 21:00:00.0', 'TiëstoWorld', 240, 1500, 75),
-(13, 3, 5, '2023-07-28 23:00:00.0', 'Club', 90, 200, 60),
-(14, 2, 6, '2023-07-29 14:00:00.0', 'Back2Back', 540, 2000, 110),
-(15, 2, 3, '2023-07-28 14:00:00.0', 'Back2Back', 540, 2000, 110),
-(16, 2, 2, '2023-07-28 14:00:00.0', 'Back2Back', 540, 2000, 110),
-(17, 2, 4, '2023-07-29 14:00:00.0', 'Back2Back', 540, 2000, 110),
-(18, 2, 5, '2023-07-29 14:00:00.0', 'Back2Back', 540, 2000, 110),
-(19, 4, 2, '2023-07-29 19:00:00.0', 'Club', 90, 300, 60),
-(20, 5, 1, '2023-07-29 21:00:00.0', 'Club', 90, 1500, 90),
 (21, 3, 3, '2023-07-29 16:00:00.0', 'Club', 90, 200, 60),
-(22, 1, 6, '2023-07-27 20:00:00.0', 'Back2Back', 360, 1500, 75);
+(22, 1, 6, '2023-07-27 20:00:00.0', 'Back2Back', 360, 1500, 75),
+(23, 1, 1, '2023-07-27 10:00:00.0', 'Back2Back', 360, 1500, 75),
+(24, 3, 4, '2023-07-27 22:00:00.0', 'Club', 90, 200, 60),
+(25, 4, 1, '2023-07-27 23:00:00.0', 'Club', 90, 300, 60),
+(26, 5, 2, '2023-07-27 22:00:00.0', 'Club', 90, 200, 60),
+(27, 6, 3, '2023-07-27 22:00:00.0', 'Club', 90, 200, 60),
+(28, 2, 1, '2023-07-28 14:00:00.0', 'Back2Back', 540, 2000, 110),
+(29, 4, 6, '2023-07-28 22:00:00.0', 'Club', 90, 300, 60),
+(30, 1, 4, '2023-07-28 21:00:00.0', 'TiëstoWorld', 240, 1500, 75),
+(31, 3, 5, '2023-07-28 23:00:00.0', 'Club', 90, 200, 60),
+(32, 2, 6, '2023-07-29 14:00:00.0', 'Back2Back', 540, 2000, 110),
+(33, 2, 3, '2023-07-28 14:00:00.0', 'Back2Back', 540, 2000, 110),
+(34, 2, 2, '2023-07-28 14:00:00.0', 'Back2Back', 540, 2000, 110),
+(35, 2, 4, '2023-07-29 14:00:00.0', 'Back2Back', 540, 2000, 110),
+(36, 2, 5, '2023-07-29 14:00:00.0', 'Back2Back', 540, 2000, 110),
+(37, 4, 2, '2023-07-29 19:00:00.0', 'Club', 90, 300, 60),
+(38, 5, 1, '2023-07-29 21:00:00.0', 'Club', 90, 1500, 90);
 
 -- --------------------------------------------------------
 
@@ -174,8 +244,52 @@ INSERT INTO `event_edm` (`id`, `venue`, `artist_id`, `date`, `session`, `duratio
 
 CREATE TABLE `event_stroll` (
   `id` int(11) NOT NULL,
-  `price` double NOT NULL
+  `price` double NOT NULL,
+  `date` datetime NOT NULL,
+  `language` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event_stroll`
+--
+
+INSERT INTO `event_stroll` (`id`, `price`, `date`, `language`) VALUES
+(39, 17.5, '2023-07-26 10:00:00', 'english'),
+(40, 17.5, '2023-07-26 10:00:00', 'dutch'),
+(41, 17.5, '2023-07-26 10:00:00', 'chinese'),
+(42, 17.5, '2023-07-26 13:00:00', 'english'),
+(43, 17.5, '2023-07-26 13:00:00', 'dutch'),
+(44, 17.5, '2023-07-26 13:00:00', 'chinese'),
+(45, 17.5, '2023-07-26 16:00:00', 'english'),
+(46, 17.5, '2023-07-26 16:00:00', 'dutch'),
+(47, 17.5, '2023-07-26 16:00:00', 'chinese'),
+(48, 17.5, '2023-07-27 10:00:00', 'english'),
+(49, 17.5, '2023-07-27 10:00:00', 'dutch'),
+(50, 17.5, '2023-07-27 10:00:00', 'chinese'),
+(51, 17.5, '2023-07-27 13:00:00', 'english'),
+(52, 17.5, '2023-07-27 13:00:00', 'dutch'),
+(53, 17.5, '2023-07-27 13:00:00', 'chinese'),
+(54, 17.5, '2023-07-27 16:00:00', 'english'),
+(55, 17.5, '2023-07-27 16:00:00', 'dutch'),
+(56, 17.5, '2023-07-27 16:00:00', 'chinese'),
+(57, 17.5, '2023-07-28 10:00:00', 'english'),
+(58, 17.5, '2023-07-28 10:00:00', 'dutch'),
+(59, 17.5, '2023-07-28 10:00:00', 'chinese'),
+(60, 17.5, '2023-07-28 13:00:00', 'english'),
+(61, 17.5, '2023-07-28 13:00:00', 'dutch'),
+(62, 17.5, '2023-07-28 13:00:00', 'chinese'),
+(63, 17.5, '2023-07-28 16:00:00', 'english'),
+(64, 17.5, '2023-07-28 16:00:00', 'dutch'),
+(65, 17.5, '2023-07-28 16:00:00', 'chinese'),
+(66, 17.5, '2023-07-29 10:00:00', 'english'),
+(67, 17.5, '2023-07-29 10:00:00', 'dutch'),
+(68, 17.5, '2023-07-29 10:00:00', 'chinese'),
+(69, 17.5, '2023-07-29 13:00:00', 'english'),
+(70, 17.5, '2023-07-29 13:00:00', 'dutch'),
+(71, 17.5, '2023-07-29 13:00:00', 'chinese'),
+(72, 17.5, '2023-07-29 16:00:00', 'english'),
+(73, 17.5, '2023-07-29 16:00:00', 'dutch'),
+(74, 17.5, '2023-07-29 16:00:00', 'chinese');
 
 -- --------------------------------------------------------
 
@@ -364,8 +478,19 @@ CREATE TABLE `ticket` (
   `event_id` int(11) NOT NULL,
   `price` double DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `exp_date` datetime DEFAULT NULL
+  `exp_date` datetime DEFAULT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `isAllAccess` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ticket`
+--
+
+INSERT INTO `ticket` (`uuid`, `status`, `event_id`, `price`, `user_id`, `exp_date`, `order_id`, `isAllAccess`) VALUES
+('2276179e-0be2-11ee-998f-0242ac120004', 'pending', 22, 75, 1, '2023-06-17 01:07:16', NULL, 0),
+('472df72e-0be8-11ee-b26a-0242ac120003', 'available', 24, 60, 1, '2023-06-17 01:51:14', NULL, 0),
+('482eac0c-0be8-11ee-b26a-0242ac120003', 'available', 27, 60, 1, '2023-06-17 01:51:16', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -520,13 +645,13 @@ ALTER TABLE `dance_location`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `event_edm`
 --
 ALTER TABLE `event_edm`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `event_yummie`
@@ -574,19 +699,23 @@ ALTER TABLE `artist_event_edm`
 --
 ALTER TABLE `event_edm`
   ADD CONSTRAINT `event_edm_ibfk_1` FOREIGN KEY (`venue`) REFERENCES `dance_location` (`id`),
-  ADD CONSTRAINT `event_edm_ibfk_3` FOREIGN KEY (`artist_id`) REFERENCES `artist` (`id`);
+  ADD CONSTRAINT `event_edm_ibfk_3` FOREIGN KEY (`artist_id`) REFERENCES `artist` (`id`),
+  ADD CONSTRAINT `event_edm_ibfk_4` FOREIGN KEY (`id`) REFERENCES `events` (`id`);
 
 --
 -- Constraints for table `event_stroll`
 --
 ALTER TABLE `event_stroll`
-  ADD CONSTRAINT `event_stroll_ibfk_1` FOREIGN KEY (`id`) REFERENCES `events` (`id`);
+  ADD CONSTRAINT `event_stroll_ibfk_1` FOREIGN KEY (`id`) REFERENCES `events` (`id`),
+  ADD CONSTRAINT `event_stroll_ibfk_2` FOREIGN KEY (`id`) REFERENCES `events` (`id`);
 
 --
 -- Constraints for table `event_yummie`
 --
 ALTER TABLE `event_yummie`
-  ADD CONSTRAINT `event_yummie_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`id`);
+  ADD CONSTRAINT `event_yummie_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant` (`id`),
+  ADD CONSTRAINT `event_yummie_ibfk_2` FOREIGN KEY (`id`) REFERENCES `events` (`id`),
+  ADD CONSTRAINT `event_yummie_ibfk_3` FOREIGN KEY (`id`) REFERENCES `events` (`id`);
 
 --
 -- Constraints for table `personal_program`
