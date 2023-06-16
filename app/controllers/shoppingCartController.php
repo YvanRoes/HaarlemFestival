@@ -50,9 +50,15 @@ class ShoppingCartController extends Controller
             $ticket->setEvent($_POST['selectedTicket']);
             $ticket->setStatus('pending');
             $ticket->setUser($_SESSION['USER_ID']);
-            $event= $eventService->get_EventById($_POST['selectedTicket']);
-            $ticket->setPrice($event->get_price());
-            $ticketService->update_Ticket($ticket);
+            $event= $eventService->get_EventYummieById($_POST['selectedTicket']);
+            if ($event == null) {
+                $event = $eventService->get_EventStrollById($_POST['selectedTicket']);
+            }
+            if ($event == null) {
+                $event = $eventService->get_EventEDMById($_POST['selectedTicket']);
+            }
+            $ticket->setPrice($event->price);
+            $ticketService->post_Ticket($ticket);
         } catch (Exception $e) {
             echo $e->getMessage();
         }

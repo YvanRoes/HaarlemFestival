@@ -159,7 +159,7 @@ class TicketRepository extends Repository
     }
     public function post_Ticket($ticket)
     {
-        $sql = "INSERT INTO ticket(uuid,status,event_id,price,user_id,exp_date,order_id,isAllAccess) VALUES (uuid(), 'available', :event, :price, :user_id, NOW() + INTERVAL 1 DAY ,null,false)";
+        $sql = "INSERT INTO ticket(uuid,status,event_id,price,user_id,exp_date,order_id,isAllAccess) VALUES (uuid(), 'pending', :event, :price, :user_id, NOW() + INTERVAL 1 DAY ,null,false)";
         $stmt = $this->conn->prepare($sql);
         $event=$ticket->getEvent();
         $stmt->bindParam(':event', $event);
