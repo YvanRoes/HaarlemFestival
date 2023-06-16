@@ -39,18 +39,20 @@ generateHeader('home', 'dark');
                 </thead>
                 <tbody>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Apple MacBook Pro 17"
-                        </th>
-                        <td class="px-6 py-4">
-                            Silver
-                        </td>
-                        <td class="px-6 py-4">
-                            Laptop
-                        </td>
-                        <td class="px-6 py-4">
-                            $2999
-                        </td>
+                        <?php
+                    foreach ($_SESSION['edmEvents'] as $event) {
+                                  echo'
+                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> '.$event->id.'</th>';
+                                 echo '                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                 <form method="post">
+                                 <input type="hidden" name="selectedTicket" value="'. $event->id .'">
+                                 <a href="/shoppingCart">
+                                 <button type="submit" value="send" >add ticket</button>
+                                   </a>
+                                  </form>
+                               </th>';
+                        }
+                        ?>
                     </tr>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">

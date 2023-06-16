@@ -73,9 +73,9 @@ class ShoppingCartController extends Controller
         $danceService = new DanceSessionService();
         $restaurantService = new RestaurantSessionService();
         //i hate doing it like this i had one method which would get me all the avaialble tickets with a parameter but it kept giving errors so this is what you get, sorry.
-        $_SESSION['edmTickets'] = $danceService->get_AllDanceSessions();
-        $_SESSION['yummieTickets'] = $restaurantService->get_AllRestaurantSessions();
-        $_SESSION['strollTickets'] = $ticketService->getAllEventsStroll();
+        $_SESSION['edmEvents'] = $danceService->get_AllDanceSessions();
+        $_SESSION['yummieEvents'] = $restaurantService->get_AllRestaurantSessions();
+        $_SESSION['strollEvents'] = $ticketService->getAllEventsStroll();
     }
     public function getPendingUserTickets(){
         try{
