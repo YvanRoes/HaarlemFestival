@@ -92,15 +92,7 @@ class ShoppingCartController extends Controller
     public function removePendingTicket($uuid){// also a mess of a method, sorry.
         try{
             $ticketService = new TicketService();
-            $result = $ticketService->get_TicketById($_POST['removePendingTicket']);
-            $ticket = new Ticket();
-            $ticket->setId($result[0]->uuid);
-            $ticket->setEvent($result[0]->event_id);
-            $ticket->setStatus('available');
-            $ticket->setUser(null);
-            $ticket->setPrice(null);
-            $ticket->setExpDate(null);
-            $ticketService->update_Ticket($ticket);
+            $ticketService->delete_Ticket($uuid);
         } catch (Exception $e) {
             echo $e->getMessage();
         }

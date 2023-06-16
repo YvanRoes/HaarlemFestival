@@ -46,6 +46,11 @@ class TicketService
         $repo = new TicketRepository();
         return $repo->update_Ticket($ticket);
     }
+    public function delete_Ticket($id)
+    {
+        $repo = new TicketRepository();
+        return $repo->delete_Ticket($id);
+    }
 
 
 }

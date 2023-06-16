@@ -55,10 +55,10 @@ class TicketRepository extends Repository
     {
         $sql = "SELECT * FROM ticket WHERE user_id = :user_id AND status = :status";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':user_id', $_SESSION['user_id']);
-        $stmt->bindParam(':status', $_SESSION['status']);
+        $stmt->bindParam(':user_id', $id);
+        $stmt->bindParam(':status', $status);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }
     public function get_QuantityOfTicketsByEventIdAndStatus($id, $status)
@@ -91,6 +91,13 @@ class TicketRepository extends Repository
         {
             echo $e->getMessage();
         }
+    }
+    public function delete_Ticket($id)
+    {
+        $sql = "DELETE FROM ticket WHERE uuid = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
     }
     public function get_AvailableEventYummieTickets(){
         try
