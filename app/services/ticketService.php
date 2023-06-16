@@ -26,6 +26,11 @@ class TicketService
         $repo = new TicketRepository();
         return $repo->post_Ticket($event);
     }
+    public function getAllEventsStroll(): array
+    {
+        $repo = new TicketRepository();
+        return $repo->getAllEventsStroll();
+    }
 
 
 }

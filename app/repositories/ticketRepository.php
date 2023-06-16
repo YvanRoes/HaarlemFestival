@@ -157,11 +157,30 @@ class TicketRepository extends Repository
         $stmt->bindParam(':price', $price);
         $stmt->execute();
     }
-    public function post_Ticket($event)
+    public function post_Ticket($ticket)
     {
-        $sql = "INSERT INTO ticket(uuid,status,event_id,price,user_id,exp_date,order_id) VALUES (uuid(), 'available', :event, null, null, null,null)";
+        $sql = "INSERT INTO ticket(uuid,status,event_id,price,user_id,exp_date,order_id,isAllAccess) VALUES (uuid(), 'available', :event, :price, :user_id, NOW() + INTERVAL 1 DAY ,null,false)";
         $stmt = $this->conn->prepare($sql);
+        $event=$ticket->getEvent();
         $stmt->bindParam(':event', $event);
+        $user_id=$ticket->getUser();
+        $stmt->bindParam(':user_id', $user_id);
+        $price = $ticket->getPrice();
+        $stmt->bindParam(':price', $price);
         $stmt->execute();
+    }
+    public function getAllEventsStroll(){
+        try
+        {
+            $sql = 'select * from event_stroll;';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+            return $result;
+        }
+        catch (PDOException $e)
+        {
+            echo $e->getMessage();
+        }
     }
 }

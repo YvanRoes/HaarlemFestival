@@ -7,6 +7,10 @@ class Ticket implements JsonSerializable
     private ?string $status = null;
     private ?float $price = null;
     private ?int $event = null;
+    private ?int $user_id = null;
+    private ?DateTime $exp_date = null;
+    private ?int $order_id = null;
+    private ?bool $isAllAccess = null;
 
     public function getId(): ?Uuid
     {
@@ -41,13 +45,40 @@ class Ticket implements JsonSerializable
     {
         $this->event = $event;
     }
+    public function getExpDate(): ?DateTime
+    {
+        return $this->exp_date;
+    }
+    public function setExpDate(?DateTime $exp_date): void
+    {
+        $this->exp_date = $exp_date;
+    }
+    public function getOrderId(): ?int
+    {
+        return $this->order_id;
+    }
+    public function setOrderId(?int $order_id): void
+    {
+        $this->order_id = $order_id;
+    }
+    public function getUser(): ?int
+    {
+        return $this->user_id;
+    }
+    public function setUser(?int $user_id): void
+    {
+        $this->user_id = $user_id;
+    }
     public function jsonSerialize(): mixed
     {
         return [
             'id' => $this->id,
             'status' => $this->status,
             'price' => $this->price,
-            'event' => $this->event
+            'event' => $this->event,
+            'exp_date' => $this->exp_date,
+            'order_id' => $this->order_id,
+            'user_id' => $this->user_id,
         ];
     }
 }
