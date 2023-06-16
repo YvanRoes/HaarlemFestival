@@ -44,17 +44,14 @@ class ShoppingCartController extends Controller
         try{
             $ticketService = new TicketService();
             $eventService = new EventService();
-            $result = $ticketService->get_TicketById($_POST['selectedTicket']);
+            $danceService = new DanceSessionService();
+            $restaurantService = new RestaurantSessionService();
             $ticket = new Ticket();
-            $ticket->setId($result[0]->uuid);
-            $ticket->setEvent($result[0]->event_id);
+            $ticket->setEvent($_POST['selectedTicket']);
             $ticket->setStatus('pending');
             $ticket->setUser($_SESSION['USER_ID']);
-            $event= $eventService->get_Event2ById($ticket->getEvent());
+            $event= $eventService->get_EventById($_POST['selectedTicket']);
             $ticket->setPrice($event->get_price());
-            $date = date_create('now');
-            date_add($date, date_interval_create_from_date_string('1 day'));
-            $ticket->setExpDate($date);
             $ticketService->update_Ticket($ticket);
         } catch (Exception $e) {
             echo $e->getMessage();

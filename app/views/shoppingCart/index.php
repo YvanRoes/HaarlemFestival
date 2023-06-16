@@ -42,10 +42,10 @@ generateHeader('home', 'dark');
                         <?php
                     foreach ($_SESSION['edmEvents'] as $event) {
                                   echo'
-                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> '.$event->id.'</th>';
+                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> '.$event->get_id().'</th>';
                                  echo '                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                  <form method="post">
-                                 <input type="hidden" name="selectedTicket" value="'. $event->id .'">
+                                 <input type="hidden" name="selectedTicket" value="'. $event->get_id() .'">
                                  <a href="/shoppingCart">
                                  <button type="submit" value="send" >add ticket</button>
                                    </a>

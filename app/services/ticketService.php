@@ -36,6 +36,16 @@ class TicketService
         $repo = new TicketRepository();
         return $repo->get_TicketsByStatus($status);
     }
+    public function get_TicketsByUserIdAndStatus($id, $status)
+    {
+        $repo = new TicketRepository();
+        return $repo->get_TicketsByUserIdAndStatus($id, $status);
+    }
+    public function update_Ticket($ticket)
+    {
+        $repo = new TicketRepository();
+        return $repo->update_Ticket($ticket);
+    }
 
 
 }
