@@ -3,7 +3,7 @@ use Ramsey\Uuid\Uuid;
 require_once __DIR__ . '/../models/event2.php';
 class Ticket implements JsonSerializable
 {
-    private ?Uuid $id = null;
+    private ?string $id = null;
     private ?string $status = null;
     private ?float $price = null;
     private ?int $event = null;
@@ -12,11 +12,11 @@ class Ticket implements JsonSerializable
     private ?int $order_id = null;
     private ?bool $isAllAccess = null;
 
-    public function getId(): ?Uuid
+    public function getId(): ?string
     {
         return $this->id;
     }
-    public function setId(?Uuid $id): void
+    public function setId(?string $id): void
     {
         $this->id = $id;
     }

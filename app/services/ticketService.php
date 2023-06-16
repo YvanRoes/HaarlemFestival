@@ -31,6 +31,11 @@ class TicketService
         $repo = new TicketRepository();
         return $repo->getAllEventsStroll();
     }
+    public function get_TicketsByStatus($status)
+    {
+        $repo = new TicketRepository();
+        return $repo->get_TicketsByStatus($status);
+    }
 
 
 }
