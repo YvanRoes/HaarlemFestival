@@ -76,9 +76,16 @@ generateHeader('home', 'dark');
             <p class="ticket">
             <h1 class="text-4xl">Your shopping cart</h1>
             </p>
-            <p class="ticket">
-
-            </p>
+            <?php 
+            if (isset($_SESSION['pendingTickets'])) {
+                foreach ($_SESSION['pendingTickets'] as $ticket) {
+                    echo '<form method="POST">
+                     <input type="hidden" name="removePendingTicket" value="'.$ticket->uuid.'">';
+                    echo '<p class="ticket">'.$ticket->uuid.'</p> 
+                    <button type="submit" value="send">';
+                }
+            }
+            ?>
 
             <div class="absolute-bottom w-full flex justify-center items-center">
                 <a href="/shoppingCart"
