@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $result = $writer->write($qr_code, label: $label);
 
     //saves the qr code to a file
-    $result->saveToFile(__DIR__ . "/qrCode.png");
-
+    $qrCodeFile = __DIR__ . "/qrCode.png";
+    $result->saveToFile($qrCodeFile);
     
 
     $dataUri = $result->getDataUri();
