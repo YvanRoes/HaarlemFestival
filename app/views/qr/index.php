@@ -25,14 +25,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $result = $writer->write($qr_code, label: $label);
 
     //saves the qr code to a file
-    // $result->saveToFile(__DIR__ . "/qrCode.png");
+    $result->saveToFile(__DIR__ . "/qrCode.png");
+
+    
 
     $dataUri = $result->getDataUri();
 
     $dompdf = new Dompdf();
 
     //image in pdf format
-    // $dompdf->loadHtml("<img src='$dataUri'>");
+    //$dompdf->loadHtml("<img src='$dataUri'>");
 
     //invoice in pdf format
     $dompdf->loadHtml(
@@ -226,6 +228,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $dompdf->setPaper('A4', 'landscape');
     $dompdf->render();
     $dompdf->stream('Ticket.pdf', $options = []);
+
+    // Download the QR code PNG
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename="qrCode.png"');
+    header('Content-Length: ' . filesize($qrCodeFile));
+    readfile($qrCodeFile);
+
+    // Download the invoice PDF
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename="invoice.pdf"');
+    header('Content-Length: ' . filesize($invoiceFile));
+    readfile($invoiceFile);
+
 
     //header("Content-Type: image/png");
 
