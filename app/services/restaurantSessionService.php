@@ -19,9 +19,9 @@ class RestaurantSessionService
     return $this->repo->get_AllRestaurantSessions();
   }
 
-  public function edit_RestaurantSession($id, $restaurant_id, $adult_Price, $kids_Price, $session_startTime, $session_endTime)
+  public function edit_RestaurantSession($id, $restaurant_id, $adult_Price, $kids_Price, $session_startTime, $session_endTime, $session_date)
   {
-    $this->repo->edit_RestaurantSession($id, $restaurant_id, $adult_Price, $kids_Price, $session_startTime, $session_endTime);
+    $this->repo->edit_RestaurantSession($id, $restaurant_id, $adult_Price, $kids_Price, $session_startTime, $session_endTime, $session_date);
   }
 
   public function insert_RestaurantSession(RestaurantSession $restaurantSession)

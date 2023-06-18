@@ -187,12 +187,17 @@
                 </div>
                 <div id="restaurantSessionSubPane" class="hidden">
                     <div action="" class="bg-white p-2 rounded-md grid grid-cols-5 relative gap-4 text-center mb-10">
+                        <label>Restaurant</label>
+                        <label>Adult price</label>
+                        <label>Kids price</label>
+                        <label>Start time</label>
+                        <label>End time</label>
                         <select id="sessionRestaurant" required></select>
                         <input id="sessionRestaurantAdultPrice" type="number" step="0.50" min="0" placeholder="Adult price" required />
                         <input id="sessionRestaurantKidsPrice" type="number" step="0.50" min="0" placeholder="Kids price" required />
                         <input type="time" id="sessionRestaurantStartTime" placeholder="Start time" required />
                         <input type="time" id="sessionRestaurantEndTime" placeholder="End time" required />
-
+                        <input type="date" id="sessionRestaurantDate" placeholder="Date" required />    
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurantSession()">Add sessions</button>
                     </div>
                     <div class="flex flex-col gap-4 pb-5" id="contentRestaurantSessionWrapper">

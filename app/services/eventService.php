@@ -30,4 +30,15 @@ class EventService
         $repo = new EventRepository();
         return $repo->get_EventEDMById($id);
     }
+
+    public function insert_NewEvent()
+    {
+        $repo = new EventRepository();
+        $repo->insert_NewEvent();
+    }
+
+    public function get_last_Id(){
+        $repo = new EventRepository();
+        return $repo->get_last_Id();
+    }
 }

@@ -74,4 +74,28 @@ class EventRepository extends Repository
         }
 
     }
+
+    public function insert_NewEvent()
+    {
+        try {
+            $stmt = $this->conn->prepare("INSERT INTO events VALUES (null)");
+            $stmt->execute();
+          } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function get_last_Id()
+    {
+        try {
+            $stmt = $this->conn->prepare("SELECT id FROM events ORDER BY id DESC LIMIT 1");
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_OBJ);
+            $result = $stmt->fetch();
+            return $result;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
 }

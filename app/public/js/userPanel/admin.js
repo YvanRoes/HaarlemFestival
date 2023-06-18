@@ -1570,12 +1570,13 @@ async function createRestaurantSessionList(objects) {
       objects[i].kids_Price,
       objects[i].session_startTime,
       objects[i].session_endTime,
+      objects[i].session_date
     );
   }
 
 }
 
-async function createRestaurantSessionContainer(element, id, restaurant_id, adult_price, kids_price, start_time, end_time) {
+async function createRestaurantSessionContainer(element, id, restaurant_id, adult_price, kids_price, start_time, end_time, date) {
   container = document.createElement('div');
   container.classList.add(
     'bg-white',
@@ -1623,7 +1624,14 @@ async function createRestaurantSessionContainer(element, id, restaurant_id, adul
   // endTimeSpan.classList.add('col-span-2');
   endTimeSpan.value = end_time;
 
-  //remove user
+  dateSpan = document.createElement('input');
+  dateSpan.setAttribute('type', 'date');
+  dateSpan.setAttribute('id', 'sessionDate' + id);
+  dateSpan.setAttribute('disabled', 'true');
+  // dateSpan.classList.add('col-span-2');
+  dateSpan.value = date;
+
+  //remove session
   buttonRemove = document.createElement('button');
   buttonRemove.innerHTML = 'REMOVE';
   buttonRemove.classList.add(
@@ -1639,7 +1647,7 @@ async function createRestaurantSessionContainer(element, id, restaurant_id, adul
     removeRestaurantSession(id);
   });
 
-  //edit user
+  //edit session
   buttonEdit = document.createElement('button');
   buttonEdit.innerHTML = 'EDIT';
   buttonEdit.classList.add(
@@ -1664,8 +1672,10 @@ async function createRestaurantSessionContainer(element, id, restaurant_id, adul
   container.appendChild(kidsPriceSpan);
   container.appendChild(startTimeSpan);
   container.appendChild(endTimeSpan);
+  container.appendChild(dateSpan);
   container.appendChild(buttonRemove);
   container.appendChild(buttonEdit);
+
 
   element.appendChild(container);
 }
@@ -1676,26 +1686,20 @@ function insertRestaurantSession() {
   kidsPrice = document.getElementById('sessionRestaurantKidsPrice');
   startTime = document.getElementById('sessionRestaurantStartTime');
   endTime = document.getElementById('sessionRestaurantEndTime');
-
-  // if (
-  //   restaurantSelect.value == '' ||
-  //   adultPrice.value == '' ||
-  //   kidsPrice.value == '' ||
-  //   startTime.value == '' ||
-  //   endTime.value == ''
-  // ) {
-  //   alert('one or multiple fields are empty');
-  //   return;
-  // }
-
+  date = document.getElementById('sessionRestaurantDate');
+ 
+  formattedDate = new Date(date.value).toISOString().split('T')[0];
   const data = {
     "post_type": "insert",
     "restaurant_id": parseInt(restaurantSelect.value),
     "adult_Price": parseFloat(adultPrice.value),
     "kids_Price": parseFloat(kidsPrice.value),
     "session_startTime": startTime.value,
-    "session_endTime": endTime.value
+    "session_endTime": endTime.value,
+    "session_date" : formattedDate
   };
+
+  console.log(data);
 
   postData('http://localhost/api/restaurantSessions', data).then(
     delay(1000).then(() => loadRestaurantSessions())
@@ -1708,6 +1712,7 @@ function editRestaurantSession(id) {
   sKidsPrice = document.getElementById('sessionRestaurantKidsPrice' + id);
   sStartTime = document.getElementById('sessionStartTime' + id);
   sEndTime = document.getElementById('sessionEndTime' + id);
+  sDate = document.getElementById('sessionDate' + id);
   b = document.getElementById('restaurantSessionB' + id);
 
   if (b.innerHTML == 'EDIT') {
@@ -1716,6 +1721,7 @@ function editRestaurantSession(id) {
     sRestaurantName.disabled = false;
     sStartTime.disabled = false;
     sEndTime.disabled = false;
+    sDate.disabled = false;
     b.innerHTML = 'Save';
     b.classList.add('bg-green-400', 'text-[#121212]');
     return;
@@ -1727,7 +1733,9 @@ function editRestaurantSession(id) {
   sRestaurantName.disabled = true;
   sStartTime.disabled = true;
   sEndTime.disabled = true;
+  sDate.disabled = true;
 
+  formattedDate = new Date(sDate.value).toISOString().split('T')[0];
   const data = {
     "post_type": "edit",
     "id": id,
@@ -1735,7 +1743,8 @@ function editRestaurantSession(id) {
     "adult_Price": parseFloat(sAdultPrice.innerHTML),
     "kids_Price": parseFloat(sKidsPrice.innerHTML),
     "session_startTime": sStartTime.value,
-    "session_endTime": sEndTime.value
+    "session_endTime": sEndTime.value,
+    "session_date" : formattedDate
   };
 
   console.log(data);
