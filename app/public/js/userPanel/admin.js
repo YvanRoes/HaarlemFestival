@@ -1519,8 +1519,11 @@ function insertRestaurant() {
   data.append("restaurant_phoneNumber", rPhonenumber.value);
   data.append("restaurant_star", rStars.value);
   data.append("restaurant_capacity", rCapacity.value);
-  data.append("picture1", picture.files[0]);
-  data.append("picture2", picture.files[1]);
+  
+  for (let i = 0; i < picture.files.length; i++) {
+    const file = picture.files[i];
+    data.append(`picture${i + 1}`, file);
+  }
 
   console.log(data);
 

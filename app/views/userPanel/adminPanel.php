@@ -178,7 +178,7 @@
                         <input type="text" id="restaurantAddress" placeholder="address" required />
                         <input type="text" id="restaurantPhoneNumber" placeholder="phone number" required />
                         <input type="number" min="0" id="restaurantCapacity" placeholder="Capacity" required />
-                        <input id="restaurantFile" type="file" multiple="multiple" title=" " class="col-span-2" />
+                        <input id="restaurantFile" type="file" multiple="multiple" class="col-span-2" />
                         <textarea class="col-span-5" id="restaurantDescription" placeholder="description" required></textarea>
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurant()">Add restaurants</button>
                     </div>

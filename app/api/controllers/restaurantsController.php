@@ -40,14 +40,15 @@ class RestaurantsController
             $img = '/img/';
             $fileExtensionsAllowed = ['jpeg', 'jpg', 'png'];
             $imagePath = "";
-
+            
             for ($i = 0; $i < 9; $i++) {
-              $files = $_FILES['picture'. $i + 1];
+              $files = $_FILES['picture' . ($i + 1)];
               $fileTmpName = $files['tmp_name'];
               $uploadPath = $curr . $img . basename($files['name']);
               move_uploaded_file($fileTmpName[$i], $uploadPath);
-              $imagePath .= $img . basename($files['name'] . ":"); 
+              $imagePath .= $img . basename($files['name']) . ":";
             }
+
             $r->__set_imagePath($imagePath);
             var_dump($r);
             $this->restaurantService->insert_Restaurant($r);
