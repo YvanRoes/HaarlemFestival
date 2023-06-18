@@ -58,40 +58,10 @@ class TicketRepository extends Repository
         $stmt->bindParam(':user_id', $id);
         $stmt->bindParam(':status', $status);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $result = $stmt->fetchAll(PDO::FETCH_CLASS);
         return $result;
     }
-    public function get_QuantityOfTicketsByEventIdAndStatus($id, $status)
-    {
-        $sql = "SELECT COUNT(*) FROM ticket WHERE event_id = :id AND status = :status";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':status', $status);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_NUM);
-        return $result[0];
-    }
-    public function removePendingTicket($ticket_id){
-        $sql = "UPDATE ticket WHERE uuid = :ticket_id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':ticket_id', $ticket_id);
-        $stmt->execute();
-    }
-    public function get_AvailableEventTickets($eventTable){
-        try
-        {
-            $sql = 'select t.uuid, t.status, t.event_id, t.price, t.user_id, t.exp_date from ticket as t join :event AS e where t.event_id = e.id and status=`available`;';
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':event', $eventTable);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_CLASS);
-            return $result;
-        }
-        catch (PDOException $e)
-        {
-            echo $e->getMessage();
-        }
-    }
+
     public function delete_Ticket($id)
     {
         $sql = "DELETE FROM ticket WHERE uuid = :id";
@@ -99,74 +69,24 @@ class TicketRepository extends Repository
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
-    public function get_AvailableEventYummieTickets(){
-        try
-        {
-            $sql = 'select t.uuid, t.status, t.event_id, t.price, t.user_id, t.exp_date from ticket as t join event_yummie AS e where t.event_id = e.id and status="available";';
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_CLASS);
-            return $result;
-        }
-        catch (PDOException $e)
-        {
-            echo $e->getMessage();
-        }
-    }
-    public function get_AvailableEventEdmTickets(){
-        try
-        {
-            $sql = 'select t.uuid, t.status, t.event_id, t.price, t.user_id, t.exp_date from ticket as t join event_edm AS e where t.event_id = e.id and status="available";';
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_CLASS);
-            return $result;
-        }
-        catch (PDOException $e)
-        {
-            echo $e->getMessage();
-        }
-    }
-    public function get_AvailableEventStrollTickets(){
-        try
-        {
-            $sql = 'select t.uuid, t.status, t.event_id, t.price, t.user_id, t.exp_date from ticket as t join event_stroll AS e where t.event_id = e.id and status="available";';
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_CLASS);
-            return $result;
-        }
-        catch (PDOException $e)
-        {
-            echo $e->getMessage();
-        }
-    }
 
-    public function update_Ticket($ticket)
+    public function put_Ticket($ticket)
     {
-        $sql = "UPDATE ticket SET status = :status, price = :price, user_id = :user_id, exp_date = :exp_date WHERE uuid = :id";
+        $sql = "UPDATE ticket SET status = :status, order_id = :order_id WHERE uuid = :id";
         $stmt = $this->conn->prepare($sql);
         $id=$ticket->getId();
         $status=$ticket->getStatus();
-        $user_id=$ticket->getUser();
-        $date=$ticket->getExpDate();
-        if (isset($date)){
-            $exp_date = $date->format('Y-m-d H:i:s');
-        }
-        else{
-            $exp_date = null;
-        }
-        $price = $ticket->getPrice();
+        $order_id=$ticket->getOrderId();
+        $stmt->bindParam(':order_id', $order_id);
         $stmt->bindParam(':status', $status);
-        $stmt->bindParam(':user_id', $user_id);
-        $stmt->bindParam(':exp_date', $exp_date);
+
         $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':price', $price);
+
         $stmt->execute();
     }
     public function post_Ticket($ticket)
     {
-        $sql = "INSERT INTO ticket(uuid,status,event_id,price,user_id,exp_date,order_id,isAllAccess) VALUES (uuid(), 'pending', :event, :price, :user_id, NOW() + INTERVAL 1 DAY ,null,false)";
+        $sql = "INSERT INTO ticket(uuid,status,event_id,price,user_id,exp_date,order_id,isAllAccess) VALUES (uuid(), 'pending', :event, :price, :user_id, NOW() + INTERVAL 1 DAY ,null,:isAllAccess)";
         $stmt = $this->conn->prepare($sql);
         $event=$ticket->getEvent();
         $stmt->bindParam(':event', $event);
@@ -174,6 +94,16 @@ class TicketRepository extends Repository
         $stmt->bindParam(':user_id', $user_id);
         $price = $ticket->getPrice();
         $stmt->bindParam(':price', $price);
+
+        $isAllAccess = $ticket->getIsAllAccess();
+        if ($isAllAccess) {
+            $isAllAccess = 1;
+        }
+        else if (!$isAllAccess) {
+            $isAllAccess = 0;
+        }
+
+        $stmt->bindParam(':isAllAccess', $isAllAccess);
         $stmt->execute();
     }
     public function getAllEventsStroll(){

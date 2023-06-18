@@ -16,15 +16,17 @@ class TicketService
         return $repo->get_TicketsByEventId($id);
     }
 
+    
+
     public function get_TicketById($id): Ticket
     {
         $repo = new TicketRepository();
         return $repo->get_TicketById($id);
     }
-    public function post_Ticket($event)
+    public function post_Ticket($ticket)
     {
         $repo = new TicketRepository();
-        return $repo->post_Ticket($event);
+        return $repo->post_Ticket($ticket);
     }
     public function getAllEventsStroll(): array
     {
@@ -41,15 +43,16 @@ class TicketService
         $repo = new TicketRepository();
         return $repo->get_TicketsByUserIdAndStatus($id, $status);
     }
-    public function update_Ticket($ticket)
-    {
-        $repo = new TicketRepository();
-        return $repo->update_Ticket($ticket);
-    }
     public function delete_Ticket($id)
     {
         $repo = new TicketRepository();
         return $repo->delete_Ticket($id);
+    }
+
+    public function put_Ticket($ticket)
+    {
+        $repo = new TicketRepository();
+        return $repo->put_Ticket($ticket);
     }
 
 

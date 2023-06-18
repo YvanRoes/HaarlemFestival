@@ -69,6 +69,14 @@ class Ticket implements JsonSerializable
     {
         $this->user_id = $user_id;
     }
+    public function getIsAllAccess(): ?bool
+    {
+        return $this->isAllAccess;
+    }
+    public function setIsAllAccess(?bool $isAllAccess): void
+    {
+        $this->isAllAccess = $isAllAccess;
+    }
     public function jsonSerialize(): mixed
     {
         return [
