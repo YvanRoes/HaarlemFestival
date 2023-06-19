@@ -58,6 +58,7 @@ class ShoppingCartController extends Controller
                 $event = $eventService->get_EventEDMById($_POST['selectedTicket']);
             }
             $ticket->setPrice($event->price);
+            $ticket->setIsAllAccess(false);
             $ticketService->post_Ticket($ticket);
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -100,8 +101,11 @@ class ShoppingCartController extends Controller
     public function checkPendingTickets(){
         $ticketService = new TicketService();
         $tickets = $ticketService->get_TicketsByStatus('pending');
+        
         foreach ($tickets as $ticket) {
-            $ticketService->delete_Ticket($ticket->uuid);
+            if($ticket->exp_date >= new DateTime("now")){
+                $ticketService->delete_Ticket($ticket->uuid);
+            }
         }
     }
 
