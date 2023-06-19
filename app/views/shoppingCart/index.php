@@ -24,7 +24,7 @@ generateHeader('home', 'dark');
                 <thead class="bg-black flex text-white w-full">
                     <tr class="flex w-full mb-4 items-center justify-center">
                         <th class="p-4 w-1/4">Date</th>
-                        <th class="p-4 w-1/4">Language</th>
+                        <th class="p-4 w-1/4">Language, session, restaurant_id</th>
                         <th class="p-4 w-1/4">Price</th>
                         <th class="p-4 w-1/4"></th>
                     </tr>
@@ -36,7 +36,7 @@ generateHeader('home', 'dark');
                            <tr class="border text-indigo-900 border-gray-700 flex items-center w-full mb-4">
                            <td class="p-4 w-1/4">' . $event->date . '<td>
                            <td class="p-4 w-1/4">' . $event->language . '<td>
-                           <td class="p-4 w-1/4">' . $event->price . '<td>
+                           <td class="p-4 w-1/4">€' . $event->price . '<td>
                            <td class="p-4 w-1/4">
                            <form method="post">
                                 <input type="hidden" name="selectedTicket" value="' . $event->id . '">
@@ -53,7 +53,24 @@ generateHeader('home', 'dark');
                            <tr class="border text-indigo-900 border-gray-700 flex items-center w-full mb-4">
                            <td class="p-4 w-1/4">' . $event->get_date() . '<td>
                            <td class="p-4 w-1/4">'  . $event->get_session(). '<td>
-                           <td class="p-4 w-1/4">' . $event->get_price() .'<td>
+                           <td class="p-4 w-1/4">€' . $event->get_price() .'<td>
+                           <td class="p-4 w-1/4">
+                           <form method="post">
+                                <input type="hidden" name="selectedTicket" value="' . $event->get_id() . '">
+                                    <a href="/shoppingCart">
+                                    <button type="submit" value="send" >add ticket</button>
+                                    </a>
+                                </form>
+                            <td>
+                           </tr>';
+                    }
+
+                    foreach ($_SESSION['yummieEvents'] as $event) {
+                        echo '
+                           <tr class="border text-indigo-900 border-gray-700 flex items-center w-full mb-4">
+                           <td class="p-4 w-1/4">' . $event->get_session_startTime(). ' - ' . $event->get_session_endTime() . ' <td>
+                           <td class="p-4 w-1/4">'  . $event->get_restaurant_id() . '<td>
+                           <td class="p-4 w-1/4"> adult: €' . $event->get_adult_price() . '<br> kids: €' . $event->get_kids_price() . '<td>
                            <td class="p-4 w-1/4">
                            <form method="post">
                                 <input type="hidden" name="selectedTicket" value="' . $event->get_id() . '">
@@ -65,6 +82,8 @@ generateHeader('home', 'dark');
                            </tr>';
                     }
                     ?>
+
+                    
                 </tbody>
             </table>
         </div>
@@ -92,7 +111,7 @@ generateHeader('home', 'dark');
                                     <tr class="border text-indigo-900 border-gray-700 flex items-center w-full mb-4">
                                     <td class="p-4 w-1/4">' . $ticket->uuid . '<td>
                                     <td class="p-4 w-1/4">' . $ticket->event_id . '<td>
-                                    <td class="p-4 w-1/4">' . $ticket->price . '<td>
+                                    <td class="p-4 w-1/4">€' . $ticket->price . '<td>
                                     <td class="p-4 w-1/4">
                                     <form method="post">
                                             <input type="hidden" name="removePendingTicket" value="' . $ticket->uuid . '">
