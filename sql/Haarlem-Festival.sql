@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Jun 19, 2023 at 04:22 PM
+-- Generation Time: Jun 19, 2023 at 09:32 PM
 -- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
 -- PHP Version: 8.0.26
 
@@ -559,6 +559,30 @@ CREATE TABLE `personal_program` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reservation`
+--
+
+CREATE TABLE `reservation` (
+  `uuid` varchar(255) NOT NULL,
+  `session_id` int(6) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `adults` int(4) NOT NULL,
+  `kids` int(4) NOT NULL,
+  `comment` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reservation`
+--
+
+INSERT INTO `reservation` (`uuid`, `session_id`, `status`, `adults`, `kids`, `comment`) VALUES
+('118911aa-0ee5-11ee-947d-0242ac140004', 2, 1, 11, 11, 'Gluten Free'),
+('32bb33f8-0ee5-11ee-947d-0242ac140004', 3, 1, 1, 1, 'Allergic seafood'),
+('a34e85ce-0ec7-11ee-947d-0242ac140004', 1, 1, 5, 5, 'No Rice');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `restaurant`
 --
 
@@ -748,6 +772,13 @@ ALTER TABLE `page`
 ALTER TABLE `personal_program`
   ADD KEY `user_id` (`user_id`),
   ADD KEY `event_id` (`event_id`);
+
+--
+-- Indexes for table `reservation`
+--
+ALTER TABLE `reservation`
+  ADD PRIMARY KEY (`uuid`) USING BTREE,
+  ADD KEY `session` (`session_id`) USING BTREE;
 
 --
 -- Indexes for table `restaurant`
