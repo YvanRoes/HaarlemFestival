@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Jun 18, 2023 at 07:08 PM
+-- Generation Time: Jun 19, 2023 at 04:22 PM
 -- Server version: 10.10.2-MariaDB-1:10.10.2+maria~ubu2204
 -- PHP Version: 8.0.26
 
@@ -273,7 +273,8 @@ INSERT INTO `events` (`id`) VALUES
 (151),
 (152),
 (153),
-(154);
+(154),
+(155);
 
 -- --------------------------------------------------------
 
@@ -384,114 +385,115 @@ CREATE TABLE `event_yummie` (
   `kids_Price` double NOT NULL,
   `session_startTime` time(1) NOT NULL,
   `session_endTime` time(1) NOT NULL,
-  `session_date` date DEFAULT NULL
+  `session_date` date DEFAULT NULL,
+  `seatings` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `event_yummie`
 --
 
-INSERT INTO `event_yummie` (`id`, `restaurant_id`, `adult_Price`, `kids_Price`, `session_startTime`, `session_endTime`, `session_date`) VALUES
-(1, 1, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-27'),
-(2, 1, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-27'),
-(3, 1, 45, 22.5, '22:00:00.0', '00:00:00.0', '2023-07-27'),
-(4, 2, 45, 22.5, '18:00:00.0', '19:30:00.0', '2023-07-27'),
-(5, 2, 45, 22.5, '20:00:00.0', '21:30:00.0', '2023-07-27'),
-(6, 2, 45, 22.5, '22:00:00.0', '23:30:00.0', '2023-07-27'),
-(7, 3, 35, 17.5, '17:00:00.0', '18:30:00.0', '2023-07-27'),
-(8, 3, 35, 17.5, '19:00:00.0', '20:30:00.0', '2023-07-27'),
-(9, 3, 35, 17.5, '21:00:00.0', '22:30:00.0', '2023-07-27'),
-(10, 4, 35, 17.5, '17:30:00.0', '19:00:00.0', '2023-07-27'),
-(11, 4, 35, 17.5, '19:30:00.0', '21:00:00.0', '2023-07-27'),
-(12, 4, 35, 17.5, '21:30:00.0', '23:00:00.0', '2023-07-27'),
-(13, 5, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-27'),
-(14, 5, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-27'),
-(15, 6, 35, 17.5, '16:30:00.0', '18:00:00.0', '2023-07-27'),
-(16, 6, 35, 17.5, '18:30:00.0', '20:00:00.0', '2023-07-27'),
-(17, 6, 35, 17.5, '20:30:00.0', '22:00:00.0', '2023-07-27'),
-(18, 7, 45, 22.5, '17:30:00.0', '19:00:00.0', '2023-07-27'),
-(19, 7, 45, 22.5, '19:30:00.0', '21:00:00.0', '2023-07-27'),
-(20, 7, 45, 22.5, '21:30:00.0', '23:00:00.0', '2023-07-27'),
-(75, 1, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-28'),
-(76, 1, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-29'),
-(77, 1, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-30'),
-(78, 1, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-31'),
-(79, 1, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-28'),
-(80, 1, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-29'),
-(81, 1, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-30'),
-(82, 1, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-31'),
-(83, 1, 45, 22.5, '22:00:00.0', '00:00:00.0', '2023-07-28'),
-(84, 1, 45, 22.5, '22:00:00.0', '00:00:00.0', '2023-07-29'),
-(85, 1, 45, 22.5, '22:00:00.0', '00:00:00.0', '2023-07-30'),
-(86, 1, 45, 22.5, '22:00:00.0', '00:00:00.0', '2023-07-31'),
-(87, 2, 45, 22.5, '18:00:00.0', '19:30:00.0', '2023-07-28'),
-(88, 2, 45, 22.5, '18:00:00.0', '19:30:00.0', '2023-07-29'),
-(89, 2, 45, 22.5, '18:00:00.0', '19:30:00.0', '2023-07-30'),
-(90, 2, 45, 22.5, '18:00:00.0', '19:30:00.0', '2023-07-31'),
-(91, 2, 45, 22.5, '20:00:00.0', '21:30:00.0', '2023-07-28'),
-(92, 2, 45, 22.5, '20:00:00.0', '21:30:00.0', '2023-07-29'),
-(93, 2, 45, 22.5, '20:00:00.0', '21:30:00.0', '2023-07-30'),
-(94, 2, 45, 22.5, '20:00:00.0', '21:30:00.0', '2023-07-31'),
-(95, 2, 45, 22.5, '22:00:00.0', '23:30:00.0', '2023-07-28'),
-(96, 2, 45, 22.5, '22:00:00.0', '23:30:00.0', '2023-07-29'),
-(97, 2, 45, 22.5, '22:00:00.0', '23:30:00.0', '2023-07-30'),
-(98, 2, 45, 22.5, '22:00:00.0', '23:30:00.0', '2023-07-31'),
-(99, 3, 35, 17.5, '17:00:00.0', '18:30:00.0', '2023-07-28'),
-(100, 3, 35, 17.5, '17:00:00.0', '18:30:00.0', '2023-07-29'),
-(101, 3, 35, 17.5, '17:00:00.0', '18:30:00.0', '2023-07-30'),
-(102, 3, 35, 17.5, '17:00:00.0', '18:30:00.0', '2023-07-31'),
-(103, 3, 35, 17.5, '19:00:00.0', '20:30:00.0', '2023-07-28'),
-(104, 3, 35, 17.5, '19:00:00.0', '20:30:00.0', '2023-07-29'),
-(105, 3, 35, 17.5, '19:00:00.0', '20:30:00.0', '2023-07-30'),
-(106, 3, 35, 17.5, '19:00:00.0', '20:30:00.0', '2023-07-31'),
-(107, 3, 35, 17.5, '21:00:00.0', '22:30:00.0', '2023-07-28'),
-(108, 3, 35, 17.5, '21:00:00.0', '22:30:00.0', '2023-07-29'),
-(109, 3, 35, 17.5, '21:00:00.0', '22:30:00.0', '2023-07-30'),
-(110, 3, 35, 17.5, '21:00:00.0', '22:30:00.0', '2023-07-31'),
-(111, 4, 35, 17.5, '17:30:00.0', '19:00:00.0', '2023-07-28'),
-(112, 4, 35, 17.5, '17:30:00.0', '19:00:00.0', '2023-07-29'),
-(113, 4, 35, 17.5, '17:30:00.0', '19:00:00.0', '2023-07-30'),
-(114, 4, 35, 17.5, '17:30:00.0', '19:00:00.0', '2023-07-31'),
-(115, 4, 35, 17.5, '19:30:00.0', '21:00:00.0', '2023-07-28'),
-(116, 4, 35, 17.5, '19:30:00.0', '21:00:00.0', '2023-07-29'),
-(117, 4, 35, 17.5, '19:30:00.0', '21:00:00.0', '2023-07-30'),
-(118, 4, 35, 17.5, '19:30:00.0', '21:00:00.0', '2023-07-31'),
-(119, 4, 35, 17.5, '21:30:00.0', '23:00:00.0', '2023-07-28'),
-(120, 4, 35, 17.5, '21:30:00.0', '23:00:00.0', '2023-07-29'),
-(121, 4, 35, 17.5, '21:30:00.0', '23:00:00.0', '2023-07-30'),
-(122, 4, 35, 17.5, '21:30:00.0', '23:00:00.0', '2023-07-31'),
-(123, 5, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-28'),
-(124, 5, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-29'),
-(125, 5, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-30'),
-(126, 5, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-31'),
-(127, 5, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-28'),
-(128, 5, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-29'),
-(129, 5, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-30'),
-(130, 5, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-31'),
-(131, 6, 35, 17.5, '16:30:00.0', '18:00:00.0', '2023-07-28'),
-(132, 6, 35, 17.5, '16:30:00.0', '18:00:00.0', '2023-07-29'),
-(133, 6, 35, 17.5, '16:30:00.0', '18:00:00.0', '2023-07-30'),
-(134, 6, 35, 17.5, '16:30:00.0', '18:00:00.0', '2023-07-31'),
-(135, 6, 35, 17.5, '18:30:00.0', '20:00:00.0', '2023-07-28'),
-(136, 6, 35, 17.5, '18:30:00.0', '20:00:00.0', '2023-07-29'),
-(137, 6, 35, 17.5, '18:30:00.0', '20:00:00.0', '2023-07-30'),
-(138, 6, 35, 17.5, '18:30:00.0', '20:00:00.0', '2023-07-31'),
-(139, 6, 35, 17.5, '20:30:00.0', '22:00:00.0', '2023-07-28'),
-(140, 6, 35, 17.5, '20:30:00.0', '22:00:00.0', '2023-07-29'),
-(141, 6, 35, 17.5, '20:30:00.0', '22:00:00.0', '2023-07-30'),
-(142, 6, 35, 17.5, '20:30:00.0', '22:00:00.0', '2023-07-31'),
-(143, 7, 45, 22.5, '17:30:00.0', '19:00:00.0', '2023-07-28'),
-(144, 7, 45, 22.5, '17:30:00.0', '19:00:00.0', '2023-07-29'),
-(145, 7, 45, 22.5, '17:30:00.0', '19:00:00.0', '2023-07-30'),
-(146, 7, 45, 22.5, '17:30:00.0', '19:00:00.0', '2023-07-31'),
-(147, 7, 45, 22.5, '19:30:00.0', '21:00:00.0', '2023-07-28'),
-(148, 7, 45, 22.5, '19:30:00.0', '21:00:00.0', '2023-07-29'),
-(149, 7, 45, 22.5, '19:30:00.0', '21:00:00.0', '2023-07-30'),
-(150, 7, 45, 22.5, '19:30:00.0', '21:00:00.0', '2023-07-31'),
-(151, 7, 45, 22.5, '21:30:00.0', '23:00:00.0', '2023-07-28'),
-(152, 7, 45, 22.5, '21:30:00.0', '23:00:00.0', '2023-07-29'),
-(153, 7, 45, 22.5, '21:30:00.0', '23:00:00.0', '2023-07-30'),
-(154, 7, 45, 22.5, '21:30:00.0', '23:00:00.0', '2023-07-31');
+INSERT INTO `event_yummie` (`id`, `restaurant_id`, `adult_Price`, `kids_Price`, `session_startTime`, `session_endTime`, `session_date`, `seatings`) VALUES
+(1, 1, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-27', 52),
+(2, 1, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-27', 52),
+(3, 1, 45, 22.5, '22:00:00.0', '00:00:00.0', '2023-07-27', 52),
+(4, 2, 45, 22.5, '18:00:00.0', '19:30:00.0', '2023-07-27', 40),
+(5, 2, 45, 22.5, '20:00:00.0', '21:30:00.0', '2023-07-27', 40),
+(6, 2, 45, 22.5, '22:00:00.0', '23:30:00.0', '2023-07-27', 40),
+(7, 3, 35, 17.5, '17:00:00.0', '18:30:00.0', '2023-07-27', 36),
+(8, 3, 35, 17.5, '19:00:00.0', '20:30:00.0', '2023-07-27', 36),
+(9, 3, 35, 17.5, '21:00:00.0', '22:30:00.0', '2023-07-27', 36),
+(10, 4, 35, 17.5, '17:30:00.0', '19:00:00.0', '2023-07-27', 48),
+(11, 4, 35, 17.5, '19:30:00.0', '21:00:00.0', '2023-07-27', 48),
+(12, 4, 35, 17.5, '21:30:00.0', '23:00:00.0', '2023-07-27', 48),
+(13, 5, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-27', 60),
+(14, 5, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-27', 60),
+(15, 6, 35, 17.5, '16:30:00.0', '18:00:00.0', '2023-07-27', 100),
+(16, 6, 35, 17.5, '18:30:00.0', '20:00:00.0', '2023-07-27', 100),
+(17, 6, 35, 17.5, '20:30:00.0', '22:00:00.0', '2023-07-27', 100),
+(18, 7, 45, 22.5, '17:30:00.0', '19:00:00.0', '2023-07-27', 45),
+(19, 7, 45, 22.5, '19:30:00.0', '21:00:00.0', '2023-07-27', 45),
+(20, 7, 45, 22.5, '21:30:00.0', '23:00:00.0', '2023-07-27', 45),
+(75, 1, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-28', 52),
+(76, 1, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-29', 52),
+(77, 1, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-30', 52),
+(78, 1, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-31', 52),
+(79, 1, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-28', 52),
+(80, 1, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-29', 52),
+(81, 1, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-30', 52),
+(82, 1, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-31', 52),
+(83, 1, 45, 22.5, '22:00:00.0', '00:00:00.0', '2023-07-28', 52),
+(84, 1, 45, 22.5, '22:00:00.0', '00:00:00.0', '2023-07-29', 52),
+(85, 1, 45, 22.5, '22:00:00.0', '00:00:00.0', '2023-07-30', 52),
+(86, 1, 45, 22.5, '22:00:00.0', '00:00:00.0', '2023-07-31', 52),
+(87, 2, 45, 22.5, '18:00:00.0', '19:30:00.0', '2023-07-28', 40),
+(88, 2, 45, 22.5, '18:00:00.0', '19:30:00.0', '2023-07-29', 40),
+(89, 2, 45, 22.5, '18:00:00.0', '19:30:00.0', '2023-07-30', 40),
+(90, 2, 45, 22.5, '18:00:00.0', '19:30:00.0', '2023-07-31', 40),
+(91, 2, 45, 22.5, '20:00:00.0', '21:30:00.0', '2023-07-28', 40),
+(92, 2, 45, 22.5, '20:00:00.0', '21:30:00.0', '2023-07-29', 40),
+(93, 2, 45, 22.5, '20:00:00.0', '21:30:00.0', '2023-07-30', 40),
+(94, 2, 45, 22.5, '20:00:00.0', '21:30:00.0', '2023-07-31', 40),
+(95, 2, 45, 22.5, '22:00:00.0', '23:30:00.0', '2023-07-28', 40),
+(96, 2, 45, 22.5, '22:00:00.0', '23:30:00.0', '2023-07-29', 40),
+(97, 2, 45, 22.5, '22:00:00.0', '23:30:00.0', '2023-07-30', 40),
+(98, 2, 45, 22.5, '22:00:00.0', '23:30:00.0', '2023-07-31', 40),
+(99, 3, 35, 17.5, '17:00:00.0', '18:30:00.0', '2023-07-28', 36),
+(100, 3, 35, 17.5, '17:00:00.0', '18:30:00.0', '2023-07-29', 36),
+(101, 3, 35, 17.5, '17:00:00.0', '18:30:00.0', '2023-07-30', 36),
+(102, 3, 35, 17.5, '17:00:00.0', '18:30:00.0', '2023-07-31', 36),
+(103, 3, 35, 17.5, '19:00:00.0', '20:30:00.0', '2023-07-28', 36),
+(104, 3, 35, 17.5, '19:00:00.0', '20:30:00.0', '2023-07-29', 36),
+(105, 3, 35, 17.5, '19:00:00.0', '20:30:00.0', '2023-07-30', 36),
+(106, 3, 35, 17.5, '19:00:00.0', '20:30:00.0', '2023-07-31', 36),
+(107, 3, 35, 17.5, '21:00:00.0', '22:30:00.0', '2023-07-28', 36),
+(108, 3, 35, 17.5, '21:00:00.0', '22:30:00.0', '2023-07-29', 36),
+(109, 3, 35, 17.5, '21:00:00.0', '22:30:00.0', '2023-07-30', 36),
+(110, 3, 35, 17.5, '21:00:00.0', '22:30:00.0', '2023-07-31', 36),
+(111, 4, 35, 17.5, '17:30:00.0', '19:00:00.0', '2023-07-28', 48),
+(112, 4, 35, 17.5, '17:30:00.0', '19:00:00.0', '2023-07-29', 48),
+(113, 4, 35, 17.5, '17:30:00.0', '19:00:00.0', '2023-07-30', 48),
+(114, 4, 35, 17.5, '17:30:00.0', '19:00:00.0', '2023-07-31', 48),
+(115, 4, 35, 17.5, '19:30:00.0', '21:00:00.0', '2023-07-28', 48),
+(116, 4, 35, 17.5, '19:30:00.0', '21:00:00.0', '2023-07-29', 48),
+(117, 4, 35, 17.5, '19:30:00.0', '21:00:00.0', '2023-07-30', 48),
+(118, 4, 35, 17.5, '19:30:00.0', '21:00:00.0', '2023-07-31', 48),
+(119, 4, 35, 17.5, '21:30:00.0', '23:00:00.0', '2023-07-28', 48),
+(120, 4, 35, 17.5, '21:30:00.0', '23:00:00.0', '2023-07-29', 48),
+(121, 4, 35, 17.5, '21:30:00.0', '23:00:00.0', '2023-07-30', 48),
+(122, 4, 35, 17.5, '21:30:00.0', '23:00:00.0', '2023-07-31', 48),
+(123, 5, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-28', 60),
+(124, 5, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-29', 60),
+(125, 5, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-30', 60),
+(126, 5, 45, 22.5, '17:00:00.0', '19:00:00.0', '2023-07-31', 60),
+(127, 5, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-28', 60),
+(128, 5, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-29', 60),
+(129, 5, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-30', 60),
+(130, 5, 45, 22.5, '19:30:00.0', '21:30:00.0', '2023-07-31', 60),
+(131, 6, 35, 17.5, '16:30:00.0', '18:00:00.0', '2023-07-28', 100),
+(132, 6, 35, 17.5, '16:30:00.0', '18:00:00.0', '2023-07-29', 100),
+(133, 6, 35, 17.5, '16:30:00.0', '18:00:00.0', '2023-07-30', 100),
+(134, 6, 35, 17.5, '16:30:00.0', '18:00:00.0', '2023-07-31', 100),
+(135, 6, 35, 17.5, '18:30:00.0', '20:00:00.0', '2023-07-28', 100),
+(136, 6, 35, 17.5, '18:30:00.0', '20:00:00.0', '2023-07-29', 100),
+(137, 6, 35, 17.5, '18:30:00.0', '20:00:00.0', '2023-07-30', 100),
+(138, 6, 35, 17.5, '18:30:00.0', '20:00:00.0', '2023-07-31', 100),
+(139, 6, 35, 17.5, '20:30:00.0', '22:00:00.0', '2023-07-28', 100),
+(140, 6, 35, 17.5, '20:30:00.0', '22:00:00.0', '2023-07-29', 100),
+(141, 6, 35, 17.5, '20:30:00.0', '22:00:00.0', '2023-07-30', 100),
+(142, 6, 35, 17.5, '20:30:00.0', '22:00:00.0', '2023-07-31', 100),
+(143, 7, 45, 22.5, '17:30:00.0', '19:00:00.0', '2023-07-28', 45),
+(144, 7, 45, 22.5, '17:30:00.0', '19:00:00.0', '2023-07-29', 45),
+(145, 7, 45, 22.5, '17:30:00.0', '19:00:00.0', '2023-07-30', 45),
+(146, 7, 45, 22.5, '17:30:00.0', '19:00:00.0', '2023-07-31', 45),
+(147, 7, 45, 22.5, '19:30:00.0', '21:00:00.0', '2023-07-28', 45),
+(148, 7, 45, 22.5, '19:30:00.0', '21:00:00.0', '2023-07-29', 45),
+(149, 7, 45, 22.5, '19:30:00.0', '21:00:00.0', '2023-07-30', 45),
+(150, 7, 45, 22.5, '19:30:00.0', '21:00:00.0', '2023-07-31', 45),
+(151, 7, 45, 22.5, '21:30:00.0', '23:00:00.0', '2023-07-28', 45),
+(152, 7, 45, 22.5, '21:30:00.0', '23:00:00.0', '2023-07-29', 45),
+(153, 7, 45, 22.5, '21:30:00.0', '23:00:00.0', '2023-07-30', 45),
+(154, 7, 45, 22.5, '21:30:00.0', '23:00:00.0', '2023-07-31', 45);
 
 -- --------------------------------------------------------
 
@@ -569,7 +571,6 @@ CREATE TABLE `restaurant` (
   `description` text DEFAULT NULL,
   `address` varchar(1000) NOT NULL,
   `phone_number` varchar(20) NOT NULL,
-  `capacity` int(11) NOT NULL,
   `imagePath` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -577,14 +578,14 @@ CREATE TABLE `restaurant` (
 -- Dumping data for table `restaurant`
 --
 
-INSERT INTO `restaurant` (`id`, `name`, `category`, `star`, `michelinStar`, `description`, `address`, `phone_number`, `capacity`, `imagePath`) VALUES
-(1, 'Ratatouille', 'French, Seafood, Eurpean', 4.7, 1, 'Ratatouille is one of Haarlem’s only Michelin starred restaurant. Located in the city centre, and owned by a talented chef Jozua Jaring, the restaurant specialises in creating delicious French dishes using fresh, local ingredients. The menu features a wide variety of classic and modern takes on French favourites Offering indoor and outdoor seating, Ratatouille appeals to a broad range of tastes and is sure to please a wide variety of diners.', 'Spaarne 96, 2011 CL Haarlem', '+31 23 542 7270', 52, '/img/4.7Rating.png:/img/ratatouilleImg1.png:/img/ratatouilleImg2.png:/img/ratatouilleImg3.png:\r\n/img/detailRatatouilleImg1.png:\r\n/img/detailRatatouilleImg2.png:\r\n/img/detailRatatouilleImg3.png:\r\n/img/detailRatatouilleImg4.png:\r\n/img/detailRatatouilleImg5.png:'),
-(2, 'Mr&Mrs', 'Dutch, Seafood, European', 4.7, 0, 'Mr&Mrs is nice little restaurant. Located in Haarlem, and owned by a lovely couple, the restaurant specialises in creating delicious Dutch dishes using fresh, local ingredients. The menu features a wide variety of classic and modern takes on Dutch favourites Offering indoor and outdoor seating, Mr&Mrs appeals to a broad range of tastes and is sure to please a wide variety of diners.', 'Lange Veerstraat 4, 2011 DB Haarlem', '+31 23 531 5935', 40, '/img/4.7Rating.png:/img/mr&mrsImg1.png:/img/mr&mrsImg2.png:/img/mr&mrsImg3.png:/img/mr&mrsImg3.png:/img/mr&mrsImg2.png:/img/mr&mrsImg4.png:/img/mr&mrsImg6.png:/img/mr&mrsImg5.png'),
-(3, 'Specktakel', 'European, International, Asian', 4.5, 0, 'Specktakel is a unique World Restaurant centrally located in the heart of Haarlem. With a special covered courtyard and a terrace with a view of the historic Vleeshal and the centuries-old Bavo church. In the world kitchen, true works of art are created where every sense is stimulated.\r\n\r\nSpecktakel is all about the experience, an experience that we create together, each in his or her own role. The world wines are selected with care, so that the wine is in harmony with the aromas and spices of the dish.\r\nThe colours, aromas and flavors create a wonderful interplay that can be talked about…', 'Klokhuisplein 9, 2011 HK Haarlem', '+31 023 512 3910', 60, '/img/4.5Rating.png:/img/specktakelImg1.png:/img/specktakelImg2.png:/img/specktakelImg3.png:/img/specktakelImg3.png:/img/specktakelImg4.png:/img/specktakelImg2.png:/img/specktakelImg1.png:/img/specktakelImg5.png:'),
-(4, 'Toujours', 'Dutch, Seafood, European', 4.4, 0, 'The wine is ready, the beer tap is running at full speed again and the cocktails are already being shaken. Sit comfortably on our terrace with a rug and patio heaters. And all that in combination with delicious dishes that we have on the menu. Let us spoil you with our appetizers & finger food. And if you want to go ALL OUT, then one of our signature dishes is perfect for you!', 'Oude Groenmarkt 10-12, 2011 HL Haarlem', '+31 023 532 1699', 48, '/img/4.4Rating.png:/img/toujoursImg1.png:/img/toujoursImg2.png:/img/toujoursImg3.png:/img/toujoursImg3.png:/img/toujoursImg2.png:/img/toujoursImg1.png:/img/toujoursImg4.png:/img/toujoursImg5.png:'),
-(5, 'ML', 'Dutch, Seafood, European', 4.1, 1, 'ML has been housing, in the beautiful, monumental building at Klokhuisplein since 2018. A place where you can eat, drink, meet and sleep.Restaurant ML is located in the courtyard of the historic printer Johan Enschedé and in the old style room of the former home of the Enschedé family. The decor is sleek and modern and includes a fine backdrop for the culinary sensations presented by chef Mark Gratama and his kitchen team. In 2021, restaurant ML is once again awarded with a Michelin star!', 'Klokhuisplein 9, 2011 HK Haarlem', '+31 023 512 3910', 60, '/img/4.1Rating.png:/img/mlImg1.png:/img/mlImg2.png:/img/mlImg3.png:\r\n/img/mlImg4.png:/img/mlImg2.png:\r\n/img/mlImg3.png:/img/mlImg1.png:\r\n/img/mlImg5.png:'),
-(6, 'Grand Cafe Brinkmann', 'Modern, Dutch, European', 4.1, 0, 'Brinkmann is a well-known grand café that has been located on the Grote Markt in Haarlem since 1881. In the thirties of the twentieth century, the business had grown into a large complex of entertainment venues. At the end of the seventies it made way for the Brinkmannpassage. Brinkmann has continued in a smaller form as a grand café. Come and have a taste of History.', 'Grote Markt 13, 2011 RC Haarlem', '+31 023 532 3111', 100, '/img/4.4Rating.png:/img/grandcafebrinkmannImg1.png:\r\n/img/grandcafebrinkmannImg2.png:\r\n/img/grandcafebrinkmannImg3.png:\r\n/img/grandcafebrinkmannImg3.png:\r\n/img/grandcafebrinkmannImg2.png:\r\n/img/grandcafebrinkmannImg1.png:\r\n/img/grandcafebrinkmannImg4.png:\r\n/img/grandcafebrinkmannImg5.png:'),
-(7, 'Fris', 'Dutch, French, European', 4.1, 1, 'Fris is One of the michelin starred restaurants and offer you class and great food. Original textures and product combinations ensure tasty flavors and a pleasant mouthfeel. And with a wines round off the story nicely. A unique experience and totally recommended.', 'Twijnderslaan 7, 2012 BG Haarlem', '+31 023 531 0717', 45, '/img/4.1Rating.png:/img/frisImg1.png:/img/frisImg2.png:/img/frisImg3.png:\r\n/img/frisImg5.png:/img/frisImg2.png:/img/frisImg3.png:/img/frisImg1.png:/img/frisImg6.png:');
+INSERT INTO `restaurant` (`id`, `name`, `category`, `star`, `michelinStar`, `description`, `address`, `phone_number`, `imagePath`) VALUES
+(1, 'Ratatouille', 'French, Seafood, Eurpean', 4.7, 1, 'Ratatouille is one of Haarlem’s only Michelin starred restaurant. Located in the city centre, and owned by a talented chef Jozua Jaring, the restaurant specialises in creating delicious French dishes using fresh, local ingredients. The menu features a wide variety of classic and modern takes on French favourites Offering indoor and outdoor seating, Ratatouille appeals to a broad range of tastes and is sure to please a wide variety of diners.', 'Spaarne 96, 2011 CL Haarlem', '+31 23 542 7271', '/img/4.7Rating.png:/img/ratatouilleImg1.png:/img/ratatouilleImg2.png:/img/ratatouilleImg3.png:\r\n/img/detailRatatouilleImg1.png:\r\n/img/detailRatatouilleImg2.png:\r\n/img/detailRatatouilleImg3.png:\r\n/img/detailRatatouilleImg4.png:\r\n/img/detailRatatouilleImg5.png:'),
+(2, 'Mr&Mrs', 'Dutch, Seafood, European', 4.7, 0, 'Mr&Mrs is nice little restaurant. Located in Haarlem, and owned by a lovely couple, the restaurant specialises in creating delicious Dutch dishes using fresh, local ingredients. The menu features a wide variety of classic and modern takes on Dutch favourites Offering indoor and outdoor seating, Mr&Mrs appeals to a broad range of tastes and is sure to please a wide variety of diners.', 'Lange Veerstraat 4, 2011 DB Haarlem', '+31 23 531 5935', '/img/4.7Rating.png:/img/mr&mrsImg1.png:/img/mr&mrsImg2.png:/img/mr&mrsImg3.png:/img/mr&mrsImg3.png:/img/mr&mrsImg2.png:/img/mr&mrsImg4.png:/img/mr&mrsImg6.png:/img/mr&mrsImg5.png'),
+(3, 'Specktakel', 'European, International, Asian', 4.5, 0, 'Specktakel is a unique World Restaurant centrally located in the heart of Haarlem. With a special covered courtyard and a terrace with a view of the historic Vleeshal and the centuries-old Bavo church. In the world kitchen, true works of art are created where every sense is stimulated.\r\n\r\nSpecktakel is all about the experience, an experience that we create together, each in his or her own role. The world wines are selected with care, so that the wine is in harmony with the aromas and spices of the dish.\r\nThe colours, aromas and flavors create a wonderful interplay that can be talked about…', 'Klokhuisplein 9, 2011 HK Haarlem', '+31 023 512 3910', '/img/4.5Rating.png:/img/specktakelImg1.png:/img/specktakelImg2.png:/img/specktakelImg3.png:/img/specktakelImg3.png:/img/specktakelImg4.png:/img/specktakelImg2.png:/img/specktakelImg1.png:/img/specktakelImg5.png:'),
+(4, 'Toujours', 'Dutch, Seafood, European', 4.4, 0, 'The wine is ready, the beer tap is running at full speed again and the cocktails are already being shaken. Sit comfortably on our terrace with a rug and patio heaters. And all that in combination with delicious dishes that we have on the menu. Let us spoil you with our appetizers & finger food. And if you want to go ALL OUT, then one of our signature dishes is perfect for you!', 'Oude Groenmarkt 10-12, 2011 HL Haarlem', '+31 023 532 1699', '/img/4.4Rating.png:/img/toujoursImg1.png:/img/toujoursImg2.png:/img/toujoursImg3.png:/img/toujoursImg3.png:/img/toujoursImg2.png:/img/toujoursImg1.png:/img/toujoursImg4.png:/img/toujoursImg5.png:'),
+(5, 'ML', 'Dutch, Seafood, European', 4.1, 1, 'ML has been housing, in the beautiful, monumental building at Klokhuisplein since 2018. A place where you can eat, drink, meet and sleep.Restaurant ML is located in the courtyard of the historic printer Johan Enschedé and in the old style room of the former home of the Enschedé family. The decor is sleek and modern and includes a fine backdrop for the culinary sensations presented by chef Mark Gratama and his kitchen team. In 2021, restaurant ML is once again awarded with a Michelin star!', 'Klokhuisplein 9, 2011 HK Haarlem', '+31 023 512 3910', '/img/4.1Rating.png:/img/mlImg1.png:/img/mlImg2.png:/img/mlImg3.png:\r\n/img/mlImg4.png:/img/mlImg2.png:\r\n/img/mlImg3.png:/img/mlImg1.png:\r\n/img/mlImg5.png:'),
+(6, 'Grand Cafe Brinkmann', 'Modern, Dutch, European', 4.1, 0, 'Brinkmann is a well-known grand café that has been located on the Grote Markt in Haarlem since 1881. In the thirties of the twentieth century, the business had grown into a large complex of entertainment venues. At the end of the seventies it made way for the Brinkmannpassage. Brinkmann has continued in a smaller form as a grand café. Come and have a taste of History.', 'Grote Markt 13, 2011 RC Haarlem', '+31 023 532 3111', '/img/4.4Rating.png:/img/grandcafebrinkmannImg1.png:\r\n/img/grandcafebrinkmannImg2.png:\r\n/img/grandcafebrinkmannImg3.png:\r\n/img/grandcafebrinkmannImg3.png:\r\n/img/grandcafebrinkmannImg2.png:\r\n/img/grandcafebrinkmannImg1.png:\r\n/img/grandcafebrinkmannImg4.png:\r\n/img/grandcafebrinkmannImg5.png:'),
+(7, 'Fris', 'Dutch, French, European', 4.1, 1, 'Fris is One of the michelin starred restaurants and offer you class and great food. Original textures and product combinations ensure tasty flavors and a pleasant mouthfeel. And with a wines round off the story nicely. A unique experience and totally recommended.', 'Twijnderslaan 7, 2012 BG Haarlem', '+31 023 531 0717', '/img/4.1Rating.png:/img/frisImg1.png:/img/frisImg2.png:/img/frisImg3.png:\r\n/img/frisImg5.png:/img/frisImg2.png:/img/frisImg3.png:/img/frisImg1.png:/img/frisImg6.png:');
 
 -- --------------------------------------------------------
 
@@ -649,7 +650,6 @@ CREATE TABLE `ticket` (
 --
 
 INSERT INTO `ticket` (`uuid`, `status`, `event_id`, `price`, `user_id`, `exp_date`, `order_id`, `isAllAccess`) VALUES
-('2276179e-0be2-11ee-998f-0242ac120004', 'pending', 22, 75, 1, '2023-06-17 01:07:16', NULL, 0),
 ('472df72e-0be8-11ee-b26a-0242ac120003', 'available', 24, 60, 1, '2023-06-17 01:51:14', NULL, 0),
 ('482eac0c-0be8-11ee-b26a-0242ac120003', 'available', 27, 60, 1, '2023-06-17 01:51:16', NULL, 0);
 
@@ -806,7 +806,7 @@ ALTER TABLE `dance_location`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT for table `event_edm`
@@ -818,7 +818,7 @@ ALTER TABLE `event_edm`
 -- AUTO_INCREMENT for table `event_yummie`
 --
 ALTER TABLE `event_yummie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT for table `page`
@@ -830,7 +830,7 @@ ALTER TABLE `page`
 -- AUTO_INCREMENT for table `restaurant`
 --
 ALTER TABLE `restaurant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `stroll_location`

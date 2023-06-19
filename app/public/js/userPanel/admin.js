@@ -1297,14 +1297,13 @@ function createRestaurantList(objects) {
         objects[i].michelinStar,
         objects[i].description,
         objects[i].address,
-        objects[i].phone_number,
-        objects[i].capacity
+        objects[i].phone_number
       );
     }
   });
 }
 
-function createRestaurantContainer(element, id, name, category, star, michelinStar, description, address, phoneNumber, capacity) {
+function createRestaurantContainer(element, id, name, category, star, michelinStar, description, address, phoneNumber) {
   container = document.createElement('span');
   container.classList.add(
     'bg-white',
@@ -1347,7 +1346,7 @@ function createRestaurantContainer(element, id, name, category, star, michelinSt
 
   descriptionSpan = document.createElement('textarea');
   descriptionSpan.innerHTML = description;
-  descriptionSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex', 'col-span-4');
+  descriptionSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex', 'col-span-5');
   descriptionSpan.setAttribute('id', 'rDescriptionSpan' + id);
   descriptionSpan.setAttribute('disabled', 'true');
 
@@ -1360,11 +1359,6 @@ function createRestaurantContainer(element, id, name, category, star, michelinSt
   phoneNumberSpan.innerHTML = phoneNumber;
   phoneNumberSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
   phoneNumberSpan.setAttribute('id', 'rPhoneNumberSpan' + id);
-
-  capacitySpan = document.createElement('span');
-  capacitySpan.innerHTML = capacity;
-  capacitySpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
-  capacitySpan.setAttribute('id', 'rCapacitySpan' + id);
 
   buttonRemove = document.createElement('button');
   buttonRemove.innerHTML = 'REMOVE';
@@ -1413,7 +1407,6 @@ function createRestaurantContainer(element, id, name, category, star, michelinSt
   container.appendChild(michelinStarSpan);
   container.appendChild(addressSpan);
   container.appendChild(phoneNumberSpan);
-  container.appendChild(capacitySpan);
   container.appendChild(descriptionSpan);
   container.appendChild(buttonRemove);
   container.appendChild(buttonEdit);
@@ -1428,7 +1421,6 @@ function editRestaurant(id) {
   rDescriptionSpan = document.getElementById('rDescriptionSpan' + id);
   rAddressSpan = document.getElementById('rAddressSpan' + id);
   rPhonenumberSpan = document.getElementById('rPhoneNumberSpan' + id);
-  rCapacitySpan = document.getElementById('rCapacitySpan' + id);
 
   b = document.getElementById('restaurantB' + id);
 
@@ -1440,7 +1432,6 @@ function editRestaurant(id) {
     setEditableType(rDescriptionSpan);
     setEditableType(rAddressSpan);
     setEditableType(rPhonenumberSpan);
-    setEditableType(rCapacitySpan);
     b.innerHTML = 'Save';
     b.classList.add('bg-green-400', 'text-[#121212]');
     return;
@@ -1454,18 +1445,6 @@ function editRestaurant(id) {
   setEditableType(rDescriptionSpan);
   setEditableType(rAddressSpan);
   setEditableType(rPhonenumberSpan);
-  setEditableType(rCapacitySpan);
-
-  //check for NaN
-  // if (isNaN(rCapacitySpan.value)) {
-  //   alert('capacity is not a number');
-  //   return;
-  // }
-
-  // if (isNaN(rStarSpan.value) || rStarSpan.value > 5 || rStarSpan.value < 0) {
-  //   alert('star is not a number');
-  //   return;
-  // }
 
   const data = new FormData();
   data.append("post_type", "edit");
@@ -1477,7 +1456,6 @@ function editRestaurant(id) {
   data.append("restaurant_description", rDescriptionSpan.value);
   data.append("restaurant_address", rAddressSpan.innerHTML);
   data.append("restaurant_phoneNumber", rPhonenumberSpan.innerHTML);
-  data.append("restaurant_capacity", rCapacitySpan.innerHTML);
 
   console.log(data);
 
@@ -1506,7 +1484,6 @@ function insertRestaurant() {
   rDescription = document.getElementById('restaurantDescription');
   rAddress = document.getElementById('restaurantAddress');
   rPhonenumber = document.getElementById('restaurantPhoneNumber');
-  rCapacity = document.getElementById('restaurantCapacity');
   picture = document.getElementById('restaurantFile');
 
   const data = new FormData();
@@ -1518,7 +1495,6 @@ function insertRestaurant() {
   data.append("restaurant_address", rAddress.value);
   data.append("restaurant_phoneNumber", rPhonenumber.value);
   data.append("restaurant_star", rStars.value);
-  data.append("restaurant_capacity", rCapacity.value);
   
   for (let i = 0; i < picture.files.length; i++) {
     const file = picture.files[i];
@@ -1573,13 +1549,14 @@ async function createRestaurantSessionList(objects) {
       objects[i].kids_Price,
       objects[i].session_startTime,
       objects[i].session_endTime,
-      objects[i].session_date
+      objects[i].session_date,
+      objects[i].seatings
     );
   }
 
 }
 
-async function createRestaurantSessionContainer(element, id, restaurant_id, adult_price, kids_price, start_time, end_time, date) {
+async function createRestaurantSessionContainer(element, id, restaurant_id, adult_price, kids_price, start_time, end_time, date, seatings) {
   container = document.createElement('div');
   container.classList.add(
     'bg-white',
@@ -1634,6 +1611,11 @@ async function createRestaurantSessionContainer(element, id, restaurant_id, adul
   // dateSpan.classList.add('col-span-2');
   dateSpan.value = date;
 
+  seatingsSpan = document.createElement('span');
+  seatingsSpan.innerHTML = seatings;
+  seatingsSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  seatingsSpan.setAttribute('id', 'sessionRestaurantSeatings' + id);
+
   //remove session
   buttonRemove = document.createElement('button');
   buttonRemove.innerHTML = 'REMOVE';
@@ -1676,6 +1658,7 @@ async function createRestaurantSessionContainer(element, id, restaurant_id, adul
   container.appendChild(startTimeSpan);
   container.appendChild(endTimeSpan);
   container.appendChild(dateSpan);
+  container.appendChild(seatingsSpan);
   container.appendChild(buttonRemove);
   container.appendChild(buttonEdit);
 
@@ -1690,6 +1673,7 @@ function insertRestaurantSession() {
   startTime = document.getElementById('sessionRestaurantStartTime');
   endTime = document.getElementById('sessionRestaurantEndTime');
   date = document.getElementById('sessionRestaurantDate');
+  seatings = document.getElementById('sessionRestaurantSeatings');
  
   formattedDate = new Date(date.value).toISOString().split('T')[0];
   const data = {
@@ -1699,7 +1683,8 @@ function insertRestaurantSession() {
     "kids_Price": parseFloat(kidsPrice.value),
     "session_startTime": startTime.value,
     "session_endTime": endTime.value,
-    "session_date" : formattedDate
+    "session_date" : formattedDate,
+    "seatings": parseInt(seatings.value)
   };
 
   console.log(data);
@@ -1716,15 +1701,17 @@ function editRestaurantSession(id) {
   sStartTime = document.getElementById('sessionStartTime' + id);
   sEndTime = document.getElementById('sessionEndTime' + id);
   sDate = document.getElementById('sessionDate' + id);
+  sSeatings = document.getElementById('sessionRestaurantSeatings' + id);
   b = document.getElementById('restaurantSessionB' + id);
 
   if (b.innerHTML == 'EDIT') {
     setEditableType(sAdultPrice);
     setEditableType(sKidsPrice);
-    sRestaurantName.disabled = false;
-    sStartTime.disabled = false;
-    sEndTime.disabled = false;
-    sDate.disabled = false;
+    setEditableType(sRestaurantName)
+    setEditableType(sStartTime)
+    setEditableType(sEndTime)
+    setEditableType(sDate)
+    setEditableType(sSeatings)
     b.innerHTML = 'Save';
     b.classList.add('bg-green-400', 'text-[#121212]');
     return;
@@ -1733,10 +1720,11 @@ function editRestaurantSession(id) {
   b.classList.remove('bg-green-400', 'text-[#121212]');
   setEditableType(sAdultPrice);
   setEditableType(sKidsPrice);
-  sRestaurantName.disabled = true;
-  sStartTime.disabled = true;
-  sEndTime.disabled = true;
-  sDate.disabled = true;
+  setEditableType(sRestaurantName)
+  setEditableType(sStartTime)
+  setEditableType(sEndTime)
+  setEditableType(sDate)
+  setEditableType(sSeatings)
 
   formattedDate = new Date(sDate.value).toISOString().split('T')[0];
   const data = {
@@ -1747,7 +1735,8 @@ function editRestaurantSession(id) {
     "kids_Price": parseFloat(sKidsPrice.innerHTML),
     "session_startTime": sStartTime.value,
     "session_endTime": sEndTime.value,
-    "session_date" : formattedDate
+    "session_date" : formattedDate,
+    "seatings": parseInt(sSeatings.innerHTML)
   };
 
   console.log(data);

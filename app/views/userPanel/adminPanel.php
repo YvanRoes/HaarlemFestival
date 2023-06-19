@@ -177,7 +177,6 @@
                         </select>
                         <input type="text" id="restaurantAddress" placeholder="address" required />
                         <input type="text" id="restaurantPhoneNumber" placeholder="phone number" required />
-                        <input type="number" min="0" id="restaurantCapacity" placeholder="Capacity" required />
                         <input id="restaurantFile" type="file" multiple="multiple" class="col-span-2" />
                         <textarea class="col-span-5" id="restaurantDescription" placeholder="description" required></textarea>
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurant()">Add restaurants</button>
@@ -198,6 +197,7 @@
                         <input type="time" id="sessionRestaurantStartTime" placeholder="Start time" required />
                         <input type="time" id="sessionRestaurantEndTime" placeholder="End time" required />
                         <input type="date" id="sessionRestaurantDate" placeholder="Date" required />    
+                        <input type="number" min="0" id="sessionRestaurantSeatings" placeholder="Seatings" required></input>
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurantSession()">Add sessions</button>
                     </div>
                     <div class="flex flex-col gap-4 pb-5" id="contentRestaurantSessionWrapper">

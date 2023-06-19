@@ -44,12 +44,13 @@ class RestaurantSessionsController
           $session->__set_session_startTime(htmlspecialchars($object->session_startTime));
           $session->__set_session_endTime(htmlspecialchars($object->session_endTime));
           $session->__set_session_date(htmlspecialchars($object->session_date));
+          $session->__set_seatings(htmlspecialchars($object->seatings));
           
           var_dump($session);
           $this->restaurantSessionService->insert_RestaurantSession($session);
           break;
         case 'edit':
-          $this->restaurantSessionService->edit_RestaurantSession(htmlspecialchars($object->id), htmlspecialchars($object->restaurant_id), htmlspecialchars($object->adult_Price), htmlspecialchars($object->kids_Price), htmlspecialchars($object->session_startTime), htmlspecialchars($object->session_endTime), htmlspecialchars($object->session_date));
+          $this->restaurantSessionService->edit_RestaurantSession(htmlspecialchars($object->id), htmlspecialchars($object->restaurant_id), htmlspecialchars($object->adult_Price), htmlspecialchars($object->kids_Price), htmlspecialchars($object->session_startTime), htmlspecialchars($object->session_endTime), htmlspecialchars($object->session_date), htmlspecialchars($object->seatings));
           break;
         case 'delete':
           $this->restaurantSessionService->delete_RestaurantSession($object->id);
