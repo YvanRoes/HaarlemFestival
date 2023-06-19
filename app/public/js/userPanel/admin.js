@@ -1262,6 +1262,9 @@ function loadYummieData(type) {
       break;
     case 'restaurantSessions':
       loadRestaurantSessions();
+      break;
+    case 'reservations':
+      loadReservations();
     default:
       break;
   }
@@ -1758,7 +1761,242 @@ function removeRestaurantSession(id) {
   }
 }
 
+async function loadReservations() {
+  reservationsPane = document.getElementById('restaurantReservationSubPane');
+  reservationsPane.classList.remove('hidden');
 
+  sessionsPane = document.getElementById('restaurantSessionSubPane');
+  restaurantPane = document.getElementById('restaurantSubPane');
+  if (!sessionsPane.classList.contains('hidden') || !restaurantPane.classList.contains('hidden')) {
+    sessionsPane.classList.add('hidden');
+    restaurantPane.classList.add('hidden');
+  }
+
+  objects = await getData('/reservations');
+  createRestaurantReservationList(objects);
+}
+
+async function createRestaurantReservationList(objects) {
+  parentElement = document.getElementById('contentRestaurantReservationWrapper');
+  title = document.getElementById('YummieTitle');
+  title.innerHTML = 'Restaurant Reservations';
+  parentElement.innerHTML = '';
+
+ 
+
+  for (let i = 0; i < objects.length; i++) {
+    const session = await getRestaurantSessionById(objects[i].session_id);
+
+    const restaurantName = await getRestaurantNameById(session.restaurant_id);
+    createRestaurantReservationContainer(
+      parentElement,
+      objects[i].uuid,
+      objects[i].session_id,
+      objects[i].status,
+      objects[i].adults,
+      objects[i].kids,
+      objects[i].comment,
+      session,
+      restaurantName
+    );
+  }
+}
+
+function createRestaurantReservationContainer(element, uuid, session_id, status, adults, kids, comment, session, restaurantName) {
+  container = document.createElement('div');
+  container.classList.add(
+    'bg-white',
+    'p-2',
+    'rounded-md',
+    'grid',
+    'lg:grid-cols-5',
+    'lg:grid-rows-2',
+    'md:grid-cols-1',
+    'text-left',
+    'relative',
+    'gap-4',
+    'text-center'
+  );
+
+  var statusText = (status) ? 'Active' : 'Deactivated';
+
+  restaurantLabel = document.createElement('label');
+  restaurantLabel.classList.add('h-full', 'items-center', 'justify-center', 'flex', 'text-xl');
+  restaurantLabel.innerHTML = 'Restaurant Name';
+
+  sessionDateLabel = document.createElement('label');
+  sessionDateLabel.classList.add('h-full', 'items-center', 'justify-center', 'flex', 'text-xl');
+  sessionDateLabel.innerHTML = 'Session Date';
+
+  sessionStartTimeLabel = document.createElement('label');
+  sessionStartTimeLabel.classList.add('h-full', 'items-center', 'justify-center', 'flex', 'text-xl');
+  sessionStartTimeLabel.innerHTML = 'Session Start Time';
+
+  sessionEndTimeLabel = document.createElement('label');
+  sessionEndTimeLabel.classList.add('h-full', 'items-center', 'justify-center', 'flex', 'text-xl');
+  sessionEndTimeLabel.innerHTML = 'Session End Time';
+
+  statusLabel = document.createElement('label');
+  statusLabel.classList.add('h-full', 'items-center', 'justify-center', 'flex', 'text-xl');
+  statusLabel.innerHTML = 'Status';
+
+  adultsLabel = document.createElement('label');
+  adultsLabel.classList.add('h-full', 'items-center', 'justify-center', 'flex', 'text-xl');
+  adultsLabel.innerHTML = 'Adults';
+
+  kidsLabel = document.createElement('label');
+  kidsLabel.classList.add('h-full', 'items-center', 'justify-center', 'flex', 'text-xl');
+  kidsLabel.innerHTML = 'Kids';
+
+  commentLabel = document.createElement('label');
+  commentLabel.classList.add('h-full', 'items-center', 'justify-center', 'flex', 'col-span-3','text-xl');
+  commentLabel.innerHTML = 'Comment';
+
+  restaurantNameSpan = document.createElement('span');
+  restaurantNameSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  restaurantNameSpan.innerHTML = restaurantName;
+  restaurantNameSpan.setAttribute('id', 'reservationRestaurantName' + uuid);
+
+  sessionDate = document.createElement('span');
+  sessionDate.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  sessionDate.innerHTML = session.session_date;
+  sessionDate.setAttribute('id', 'reservationSessionDate' + uuid);
+
+  sessionStartTime = document.createElement('span');
+  sessionStartTime.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  sessionStartTime.innerHTML = session.session_startTime;
+  sessionStartTime.setAttribute('id', 'reservationSessionStartTime' + uuid);
+
+  sessionEndTime = document.createElement('span');
+  sessionEndTime.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  sessionEndTime.innerHTML = session.session_endTime;
+  sessionEndTime.setAttribute('id', 'reservationSessionEndTime' + uuid);
+
+  statusSpan = document.createElement('span');
+  statusSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  statusSpan.innerHTML = statusText;
+  statusSpan.setAttribute('id', 'reservationStatus' + uuid);
+
+  adultsSpan = document.createElement('span');
+  adultsSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  adultsSpan.innerHTML = adults;
+  adultsSpan.setAttribute('id', 'reservationAdults' + uuid);
+
+  kidsSpan = document.createElement('span');
+  kidsSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex');
+  kidsSpan.innerHTML = kids;
+  kidsSpan.setAttribute('id', 'reservationKids' + uuid);
+
+  commentSpan = document.createElement('textarea');
+  commentSpan.classList.add('h-full', 'items-center', 'justify-center', 'flex', 'col-span-3');
+  commentSpan.innerHTML = comment;
+  commentSpan.disabled = true;
+  commentSpan.setAttribute('id', 'reservationComment' + uuid);
+
+  button = document.createElement('button');
+  button.innerHTML = (status) ? 'DEACTIVATE' : 'ACTIVATE';
+  if (status) {
+    button.classList.add('bg-red-500');
+  }
+  else {
+    button.classList.add('bg-green-500');
+  }
+  button.classList.add(
+    'm-2',
+    'py-2',
+    'px-4',
+    'rounded-md',
+    'text-[#F7F7FB]',
+    'w-fit',
+    'h-fit',
+    'h-[50px]'
+  );
+  button.addEventListener('click', () => {
+  
+    if (status) {
+      button.innerHTML = 'ACTIVATE';
+      button.classList.remove('active');   
+      button.classList.remove('bg-red-500');
+      button.classList.add('bg-green-500');
+      deactivateRestaurantReservation(uuid, session_id, status, adults, kids, comment);
+    } else {
+      button.innerHTML = 'DEACTIVATE';
+      button.classList.add('active');
+      button.classList.remove('bg-green-500');
+      button.classList.add('bg-red-500');
+      activateRestaurantReservation(uuid, session_id, status, adults, kids, comment);
+    }
+  });
+
+  container.appendChild(restaurantLabel);
+  container.appendChild(sessionDateLabel);
+  container.appendChild(sessionStartTimeLabel);
+  container.appendChild(sessionEndTimeLabel);
+  container.appendChild(statusLabel);
+  container.appendChild(restaurantNameSpan);
+  container.appendChild(sessionDate);
+  container.appendChild(sessionStartTime);
+  container.appendChild(sessionEndTime);
+  container.appendChild(statusSpan);
+  container.appendChild(adultsLabel);
+  container.appendChild(kidsLabel);
+  container.appendChild(commentLabel);
+  container.appendChild(adultsSpan);
+  container.appendChild(kidsSpan);
+  container.appendChild(commentSpan);
+  container.appendChild(button);
+
+  element.appendChild(container);
+}
+
+function deactivateRestaurantReservation(uuid, session_id, status, adults, kids, comment) {
+  const data = {
+    post_type: 'edit',
+    uuid: uuid,
+    session_id: session_id,
+    status: 0,
+    adults: adults,
+    kids: kids,
+    comment: comment,
+  }
+  if (confirm('are you sure you want to deactivate this reservation?')) {
+    postData('http://localhost/api/reservations', data);
+    delay(1000).then(loadReservations());
+  }
+}
+
+function activateRestaurantReservation(uuid, session_id, status, adults, kids, comment) {
+  const data = {
+    post_type: 'edit',
+    uuid: uuid,
+    session_id: session_id,
+    status: 1,
+    adults: adults,
+    kids: kids,
+    comment: comment,
+  }
+
+  postData('http://localhost/api/reservations', data);
+  delay(1000).then(loadReservations());
+}
+
+async function getRestaurantSessionById(id) {
+  const restaurantSessions = await getData('/restaurantSessions');
+  for (let i = 0; i < restaurantSessions.length; i++) {
+    if (restaurantSessions[i].id == id) {
+      return restaurantSessions[i];
+    }
+  }
+}
+
+async function getRestaurantNameById(id) {
+  restaurants = await getData('/restaurants')
+  for (let i = 0; i < restaurants.length; i++) {
+    if (restaurants[i].id == id) {
+      return restaurants[i].name;
+    }
+  }
+}
 
 //YUMMIE FUNCTIONALTIES END//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -1834,5 +2072,5 @@ function insertCustomPageTab(name, title) {
 //loadUserData();
 //loadEDMData('artists');
 // loadYummieData('restaurants');
-loadYummieData('restaurantSessions');
+loadYummieData('reservations');
 loadCustomPageTabs();

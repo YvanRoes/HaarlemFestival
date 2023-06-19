@@ -77,6 +77,9 @@
                     <li>
                         <button onclick="loadYummieData(`restaurantSessions`)" class="block px-4 py-2 dark:hover:text-[#121212]">sessions</button>
                     </li>
+                    <li>
+                        <button onclick="loadYummieData(`reservations`)" class="block px-4 py-2 dark:hover:text-[#121212]">reservations</button>
+                    </li>
                 </ul>
             </ul>
 
@@ -203,6 +206,10 @@
                     <div class="flex flex-col gap-4 pb-5" id="contentRestaurantSessionWrapper">
                     </div>
                 </div>
+                <div id="restaurantReservationSubPane" class="hidden">  
+                    <div class="flex flex-col gap-4 pb-5" id="contentRestaurantReservationWrapper">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -212,5 +219,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 
 </body>
+
+<style>
+    label {
+        font-size: 18px;
+        font-weight: medium;
+    }
+</style>
 
 </html>

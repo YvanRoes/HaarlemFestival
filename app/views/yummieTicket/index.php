@@ -40,9 +40,16 @@
                 <select id="sessionSelect" required></select>
             </div>
 
-            <div id="seatingsContainer" class="w-[50vw] mt-10 mb-10" hidden>
-                <h2 class="text-[24px] font-bold mt-[50px]">Number of people</h2>
-                <input type="number" id="numberOfPeople" min="1" required>
+            <div class="grid grid-cols-2">
+                <div id="adultContainer" class="w-[50vw] mt-10 mb-10" hidden>
+                    <h2 class="text-[24px] font-bold mt-[50px]">Number of Adults</h2>
+                    <input type="number" id="numberOfPeople" min="1" required>
+                </div>
+
+                <div id="childrenContainer" class="w-[50vw] mt-10 mb-10" hidden>
+                    <h2 class="text-[24px] font-bold mt-[50px]">Number of Kids</h2>
+                    <input type="number" id="numberOfPeople" min="1" required>
+                </div>
             </div>
         </div>
 
@@ -82,13 +89,15 @@
     const selectedDate = dates.value;
         if (selectedDate) {
             sessionContainer.removeAttribute('hidden');
-            seatingsContainer.removeAttribute('hidden');
+            adultContainer.removeAttribute('hidden');
+            childrenContainer.removeAttribute('hidden');
             commentContainer.removeAttribute('hidden');
             clearSelect(sessionSelect);
             loadSessions();
         } else {
             sessionContainer.setAttribute('hidden', 'true');
-            seatingsContainer.setAttribute('hidden', 'true');
+            adultContainer.setAttribute('hidden', 'true');
+            childrenContainer.setAttribute('hidden', 'true');
             commentContainer.setAttribute('hidden', 'true');
         }
     });
