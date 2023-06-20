@@ -27,9 +27,9 @@ class CartController
 
 
       $cartObjects = [];
-      for($i = 0; $i < sizeof($result); $i++){
+      for ($i = 0; $i < sizeof($result); $i++) {
 
-       
+
         $resultObject = new CartObject(
           $result[$i]->getId(),
           $result[$i]->getStatus(),
@@ -40,31 +40,32 @@ class CartController
         );
 
 
-
-
-        $resultObject->session = $this->getSession($result[$i]->getEvent_id());
+        $resultObject = $this->getSession($resultObject, $result[$i]);
         array_push($cartObjects, $resultObject);
       }
-
-      
       echo json_encode($cartObjects);
       return;
     }
   }
 
+  function getSession($returnObject, $result)
+  {
+    $s = $this->eventService->get_EventYummieById($result->getEvent_id());
+    if ($s != null) {
+      $returnObject->session_type = "yummie";
+      goto r;
+    }
+    $s = $this->eventService->get_EventEDMById($result->getEvent_id());
+    if ($s != null) {
+      $returnObject->session_type = "edm";
+      goto r;
+    }
+    $s = $this->eventService->get_EventStrollById($result->getEvent_id());
+    $returnObject->session_type = "stroll";
 
-  function getSession($id){
-    $session = $this->eventService->get_EventYummieById($id);
-    if($session != null)
-      return $session;
-    $session = $this->eventService->get_EventEDMById($id);
-    if ($session != null)
-      return $session;
-    $session = $this->eventService->get_EventStrollById($id);
-    return $session;
+
+    r:
+    $returnObject->session = $s;
+    return $returnObject;
   }
-
-
-
-  
 }
