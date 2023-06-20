@@ -15,12 +15,12 @@ class TicketRepository extends Repository
 
     public function Get_AllTicketsByEventIdAndStatus($id, $status): array
     {
-        $sql = "SELECT * FROM ticket WHERE event_id = :id AND status = :status";
+        $sql = "SELECT uuid as id, status, event_id, price, user_id, order_id, isAllAccess From ticket WHERE user_id = :user_id, status = :status";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':status', $status);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $result = $stmt->fetchAll(PDO::FETCH_CLASS, 'Ticket');
         return $result;
     }
     public function get_TicketsByEventId($id): array
@@ -53,12 +53,14 @@ class TicketRepository extends Repository
     }
     public function get_TicketsByUserIdAndStatus($id, $status)
     {
-        $sql = "SELECT * FROM ticket WHERE user_id = :user_id AND status = :status";
+        $sql = "SELECT uuid, status, event_id, price, user_id, order_id, isAllAccess From ticket WHERE user_id = :user_id AND status = :status";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':user_id', $id);
         $stmt->bindParam(':status', $status);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Ticket');
+        $result = $stmt->fetchAll();
+        
         return $result;
     }
 
@@ -88,14 +90,14 @@ class TicketRepository extends Repository
     {
         $sql = "INSERT INTO ticket(uuid,status,event_id,price,user_id,exp_date,order_id,isAllAccess) VALUES (uuid(), 'pending', :event, :price, :user_id, NOW() + INTERVAL 1 DAY ,null,:isAllAccess)";
         $stmt = $this->conn->prepare($sql);
-        $event=$ticket->getEvent();
+        $event=$ticket->getEvent_Id();
         $stmt->bindParam(':event', $event);
-        $user_id=$ticket->getUser();
+        $user_id=$ticket->get_UserId();
         $stmt->bindParam(':user_id', $user_id);
         $price = $ticket->getPrice();
         $stmt->bindParam(':price', $price);
 
-        $isAllAccess = $ticket->getIsAllAccess();
+        $isAllAccess = $ticket->get_IsAllAccess();
         if ($isAllAccess) {
             $isAllAccess = 1;
         }
