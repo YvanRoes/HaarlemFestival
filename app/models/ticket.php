@@ -3,22 +3,21 @@ use Ramsey\Uuid\Uuid;
 require_once __DIR__ . '/../models/event2.php';
 class Ticket implements JsonSerializable
 {
-    private ?string $id = null;
+    private ?string $uuid = null;
     private ?string $status = null;
     private ?float $price = null;
-    private ?int $event = null;
+    private ?int $event_id = null;
     private ?int $user_id = null;
-    private ?DateTime $exp_date = null;
     private ?int $order_id = null;
     private ?bool $isAllAccess = null;
 
     public function getId(): ?string
     {
-        return $this->id;
+        return $this->uuid;
     }
     public function setId(?string $id): void
     {
-        $this->id = $id;
+        $this->uuid = $id;
     }
     public function getStatus(): ?string
     {
@@ -37,21 +36,13 @@ class Ticket implements JsonSerializable
     {
         $this->price = $price;
     }
-    public function getEvent(): ?int
+    public function getEvent_id(): ?int
     {
-        return $this->event;
+        return $this->event_id;
     }
-    public function setEvent(?int $event): void
+    public function setEvent_id(?int $event): void
     {
-        $this->event = $event;
-    }
-    public function getExpDate(): ?DateTime
-    {
-        return $this->exp_date;
-    }
-    public function setExpDate(?DateTime $exp_date): void
-    {
-        $this->exp_date = $exp_date;
+        $this->event_id = $event;
     }
     public function getOrderId(): ?int
     {
@@ -61,33 +52,32 @@ class Ticket implements JsonSerializable
     {
         $this->order_id = $order_id;
     }
-    public function getUser(): ?int
+    public function get_UserId(): ?int
     {
         return $this->user_id;
     }
-    public function setUser(?int $user_id): void
+    public function set_UserId(?int $user_id): void
     {
         $this->user_id = $user_id;
     }
-    public function getIsAllAccess(): ?bool
+    public function get_IsAllAccess(): ?bool
     {
         return $this->isAllAccess;
     }
-    public function setIsAllAccess(?bool $isAllAccess): void
+    public function set_IsAllAccess(?bool $isAllAccess): void
     {
         $this->isAllAccess = $isAllAccess;
     }
     public function jsonSerialize(): mixed
     {
         return [
-            'id' => $this->id,
+            'id' => $this->uuid,
             'status' => $this->status,
             'price' => $this->price,
-            'event' => $this->event,
-            'exp_date' => $this->exp_date,
+            'event' => $this->event_id,
             'order_id' => $this->order_id,
             'user_id' => $this->user_id,
+            'isAllAccess' => $this->isAllAccess
         ];
     }
 }
-?>
