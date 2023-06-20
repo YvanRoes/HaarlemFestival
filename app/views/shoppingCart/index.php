@@ -115,6 +115,7 @@ generateHeader('home', 'dark');
                                     <td class="p-4 w-1/4">
                                     <form method="post">
                                             <input type="hidden" name="removePendingTicket" value="' . $ticket->getId() . '">
+                                            <input type="hidden" id="userId" value="' . $_SESSION['USER_ID'] . '"></input>
                                                 <a href="/shoppingCart">
                                                 <button type="submit" value="send" >remove ticket</button></a>
                                     </form>
@@ -133,13 +134,13 @@ generateHeader('home', 'dark');
             <div class="absolute-bottom w-full flex justify-center items-center">
                 <a href="/shoppingCart" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">Shopping
                     cart</a>
-                    <p><?php if (isset($_SESSION['pendingTickets'])) {
-                            $total = 0;
-                            foreach ($_SESSION['pendingTickets'] as $ticket) {
-                                $total += $ticket->getPrice();
-                                
-                            }
-                        } echo $total; ?></p>
+                <p><?php if (isset($_SESSION['pendingTickets'])) {
+                        $total = 0;
+                        foreach ($_SESSION['pendingTickets'] as $ticket) {
+                            $total += $ticket->getPrice();
+                        }
+                    }
+                    echo $total; ?></p>
             </div>
 
         </div>
@@ -147,10 +148,64 @@ generateHeader('home', 'dark');
 
 
 <script>
-    async function getData() {
-        const response = await fetch('http://localhost/api/cart?id=' + 4);
-        const data = await response.json();
-        console.log(data);
+    async function getShoppingCartItems(id) {
+        const res = await fetch('http://localhost/api/cart?id=' + id);
+        const data = await res.json();
+        return data;
     }
-    getData();
+
+
+    async function loadCart() {
+        items = await getShoppingCartItems(getId());
+
+        console.log(items);
+        ticketWrapper = document.getElementById('tickets');
+        for (let i = 0; i < items.length; i++) {
+            switch (items[i].session_type) {
+                case "yummie":
+                    generateYummieCartObject(items[i], ticketWrapper);
+                    break;
+                case "edm":
+                    generateEDMCartObject(items[i], ticketWrapper);
+                    break;
+                case "stroll":
+                    generateStrollCartObject(items[i], ticketWrapper);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
+
+
+    function generateYummieCartObject(item, parent) {
+        console.log(item);
+        title = document.createElement("h1");
+        title.innerHTML = item.id;
+        title.classList.add('bg-gray-200');
+        parent.appendChild(title);
+    }
+
+    function generateEDMCartObject(item, parent) {
+        title = document.createElement("h1");
+        title.innerHTML = item.id;
+        title.classList.add('bg-indigo-500');
+        parent.appendChild(title);
+    }
+
+    function generateStrollCartObject(item, parent) {
+        title = document.createElement("h1");
+        title.innerHTML = item.id;
+        title.classList.add('bg-gray-800');
+        parent.appendChild(title);
+    }
+
+    function getId() {
+        id = document.getElementById("userId").value;
+        return id;
+    }
+
+    loadCart();
 </script>
