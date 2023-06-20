@@ -1,4 +1,8 @@
 <?php
+    use Ramsey\Uuid\Uuid;
+
+    $uuid = Uuid::uuid4();
+    $uuid = $uuid->toString();
     $user_id = $_SESSION['USER_ID'];
 ?>
 <style>
@@ -62,7 +66,7 @@
         </div>  
 
         <div class="flex justify-center">
-            <button id="proceedButton" class="m-2 py-2 px-8 rounded-md text-[#F7F7FB] bg-slate-800 w-fit mt-10">Make Reservation</button>
+            <button id="proceedButton" class="m-2 py-2 px-8 rounded-md text-[#F7F7FB] text-[18px] bg-slate-800 w-fit mt-10">Make Reservation</button>
         </div>
     </div>
 </body>
@@ -205,10 +209,13 @@
     }
 
     function createReservation() {
+        var uuid = <?php echo json_encode($uuid); ?>;
+
         getSelectedSession()
         .then((selectedSession) => {
             const reservation = {
                 post_type: 'insert',
+                uuid: uuid,
                 session_id: selectedSession.id,
                 status: 1,
                 adults: parseInt(adultsInput.value),
@@ -239,7 +246,7 @@
                 body: JSON.stringify(reservation),
             })
             .then((data) => {
-                window.location.href = 'http://localhost/yummieTicket/overview';
+                window.location.href = 'http://localhost/yummieTicket/overview?id=' + uuid;
             })
         })
         .catch((error) => {

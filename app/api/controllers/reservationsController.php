@@ -37,6 +37,7 @@ class ReservationsController
           break;
         case 'insert':
           $r = new Reservation();
+            $r->__set_uuid(htmlspecialchars($object->uuid));
             $r->__set_session_id(htmlspecialchars($object->session_id));
             $r->__set_status($object->status);
             $r->__set_adults(htmlspecialchars($object->adults));
@@ -46,7 +47,6 @@ class ReservationsController
           $this->reservationService->insert_Reservation($r);
           break;
         default:
-          echo 'sum aint right';
           break;
       }
     }

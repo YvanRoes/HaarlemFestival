@@ -33,4 +33,9 @@ class RestaurantSessionService
   {
     $this->repo->delete_RestaurantSession($id);
   }
+
+  public function get_RestaurantSessionById($id)
+  {
+    return $this->repo->get_RestaurantSessionById($id);
+  }
 }

@@ -18,7 +18,7 @@ class Reservation implements JsonSerializable
         return $this->uuid;
     }
 
-    public function __set_uuid(int $uuid): self
+    public function __set_uuid(string $uuid): self
     {
         $this->uuid = $uuid;
         return $this;

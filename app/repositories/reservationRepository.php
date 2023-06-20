@@ -20,8 +20,8 @@ class ReservationRepository extends Repository{
 
     public function get_ReservationById($uuid){
         try{
-            $stmt = $this->conn->prepare("SELECT uuid, session_id, status, adults, kids, comment FROM reservation WHERE id = :id");
-            $stmt->bindParam(':id', $uuid);
+            $stmt = $this->conn->prepare("SELECT uuid, session_id, status, adults, kids, comment FROM reservation WHERE uuid = :uuid");
+            $stmt->bindParam(':uuid', $uuid);
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Reservation');
@@ -34,7 +34,8 @@ class ReservationRepository extends Repository{
 
     public function insert_Reservation($reservation){
         try{
-            $stmt = $this->conn->prepare("INSERT INTO reservation (uuid, session_id, status, adults, kids, comment) VALUES (uuid(), :session_id, :status, :adults, :kids, :comment)");
+            $stmt = $this->conn->prepare("INSERT INTO reservation (uuid, session_id, status, adults, kids, comment) VALUES (:uuid, :session_id, :status, :adults, :kids, :comment)");
+            $stmt->bindParam(':uuid', $reservation->get_uuid());
             $stmt->bindParam(':session_id', $reservation->get_session_id());
             $stmt->bindParam(':status', $reservation->get_status());
             $stmt->bindParam(':adults', $reservation->get_adults());
