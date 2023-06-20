@@ -34,7 +34,7 @@ generateHeader('home', 'dark');
                     foreach ($_SESSION['strollEvents'] as $event) {
                         echo '
                            <tr class="border text-indigo-900 border-gray-700 flex items-center w-full mb-4">
-                           <td class="p-4 w-1/4">' . $event->date . '<td>
+                           <td class="p-4 w-1/4">Stroll <br>' . $event->date . '<td>
                            <td class="p-4 w-1/4">' . $event->language . '<td>
                            <td class="p-4 w-1/4">€' . $event->price . '<td>
                            <td class="p-4 w-1/4">
@@ -51,9 +51,9 @@ generateHeader('home', 'dark');
                     foreach ($_SESSION['edmEvents'] as $event) {
                         echo '
                            <tr class="border text-indigo-900 border-gray-700 flex items-center w-full mb-4">
-                           <td class="p-4 w-1/4">' . $event->get_date() . '<td>
-                           <td class="p-4 w-1/4">'  . $event->get_session(). '<td>
-                           <td class="p-4 w-1/4">€' . $event->get_price() .'<td>
+                           <td class="p-4 w-1/4">Dance<br>' . $event->get_date() . '<td>
+                           <td class="p-4 w-1/4">'  . $event->get_session() . '<td>
+                           <td class="p-4 w-1/4">€' . $event->get_price() . '<td>
                            <td class="p-4 w-1/4">
                            <form method="post">
                                 <input type="hidden" name="selectedTicket" value="' . $event->get_id() . '">
@@ -68,7 +68,7 @@ generateHeader('home', 'dark');
                     foreach ($_SESSION['yummieEvents'] as $event) {
                         echo '
                            <tr class="border text-indigo-900 border-gray-700 flex items-center w-full mb-4">
-                           <td class="p-4 w-1/4">' . $event->get_session_startTime(). ' - ' . $event->get_session_endTime() . ' <td>
+                           <td class="p-4 w-1/4">Yummie<br>' . $event->get_session_startTime() . ' - ' . $event->get_session_endTime() . ' <td>
                            <td class="p-4 w-1/4">'  . $event->get_restaurant_id() . '<td>
                            <td class="p-4 w-1/4"> adult: €' . $event->get_adult_price() . '<br> kids: €' . $event->get_kids_price() . '<td>
                            <td class="p-4 w-1/4">
@@ -83,7 +83,7 @@ generateHeader('home', 'dark');
                     }
                     ?>
 
-                    
+
                 </tbody>
             </table>
         </div>
@@ -101,7 +101,7 @@ generateHeader('home', 'dark');
                             <th class="p-4 w-1/4"></th>
                         </tr>
                     </thead>
-                    <tbody class="bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full h-[500px]">
+                    <tbody class="bg-grey-light flex flex-col items-center overflow-y-scroll w-full h-[500px]" id="tickets">
                         <?php
 
                         if (isset($_SESSION['pendingTickets'])) {
@@ -109,12 +109,12 @@ generateHeader('home', 'dark');
 
                                 echo '
                                     <tr class="border text-indigo-900 border-gray-700 flex items-center w-full mb-4">
-                                    <td class="p-4 w-1/4">' . $ticket->uuid . '<td>
-                                    <td class="p-4 w-1/4">' . $ticket->event_id . '<td>
-                                    <td class="p-4 w-1/4">€' . $ticket->price . '<td>
+                                    <td class="p-4 w-1/4">' . $ticket->getId() . '<td>
+                                    <td class="p-4 w-1/4">' . $ticket->getEvent_Id() . '<td>
+                                    <td class="p-4 w-1/4">€' . $ticket->getPrice() . '<td>
                                     <td class="p-4 w-1/4">
                                     <form method="post">
-                                            <input type="hidden" name="removePendingTicket" value="' . $ticket->uuid . '">
+                                            <input type="hidden" name="removePendingTicket" value="' . $ticket->getId() . '">
                                                 <a href="/shoppingCart">
                                                 <button type="submit" value="send" >remove ticket</button></a>
                                     </form>
@@ -137,3 +137,13 @@ generateHeader('home', 'dark');
 
         </div>
 </body>
+
+
+<script>
+    async function getData() {
+        const response = await fetch('http://localhost/api/cart?id=' + 4);
+        const data = await response.json();
+        console.log(data);
+    }
+    getData();
+</script>
