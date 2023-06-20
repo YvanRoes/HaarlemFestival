@@ -47,9 +47,9 @@ class ShoppingCartController extends Controller
             $danceService = new DanceSessionService();
             $restaurantService = new RestaurantSessionService();
             $ticket = new Ticket();
-            $ticket->setEvent($_POST['selectedTicket']);
+            $ticket->setEvent_Id($_POST['selectedTicket']);
             $ticket->setStatus('pending');
-            $ticket->setUser($_SESSION['USER_ID']);
+            $ticket->set_UserId($_SESSION['USER_ID']);
             $event= $eventService->get_EventYummieById($_POST['selectedTicket']);
             if ($event == null) {
                 $event = $eventService->get_EventStrollById($_POST['selectedTicket']);
@@ -58,7 +58,7 @@ class ShoppingCartController extends Controller
                 $event = $eventService->get_EventEDMById($_POST['selectedTicket']);
             }
             $ticket->setPrice($event->price);
-            $ticket->setIsAllAccess(false);
+            $ticket->set_IsAllAccess(false);
             $ticketService->post_Ticket($ticket);
         } catch (Exception $e) {
             echo $e->getMessage();
