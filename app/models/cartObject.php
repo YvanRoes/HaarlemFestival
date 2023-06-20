@@ -7,6 +7,7 @@ class cartObject implements JsonSerializable
   public ?string $id = null;
   public ?string $status = null;
   public ?float $price = null;
+  public ?string $session_type = null;
   public $session;
   public ?int $user_id = null;
   public ?int $order_id = null;
@@ -31,6 +32,7 @@ class cartObject implements JsonSerializable
       'id' => $this->id,
       'status' => $this->status,
       'price' => $this->price,
+      'session_type' => $this->session_type,
       'session' => $this->session,
       'order_id' => $this->order_id,
       'user_id' => $this->user_id,
