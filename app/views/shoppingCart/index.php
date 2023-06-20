@@ -133,6 +133,13 @@ generateHeader('home', 'dark');
             <div class="absolute-bottom w-full flex justify-center items-center">
                 <a href="/shoppingCart" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">Shopping
                     cart</a>
+                    <p><?php if (isset($_SESSION['pendingTickets'])) {
+                            $total = 0;
+                            foreach ($_SESSION['pendingTickets'] as $ticket) {
+                                $total += $ticket->getPrice();
+                                
+                            }
+                        } echo $total; ?></p>
             </div>
 
         </div>
