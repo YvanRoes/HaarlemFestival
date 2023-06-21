@@ -66,7 +66,7 @@ class TicketRepository extends Repository
 
     public function delete_Ticket($id)
     {
-        $sql = "DELETE FROM ticket WHERE uuid = :id";
+        $sql = "DELETE FROM `ticket` WHERE `uuid` = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
