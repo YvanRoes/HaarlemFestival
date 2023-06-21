@@ -19,10 +19,19 @@ class YummieTicketController extends Controller{
 
 
     public function index(){
+        if (!isset($_SESSION['USER_ID'])){
+            header('Location: 404');
+            exit();
+        }
         require __DIR__ . '/../views/yummieTicket/index.php';
     }
 
     public function overview(){
+        if (!isset($_SESSION['USER_ID'])){
+            header('Location: 404');
+            exit();
+        }
+
         if (isset($_GET['id'])){
             $reservation = $this->reservationService->get_ReservationById($_GET['id']);
             $session = $this->sessionService->get_RestaurantSessionById($reservation->get_session_id());

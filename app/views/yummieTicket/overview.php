@@ -37,6 +37,7 @@
             <h2><? echo $comment ?></h2>
         </div>
         <div class="flex justify-center">
+            <button id="checkoutButton" class="m-2 py-2 px-8 rounded-md text-[#F7F7FB] bg-slate-800 w-fit mt-10" onclick="reserve()">Make New Reservation</button>
             <button id="checkoutButton" class="m-2 py-2 px-8 rounded-md text-[#F7F7FB] bg-slate-800 w-fit mt-10">Proceed to Checkout</button>
         </div>
     </div>
@@ -45,6 +46,12 @@
 <?php
     include __DIR__ . '/../footer.php';
 ?>
+
+<script>
+    function reserve() {
+        window.location.href = "http://localhost/yummieTicket";
+    }
+</script>
 
 <style>
     h2 {

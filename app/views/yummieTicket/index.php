@@ -50,12 +50,12 @@
             <div class="grid grid-cols-2">
                 <div id="adultContainer" class="w-[50vw] mt-10 mb-10" hidden>
                     <h2 class="text-[24px] font-bold mt-[50px]">Number of Adults</h2>
-                    <input type="number" id="adultsInput" min="1" required>
+                    <input type="number" id="adultsInput" min="0" value="0" required>
                 </div>
 
                 <div id="childrenContainer" class="w-[50vw] mt-10 mb-10" hidden>
                     <h2 class="text-[24px] font-bold mt-[50px]">Number of Kids</h2>
-                    <input type="number" id="kidsInput" min="1" required>
+                    <input type="number" id="kidsInput" min="0" value="0" required>
                 </div>
             </div>
         </div>
