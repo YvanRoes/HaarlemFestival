@@ -199,14 +199,14 @@
                         <input id="sessionRestaurantKidsPrice" type="number" step="0.50" min="0" placeholder="Kids price" required />
                         <input type="time" id="sessionRestaurantStartTime" placeholder="Start time" required />
                         <input type="time" id="sessionRestaurantEndTime" placeholder="End time" required />
-                        <input type="date" id="sessionRestaurantDate" placeholder="Date" required />    
+                        <input type="date" id="sessionRestaurantDate" placeholder="Date" required />
                         <input type="number" min="0" id="sessionRestaurantSeatings" placeholder="Seatings" required></input>
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="insertRestaurantSession()">Add sessions</button>
                     </div>
                     <div class="flex flex-col gap-4 pb-5" id="contentRestaurantSessionWrapper">
                     </div>
                 </div>
-                <div id="restaurantReservationSubPane" class="hidden">  
+                <div id="restaurantReservationSubPane" class="hidden">
                     <div class="flex flex-col gap-4 pb-5" id="contentRestaurantReservationWrapper">
                     </div>
                 </div>
@@ -215,7 +215,10 @@
     </div>
     </div>
 
-    <script src="./js/userPanel/admin.js"></script>
+    <script src="./js/userPanel/user_management.js"></script>
+    <script src="./js/userPanel/yummie_management.js"></script>
+    <script src="./js/userPanel/dance_management.js"></script>
+    <script src="./js/userPanel/general.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 
 </body>
