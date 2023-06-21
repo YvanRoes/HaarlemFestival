@@ -8,7 +8,10 @@ require_once __DIR__ . '/../services/mailService.php';
 require_once __DIR__ . '/../services/eventService.php';
 require_once __DIR__ . '/../services/restaurantSessionService.php';
 require_once __DIR__ . '/../services/danceSessionService.php';
+require_once __DIR__ . '/../services/qrCodeService.php';
+require_once __DIR__ . '/../services/invoiceService.php';
 require_once __DIR__ . '/../models/ticket.php';
+
 
 
 class ShoppingCartController extends Controller
@@ -155,46 +158,13 @@ class ShoppingCartController extends Controller
         $ticketService = new TicketService();
 
         $result = $ticketService->get_TicketsByUserIdAndStatus($uid, "pending");
-        //$this->createQrCodeRequest($result);
+        $qrCodeService = new QrCodeService();
+        $qrCodeService->send_QRCode($result);
+        $invoiceService = new InvoiceService();
+        $invoiceService->send_Invoice($result);
 
         for($i = 0; $i < sizeof($result); $i++){
             $ticketService->checkoutTicket($result[$i]->getId());
         }
-
-        header("Location: http://localhost/redirecturl?orderId=3");
-    }
-
-
-    function createQrCodeRequest($result){
-        //The url you wish to send the POST request to
-        $url = "http://localhost/qr";
-
-        //The data you want to send via POST
-        $fields = [
-            'ticket' => $result[0]->getId(),
-        ];
-
-        print_r($fields);
-
-        //url-ify the data for the POST
-        $fields_string = http_build_query($fields);
-
-        echo $fields_string;
-
-        //open connection
-        $ch = curl_init();
-
-        //set the url, number of POST vars, POST data
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-
-        //So that curl_exec returns the contents of the cURL; rather than echoing it
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        //execute post
-        $result = curl_exec($ch);
-        echo $result;
-        print_r($result);
     }
 }
