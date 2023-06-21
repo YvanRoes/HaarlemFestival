@@ -93,5 +93,15 @@ class RestaurantSessionRepository extends Repository
       echo $e;
     }
   }
+
+  public function updateTicketCountByEventId($id)
+  {
+    try {
+      $stmt = $this->conn->prepare("UPDATE `event_yummie` SET `seatings`=(seatings-1) WHERE id = :id");
+      $stmt->execute(array(':id' => $id));
+    } catch (PDOException $e) {
+      echo $e;
+    }
+  }
   
 }

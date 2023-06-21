@@ -1,5 +1,7 @@
 <?php
+
 use Ramsey\Collection\Tool\ValueToStringTrait;
+
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/shoppingCartService.php';
 require_once __DIR__ . '/../services/userService.php';
@@ -28,7 +30,7 @@ class ShoppingCartController extends Controller
             }
             if (isset($_POST['removePendingTicket'])) {
                 $this->removePendingTicket($_POST['removePendingTicket']);
-            }   
+            }
         }
         $this->getPendingUserTickets();
         $this->setAllAvailableTickets();
@@ -44,7 +46,7 @@ class ShoppingCartController extends Controller
     }
     public function assignTicketToUser()
     { //this method is a mess but hey it workd.
-        try{
+        try {
             $ticketService = new TicketService();
             $eventService = new EventService();
             $danceService = new DanceSessionService();
@@ -53,7 +55,7 @@ class ShoppingCartController extends Controller
             $ticket->setEvent_Id($_POST['selectedTicket']);
             $ticket->setStatus('pending');
             $ticket->set_UserId($_SESSION['USER_ID']);
-            $event= $eventService->get_EventYummieById($_POST['selectedTicket']);
+            $event = $eventService->get_EventYummieById($_POST['selectedTicket']);
             if ($event == null) {
                 $event = $eventService->get_EventStrollById($_POST['selectedTicket']);
             }
@@ -62,7 +64,7 @@ class ShoppingCartController extends Controller
             }
 
             //if exists, its non-yummie event
-            if(property_exists($event, "price")){
+            if (property_exists($event, "price")) {
                 $ticket->setPrice($event->price);
             }
             $ticket->set_IsAllAccess(false);
@@ -79,7 +81,8 @@ class ShoppingCartController extends Controller
         $shoppingCartService = new ShoppingCartService();
         $shoppingCartService->removeTicket($ticket);
     }
-    private function setAllAvailableTickets(){
+    private function setAllAvailableTickets()
+    {
         $ticketService = new TicketService();
         $danceService = new DanceSessionService();
         $restaurantService = new RestaurantSessionService();
@@ -88,8 +91,9 @@ class ShoppingCartController extends Controller
         $_SESSION['yummieEvents'] = $restaurantService->get_AllRestaurantSessions();
         $_SESSION['strollEvents'] = $ticketService->getAllEventsStroll();
     }
-    public function getPendingUserTickets(){
-        try{
+    public function getPendingUserTickets()
+    {
+        try {
             $ticketService = new TicketService();
             $tickets = $ticketService->get_TicketsByUserIdAndStatus($_SESSION['USER_ID'], 'pending');
             $_SESSION['pendingTickets'] = $tickets;
@@ -97,29 +101,25 @@ class ShoppingCartController extends Controller
             echo $e->getMessage();
         }
     }
-    public function removePendingTicket($uuid){// also a mess of a method, sorry.
-        try{
+    public function removePendingTicket($uuid)
+    { // also a mess of a method, sorry.
+        try {
             $ticketService = new TicketService();
             $ticketService->delete_Ticket($uuid);
         } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
-    public function checkPendingTickets(){
+    public function checkPendingTickets()
+    {
         $ticketService = new TicketService();
         $tickets = $ticketService->get_TicketsByStatus('pending');
-        
+
         foreach ($tickets as $ticket) {
-            if($ticket->exp_date >= new DateTime("now")){
+            if ($ticket->exp_date >= new DateTime("now")) {
                 $ticketService->delete_Ticket($ticket->uuid);
             }
         }
-    }
-
-    public function checkout()
-    {
-        $shoppingCartService = new ShoppingCartService();
-        $shoppingCartService->checkout();
     }
 
     public function payment()
@@ -128,32 +128,31 @@ class ShoppingCartController extends Controller
         if (isset($_SESSION['USER_ID'])) {
             try {
 
+                $amount = $_GET["amount"];
                 $payment = $mollie->payments->create([
                     "amount" => [
                         "currency" => "EUR",
-                        "value" => "10.00"
+                        "value" => $amount
                     ],
                     "method" => "creditcard",
-                    "description" => "My first API payment",
-                    "redirectUrl" => "http://localhost/redirecturl?orderId=3",
-                    "webhookUrl"  => "http://localhost/api/webhook",
+                    "description" => "payment",
+                    "redirectUrl" => "https://6ec6-2001-1c00-190f-2500-98e4-6c4c-e24c-ed06.ngrok-free.app/api/webhook",
+                    "webhookUrl"  => "https://6ec6-2001-1c00-190f-2500-98e4-6c4c-e24c-ed06.ngrok-free.app/api/webhook",
                 ]);
 
 
                 header("Location: " . $payment->getCheckoutUrl(), true, 303);
             } catch (Exception $e) {
-                // echo $e->getMessage();
-                $this->createPaymentWithoutMollie();
+                echo $e->getMessage();
+                //$this->createPaymentWithoutMollie();
             }
         } else {
             header("Location: /login");
         }
     }
 
-    function createPaymentWithoutMollie(){
-        
-        $amount = $_GET["amount"];
-        $uid = $_GET["userId"];
+    function createPaymentWithoutMollie()
+    {
 
         $ticketService = new TicketService();
 
@@ -163,7 +162,7 @@ class ShoppingCartController extends Controller
         $invoiceService = new InvoiceService();
         $invoiceService->send_Invoice($result);
 
-        for($i = 0; $i < sizeof($result); $i++){
+        for ($i = 0; $i < sizeof($result); $i++) {
             $ticketService->checkoutTicket($result[$i]->getId());
         }
     }
