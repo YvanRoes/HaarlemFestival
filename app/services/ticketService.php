@@ -55,5 +55,10 @@ class TicketService
         return $repo->put_Ticket($ticket);
     }
 
+    public function checkoutTicket($id){
+        $repo = new TicketRepository();
+        return $repo->checkoutTicket($id);
+    }
+
 
 }

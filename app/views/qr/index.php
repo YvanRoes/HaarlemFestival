@@ -11,6 +11,7 @@ use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $text = $_POST["Ticket"];
+    print_r($text);
 
     $qr_code = QrCode::create($text)
         ->setErrorCorrectionLevel(new ErrorCorrectionLevelHigh); //makes the qr code more resillient
