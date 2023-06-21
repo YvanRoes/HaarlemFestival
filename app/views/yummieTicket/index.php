@@ -246,7 +246,9 @@
                 body: JSON.stringify(reservation),
             })
             .then((data) => {
-                window.location.href = 'http://localhost/yummieTicket/overview?id=' + uuid;
+                setTimeout(() => {
+                    window.location.href = 'http://localhost/yummieTicket/overview?id=' + uuid;
+                }, 1000);
             })
         })
         .catch((error) => {

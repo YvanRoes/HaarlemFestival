@@ -175,35 +175,11 @@ function generatePlanningItem(date, location, artist, tickets, price) {
   priceSpan.classList.add('border', 'br-[1px]');
   priceSpan.innerHTML = '€' + price;
 
-  plusButton = document.createElement('button');
-  plusButton.innerHTML = '+';
-  plusButton.style.color = 'green';
-  // plusButton.addEventListener('click', function () {
-  //   let currentCount = parseInt(countSpan.innerHTML);
-  //   countSpan.innerHTML = currentCount + 1;
-  // });
-
-  countSpan = document.createElement('span');
-  countSpan.innerHTML = '0';
-
-  minusButton = document.createElement('button');
-  minusButton.innerHTML = '-';
-  minusButton.style.color = 'red';
-  // minusButton.addEventListener('click', function () {
-  //   let currentCount = parseInt(countSpan.innerHTML);
-  //   if (currentCount > 0) {
-  //     countSpan.innerHTML = currentCount - 1;
-  //   }
-  // });
-
   wrapper.appendChild(dateSpan);
   wrapper.appendChild(locationSpan);
   wrapper.appendChild(artistSpan);
   wrapper.appendChild(ticketsSpan);
   wrapper.appendChild(priceSpan);
-  wrapper.appendChild(plusButton);
-  wrapper.appendChild(countSpan);
-  wrapper.appendChild(minusButton);
 
   grid.appendChild(wrapper);
 }
