@@ -30,7 +30,7 @@ class TourTicketController extends Controller{
         }
 
         if (isset($_GET['id'])){
-
+            
         }
         require __DIR__ . '/../views/tourTicket/overview.php';
     }

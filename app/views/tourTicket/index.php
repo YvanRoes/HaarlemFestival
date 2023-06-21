@@ -68,12 +68,14 @@
 ?>
 
 <script>
+    addDefaultOption(dates, 'Select a date');
+    addDefaultOption(times, 'Select a time');
+    addDefaultOption(languages, 'Select a language');
+
     loadSelects();
 
     function loadSelects() {
-        addDefaultOption(dates, 'Select a date');
-        addDefaultOption(times, 'Select a time');
-        addDefaultOption(languages, 'Select a language');
+
 
         fetch('http://localhost/api/tourSessions')
         .then(response => response.json())
@@ -171,12 +173,16 @@
         getSelectedSession()
         .then((selectedSession) => {
             for (let i = 0; i < singleInput.value; i++) {
-            createTicket(selectedSession.price);
+                createTicket(selectedSession.price);
             }
             for (let i = 0; i < familyInput.value; i++) {
-            createTicket(selectedSession.family_Price);
+                createTicket(selectedSession.family_Price);
             }
         });
+        
+        setTimeout(function() {
+            window.location.href = `http://localhost/shoppingCart`;
+        }, 1000);
     });
 
     function addDefaultOption(selectElement, text) {

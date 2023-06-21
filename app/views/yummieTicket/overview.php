@@ -38,7 +38,7 @@
         </div>
         <div class="flex justify-center">
             <button id="checkoutButton" class="m-2 py-2 px-8 rounded-md text-[#F7F7FB] bg-slate-800 w-fit mt-10" onclick="reserve()">Make New Reservation</button>
-            <button id="checkoutButton" class="m-2 py-2 px-8 rounded-md text-[#F7F7FB] bg-slate-800 w-fit mt-10">Proceed to Checkout</button>
+            <button id="checkoutButton" class="m-2 py-2 px-8 rounded-md text-[#F7F7FB] bg-slate-800 w-fit mt-10" onclick="checkout()">Go To Shopping Cart</button>
         </div>
     </div>
 </body>
@@ -50,6 +50,10 @@
 <script>
     function reserve() {
         window.location.href = "http://localhost/yummieTicket";
+    }
+
+    function checkout() {
+        window.location.href = "http://localhost/shoppingCart";
     }
 </script>
 

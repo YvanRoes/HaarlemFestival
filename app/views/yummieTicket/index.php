@@ -292,11 +292,9 @@
     }
 
     function clearSelect(selectElement) {
-    while (selectElement.firstChild) {
-        selectElement.removeChild(selectElement.firstChild);
-    }
-
-
+        while (selectElement.firstChild) {
+            selectElement.removeChild(selectElement.firstChild);
+        }
     }
 </script>
 
