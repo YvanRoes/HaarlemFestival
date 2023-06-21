@@ -122,4 +122,14 @@ class TicketRepository extends Repository
             echo $e->getMessage();
         }
     }
+
+
+    public function checkoutTicket($id){
+
+        $sql = "UPDATE `ticket` SET `status`='paid' WHERE uuid = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        
+    }
 }

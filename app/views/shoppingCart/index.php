@@ -38,8 +38,9 @@ echo '<input type="hidden" id="userId" value="' . $_SESSION['USER_ID'] . '"></in
                 </span>
                 <span class="p-auto text-[20px] w-fit">total:<p id="totalCount"></p>
                 </span>
-                <a href="/shoppingCart" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">Shopping
-                    cart</a>
+                <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-6 border-b-4 border-blue-700 hover:border-blue-500 rounded" onclick="checkout()">
+                    Checkout
+                </button>
             </div>
 
         </div>
@@ -256,4 +257,18 @@ echo '<input type="hidden" id="userId" value="' . $_SESSION['USER_ID'] . '"></in
         parent.appendChild(fullWrapper);
     }
     loadCart();
-</script>
+
+
+
+
+
+    function checkout() {
+
+
+        if( totalAmount <= 0){
+            alert("There are currently no items in your shopping cart");
+            return;
+        }
+        location.href = '/shoppingcart/payment?amount=' + totalAmount + '&userId=' + getId();
+    }
+    </script>
