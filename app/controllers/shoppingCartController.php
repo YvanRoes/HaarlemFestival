@@ -57,7 +57,11 @@ class ShoppingCartController extends Controller
             if ($event == null) {
                 $event = $eventService->get_EventEDMById($_POST['selectedTicket']);
             }
-            $ticket->setPrice($event->price);
+
+            //if exists, its non-yummie event
+            if(property_exists($event, "price")){
+                $ticket->setPrice($event->price);
+            }
             $ticket->set_IsAllAccess(false);
             $ticketService->post_Ticket($ticket);
         } catch (Exception $e) {

@@ -14,6 +14,9 @@
 <?php
 require_once __DIR__ . '/../header.php';
 generateHeader('home', 'dark');
+
+
+echo '<input type="hidden" id="userId" value="' . $_SESSION['USER_ID'] . '"></input>';
 ?>
 
 <body>
@@ -64,23 +67,6 @@ generateHeader('home', 'dark');
                             <td>
                            </tr>';
                     }
-
-                    foreach ($_SESSION['yummieEvents'] as $event) {
-                        echo '
-                           <tr class="border text-indigo-900 border-gray-700 flex items-center w-full mb-4">
-                           <td class="p-4 w-1/4">Yummie<br>' . $event->get_session_startTime() . ' - ' . $event->get_session_endTime() . ' <td>
-                           <td class="p-4 w-1/4">'  . $event->get_restaurant_id() . '<td>
-                           <td class="p-4 w-1/4"> adult: €' . $event->get_adult_price() . '<br> kids: €' . $event->get_kids_price() . '<td>
-                           <td class="p-4 w-1/4">
-                           <form method="post">
-                                <input type="hidden" name="selectedTicket" value="' . $event->get_id() . '">
-                                    <a href="/shoppingCart">
-                                    <button type="submit" value="send" >add ticket</button>
-                                    </a>
-                                </form>
-                            <td>
-                           </tr>';
-                    }
                     ?>
 
 
@@ -88,44 +74,12 @@ generateHeader('home', 'dark');
             </table>
         </div>
 
-        <div class="w-1/2 h-10% flex flex-col justify-center items-center">
+        <div class=" w-[900px] h-10% flex flex-col justify-center items-center">
             <p class="ticket">
             <h1 class="text-4xl">Your shopping cart</h1>
-            <div class="overflow-y">
-                <table class="text-left w-[600px]">
-                    <thead class="bg-black flex text-white w-full">
-                        <tr class="flex w-full mb-4 items-center justify-center">
-                            <th class="p-4 w-1/4">uuid</th>
-                            <th class="p-4 w-1/4">event_id</th>
-                            <th class="p-4 w-1/4">price</th>
-                            <th class="p-4 w-1/4"></th>
-                        </tr>
-                    </thead>
+            <div class="overflow-y w-full">
+                <table class="text-left w-full">
                     <tbody class="bg-grey-light flex flex-col items-center overflow-y-scroll w-full h-[500px] gap-[50px]" id="tickets">
-                        <?php
-
-                        if (isset($_SESSION['pendingTickets'])) {
-                            foreach ($_SESSION['pendingTickets'] as $ticket) {
-
-                                echo '
-                                    <tr class="border text-indigo-900 border-gray-700 flex items-center w-full mb-4">
-                                    <td class="p-4 w-1/4">' . $ticket->getId() . '<td>
-                                    <td class="p-4 w-1/4">' . $ticket->getEvent_Id() . '<td>
-                                    <td class="p-4 w-1/4">€' . $ticket->getPrice() . '<td>
-                                    <td class="p-4 w-1/4">
-                                    <form method="post">
-                                            <input type="hidden" name="removePendingTicket" value="' . $ticket->getId() . '">
-                                            <input type="hidden" id="userId" value="' . $_SESSION['USER_ID'] . '"></input>
-                                                <a href="/shoppingCart">
-                                                <button type="submit" value="send" >remove ticket</button></a>
-                                    </form>
-                                    <td>
-                                    </tr>';
-                                echo '<form method="POST">
-                                    <input type="hidden" name="checkoutTickets"><button type="submit" value="send">';
-                            }
-                        }
-                        ?>
                     </tbody>
                 </table>
             </div>
@@ -134,13 +88,11 @@ generateHeader('home', 'dark');
             <div class="absolute-bottom w-full flex justify-center items-center">
                 <a href="/shoppingCart" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">Shopping
                     cart</a>
-                <p><?php if (isset($_SESSION['pendingTickets'])) {
-                        $total = 0;
-                        foreach ($_SESSION['pendingTickets'] as $ticket) {
-                            $total += $ticket->getPrice();
-                        }
-                    }
-                    echo $total; ?></p>
+                <span>
+                    Total:
+                    <p id="totalCount"></p>
+                </span>
+
             </div>
 
         </div>
@@ -148,12 +100,15 @@ generateHeader('home', 'dark');
 
 
 <script>
+    let euro = Intl.NumberFormat('en-DE', {
+        style: 'currency',
+        currency: 'EUR',
+    });
     async function getShoppingCartItems(id) {
         const res = await fetch('http://localhost/api/cart?id=' + id);
         const data = await res.json();
         return data;
     }
-
 
     async function loadCart() {
         items = await getShoppingCartItems(getId());
@@ -178,18 +133,60 @@ generateHeader('home', 'dark');
     }
 
     function getRestaurant(id) {
-        restaurants = getRestaurantsFromAPI(id);
-
-        for (let i = 0; i < restaurants.length; i++) {
-            if (restaurants[i].id == id)
-                return restaurants[i]
-        }
-        
+        return new Promise((resolve, reject) => {
+            fetch('http://localhost/api/restaurants')
+                .then((response) => response.json())
+                .then((data) => {
+                    const restaurant = data.find((r) => {
+                        return (
+                            r.id == id
+                        );
+                    });
+                    resolve(restaurant);
+                    return restaurant;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        });
     }
 
-    async function getRestaurantsFromAPI(id) {
-        const res = await fetch('http://localhost/api/restaurants')
-        return await res.json();
+    function getVenue(id) {
+        return new Promise((resolve, reject) => {
+            fetch('http://localhost/api/dancelocations')
+                .then((response) => response.json())
+                .then((data) => {
+                    const location = data.find((l) => {
+                        return (
+                            l.id == id
+                        );
+                    });
+                    resolve(location);
+                    return location;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        });
+    }
+
+    function getArtist(id) {
+        return new Promise((resolve, reject) => {
+            fetch('http://localhost/api/artists')
+                .then((response) => response.json())
+                .then((data) => {
+                    const artist = data.find((a) => {
+                        return (
+                            a.id == id
+                        );
+                    });
+                    resolve(artist);
+                    return artist;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        });
     }
 
     async function removeTicket(target) {
@@ -198,74 +195,42 @@ generateHeader('home', 'dark');
             id: target.currentTarget.myParam
         }
         fetch('http://localhost/api/tickets', {
-                method: 'POST',
-                mode: 'cors',
-                cache: 'no-cache',
-                credentials: 'same-origin',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                redirect: 'follow',
-                referrerPolicy: 'no-referrer',
-                body: JSON.stringify(data),
-            })
-        console.log(data);
-
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer',
+            body: JSON.stringify(data),
+        });
+        setTimeout(() => {
+            loadCart();
+        }, "500");
     }
 
     function generateYummieCartObject(item, parent) {
 
-        fullWrapper = document.createElement('div');
-        fullWrapper.classList.add("bg-[#F7F7FB]", "p-4", "rounded-md", "w-full", "h-[150px]", "flex", "flex-row")
-
-        wrapperLeft = document.createElement("div");
-        wrapperLeft.classList.add("w-[70%]", "h-[150px]");
-        console.log(item);
-        title = document.createElement("h1");
-
-        const restaurant = getRestaurant(item.session.restaurant_id);
-        title.innerHTML = restaurant.name;
-        title.classList.add("bold", "text-[20px]");
-        secondTitle = document.createElement("h2");
-        secondTitle.innerHTML = restaurant.address;
-
-
-        timeTitle = document.createElement("span");
-        timeTitle.innerHTML = "starting time: ";
-        timeSpan = document.createElement("span");
-        timeSpan.classList.add("text-[30px]", "p-4")
-        timeSpan.innerHTML = item.session.session_startTime;
-
-
-        wrapperLeft.appendChild(title);
-        wrapperLeft.appendChild(secondTitle);
-        wrapperLeft.appendChild(timeTitle);
-        wrapperLeft.appendChild(timeSpan);
-
-
-        wrapperRight = document.createElement("div");
-        wrapperRight.classList.add("w-auto", "flex", "items-center", "justify-items-end")
-
-        remove = document.createElement("button");
-        remove.innerHTML = "remove";
-        remove.addEventListener("click", removeTicket, false);
-        remove.myParam = item.id;
-
-
-        wrapperRight.appendChild(remove);
-        fullWrapper.appendChild(wrapperLeft);
-        fullWrapper.appendChild(wrapperRight);
-        parent.appendChild(fullWrapper);
+        getRestaurant(item.session.restaurant_id).then(r => {
+            date = item.session.session_date + ' ' + item.session.session_startTime;
+            generateCartObject(item.id, r.name, r.address, date, 1, item.price, parent);
+        });
     }
 
     function generateEDMCartObject(item, parent) {
+        getVenue(item.session.venue).then(v => {
+            getArtist(item.session.artist_id).then(a => {
+                generateCartObject(item.id, v.name, a.name, item.session.date, 1, item.price, parent);
+            })
 
+        })
     }
 
     function generateStrollCartObject(item, parent) {
-        title = document.createElement("h1");
-        title.innerHTML = item.id;
-        parent.appendChild(title);
+        subTitle = "Language: " + item.session.language;
+        generateCartObject(item.id, "Stroll through Haarlem", subTitle, item.session.date, 1, item.price, parent);
     }
 
     function getId() {
@@ -273,5 +238,52 @@ generateHeader('home', 'dark');
         return id;
     }
 
+    function generateCartObject(id, title, subTitle, date, qty, priceTag, parent) {
+        fullWrapper = document.createElement('div');
+        fullWrapper.classList.add("bg-[#F7F7FB]", "p-4", "rounded-md", "w-full", "h-fit", "flex", "flex-row")
+
+        wrapperLeft = document.createElement("div");
+        wrapperLeft.classList.add("w-[70%]", "flex", "flex-col", "gap-2");
+        titleSpan = document.createElement("h1");
+        titleSpan.innerHTML = title;
+        titleSpan.classList.add("bold", "text-[20px]");
+        secondTitle = document.createElement("h2");
+        secondTitle.innerHTML = subTitle;
+
+
+        timeTitle = document.createElement("span");
+        timeTitle.innerHTML = "starting time:";
+        timeSpan = document.createElement("span");
+        timeSpan.classList.add("text-[25px]")
+        timeSpan.innerHTML = date;
+
+        qty = document.createElement("span");
+        qty.innerHTML = "Qty: " + 1;
+
+        price = document.createElement("span");
+        price.innerHTML = euro.format(priceTag);
+
+        wrapperLeft.appendChild(titleSpan);
+        wrapperLeft.appendChild(secondTitle);
+        wrapperLeft.appendChild(timeTitle);
+        wrapperLeft.appendChild(timeSpan);
+        wrapperLeft.appendChild(qty);
+        wrapperLeft.appendChild(price)
+
+
+        wrapperRight = document.createElement("div");
+        wrapperRight.classList.add("w-auto", "flex", "items-center", "justify-items-end", "gap-8")
+
+        remove = document.createElement("button");
+        remove.innerHTML = "remove";
+        remove.addEventListener("click", removeTicket, false);
+        remove.myParam = id;
+
+
+        wrapperRight.appendChild(remove);
+        fullWrapper.appendChild(wrapperLeft);
+        fullWrapper.appendChild(wrapperRight);
+        parent.appendChild(fullWrapper);
+    }
     loadCart();
 </script>
