@@ -27,6 +27,7 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
         ),
         'M' => 
         array (
+            'Mollie\\Api\\' => 11,
             'Masterminds\\' => 12,
         ),
         'F' => 
@@ -41,6 +42,10 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
         array (
             'Dompdf\\' => 7,
             'DASPRiD\\Enum\\' => 13,
+        ),
+        'C' => 
+        array (
+            'Composer\\CaBundle\\' => 18,
         ),
         'B' => 
         array (
@@ -70,6 +75,10 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
+        'Mollie\\Api\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mollie/mollie-api-php/src',
+        ),
         'Masterminds\\' => 
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
@@ -89,6 +98,10 @@ class ComposerStaticInitf6ee7d872b6b94c8964b92f23f0413bc
         'DASPRiD\\Enum\\' => 
         array (
             0 => __DIR__ . '/..' . '/dasprid/enum/src',
+        ),
+        'Composer\\CaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
         'Brick\\Math\\' => 
         array (
