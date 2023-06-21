@@ -101,7 +101,7 @@ generateHeader('home', 'dark');
                             <th class="p-4 w-1/4"></th>
                         </tr>
                     </thead>
-                    <tbody class="bg-grey-light flex flex-col items-center overflow-y-scroll w-full h-[500px]" id="tickets">
+                    <tbody class="bg-grey-light flex flex-col items-center overflow-y-scroll w-full h-[500px] gap-[50px]" id="tickets">
                         <?php
 
                         if (isset($_SESSION['pendingTickets'])) {
@@ -157,9 +157,8 @@ generateHeader('home', 'dark');
 
     async function loadCart() {
         items = await getShoppingCartItems(getId());
-
-        console.log(items);
         ticketWrapper = document.getElementById('tickets');
+        ticketWrapper.innerHTML = "";
         for (let i = 0; i < items.length; i++) {
             switch (items[i].session_type) {
                 case "yummie":
@@ -178,27 +177,94 @@ generateHeader('home', 'dark');
         }
     }
 
+    function getRestaurant(id) {
+        restaurants = getRestaurantsFromAPI(id);
 
+        for (let i = 0; i < restaurants.length; i++) {
+            if (restaurants[i].id == id)
+                return restaurants[i]
+        }
+        
+    }
+
+    async function getRestaurantsFromAPI(id) {
+        const res = await fetch('http://localhost/api/restaurants')
+        return await res.json();
+    }
+
+    async function removeTicket(target) {
+        data = {
+            post_type: "delete",
+            id: target.currentTarget.myParam
+        }
+        fetch('http://localhost/api/tickets', {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(data),
+            })
+        console.log(data);
+
+    }
 
     function generateYummieCartObject(item, parent) {
+
+        fullWrapper = document.createElement('div');
+        fullWrapper.classList.add("bg-[#F7F7FB]", "p-4", "rounded-md", "w-full", "h-[150px]", "flex", "flex-row")
+
+        wrapperLeft = document.createElement("div");
+        wrapperLeft.classList.add("w-[70%]", "h-[150px]");
         console.log(item);
         title = document.createElement("h1");
-        title.innerHTML = item.id;
-        title.classList.add('bg-gray-200');
-        parent.appendChild(title);
+
+        const restaurant = getRestaurant(item.session.restaurant_id);
+        title.innerHTML = restaurant.name;
+        title.classList.add("bold", "text-[20px]");
+        secondTitle = document.createElement("h2");
+        secondTitle.innerHTML = restaurant.address;
+
+
+        timeTitle = document.createElement("span");
+        timeTitle.innerHTML = "starting time: ";
+        timeSpan = document.createElement("span");
+        timeSpan.classList.add("text-[30px]", "p-4")
+        timeSpan.innerHTML = item.session.session_startTime;
+
+
+        wrapperLeft.appendChild(title);
+        wrapperLeft.appendChild(secondTitle);
+        wrapperLeft.appendChild(timeTitle);
+        wrapperLeft.appendChild(timeSpan);
+
+
+        wrapperRight = document.createElement("div");
+        wrapperRight.classList.add("w-auto", "flex", "items-center", "justify-items-end")
+
+        remove = document.createElement("button");
+        remove.innerHTML = "remove";
+        remove.addEventListener("click", removeTicket, false);
+        remove.myParam = item.id;
+
+
+        wrapperRight.appendChild(remove);
+        fullWrapper.appendChild(wrapperLeft);
+        fullWrapper.appendChild(wrapperRight);
+        parent.appendChild(fullWrapper);
     }
 
     function generateEDMCartObject(item, parent) {
-        title = document.createElement("h1");
-        title.innerHTML = item.id;
-        title.classList.add('bg-indigo-500');
-        parent.appendChild(title);
+
     }
 
     function generateStrollCartObject(item, parent) {
         title = document.createElement("h1");
         title.innerHTML = item.id;
-        title.classList.add('bg-gray-800');
         parent.appendChild(title);
     }
 

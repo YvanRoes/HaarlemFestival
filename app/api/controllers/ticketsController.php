@@ -37,28 +37,27 @@ class TicketsController
         }
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $body =  file_get_contents('php://input');
-            $object = json_decode($body);
-      
-      
+            $jsonData = stripslashes(html_entity_decode($body));
+
+            $object = json_decode($jsonData);
             if ($object == null) {
               return;
             }
       
-            switch ($object->post_type) {
-                
+            switch ($object->post_type) { 
             case 'insert':
                 // if the ticket is all access just leave event null and set the bool to true
                 
                 // to get the events for the tickets just use the sessions service you guys made it just uses the same things.
                 
                 $ticket = new Ticket();
-                $ticket->setEvent(htmlspecialchars($object->event_id));
-                $ticket->setUser(htmlspecialchars($object->user_id));
+                $ticket->setEvent_id(htmlspecialchars($object->event_id));
+                $ticket->set_UserId(htmlspecialchars($object->user_id));
                 $ticket->setPrice(htmlspecialchars($object->price));
                 if ($object->isAllAccess == 0)
-                    $ticket->setIsAllAccess(false);
+                    $ticket->set_IsAllAccess(false);
                 else if ($object->isAllAccess == 1)
-                    $ticket->setIsAllAccess(true);
+                    $ticket->set_IsAllAccess(true);
                 $this->ticketService->post_Ticket($ticket);
                 break;
             case 'update':
