@@ -66,7 +66,7 @@ class TicketRepository extends Repository
 
     public function delete_Ticket($id)
     {
-        $this->updateTicketsAmount($this->getEventIdFromTicket($id), '+');
+        $this->updateTicketsAmount($this->get_EventIdFromTicket($id), '+');
         $sql = "DELETE FROM `ticket` WHERE `uuid` = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);
@@ -110,13 +110,13 @@ class TicketRepository extends Repository
         $stmt->bindParam(':isAllAccess', $isAllAccess);
         $stmt->execute();
     }
-    public function getEventIdFromTicket($id){
-        $sql = "SELECT event_id FROM ticket WHERE uuid = :id";
+    public function get_EventIdFromTicket($id){
+        $sql = "SELECT `event_id` FROM `ticket` WHERE `uuid` = :id ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
+        return $result['event_id'];
     }
 
     public function getTicketsAmount($event_id){
@@ -125,7 +125,7 @@ class TicketRepository extends Repository
         $stmt->bindParam(':id', $event_id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
+        return $result['ticketsAmount'];
     }
     
 
@@ -139,13 +139,11 @@ class TicketRepository extends Repository
         else if ($plusOrMinus == '+'){
             $sql = "UPDATE events SET ticketsAmount = (SELECT ticketsAmount FROM events WHERE id = :id) + 1 WHERE id = :id;";
         }
-        else{
-            return;
-        }
-
+        else
+            return;        
+        
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $event_id);
-        $stmt->bindParam(':plusOrMinus', $plusOrMinus);
         $stmt->execute();        
     }
     public function getAllEventsStroll(){
