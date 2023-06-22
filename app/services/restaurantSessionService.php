@@ -38,4 +38,9 @@ class RestaurantSessionService
   {
     return $this->repo->get_RestaurantSessionById($id);
   }
+
+  public function updateTicketCountByEventid($id)
+  {
+    $this->repo->updateTicketCountByEventId($id);
+  }
 }

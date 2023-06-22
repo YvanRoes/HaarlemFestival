@@ -35,11 +35,12 @@ class TicketRepository extends Repository
 
     public function get_TicketById($id): Ticket
     {
-        $sql = "SELECT * FROM ticket WHERE id = :id";
+        $sql = "SELECT `uuid`, `status`, `event_id`, `price`, `user_id`, `exp_date`, `order_id`, `isAllAccess` FROM `ticket` WHERE uuid = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_CLASS);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Ticket');
+        $result = $stmt->fetch();
        return $result;
     }
     public function get_TicketsByStatus($status)

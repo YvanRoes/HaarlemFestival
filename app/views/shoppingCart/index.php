@@ -273,8 +273,6 @@ else{
 
 
     function checkout() {
-
-
         if( totalAmount <= 0){
             alert("There are currently no items in your shopping cart");
             return;
