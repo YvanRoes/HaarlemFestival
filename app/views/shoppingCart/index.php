@@ -263,12 +263,10 @@ echo '<input type="hidden" id="userId" value="' . $_SESSION['USER_ID'] . '"></in
 
 
     function checkout() {
-
-
         if( totalAmount <= 0){
             alert("There are currently no items in your shopping cart");
             return;
         }
-        location.href = '/shoppingcart/payment?amount=' + totalAmount + '&userId=' + getId();
+        location.href = '/shoppingcart/payment?amount=' + totalAmount;
     }
     </script>

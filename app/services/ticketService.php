@@ -1,5 +1,8 @@
 <?php
 require __DIR__ . '/../repositories/ticketRepository.php';
+require_once __DIR__ . '/danceSessionService.php';
+require_once __DIR__ . '/danceSessionService.php';
+require_once __DIR__ . '/restaurantSessionService.php';
 require_once __DIR__ . '/../models/ticket.php';
 
 class TicketService
@@ -61,7 +64,13 @@ class TicketService
 
     public function checkoutTicket($id){
         $repo = new TicketRepository();
-        return $repo->checkoutTicket($id);
+        $repo->checkoutTicket($id);
+
+        $ticket = $repo->get_TicketById($id);
+        $danceService = new DanceSessionService(); 
+        $danceService->updateTicketCountByEventid($ticket->getEvent_id());
+        $restaurantService = new RestaurantSessionService();
+        $restaurantService->updateTicketCountByEventid($ticket->getEvent_id());
     }
 
 
