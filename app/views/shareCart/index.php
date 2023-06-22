@@ -15,12 +15,8 @@
 require_once __DIR__ . '/../header.php';
 generateHeader('home', 'dark');
 
-if (isset($_SESSION['USER_ID'])) {
-    echo '<input type="hidden" id="userId" value="' . $_SESSION['USER_ID'] . '"></input>';
-}
-else{
-    echo '<input type="hidden" id="userId" value="' . $_SESSION['TEMP_ID'] . '"></input>';
-}
+
+echo '<input type="hidden" id="userId" value="' . $_GET['id'] . '"></input>';
 ?>
 
 <body>
@@ -36,20 +32,6 @@ else{
                 </table>
             </div>
             </p>
-
-            <div class="absolute-bottom w-full flex flex-row gap-8 py-8">
-                <span class="p-auto text-[20px] ml-auto w-fit">sub-total:<p id="subTotalCount"></p>
-                </span>
-                <span class="p-auto text-[20px] w-fit">total:<p id="totalCount"></p>
-                </span>
-                <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-6 border-b-4 border-blue-700 hover:border-blue-500 rounded" onclick="checkout()">
-                    Checkout
-                </button>
-                
-                <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-6 border-b-4 border-blue-700 hover:border-blue-500 rounded" onclick="share()">
-                    Share
-                </button>
-            </div>
 
         </div>
 </body>
@@ -90,15 +72,6 @@ else{
             }
         }
 
-        loadTotal();
-    }
-
-    function loadTotal() {
-        subtotal = document.getElementById('subTotalCount');
-        subtotal.innerHTML = euro.format(subTotalAmount);
-
-        total = document.getElementById('totalCount');
-        total.innerHTML = euro.format(totalAmount);
     }
 
     function getRestaurant(id) {
@@ -156,28 +129,6 @@ else{
                     console.log(error);
                 });
         });
-    }
-
-    async function removeTicket(target) {
-        data = {
-            post_type: "delete",
-            id: target.currentTarget.myParam
-        }
-        fetch('http://localhost/api/tickets', {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
-            body: JSON.stringify(data),
-        });
-        setTimeout(() => {
-            loadCart();
-        }, "500");
     }
 
     function generateYummieCartObject(item, parent) {
@@ -253,36 +204,12 @@ else{
         wrapperRight = document.createElement("div");
         wrapperRight.classList.add("w-auto", "flex", "items-center", "justify-items-end", "gap-8")
 
-        remove = document.createElement("button");
-        remove.innerHTML = "remove";
-        remove.addEventListener("click", removeTicket, false);
-        remove.myParam = id;
 
 
-        wrapperRight.appendChild(remove);
         fullWrapper.appendChild(wrapperLeft);
         fullWrapper.appendChild(wrapperRight);
         parent.appendChild(fullWrapper);
     }
     loadCart();
 
-    function share(){
-        alert("Share this link with others to show them your shopping cart: /shareCart?id=" + getId() );
-    }
-
-
-
-    function checkout() {
-
-
-        if( totalAmount <= 0){
-            alert("There are currently no items in your shopping cart");
-            return;
-        }
-        if (getId() >= 10000) {
-            alert("create an account to checkout");
-            return;
-        }
-        location.href = '/shoppingcart/payment?amount=' + totalAmount + '&userId=' + getId();
-    }
     </script>

@@ -16,12 +16,6 @@ class TicketService
         return $repo->get_TicketsByEventId($id);
     }
 
-    public function update_TicketAmount($id)
-    {
-        $repo = new TicketRepository();
-        return $repo->updateTicketsAmount($id, '+');
-    }
-
     public function get_TicketById($id): Ticket
     {
         $repo = new TicketRepository();

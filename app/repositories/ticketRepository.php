@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/ticket.php';
-USE Ramsey\Uuid\Uuid;
+
 class TicketRepository extends Repository
 {
     public function get_AllTickets(): array

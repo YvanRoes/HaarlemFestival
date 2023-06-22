@@ -1,4 +1,6 @@
 <?php
+$user_id = $_SESSION['TEMP_ID'];
+if (isset($_SESSION['USER_ID']))
     $user_id = $_SESSION['USER_ID'];
 ?>
 <style>

@@ -3,7 +3,10 @@
 
     $uuid = Uuid::uuid4();
     $uuid = $uuid->toString();
-    $user_id = $_SESSION['USER_ID'];
+    $user_id = $_SESSION['TEMP_ID'];
+    if (isset($_SESSION['USER_ID']))
+        $user_id = $_SESSION['USER_ID'];
+    var_dump($user_id);
 ?>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
