@@ -136,15 +136,15 @@ class ShoppingCartController extends Controller
                     ],
                     "method" => "creditcard",
                     "description" => "payment",
-                    "redirectUrl" => "https://6ec6-2001-1c00-190f-2500-98e4-6c4c-e24c-ed06.ngrok-free.app/api/webhook",
-                    "webhookUrl"  => "https://6ec6-2001-1c00-190f-2500-98e4-6c4c-e24c-ed06.ngrok-free.app/api/webhook",
+                    "redirectUrl" => "https://9b5c-2001-1c00-190f-2500-98e4-6c4c-e24c-ed06.ngrok-free.app//api/webhook",
+                    "webhookUrl"  => "https://9b5c-2001-1c00-190f-2500-98e4-6c4c-e24c-ed06.ngrok-free.app//api/webhook",
                 ]);
 
 
                 header("Location: " . $payment->getCheckoutUrl(), true, 303);
             } catch (Exception $e) {
                 echo $e->getMessage();
-                //$this->createPaymentWithoutMollie();
+                $this->createPaymentWithoutMollie();
             }
         } else {
             header("Location: /login");
@@ -156,7 +156,7 @@ class ShoppingCartController extends Controller
 
         $ticketService = new TicketService();
 
-        $result = $ticketService->get_TicketsByUserIdAndStatus($uid, "pending");
+        $result = $ticketService->get_TicketsByUserIdAndStatus($_SESSION["USER_ID"], "pending");
         $qrCodeService = new QrCodeService();
         $qrCodeService->send_QRCode($result);
         $invoiceService = new InvoiceService();

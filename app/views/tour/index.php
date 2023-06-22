@@ -11,6 +11,7 @@
 
 <title>Haarlem Tour</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="/js/tour/index.js"></script>
 
 <!-- body class is always empty from db -->
 <!-- <body class="overflow-x-hidden bg-[#F7F7FB] flex flex-col items-center h-fit w-screen">
