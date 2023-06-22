@@ -19,8 +19,6 @@ class TicketService
         return $repo->get_TicketsByEventId($id);
     }
 
-    
-
     public function get_TicketById($id): Ticket
     {
         $repo = new TicketRepository();

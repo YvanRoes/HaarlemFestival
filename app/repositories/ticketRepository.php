@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/ticket.php';
-USE Ramsey\Uuid\Uuid;
+
 class TicketRepository extends Repository
 {
     public function get_AllTickets(): array
@@ -67,6 +67,7 @@ class TicketRepository extends Repository
 
     public function delete_Ticket($id)
     {
+        $this->updateTicketsAmount($this->get_EventIdFromTicket($id), '+');
         $sql = "DELETE FROM `ticket` WHERE `uuid` = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);
@@ -89,6 +90,7 @@ class TicketRepository extends Repository
     }
     public function post_Ticket($ticket)
     {
+        $this->updateTicketsAmount($ticket->getEvent_Id(), '-');
         $sql = "INSERT INTO ticket(uuid,status,event_id,price,user_id,exp_date,order_id,isAllAccess) VALUES (uuid(), 'pending', :event, :price, :user_id, NOW() + INTERVAL 1 DAY ,null,:isAllAccess)";
         $stmt = $this->conn->prepare($sql);
         $event=$ticket->getEvent_Id();
@@ -108,6 +110,42 @@ class TicketRepository extends Repository
 
         $stmt->bindParam(':isAllAccess', $isAllAccess);
         $stmt->execute();
+    }
+    public function get_EventIdFromTicket($id){
+        $sql = "SELECT `event_id` FROM `ticket` WHERE `uuid` = :id ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['event_id'];
+    }
+
+    public function getTicketsAmount($event_id){
+        $sql = "SELECT ticketsAmount FROM events WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $event_id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['ticketsAmount'];
+    }
+    
+
+    public function updateTicketsAmount($event_id,$plusOrMinus){
+        if ($this->getTicketsAmount($event_id) <= 0 && $plusOrMinus == '-'){
+            return;
+        }
+        if ($plusOrMinus == '-'){
+            $sql = "UPDATE events SET ticketsAmount = (SELECT ticketsAmount FROM events WHERE id = :id) - 1 WHERE id = :id;";
+        }
+        else if ($plusOrMinus == '+'){
+            $sql = "UPDATE events SET ticketsAmount = (SELECT ticketsAmount FROM events WHERE id = :id) + 1 WHERE id = :id;";
+        }
+        else
+            return;        
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $event_id);
+        $stmt->execute();        
     }
     public function getAllEventsStroll(){
         try

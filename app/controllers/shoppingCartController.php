@@ -21,8 +21,11 @@ class ShoppingCartController extends Controller
     public function index()
     {
         $this->checkPendingTickets();
-        if (!isset($_SESSION['USER_ID'])) {
-            header('Location: /login');
+        if (!isset($_SESSION['USER_ID']) and !isset($_SESSION['TEMP_ID'])){
+            $_SESSION['TEMP_ID'] = random_int(100000, 999999);
+        }
+        if (isset($_SESSION['USER_ID'])) {
+            $_SESSION['TEMP_ID'] = null;
         }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['selectedTicket'])) {
@@ -32,7 +35,6 @@ class ShoppingCartController extends Controller
                 $this->removePendingTicket($_POST['removePendingTicket']);
             }
         }
-        $this->getPendingUserTickets();
         $this->setAllAvailableTickets();
         $this->displayView('shoppingCart');
     }

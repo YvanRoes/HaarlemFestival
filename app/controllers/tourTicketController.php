@@ -16,15 +16,14 @@ class TourTicketController extends Controller{
 
 
     public function index(){
-        if (!isset($_SESSION['USER_ID'])){
-            header('Location: 404');
-            exit();
+        if (!isset($_SESSION['USER_ID']) and !isset($_SESSION['TEMP_ID'])){
+            $_SESSION['TEMP_ID'] = random_int(100000, 999999);
         }
         require __DIR__ . '/../views/tourTicket/index.php';
     }
 
     public function overview(){
-        if (!isset($_SESSION['USER_ID'])){
+        if (!isset($_SESSION['USER_ID']) or !isset($_SESSION['TEMP_ID'])){
             header('Location: 404');
             exit();
         }
